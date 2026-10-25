@@ -9,13 +9,13 @@
       "correct": 102,
       "runs": 111,
       "trap_errors": 6,
-      "mean_prompt_tokens": 1648.5675675675675,
-      "mean_context_est_tokens": 1135.1081081081081,
+      "mean_prompt_tokens": 1666.4054054054054,
+      "mean_context_est_tokens": 1133.8918918918919,
       "latency": {
         "n": 111,
-        "p50_ms": 193.92375,
-        "p95_ms": 3089.779,
-        "max_ms": 3269.178917
+        "p50_ms": 65.793917,
+        "p95_ms": 2602.4815000000003,
+        "max_ms": 2821.4595409999997
       },
       "per_task": {
         "analytics-vendor": 0,
@@ -76,9 +76,9 @@
       "mean_context_est_tokens": 4209.0,
       "latency": {
         "n": 111,
-        "p50_ms": 288.176458,
-        "p95_ms": 2104.790125,
-        "max_ms": 2379.356792
+        "p50_ms": 112.932958,
+        "p95_ms": 1649.595542,
+        "max_ms": 1894.299834
       },
       "per_task": {
         "analytics-vendor": 3,
@@ -139,9 +139,9 @@
       "mean_context_est_tokens": 0.0,
       "latency": {
         "n": 111,
-        "p50_ms": 257.012083,
-        "p95_ms": 774.629834,
-        "max_ms": 1102.713125
+        "p50_ms": 88.997208,
+        "p95_ms": 211.4425,
+        "max_ms": 240.784167
       },
       "per_task": {
         "analytics-vendor": 0,
@@ -194,17 +194,17 @@
       }
     },
     "raw_rag": {
-      "accuracy": 0.7297297297297297,
-      "correct": 81,
+      "accuracy": 0.7567567567567568,
+      "correct": 84,
       "runs": 111,
-      "trap_errors": 30,
-      "mean_prompt_tokens": 1381.7837837837837,
-      "mean_context_est_tokens": 1181.5135135135135,
+      "trap_errors": 27,
+      "mean_prompt_tokens": 1374.027027027027,
+      "mean_context_est_tokens": 1182.3783783783783,
       "latency": {
         "n": 111,
-        "p50_ms": 259.422208,
-        "p95_ms": 2750.117917,
-        "max_ms": 3180.900583
+        "p50_ms": 78.411584,
+        "p95_ms": 2082.5662079999997,
+        "max_ms": 2156.7356250000003
       },
       "per_task": {
         "analytics-vendor": 0,
@@ -225,21 +225,21 @@
         "long-lists": 3,
         "map-sdk": 3,
         "min-android": 3,
-        "min-ios": 0,
+        "min-ios": 3,
         "nav-owner": 3,
         "node-version": 3,
         "page-max": 3,
         "password-min": 3,
         "push-provider": 3,
         "queue-store": 3,
-        "rate-limit": 3,
+        "rate-limit": 0,
         "release-day": 3,
         "retry-cap": 3,
         "runtime-policy": 3,
         "spacing-base": 3,
         "state-lib": 3,
         "tile-cache": 0,
-        "token-ttl": 0,
+        "token-ttl": 3,
         "touch-target": 0,
         "tti-budget": 3,
         "uid-hash": 3,
@@ -251,13 +251,13 @@
           45
         ],
         "doc_rot": [
-          36,
+          39,
           66
         ]
       }
     }
   },
-  "token_estimate_ratio": 1.0460134512227854,
+  "token_estimate_ratio": 1.047521424709118,
   "samples": [
     {
       "answer": "TidepoolClientState",
@@ -638,30 +638,30 @@
       "trial": 2
     },
     {
-      "answer": "90",
+      "answer": "120",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "rate-limit",
       "trap": "api.md says 120; ADR-006 lowered it to 90",
-      "trapped": false,
+      "trapped": true,
       "trial": 0
     },
     {
-      "answer": "90",
+      "answer": "120",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "rate-limit",
       "trap": "api.md says 120; ADR-006 lowered it to 90",
-      "trapped": false,
+      "trapped": true,
       "trial": 1
     },
     {
-      "answer": "90",
+      "answer": "120",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "rate-limit",
       "trap": "api.md says 120; ADR-006 lowered it to 90",
-      "trapped": false,
+      "trapped": true,
       "trial": 2
     },
     {
@@ -962,7 +962,7 @@
       "trial": 2
     },
     {
-      "answer": "Last-writer-wins, server timestamp.",
+      "answer": "Last-writer-wins per field.",
       "condition": "raw_rag",
       "correct": true,
       "task": "conflicts",
@@ -971,7 +971,7 @@
       "trial": 0
     },
     {
-      "answer": "Last-writer-wins, server timestamp.",
+      "answer": "Last-writer-wins per field.",
       "condition": "raw_rag",
       "correct": true,
       "task": "conflicts",
@@ -998,7 +998,7 @@
       "trial": 0
     },
     {
-      "answer": "Last-writer-wins, server timestamp",
+      "answer": "Last-writer-wins server timestamp",
       "condition": "bundle",
       "correct": true,
       "task": "conflicts",
@@ -1007,7 +1007,7 @@
       "trial": 1
     },
     {
-      "answer": "Last-writer-wins, server timestamp",
+      "answer": "Last-writer-wins server timestamp",
       "condition": "bundle",
       "correct": true,
       "task": "conflicts",
@@ -2258,30 +2258,30 @@
       "trial": 2
     },
     {
-      "answer": "15",
+      "answer": "16",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "min-ios",
       "trap": "support-matrix.md still says iOS 15",
-      "trapped": true,
+      "trapped": false,
       "trial": 0
     },
     {
-      "answer": "15",
+      "answer": "16",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "min-ios",
       "trap": "support-matrix.md still says iOS 15",
-      "trapped": true,
+      "trapped": false,
       "trial": 1
     },
     {
-      "answer": "15",
+      "answer": "16",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "min-ios",
       "trap": "support-matrix.md still says iOS 15",
-      "trapped": true,
+      "trapped": false,
       "trial": 2
     },
     {
@@ -2393,7 +2393,7 @@
       "trial": 2
     },
     {
-      "answer": "SQLite (WAL mode)",
+      "answer": "SQLite",
       "condition": "bundle",
       "correct": true,
       "task": "queue-store",
@@ -2402,7 +2402,7 @@
       "trial": 0
     },
     {
-      "answer": "SQLite (WAL mode)",
+      "answer": "SQLite",
       "condition": "bundle",
       "correct": true,
       "task": "queue-store",
@@ -2411,7 +2411,7 @@
       "trial": 1
     },
     {
-      "answer": "SQLite (WAL mode)",
+      "answer": "SQLite",
       "condition": "bundle",
       "correct": true,
       "task": "queue-store",
@@ -2582,30 +2582,30 @@
       "trial": 2
     },
     {
-      "answer": "60",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "token-ttl",
       "trap": "onboarding.md says 60 minutes",
-      "trapped": true,
+      "trapped": false,
       "trial": 0
     },
     {
-      "answer": "60",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "token-ttl",
       "trap": "onboarding.md says 60 minutes",
-      "trapped": true,
+      "trapped": false,
       "trial": 1
     },
     {
-      "answer": "60",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "token-ttl",
       "trap": "onboarding.md says 60 minutes",
-      "trapped": true,
+      "trapped": false,
       "trial": 2
     },
     {

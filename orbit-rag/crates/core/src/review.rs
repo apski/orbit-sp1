@@ -32,7 +32,107 @@ pub struct Impact {
     pub via: Option<String>, // "ctx_002 depends_on ctx_001"
 }
 
+/// The passage of a decision doc that states the decision: a `**Decision:**` line or
+/// bullet, else the first paragraph under a `## Decision` heading, else the first
+/// paragraph after the title that isn't metadata (status, date, frontmatter).
+/// Byte range, trimmed; `None` when the doc has no prose.
+pub fn decision_passage(text: &str) -> Option<(usize, usize)> {
+    let mut paras: Vec<(usize, usize)> = Vec::new(); // blank-line or bullet separated blocks
+    let mut start: Option<usize> = None;
+    let mut at = 0;
+    let mut in_front = text.starts_with("---");
+    for (i, line) in text.split_inclusive('\n').enumerate() {
+        let t = line.trim();
+        if in_front {
+            if i > 0 && t == "---" {
+                in_front = false;
+            }
+            at += line.len();
+            continue;
+        }
+        let bullet = t.starts_with("- ") || t.starts_with("* ");
+        if t.is_empty() || t.starts_with('#') || bullet {
+            if let Some(s) = start.take() {
+                paras.push((s, at));
+            }
+        }
+        if t.starts_with('#') {
+            paras.push((at, at + line.len())); // headings are their own block
+        } else if !t.is_empty() && start.is_none() {
+            start = Some(at);
+        }
+        at += line.len();
+    }
+    if let Some(s) = start {
+        paras.push((s, at));
+    }
+    let body = |(s, e): (usize, usize)| text[s..e].trim();
+    let trimmed = |(s, e): (usize, usize)| {
+        let raw = &text[s..e];
+        let lead = raw.len() - raw.trim_start().len();
+        (s + lead, s + lead + raw.trim().len())
+    };
+    let plain = |b: &str| b.replace("**", "").trim_start_matches(['-', '*', ' ']).to_lowercase();
+    let indent = |(s, _): (usize, usize)| text[s..].len() - text[s..].trim_start_matches(' ').len();
+    if let Some(k) = paras.iter().position(|p| plain(body(*p)).starts_with("decision:")) {
+        // a `- **Decision:**` bullet owns the sub-bullets nested under it
+        let end = paras[k + 1..].iter().take_while(|p| indent(**p) > indent(paras[k])).last().map_or(paras[k].1, |p| p.1);
+        return Some(trimmed((paras[k].0, end)));
+    }
+    if let Some(i) = paras.iter().position(|p| {
+        let b = body(*p).to_lowercase();
+        b.starts_with('#') && b.trim_start_matches('#').trim().starts_with("decision")
+    }) {
+        if let Some(p) = paras[i + 1..].iter().find(|p| !body(**p).starts_with('#')) {
+            return Some(trimmed(*p));
+        }
+    }
+    let meta = |b: &str| ["status:", "date:", "owner:", "deciders:", "author:", "created:"].iter().any(|m| plain(b).contains(m) && b.len() < 400);
+    paras.iter().find(|p| !body(**p).starts_with('#') && !meta(body(**p))).map(|p| trimmed(*p))
+}
+
+/// `<what we will do>`-style placeholders outside code spans.
+fn is_template(t: &str) -> bool {
+    t.split('`').step_by(2).any(|plain| {
+        plain.match_indices('<').any(|(i, _)| plain[i + 1..].starts_with(|c: char| c.is_ascii_lowercase()) && plain[i..].find('>').is_some_and(|j| j < 80 && !plain[i..i + j].contains('\n')))
+    })
+}
+
 impl Store {
+    /// Offer every decision doc's decision passage as a proposed record with a review
+    /// item, so a person can approve it in one step. Nothing here is authoritative until
+    /// accepted. Skips docs that already have a record. Returns (path, record id).
+    pub fn propose_decisions(&self, dry_run: bool) -> Result<Vec<(String, String)>> {
+        let docs: Vec<(String, i64, String, String)> = self
+            .db
+            .prepare(
+                "SELECT DISTINCT s.id, r.id, s.path, r.snapshot_hash FROM chunks c JOIN source_revisions r ON r.id = c.revision_id
+                 JOIN sources s ON s.id = r.source_id WHERE c.kind = 'decision' ORDER BY s.path",
+            )?
+            .query_map([], |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?, r.get(3)?)))?
+            .collect::<rusqlite::Result<_>>()?;
+        let mut out = Vec::new();
+        for (src, rev, path, snap) in docs {
+            if !self.records_where("source_id = ?1 AND status <> 'retired'", [&src])?.is_empty() {
+                continue;
+            }
+            let text = self.snapshot(&snap)?;
+            let Some((s, e)) = decision_passage(&text) else { continue };
+            if is_template(&text[s..e]) {
+                continue; // an index or template note, e.g. "**Decision:** <what we will do>"
+            }
+            if dry_run {
+                out.push((path, text[s..e].chars().take(80).collect()));
+                continue;
+            }
+            let id = self.capture(&src, rev, s, e, "decision", Some("proposed from a decision doc: accept to make it authoritative"), None, true)?;
+            self.db.execute("INSERT OR IGNORE INTO review_items(record_id, reason, state) VALUES (?1, 'proposed', 'open')", [&id])?;
+            self.event("record.proposed", &id, json!({ "path": path }))?;
+            out.push((path, id));
+        }
+        Ok(out)
+    }
+
     pub fn review_list(&self) -> Result<Vec<ReviewItem>> {
         let rows: Vec<(i64, String, String, String)> = self
             .db
@@ -149,5 +249,25 @@ impl Store {
             frontier = next;
         }
         Ok(out)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::decision_passage;
+
+    #[test]
+    fn finds_the_decision_statement() {
+        let p = |t: &str| decision_passage(t).map(|(s, e)| t[s..e].to_string());
+        let bullets = "---\ntype: decision\n---\n\n# TECH-020: x\n\n- **Date:** 2026 · **Status:** active.\n- **Insight:** measured.\n- **Decision:** One lot rule.\n  Continued.\n- **Rejected:** y.\n";
+        assert_eq!(p(bullets).unwrap(), "- **Decision:** One lot rule.\n  Continued.");
+        let adr = "# ADR-006: Lower the limit\n\nStatus: accepted\n\n## Context\n\nOutage.\n\n## Decision\n\nFrom 3.3 the limit is 90.\n\n## Consequences\n\nSlower.\n";
+        assert_eq!(p(adr).unwrap(), "From 3.3 the limit is 90.");
+        let plain = "# Paid data spend follows payment\n\n**Status:** decided 2026-10-03\n\nWe only pay for data once a user pays.\n";
+        assert_eq!(p(plain).unwrap(), "We only pay for data once a user pays.");
+        assert_eq!(p("# Title only\n"), None);
+        let nested = "# Canada ACB\n\n- **Decision:**\n  - `ca.rs::match_ca`: per asset.\n  - A new variant.\n- **Rejected:**\n  - FIFO.\n";
+        assert_eq!(p(nested).unwrap(), "- **Decision:**\n  - `ca.rs::match_ca`: per asset.\n  - A new variant.");
+        assert!(super::is_template("- **Decision:** <what we will do / stop doing>") && !super::is_template("use `Vec<u8>` here"));
     }
 }

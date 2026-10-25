@@ -46,6 +46,15 @@ enum Cmd {
         seed: u64,
         #[arg(long, default_value = "benchmarks/queries.jsonl")]
         out: PathBuf,
+        /// only passages from paths starting with one of these (comma-separated)
+        #[arg(long, value_delimiter = ',')]
+        include: Vec<String>,
+        /// use the corpus's existing .orbit-rag store as is (no registering, no embedding)
+        #[arg(long)]
+        existing: bool,
+        /// markdown chunks only (skip code)
+        #[arg(long)]
+        docs_only: bool,
     },
     /// Score one retrieval config (fts5, sqlite-vector, sqlite-hybrid, lance-fts, lance-vector, lance-hybrid)
     Retrieval {
@@ -54,6 +63,12 @@ enum Cmd {
         corpus: PathBuf,
         #[arg(long, default_value = "benchmarks/queries.jsonl")]
         queries: PathBuf,
+        /// use the corpus's existing .orbit-rag store as is (no registering, no embedding)
+        #[arg(long)]
+        existing: bool,
+        /// only queries whose `split` is this (e.g. tune, held)
+        #[arg(long)]
+        split: Option<String>,
     },
     /// Latency gates (warm in-process, cold CLI processes)
     Perf {
@@ -128,15 +143,16 @@ fn main() -> Result<()> {
             let n: i64 = s.db.query_row("SELECT COUNT(*) FROM chunks", [], |r| r.get(0))?;
             eprintln!("{} sources, {n} chunks", s.markdown_files()?.len());
         }
-        Cmd::GenQueries { corpus, n, model, seed, out: path } => {
-            let s = retrieval::setup(&corpus)?;
-            let qs = retrieval::gen_queries(&s, n, &model, seed)?;
+        Cmd::GenQueries { corpus, n, model, seed, out: path, include, existing, docs_only } => {
+            let s = if existing { orbit_core::Store::discover(&corpus)? } else { retrieval::setup(&corpus)? };
+            let qs = retrieval::gen_queries(&s, n, &model, seed, &include, docs_only)?;
             std::fs::write(&path, qs.iter().map(|q| serde_json::to_string(q).unwrap() + "\n").collect::<String>())?;
             eprintln!("wrote {} queries to {}", qs.len(), path.display());
         }
-        Cmd::Retrieval { config, corpus, queries } => {
-            let s = retrieval::setup(&corpus)?;
-            out(&retrieval::evaluate(&s, &config, &load_queries(&queries)?)?);
+        Cmd::Retrieval { config, corpus, queries, existing, split } => {
+            let s = if existing { orbit_core::Store::discover(&corpus)? } else { retrieval::setup(&corpus)? };
+            let qs: Vec<_> = load_queries(&queries)?.into_iter().filter(|q| split.as_ref().is_none_or(|sp| q.split.as_deref() == Some(sp.as_str()))).collect();
+            out(&retrieval::evaluate(&s, &config, &qs)?);
         }
         Cmd::Perf { corpus, queries, iters } => {
             retrieval::setup(&corpus)?;

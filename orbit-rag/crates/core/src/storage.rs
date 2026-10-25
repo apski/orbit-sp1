@@ -10,11 +10,16 @@ const MIGRATIONS: &[&str] = &[
     include_str!("../../../migrations/0003_embedding_ids.sql"),
     include_str!("../../../migrations/0004_code_toggle_and_tags.sql"),
     include_str!("../../../migrations/0005_lookup_indexes.sql"),
+    include_str!("../../../migrations/0006_chunk_kinds.sql"),
+    include_str!("../../../migrations/0007_chunk_symbols.sql"),
+    include_str!("../../../migrations/0008_events_by_entity.sql"),
 ];
 
 pub struct Store {
     pub db: Connection,
     pub root: PathBuf,
+    /// Per-repo kind rules and weights (`.orbit-rag/kinds.json`), else the defaults.
+    pub kinds: crate::kinds::Overrides,
 }
 
 /// The per-repo data directory. Not `.orbit/`: orbit-SP1's Orbit owns that.
@@ -59,9 +64,10 @@ impl Store {
             tx.pragma_update(None, "user_version", i + 1)?;
             tx.commit()?;
         }
-        let store = Store { db, root };
-        if v > 0 && v < 4 {
-            store.reindex()?; // 0004 added code tags: derive them for existing sources
+        let kinds = crate::kinds::Overrides::load(&root.join(DATA_DIR));
+        let store = Store { db, root, kinds };
+        if v > 0 && v < MIGRATIONS.len() && v < 6 {
+            store.reindex()?; // 0004 added code tags, 0006 chunk kinds: derive them for existing sources
         }
         Ok(store)
     }

@@ -9,13 +9,13 @@
       "correct": 102,
       "runs": 111,
       "trap_errors": 3,
-      "mean_prompt_tokens": 689.6486486486486,
-      "mean_context_est_tokens": 428.5135135135135,
+      "mean_prompt_tokens": 690.7837837837837,
+      "mean_context_est_tokens": 427.13513513513516,
       "latency": {
         "n": 111,
-        "p50_ms": 781.118333,
-        "p95_ms": 2832.297416,
-        "max_ms": 30303.28725
+        "p50_ms": 133.975459,
+        "p95_ms": 894.0381659999999,
+        "max_ms": 1038.2407090000002
       },
       "per_task": {
         "analytics-vendor": 3,
@@ -76,9 +76,9 @@
       "mean_context_est_tokens": 4209.0,
       "latency": {
         "n": 111,
-        "p50_ms": 1121.307916,
-        "p95_ms": 3646.2205,
-        "max_ms": 45688.702417
+        "p50_ms": 140.16775,
+        "p95_ms": 1409.2157080000002,
+        "max_ms": 1905.394083
       },
       "per_task": {
         "analytics-vendor": 3,
@@ -139,9 +139,9 @@
       "mean_context_est_tokens": 0.0,
       "latency": {
         "n": 111,
-        "p50_ms": 544.343083,
-        "p95_ms": 12639.383167,
-        "max_ms": 51956.335416
+        "p50_ms": 123.114583,
+        "p95_ms": 227.23275,
+        "max_ms": 346.610792
       },
       "per_task": {
         "analytics-vendor": 0,
@@ -198,13 +198,13 @@
       "correct": 84,
       "runs": 111,
       "trap_errors": 27,
-      "mean_prompt_tokens": 636.7027027027027,
-      "mean_context_est_tokens": 487.5135135135135,
+      "mean_prompt_tokens": 627.972972972973,
+      "mean_context_est_tokens": 487.1081081081081,
       "latency": {
         "n": 111,
-        "p50_ms": 895.15575,
-        "p95_ms": 2347.289666,
-        "max_ms": 32686.8895
+        "p50_ms": 155.416042,
+        "p95_ms": 853.728125,
+        "max_ms": 959.388042
       },
       "per_task": {
         "analytics-vendor": 0,
@@ -221,11 +221,11 @@
         "event-retention": 3,
         "fallback-locale": 3,
         "flush-interval": 3,
-        "image-format": 3,
+        "image-format": 0,
         "long-lists": 3,
         "map-sdk": 3,
         "min-android": 0,
-        "min-ios": 3,
+        "min-ios": 0,
         "nav-owner": 3,
         "node-version": 3,
         "page-max": 3,
@@ -239,8 +239,8 @@
         "spacing-base": 3,
         "state-lib": 3,
         "tile-cache": 0,
-        "token-ttl": 0,
-        "touch-target": 0,
+        "token-ttl": 3,
+        "touch-target": 3,
         "tti-budget": 3,
         "uid-hash": 3,
         "upload-limit": 0
@@ -257,7 +257,7 @@
       }
     }
   },
-  "token_estimate_ratio": 1.0029329227891024,
+  "token_estimate_ratio": 1.0018958223677799,
   "samples": [
     {
       "answer": "TidepoolClientState",
@@ -962,7 +962,7 @@
       "trial": 2
     },
     {
-      "answer": "Last-writer-wins with server time.",
+      "answer": "Last-writer-wins with server.",
       "condition": "raw_rag",
       "correct": true,
       "task": "conflicts",
@@ -971,7 +971,7 @@
       "trial": 0
     },
     {
-      "answer": "Last-writer-wins with server time.",
+      "answer": "Last-writer-wins, server timestamp.",
       "condition": "raw_rag",
       "correct": true,
       "task": "conflicts",
@@ -980,7 +980,7 @@
       "trial": 1
     },
     {
-      "answer": "Last-writer-wins with server time.",
+      "answer": "Last-writer-wins, server timestamp.",
       "condition": "raw_rag",
       "correct": true,
       "task": "conflicts",
@@ -1610,30 +1610,30 @@
       "trial": 2
     },
     {
-      "answer": "AVIF",
+      "answer": "WebP",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "image-format",
       "trap": "media-pipeline.md still says WebP",
-      "trapped": false,
+      "trapped": true,
       "trial": 0
     },
     {
-      "answer": "AVIF",
+      "answer": "WebP",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "image-format",
       "trap": "media-pipeline.md still says WebP",
-      "trapped": false,
+      "trapped": true,
       "trial": 1
     },
     {
-      "answer": "AVIF",
+      "answer": "WebP",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "image-format",
       "trap": "media-pipeline.md still says WebP",
-      "trapped": false,
+      "trapped": true,
       "trial": 2
     },
     {
@@ -2258,30 +2258,30 @@
       "trial": 2
     },
     {
-      "answer": "16",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "min-ios",
       "trap": "support-matrix.md still says iOS 15",
-      "trapped": false,
+      "trapped": true,
       "trial": 0
     },
     {
-      "answer": "16",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "min-ios",
       "trap": "support-matrix.md still says iOS 15",
-      "trapped": false,
+      "trapped": true,
       "trial": 1
     },
     {
-      "answer": "16",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": true,
+      "correct": false,
       "task": "min-ios",
       "trap": "support-matrix.md still says iOS 15",
-      "trapped": false,
+      "trapped": true,
       "trial": 2
     },
     {
@@ -2582,30 +2582,30 @@
       "trial": 2
     },
     {
-      "answer": "60",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "token-ttl",
       "trap": "onboarding.md says 60 minutes",
-      "trapped": true,
+      "trapped": false,
       "trial": 0
     },
     {
-      "answer": "60",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "token-ttl",
       "trap": "onboarding.md says 60 minutes",
-      "trapped": true,
+      "trapped": false,
       "trial": 1
     },
     {
-      "answer": "60",
+      "answer": "15",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "token-ttl",
       "trap": "onboarding.md says 60 minutes",
-      "trapped": true,
+      "trapped": false,
       "trial": 2
     },
     {
@@ -2798,30 +2798,30 @@
       "trial": 2
     },
     {
-      "answer": "44",
+      "answer": "48",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "touch-target",
       "trap": "accessibility.md says 44",
-      "trapped": true,
+      "trapped": false,
       "trial": 0
     },
     {
-      "answer": "44",
+      "answer": "48",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "touch-target",
       "trap": "accessibility.md says 44",
-      "trapped": true,
+      "trapped": false,
       "trial": 1
     },
     {
-      "answer": "44",
+      "answer": "48",
       "condition": "raw_rag",
-      "correct": false,
+      "correct": true,
       "task": "touch-target",
       "trap": "accessibility.md says 44",
-      "trapped": true,
+      "trapped": false,
       "trial": 2
     },
     {

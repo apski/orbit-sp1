@@ -66,6 +66,11 @@ pub fn is_markdown(path: &str) -> bool {
     path.ends_with(".md") || path.ends_with(".markdown")
 }
 
+/// The symbol a code chunk defines: last word of its innermost heading (`fn reindex` -> `reindex`).
+fn symbol(lang: &str, heading_path: &[String]) -> Option<String> {
+    (lang != "markdown").then(|| heading_path.last()?.split_whitespace().last().map(String::from)).flatten()
+}
+
 pub fn supported(path: &str) -> bool {
     is_markdown(path) || crate::code::language(path).is_some()
 }
@@ -188,8 +193,9 @@ impl Store {
     pub fn sync_all(&self) -> Result<SyncReport> {
         let ids: Vec<String> = self.db.prepare("SELECT id FROM sources")?.query_map([], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?;
         let mut total = SyncReport::default();
+        let mut candidates = None; // the repo walk for rename detection, done at most once per sync
         for id in ids {
-            let r = self.sync_source(&id)?;
+            let r = self.sync_source_with(&id, &mut candidates)?;
             total.revised.extend(r.revised);
             total.reanchored.extend(r.reanchored);
             total.flagged.extend(r.flagged);
@@ -198,12 +204,34 @@ impl Store {
     }
 
     pub fn sync_source(&self, id: &str) -> Result<SyncReport> {
+        self.sync_source_with(id, &mut None)
+    }
+
+    /// Whether the last lifecycle event of a source says it went missing.
+    fn marked_missing(&self, id: &str) -> Result<bool> {
+        let k: Option<String> = self
+            .db
+            .query_row("SELECT kind FROM events WHERE entity = ?1 AND kind LIKE 'source.%' ORDER BY id DESC LIMIT 1", [id], |r| r.get(0))
+            .optional()?;
+        Ok(k.as_deref() == Some("source.missing"))
+    }
+
+    fn sync_source_with(&self, id: &str, candidates: &mut Option<Vec<String>>) -> Result<SyncReport> {
         let mut report = SyncReport::default();
         let mut path: String = self.db.query_row("SELECT path FROM sources WHERE id = ?1", [id], |r| r.get(0))?;
         let latest = self.latest_revision(id)?;
         if !self.root.join(&path).is_file() {
+            // looked for once already: a deleted file is not searched for on every command
+            if self.marked_missing(id)? {
+                return Ok(report);
+            }
             let renamed = match &latest {
-                Some(l) => self.find_renamed(&l.path, &self.snapshot(&l.snapshot_hash)?)?,
+                Some(l) => {
+                    if candidates.is_none() {
+                        *candidates = Some(self.source_files()?);
+                    }
+                    self.find_renamed(&l.path, &self.snapshot(&l.snapshot_hash)?, candidates.as_deref().unwrap_or(&[]))?
+                }
                 None => None,
             };
             match renamed {
@@ -214,6 +242,13 @@ impl Store {
                 }
                 None => {
                     self.flag_source_missing(id, &mut report)?;
+                    // out of the search index (its records stay, flagged for review)
+                    self.db.execute(
+                        "DELETE FROM chunks_fts WHERE chunk_id IN (SELECT c.id FROM chunks c JOIN source_revisions r ON r.id = c.revision_id WHERE r.source_id = ?1)",
+                        [id],
+                    )?;
+                    self.db.execute("DELETE FROM chunks WHERE revision_id IN (SELECT id FROM source_revisions WHERE source_id = ?1)", [id])?;
+                    self.event("source.missing", id, json!({ "path": path }))?;
                     return Ok(report);
                 }
             }
@@ -221,6 +256,12 @@ impl Store {
         let content = std::fs::read_to_string(self.root.join(&path))?;
         let hash = sha256(&content);
         if latest.as_ref().is_some_and(|l| l.snapshot_hash == hash && l.path == path) {
+            if self.marked_missing(id)? {
+                // back, unchanged: index it again
+                let l = latest.unwrap();
+                self.reindex_chunks(id, l.id, &l.path, &content)?;
+                self.event("source.restored", id, json!({ "path": path }))?;
+            }
             return Ok(report);
         }
 
@@ -264,13 +305,14 @@ impl Store {
     /// A missing source's new path: an unregistered file with identical content, else
     /// the one clearly most similar by line-set Jaccard (moved *and* edited). The
     /// edits are then handled by normal re-anchoring.
-    // ponytail: reads every candidate file of the same type; fine for repos, index by hash if huge
-    fn find_renamed(&self, old_path: &str, old: &str) -> Result<Option<String>> {
+    // ponytail: reads every candidate file of the same type, once per newly missing
+    // source (a deleted source is searched for once); index candidates by hash if huge
+    fn find_renamed(&self, old_path: &str, old: &str, candidates: &[String]) -> Result<Option<String>> {
         let ext = |p: &str| p.rsplit('.').next().unwrap_or("").to_string();
         let lines = |t: &str| t.lines().map(str::trim).filter(|l| !l.is_empty()).map(String::from).collect::<std::collections::HashSet<_>>();
         let (hash, old_lines) = (sha256(old), lines(old));
         let mut scored = Vec::new();
-        for f in self.source_files()? {
+        for f in candidates.iter().cloned() {
             if ext(&f) != ext(old_path) || self.source_by_path(&f)?.is_some() {
                 continue;
             }
@@ -316,14 +358,15 @@ impl Store {
         )?;
         self.db.execute("DELETE FROM chunks WHERE revision_id IN (SELECT id FROM source_revisions WHERE source_id = ?1)", [source_id])?;
         let lang = fence_lang(path);
+        let kind = self.kinds.classify(path, content);
         let mut tags = crate::tags::tags(path, content).into_iter().peekable();
         for c in chunks(path, content) {
             let text = &content[c.start..c.end];
             let it = index_text(&c.heading_path, text);
             let h = sha256(&it);
             self.db.execute(
-                "INSERT INTO chunks(revision_id, heading_path, scope, start_offset, end_offset, text, hash, lang) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
-                params![rev_id, serde_json::to_string(&c.heading_path)?, slug(&c.heading_path), c.start, c.end, text, h, lang],
+                "INSERT INTO chunks(revision_id, heading_path, scope, start_offset, end_offset, text, hash, lang, kind, symbol) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
+                params![rev_id, serde_json::to_string(&c.heading_path)?, slug(&c.heading_path), c.start, c.end, text, h, lang, kind, symbol(lang, &c.heading_path)],
             )?;
             let cid = self.db.last_insert_rowid();
             // tags are sorted by start; one belongs to the chunk its start falls in
@@ -425,6 +468,29 @@ impl Store {
 
 #[cfg(test)]
 mod tests {
+
+    #[test]
+    fn a_deleted_source_leaves_the_index_once_and_returns_when_restored() {
+        let dir = std::env::temp_dir().join(format!("orbit-missing-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(dir.join("a.md"), "# A\n\nKeep the backoff at two seconds.\n").unwrap();
+        let s = crate::Store::init(&dir).unwrap();
+        s.open_source(&dir.join("a.md")).unwrap();
+        let chunks = |s: &crate::Store| s.db.query_row("SELECT COUNT(*) FROM chunks", [], |r| r.get::<_, i64>(0)).unwrap();
+        assert!(chunks(&s) > 0);
+        std::fs::rename(dir.join("a.md"), dir.join("a.md.bak")).unwrap();
+        s.sync_all().unwrap();
+        assert_eq!(chunks(&s), 0, "a missing file is not searchable");
+        s.sync_all().unwrap(); // second sync: no new search, no duplicate event
+        let missing: i64 = s.db.query_row("SELECT COUNT(*) FROM events WHERE kind = 'source.missing'", [], |r| r.get(0)).unwrap();
+        assert_eq!(missing, 1);
+        std::fs::rename(dir.join("a.md.bak"), dir.join("a.md")).unwrap();
+        s.sync_all().unwrap();
+        assert!(chunks(&s) > 0, "restored file is indexed again");
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+
     use super::*;
 
     #[test]

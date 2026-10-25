@@ -127,6 +127,9 @@ export function install(repo) {
     out.push(['orbit-rag', 'binary', installBinary(src)]);
     const emb = embedder();
     out.push(['orbit-rag', 'index', `${index(repo)}; embeddings: ${emb}`]);
+    // decision docs (ADRs, decision folders, `type: decision`) become proposed highlights to approve in Review
+    const p = run(BIN, ['context', 'propose'], { cwd: repo, env: { ...process.env, ORBIT_EMBED: 'none' } });
+    out.push(['orbit-rag', 'proposals', p.status === 0 ? p.stderr.trim().split('\n').slice(-1)[0] : `FAILED: ${p.stderr.trim()}`]);
     if (!argv.includes('--no-mcp')) out.push(['orbit-rag', 'mcp', mcp(repo, emb)]);
     if (!argv.includes('--no-service')) out.push(['orbit-rag', 'ui', service(repo, emb)]);
   } catch (e) {

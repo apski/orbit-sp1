@@ -191,14 +191,22 @@ fn render_item(i: &Item) -> String {
             if let Some(v) = &i.via {
                 s += &format!("Via: {v}\n");
             }
-            s + &format!("\nSource: {} · {}\n", cite(h), crumbs)
+            s + &format!("\nSource: {} · {} · {}\n", cite(h), crumbs, h.kind) + &code_refs(h)
         }
         (None, _) => {
             let f = fence(&h.text);
             let lang = if h.corpus == Corpus::Diff { "diff" } else { crate::sources::fence_lang(&h.path) };
-            format!("\n### {} · {}\n\n{f}{lang}\n{}\n{f}\n", cite(h), crumbs, h.text.trim_end())
+            format!("\n### {} · {} · {}\n\n{f}{lang}\n{}\n{f}\n", cite(h), crumbs, h.kind, h.text.trim_end()) + &code_refs(h)
         }
     }
+}
+
+/// "Implemented in" pointers for names the passage puts in backticks.
+fn code_refs(h: &Hit) -> String {
+    if h.code_refs.is_empty() {
+        return String::new();
+    }
+    format!("Implemented in: {}\n", h.code_refs.iter().map(|c| format!("`{}` {}:{}", c.name, c.path, c.line)).collect::<Vec<_>>().join(", "))
 }
 
 fn manifest_row(i: &Item) -> String {

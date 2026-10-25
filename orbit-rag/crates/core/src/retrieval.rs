@@ -57,6 +57,33 @@ pub fn set_reranker(r: Box<dyn Reranker>) {
 
 /// Hits the reranker sees: deeper than the result so it can promote from below.
 const RERANK_DEPTH: usize = 30;
+/// bm25 weight of the heading-path column relative to body text (`ORBIT_HEADING_WEIGHT`).
+/// 3.0 was tried and did not help on the held-out eval (RESULTS.md §8), so it is off.
+const HEADING_WEIGHT: f64 = 1.0;
+/// Doc chunks with fewer prose words than this (links and headings removed) are thin.
+const THIN_WORDS: usize = 6;
+const THIN_WEIGHT: f64 = 0.5;
+
+/// Words of prose, ignoring `[[wiki links]]`, URLs and heading lines.
+fn prose_words(text: &str) -> usize {
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some(i) = rest.find("[[") {
+        out.push_str(&rest[..i]);
+        rest = rest[i..].find("]]").map_or("", |j| &rest[i + j + 2..]);
+    }
+    out.push_str(rest);
+    out.lines()
+        .filter(|l| !l.trim_start().starts_with('#'))
+        .flat_map(|l| l.split_whitespace())
+        .filter(|w| !w.contains("://") && w.chars().any(char::is_alphabetic))
+        .count()
+}
+
+/// Below this many exact-word candidates, the lexical retriever also tries word prefixes.
+const PREFIX_FALLBACK: usize = 5;
+/// Candidates the kind prior re-orders, as a multiple of the requested limit.
+const PRIOR_DEPTH: usize = 3;
 
 pub struct Lexical<'a>(pub &'a Store);
 
@@ -65,38 +92,54 @@ impl Retriever for Lexical<'_> {
         "fts5".into()
     }
     fn search(&self, q: &SearchQuery, k: usize) -> Result<Vec<Candidate>> {
-        // prefix match for words of 3+ chars ("fire" finds "Firebase"); bm25 still
-        // ranks exact-word hits higher because they match more tokens
-        let terms: Vec<String> =
-            q.text.split(|c: char| !c.is_alphanumeric()).filter(|t| t.len() > 1).map(|t| if t.chars().count() >= 3 { format!("\"{t}\"*") } else { format!("\"{t}\"") }).collect();
-        if terms.is_empty() {
+        let words: Vec<&str> = q.text.split(|c: char| !c.is_alphanumeric()).filter(|t| t.len() > 1).collect();
+        if words.is_empty() {
             return Ok(vec![]);
         }
-        let m = terms.join(" OR ");
+        // exact words first; prefixes ("fire" -> "Firebase") only when that finds almost
+        // nothing: prefix terms on every query reshuffled tight bundles (RESULTS.md §8)
+        let exact = |t: &&str| format!("\"{t}\"");
+        let mut scored = self.query(q, k, &words.iter().map(exact).collect::<Vec<_>>().join(" OR "))?;
+        if scored.len() < PREFIX_FALLBACK && std::env::var("ORBIT_FTS_PREFIX").as_deref() != Ok("0") {
+            let pre = words.iter().map(|t| if t.chars().count() >= 3 { format!("\"{t}\"*") } else { exact(t) }).collect::<Vec<_>>().join(" OR ");
+            let found: Vec<_> = self.query(q, k, &pre)?.into_iter().filter(|x| !scored.iter().any(|y| y.1 == x.1 && y.2 == x.2)).collect();
+            scored.extend(found); // after the exact hits, which keep their order
+            return Ok(rank_joint(scored.into_iter().map(|(_, c, id)| (c, id)), k));
+        }
+        scored.sort_by(|a, b| a.0.total_cmp(&b.0));
+        Ok(rank_joint(scored.into_iter().map(|(_, c, id)| (c, id)), k))
+    }
+}
+
+impl Lexical<'_> {
+    /// One bm25-ordered list (lower = better) across records, chunks and diffs for an FTS5 expression.
+    fn query(&self, q: &SearchQuery, k: usize, m: &str) -> Result<Vec<(f64, Corpus, String)>> {
+        // a match in the heading path counts more than one in body text
+        let hw: f64 = std::env::var("ORBIT_HEADING_WEIGHT").ok().and_then(|v| v.parse().ok()).unwrap_or(HEADING_WEIGHT);
         // one bm25-ordered list across the three tables (lower bm25 = better)
         let mut scored: Vec<(f64, Corpus, String)> = Vec::new();
         for (corpus, sql) in [
-            (Corpus::Record, "SELECT record_id, bm25(records_fts) FROM records_fts WHERE records_fts MATCH ?1 AND ?3 ORDER BY 2 LIMIT ?2"),
+            (Corpus::Record, "SELECT record_id, bm25(records_fts, 0.0, ?4, 1.0, 1.0) FROM records_fts WHERE records_fts MATCH ?1 AND ?3 ORDER BY 2 LIMIT ?2"),
             (
                 Corpus::Chunk,
-                "SELECT CAST(chunks_fts.chunk_id AS TEXT), bm25(chunks_fts) FROM chunks_fts JOIN chunks c ON c.id = chunks_fts.chunk_id
+                "SELECT CAST(chunks_fts.chunk_id AS TEXT), bm25(chunks_fts, 0.0, ?4, 1.0) FROM chunks_fts JOIN chunks c ON c.id = chunks_fts.chunk_id
                  WHERE chunks_fts MATCH ?1 AND (?3 OR c.lang = 'markdown') ORDER BY 2 LIMIT ?2",
             ),
             (
                 Corpus::Diff,
-                "SELECT CAST(diffs_fts.hunk_id AS TEXT), bm25(diffs_fts) FROM diffs_fts JOIN diff_hunks d ON d.id = diffs_fts.hunk_id
+                "SELECT CAST(diffs_fts.hunk_id AS TEXT), bm25(diffs_fts, 0.0, ?4, 1.0) FROM diffs_fts JOIN diff_hunks d ON d.id = diffs_fts.hunk_id
                  WHERE diffs_fts MATCH ?1 AND (?3 OR d.lang = 'markdown') ORDER BY 2 LIMIT ?2",
             ),
         ] {
             let mut st = self.0.db.prepare(sql)?;
             let code = q.include_code || corpus == Corpus::Record; // records: filtered after hydration
-            for row in st.query_map(rusqlite::params![m, k, code], |r| Ok((r.get::<_, f64>(1)?, r.get::<_, String>(0)?)))? {
+            for row in st.query_map(rusqlite::params![m, k, code, hw], |r| Ok((r.get::<_, f64>(1)?, r.get::<_, String>(0)?)))? {
                 let (score, id) = row?;
                 scored.push((score, corpus, id));
             }
         }
         scored.sort_by(|a, b| a.0.total_cmp(&b.0));
-        Ok(rank_joint(scored.into_iter().map(|(_, c, id)| (c, id)), k))
+        Ok(scored)
     }
 }
 
@@ -184,11 +227,41 @@ pub fn rrf(lists: &[(String, Vec<Candidate>)]) -> Vec<(Corpus, String, f64, Vec<
     out
 }
 
+/// How well the retrievers agree on a hit, in words an agent can use (a fused
+/// score of 0.03 says nothing): every retriever ranked it in its top 10 →
+/// "strong"; at least one did → "partial"; else "weak".
+fn match_label(lists: &[(String, Vec<Candidate>)], corpus: Corpus, id: &str) -> &'static str {
+    let ranks: Vec<usize> = lists.iter().filter_map(|(_, l)| l.iter().find(|c| c.corpus == corpus && c.id == id).map(|c| c.rank)).collect();
+    let top = ranks.iter().filter(|&&r| r < 10).count();
+    if top == lists.len() && (lists.len() > 1 || ranks.first().is_some_and(|&r| r < 3)) {
+        "strong"
+    } else if top > 0 {
+        "partial"
+    } else {
+        "weak"
+    }
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub struct CodeRef {
+    pub name: String,
+    pub path: String,
+    pub line: usize,
+}
+
 #[derive(Clone, Debug, Serialize)]
 pub struct Hit {
     pub corpus: Corpus,
     pub id: String,
     pub score: f64,
+    /// decision, spec, doc, code, history, agent or marketing (kinds.rs)
+    pub kind: String,
+    /// strong / partial / weak retriever agreement (see `match_label`)
+    #[serde(rename = "match")]
+    pub matched: String,
+    /// Code that defines names this passage mentions in backticks (docs only).
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub code_refs: Vec<CodeRef>,
     pub retrievers: Vec<String>,
     pub validity: String,
     pub path: String,
@@ -240,12 +313,19 @@ pub fn search_with(store: &Store, retrievers: &[Box<dyn Retriever + '_>], q: &Se
         }
     }
     let reranker = RERANKER.get();
-    let depth = if reranker.is_some() { q.limit.max(RERANK_DEPTH) } else { q.limit };
+    let priors = std::env::var("ORBIT_KIND_PRIORS").as_deref() != Ok("0");
+    // the kind prior and the reranker re-order, so both look past the requested limit
+    let depth = q.limit.max(if reranker.is_some() { RERANK_DEPTH } else { 0 }).max(if priors { q.limit * PRIOR_DEPTH } else { 0 });
     let mut snaps: HashMap<String, String> = HashMap::new();
     let mut seen = HashSet::new();
     let mut hits = Vec::new();
     for (corpus, id, score, by) in rrf(&lists) {
-        let Some(h) = hydrate(store, &mut snaps, corpus, &id, score, by)? else { continue };
+        let Some(mut h) = hydrate(store, &mut snaps, corpus, &id, score, by)? else { continue };
+        h.matched = match_label(&lists, corpus, &id).into();
+        h.score *= store.kinds.weight(&h.kind);
+        if priors && h.corpus == Corpus::Chunk && h.kind != "code" && prose_words(&h.text) < THIN_WORDS {
+            h.score *= THIN_WEIGHT; // a "Related: [[..]]" footer matches on link titles, not content
+        }
         let in_scope = q.scope.as_deref().is_none_or(|s| h.scope.starts_with(s) || h.path.starts_with(s));
         let active = q.include_inactive || !matches!(h.validity.as_str(), "retired" | "superseded");
         // also catches retrievers that can't filter by language (LanceDB)
@@ -272,7 +352,11 @@ pub fn search_with(store: &Store, retrievers: &[Box<dyn Retriever + '_>], q: &Se
             Err(e) => warnings.push(format!("{} unavailable: {e:#}", r.name())),
         }
     }
+    if priors && reranker.is_none() {
+        hits.sort_by(|a, b| b.score.total_cmp(&a.score)); // stable: equal scores keep fused order
+    }
     hits.truncate(q.limit);
+    crate::coderefs::attach(store, &mut hits)?;
     Ok(SearchResult { hits, retrievers: names, warnings })
 }
 
@@ -294,6 +378,9 @@ pub fn record_hit(store: &Store, snaps: &mut HashMap<String, String>, r: Record,
         scope: r.scope.clone(),
         text: r.body.clone(),
         offsets: None,
+        kind: store.kinds.classify(&r.path, &text).into(),
+        matched: String::new(),
+        code_refs: vec![],
         record: Some(r),
     })
 }
@@ -340,19 +427,27 @@ fn hydrate(store: &Store, snaps: &mut HashMap<String, String>, corpus: Corpus, i
             text,
             context: None,
             offsets: None,
+            kind: "history".into(), // a change, like the validity says
+            matched: String::new(),
+            code_refs: vec![],
             record: None,
         }));
     }
     let row = store
         .db
         .query_row(
-            "SELECT c.heading_path, c.scope, c.start_offset, c.end_offset, c.text, s.path, r.git_rev, r.snapshot_hash
+            "SELECT c.heading_path, c.scope, c.start_offset, c.end_offset, c.text, s.path, r.git_rev, r.snapshot_hash, c.kind
              FROM chunks c JOIN source_revisions r ON r.id = c.revision_id JOIN sources s ON s.id = r.source_id WHERE c.id = ?1",
             [id],
-            |r| Ok((r.get::<_, String>(0)?, r.get(1)?, r.get::<_, usize>(2)?, r.get::<_, usize>(3)?, r.get(4)?, r.get(5)?, r.get::<_, Option<String>>(6)?, r.get::<_, String>(7)?)),
+            |r| {
+                Ok((
+                    (r.get::<_, String>(0)?, r.get::<_, String>(1)?, r.get::<_, usize>(2)?, r.get::<_, usize>(3)?, r.get::<_, String>(4)?),
+                    (r.get::<_, String>(5)?, r.get::<_, Option<String>>(6)?, r.get::<_, String>(7)?, r.get::<_, String>(8)?),
+                ))
+            },
         )
         .optional()?;
-    let Some((hp, scope, s, e, text, path, git, snap)) = row else { return Ok(None) };
+    let Some(((hp, scope, s, e, text), (path, git, snap, kind))) = row else { return Ok(None) };
     let content = snaps.entry(snap.clone()).or_insert(store.snapshot(&snap)?);
     Ok(Some(Hit {
         corpus,
@@ -368,12 +463,21 @@ fn hydrate(store: &Store, snaps: &mut HashMap<String, String>, corpus: Corpus, i
         text,
         context: None,
         offsets: Some((crate::storage::byte_to_utf16(content, s), crate::storage::byte_to_utf16(content, e))),
+        kind,
+        matched: String::new(),
+        code_refs: vec![],
         record: None,
     }))
 }
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn link_footers_are_thin() {
+        assert!(super::prose_words("Related: [[Tech Decisions]], [[2026-09-23 The Tax Worker Is A Rust Process|TECH-019]].") < super::THIN_WORDS);
+        assert!(super::prose_words("The move's sub-run matches with exactly one lot rule, the user's method.") >= super::THIN_WORDS);
+    }
+
     #[test]
     fn sentence_around_marks_the_highlight_in_its_sentence() {
         let t = "## Images\n\nForecast imagery and spot photos are served as AVIF with a JPEG fallback for clients. Thumbnails are small.\n";

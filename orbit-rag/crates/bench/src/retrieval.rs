@@ -21,6 +21,12 @@ pub struct Query {
     pub heading: String,
     /// share of the query's content words that appear verbatim in the passage
     pub lexical_overlap: f64,
+    /// eval split (tune / held) when a set is used to tune ranking
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub split: Option<String>,
+    /// other passages that also answer it (path, start, end), e.g. a decision and its spec section
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub also: Vec<(String, usize, usize)>,
 }
 
 /// Open (or create) the corpus store, register every Markdown file, embed all.
@@ -61,13 +67,18 @@ fn ollama_generate(model: &str, prompt: &str, seed: u64) -> Result<String> {
     Ok(v["response"].as_str().unwrap_or("").to_string())
 }
 
-pub fn gen_queries(store: &Store, n: usize, model: &str, seed: u64) -> Result<Vec<Query>> {
+pub fn gen_queries(store: &Store, n: usize, model: &str, seed: u64, include: &[String], docs_only: bool) -> Result<Vec<Query>> {
     let mut st = store.db.prepare(
         "SELECT s.path, c.start_offset, c.end_offset, c.text, c.heading_path FROM chunks c
          JOIN source_revisions r ON r.id = c.revision_id JOIN sources s ON s.id = r.source_id
-         WHERE length(c.text) BETWEEN 400 AND 1700 AND substr(trim(c.text), 1, 3) <> '```' ORDER BY c.id",
+         WHERE length(c.text) BETWEEN 400 AND 1700 AND substr(trim(c.text), 1, 3) <> '```' AND (?1 = 0 OR c.lang = 'markdown') ORDER BY c.id",
     )?;
-    let pool: Vec<(String, usize, usize, String, String)> = st.query_map([], |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?, r.get(3)?, r.get(4)?)))?.collect::<rusqlite::Result<_>>()?;
+    let pool: Vec<(String, usize, usize, String, String)> = st
+        .query_map([docs_only as i64], |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?, r.get(3)?, r.get(4)?)))?
+        .collect::<rusqlite::Result<Vec<(String, usize, usize, String, String)>>>()?
+        .into_iter()
+        .filter(|p| include.is_empty() || include.iter().any(|i| p.0.starts_with(i.as_str())))
+        .collect();
     let mut rng = Rng::new(seed);
     let mut used = HashSet::new();
     let mut out = Vec::new();
@@ -88,7 +99,8 @@ pub fn gen_queries(store: &Store, n: usize, model: &str, seed: u64) -> Result<Ve
             continue;
         }
         eprintln!("[{}/{n}] {q}", out.len() + 1);
-        out.push(Query { qid: out.len(), lexical_overlap: overlap(&q, &text), query: q, path, start, end, heading });
+        let split = Some(if out.len() % 2 == 0 { "tune" } else { "held" }.to_string());
+        out.push(Query { qid: out.len(), lexical_overlap: overlap(&q, &text), query: q, path, start, end, heading, split, also: vec![] });
     }
     Ok(out)
 }
@@ -107,6 +119,8 @@ pub struct ConfigResult {
     pub peak_rss_mb: f64,
     pub index_bytes: u64,
     pub notes: String,
+    /// per query: rank of the first relevant hit (None = not in top 10) and the top 3 paths
+    pub details: Vec<serde_json::Value>,
 }
 
 /// Bytes used by named tables/indexes (dbstat), falling back to the whole file.
@@ -120,7 +134,12 @@ fn relevant(store: &Store, q: &Query) -> Result<HashSet<String>> {
         "SELECT 'chunk_' || c.id FROM chunks c JOIN source_revisions r ON r.id = c.revision_id JOIN sources s ON s.id = r.source_id
          WHERE s.path = ?1 AND c.start_offset < ?3 AND c.end_offset > ?2",
     )?;
-    let ids = st.query_map(rusqlite::params![q.path, q.start, q.end], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?;
+    let mut ids = HashSet::new();
+    for (path, start, end) in std::iter::once((q.path.clone(), q.start, q.end)).chain(q.also.iter().cloned()) {
+        for id in st.query_map(rusqlite::params![path, start, end], |r| r.get::<_, String>(0))? {
+            ids.insert(id?);
+        }
+    }
     Ok(ids)
 }
 
@@ -183,13 +202,17 @@ pub fn evaluate(store: &Store, config: &str, queries: &[Query]) -> Result<Config
 
     let (mut r1, mut r5, mut r10, mut mrr, mut ndcg) = (0.0, 0.0, 0.0, 0.0, 0.0);
     let mut lat = Vec::new();
+    let mut details = Vec::new();
     for (q, v) in queries.iter().zip(&vecs) {
         let rel = relevant(store, q)?;
         let sq = SearchQuery { text: q.query.clone(), limit: 10, vector: Some(v.clone()), ..Default::default() };
         let (res, dt) = time(|| search_with(store, &retrievers, &sq));
         lat.push(dt);
-        let hits: Vec<String> = res?.hits.into_iter().filter(|h| h.corpus == Corpus::Chunk).map(|h| h.id).collect();
+        let res = res?;
+        let top: Vec<String> = res.hits.iter().take(3).map(|h| format!("{} [{}]", h.path, h.kind)).collect();
+        let hits: Vec<String> = res.hits.into_iter().filter(|h| h.corpus == Corpus::Chunk).map(|h| h.id).collect();
         let first = hits.iter().position(|h| rel.contains(h));
+        details.push(json!({ "qid": q.qid, "split": q.split, "query": q.query, "want": q.path, "first": first, "top": top }));
         r1 += first.is_some_and(|p| p < 1) as u8 as f64;
         r5 += first.is_some_and(|p| p < 5) as u8 as f64;
         r10 += first.is_some_and(|p| p < 10) as u8 as f64;
@@ -212,5 +235,6 @@ pub fn evaluate(store: &Store, config: &str, queries: &[Query]) -> Result<Config
         peak_rss_mb: peak_rss_mb(),
         index_bytes,
         notes,
+        details,
     })
 }

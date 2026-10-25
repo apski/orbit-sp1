@@ -228,3 +228,74 @@ for a raw prompt):
     missing indexes.
   - Uniform random vectors are the worst case for HNSW (recall 0.31).
 - **Next.** The bench now uses clustered vectors. The rerun waits for a quiet host.
+
+## 8. Ranking by document kind (`results/exampleapp-eval-aggregates.json`)
+
+Why: on ExampleApp (4,458 files, 52k chunks), "what do the docs say about bridge
+transfer cost basis?" ranked agent checklists and a marketing email above the spec
+section and the two decision notes that settle it (ADR-003).
+
+**Test set.** Questions come from gemma3:4b doc2query over passages. Only aggregate
+numbers are here, because the questions quote internal docs; they stay in
+ExampleApp's local `.orbit-rag/eval/`.
+
+- *canonical*: 31 questions from an explicit file list (`06 Decisions/`,
+  `docs/positions/`, `docs/architecture/`). The generic classifier never sees the
+  list. One question was hand-added: the bridge one, in the tune split.
+- *uniform*: 30 questions from random doc passages of any kind, to measure the cost
+  to questions whose answer lives in agent, history or marketing docs.
+- Each set is split into tune and held. Weights were picked on tune only.
+
+MRR@10 (R@1 in brackets), sqlite-hybrid:
+
+| ranking | canonical held | canonical tune | uniform held | uniform tune |
+|---|---|---|---|---|
+| before (2026-10-25 morning) | 0.47 (0.27) | 0.41 (0.31) | 0.49 (0.40) | 0.37 (0.27) |
+| heading weight ×3 only | 0.44 (0.27) | 0.38 (0.25) | 0.51 (0.40) | 0.38 (0.27) |
+| priors with demotion (decision 1.3, spec 1.15, history 0.8, agent/marketing 0.75) | 0.59 (0.40) | 0.49 (0.38) | 0.47 (0.33) | 0.23 (0.13) |
+| **final: decision 1.3, spec 1.15, rest 1.0; thin chunks ×0.5; exact words first** | **0.62 (0.47)** | 0.47 (0.38) | 0.46 (0.33) | 0.30 (0.20) |
+
+Canonical held R@5 went from 0.73 to 0.87.
+
+- **The trade-off is real.**
+  - On the tune split no weighting beat the baseline on canonical plus uniform
+    combined (0.78). The chosen one scored 0.76. It was picked as the best
+    trade-off, because questions about current rules are the use case.
+  - On held, canonical gains 0.15 MRR and uniform loses 0.03.
+  - With n = 15 per split, single-task flips move MRR by about 0.05.
+- **Heading weighting didn't help**, so it defaults to 1.0. The thin-chunk rule
+  (fewer than 6 prose words) was neutral on both sets and removes link-footer
+  noise from results.
+- **Kinds on ExampleApp:**
+
+  | kind | files |
+  |---|---|
+  | decision | 52 |
+  | spec | 328 |
+  | history | 399 |
+  | agent | 375 |
+  | marketing | 135 |
+  | doc | 207 |
+  | code | 3,450 |
+
+- **Other corpora.**
+  - The Rust Book is unchanged (R@10 0.83, nDCG 0.55): every file is `doc`, so
+    the priors are neutral when a repo has no conventions.
+  - Tidepool agent trials (gemma3:4b): bundles are unchanged at both budgets
+    (500: 39/45 consistent, 63/66 doc rot; 1200: 42/45, 60/66). Raw RAG doc rot at
+    1200 went from 36 to 39.
+- **Regression caught on the way.** "fire" → "Firebase" prefix matching, added
+  earlier that day, ran on every query. It dropped bundles to 30/45 on consistent
+  tasks at 500 tokens: prefix terms reshuffled which chunks filled the budget.
+  - Run: `results/agent-gemma3-4b-b500-prefix-always.json`.
+  - Found with `agent --dump` bundle diffs.
+  - Prefixes are now a fallback, used only when exact words find under 5
+    candidates.
+- **Latency.** ExampleApp hybrid p50 is 230–480 ms (the high end measured while an
+  agent benchmark shared the host); keyword CLI search is 0.26 s. On the same day,
+  a deleted folder (55 missing sources) made every sync walk the whole tree
+  (20 s per command). Fixed: a missing source is searched for once, then marked
+  and dropped from the index.
+- **Proposals.** `context propose` produced 50 proposed decision highlights on
+  ExampleApp: 52 decision docs, minus one template and one with no prose. None is
+  authoritative until approved in Review.

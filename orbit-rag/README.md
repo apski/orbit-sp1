@@ -48,6 +48,24 @@ orbit-rag watch | sync | reindex | check | backup | restore <file>
   highlights on code unless you pass `--code` (`include_code` in MCP, a checkbox
   in the viewer). Code is still tagged: see
   [`docs/adr-002-code-tags.md`](docs/adr-002-code-tags.md).
+- **Ranking by document kind.** Every source gets a kind from conventions any repo
+  can follow: `decision` (ADRs, decision folders, `type: decision`), `spec`
+  (`docs/`, README), `history` (dated, log-style or superseded files), `agent`
+  (`AGENTS.md`, `SKILL.md`, dot-dirs), `marketing`, `doc` and `code`.
+  - Decisions (×1.3) and specs (×1.15) rank higher; nothing is demoted.
+  - Chunks that are only links (a `Related: [[…]]` footer) count half.
+  - Override per repo with `.orbit-rag/kinds.json`:
+    `{"rules": [["path/prefix/", "decision"]], "weights": {"agent": 0.8}}`.
+  - Decision ADR: [`docs/adr-003-ranking-by-kind.md`](docs/adr-003-ranking-by-kind.md).
+- **Each hit carries:**
+  - `kind`;
+  - `match`: `strong` when every retriever ranked it in its top 10, `partial` or `weak` otherwise;
+  - `code_refs`: where the code names it puts in backticks are defined, even with code off.
+- **Decisions become reviewable highlights.**
+  - `orbit-rag context propose [--dry-run]` offers each decision doc's decision
+    passage as a *proposed* record. The installer runs it.
+  - Approve in the viewer's Review tab, or with `context review accept <id>`.
+  - Nothing is authoritative until a person approves it.
 - **Engines and settings:**
 
   | variable | values | default |
@@ -57,9 +75,14 @@ orbit-rag watch | sync | reindex | check | backup | restore <file>
   | `ORBIT_RERANK` | `jina-turbo`, `bge-base`, `none` (needs `--features rerank`) | `none` |
   | `ORBIT_TOKENIZER` | `chars4`, `o200k`, `cl100k` | `chars4` |
   | `ORBIT_ANN_MIN` | vectors per model before the HNSW index is used (needs `--features ann`) | 20000 |
-- **MCP.** `orbit-rag mcp` is a read-only stdio server with 8 tools: `search_context`,
-  `build_context_bundle`, `get_context_record`, `get_context_source`,
-  `related_context`, `review_queue`, `impact` and `code_model`.
+  | `ORBIT_KIND_PRIORS` | `0` turns off the kind weights and the thin-chunk rule | on |
+  | `ORBIT_FTS_PREFIX` | `0` turns off the prefix fallback (words of 3+ letters, used when exact words find under 5 hits) | on |
+  | `ORBIT_HEADING_WEIGHT` | bm25 weight of headings vs body (3.0 didn't help) | 1.0 |
+- **MCP.** `orbit-rag mcp` is a read-only stdio server with 9 tools:
+  `build_context_bundle` (start here for questions), `search_context`,
+  `read_source` (path + lines), `get_context_record`, `get_context_source`,
+  `related_context`, `review_queue`, `impact` and `code_model`. Its instructions
+  tell agents to read the cited passage before stating specifics.
   - **Register it** from the indexed repo's root:
     `claude mcp add orbit-rag -s local -e ORBIT_EMBED=ollama:nomic-embed-text -- <abs path>/orbit-rag mcp`.
   - **Use an installed copy** (for example `~/.local/share/orbit-rag/bin/orbit-rag`),

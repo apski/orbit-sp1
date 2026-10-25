@@ -144,6 +144,11 @@ enum Ctx {
         #[arg(long)]
         code: bool,
     },
+    /// Offer each decision doc's decision passage as a proposed highlight, for one-step review
+    Propose {
+        #[arg(long)]
+        dry_run: bool,
+    },
     /// Machine-derived code model per subsystem: types, constants, config, API, boundaries
     Model {
         #[arg(long)]
@@ -352,10 +357,13 @@ fn context(c: Ctx) -> Result<()> {
                     None if h.corpus == orbit_core::retrieval::Corpus::Diff => format!("[{}] diff hunk · {}", h.id, h.validity),
                     None => format!("[{}] source chunk · {}", h.id, h.validity),
                 };
-                println!("{:>2}. {head}  ({:.4} via {})", i + 1, h.score, h.retrievers.join("+"));
+                println!("{:>2}. {head}  ({} {} match via {})", i + 1, h.kind, h.matched, h.retrievers.join("+"));
                 let text: String = h.text.split_whitespace().collect::<Vec<_>>().join(" ").chars().take(160).collect();
                 println!("    {text}");
                 println!("    {} · {}", cite(h), h.heading_path.join(" › "));
+                if !h.code_refs.is_empty() {
+                    println!("    implemented in: {}", h.code_refs.iter().map(|c| format!("{} {}:{}", c.name, c.path, c.line)).collect::<Vec<_>>().join(", "));
+                }
             }
             eprintln!("{} hits in {:.1} ms ({})", res.hits.len(), t.elapsed().as_secs_f64() * 1e3, res.retrievers.join(", "));
         }
@@ -447,6 +455,13 @@ fn context(c: Ctx) -> Result<()> {
                 let via = i.via.map(|v| format!("  (via {v})")).unwrap_or_default();
                 println!("{indent}{}{via}", record_line(&i.record));
             }
+        }
+        Ctx::Propose { dry_run } => {
+            let p = s.propose_decisions(dry_run)?;
+            for (path, what) in &p {
+                println!("{what}  {path}");
+            }
+            eprintln!("{} {} (review: orbit-rag context review list, or the viewer's Review tab)", p.len(), if dry_run { "would be proposed" } else { "proposed" });
         }
         Ctx::Model { scope, json } => {
             let m = orbit_core::model::code_model(&s, scope.as_deref())?;

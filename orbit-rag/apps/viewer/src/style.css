@@ -88,3 +88,10 @@ kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; font-si
 .locate { text-decoration: underline 2px var(--ok); text-underline-offset: 3px; animation: locate 1.2s ease-out; }
 @keyframes locate { from { background: var(--flash); } to { background: transparent; } }
 @media (prefers-reduced-motion: reduce) { .locate { animation: none; } }
+
+/* kind and match chips on search results; decisions and strong matches stand out */
+.chip.kind-decision { color: var(--decision-b); } .chip.kind-spec { color: var(--ok); }
+.chip.match-weak { opacity: 0.6; }
+.refs { margin: 4px 12px 0; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ref { background: none; border: 0; padding: 0; cursor: pointer; color: inherit; }
+.ref code { font-size: 11px; text-decoration: underline dotted; }

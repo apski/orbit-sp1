@@ -285,10 +285,10 @@ function Highlights({ doc, act }) {
   )
 }
 
-function ReviewActions({ id, act, canAccept }) {
+function ReviewActions({ id, act, canAccept, label }) {
   return (
     <div className="actions">
-      {canAccept && <button onClick={() => act('accept', id)} data-testid={`accept-${id}`}>Accept current text</button>}
+      {canAccept && <button onClick={() => act('accept', id)} data-testid={`accept-${id}`}>{label ?? 'Accept current text'}</button>}
       <button onClick={() => act('retire', id)}>Retire</button>
     </div>
   )
@@ -302,11 +302,15 @@ function ReviewQueue({ items, act, open }) {
         <li key={i.id}>
           <button className="card" onClick={() => open(i.record.path, i.record.id)}>
             <div className="row"><b>{i.record.id}</b><span className={`cat cat-${i.record.category}`}>{i.record.category}</span><span className="chip">{i.reason.replace('_', ' ')}</span></div>
-            {i.approved && <div className="diff old">{i.approved[0]}</div>}
-            <div className="diff new">{i.record.start != null ? i.record.exact : '(no position found)'}</div>
+            {i.reason === 'proposed'
+              ? <div className="body">{i.record.exact}</div>
+              : <>
+                  {i.approved && <div className="diff old">{i.approved[0]}</div>}
+                  <div className="diff new">{i.record.start != null ? i.record.exact : '(no position found)'}</div>
+                </>}
             <div className="muted small">{i.record.path}</div>
           </button>
-          <ReviewActions id={i.record.id} act={act} canAccept={i.record.start != null} />
+          <ReviewActions id={i.record.id} act={act} canAccept={i.record.start != null} label={i.reason === 'proposed' ? 'Approve' : undefined} />
         </li>
       ))}
     </ul>
@@ -336,10 +340,15 @@ function Search({ open }) {
             {res.hits.map((h) => (
               <li key={h.id}>
                 <button className="card" onClick={() => open(h.path, h.record ? h.id : null, h.offsets)}>
-                  <div className="row"><b>{h.id}</b>{h.record && <span className={`cat cat-${h.record.category}`}>{h.record.category}</span>}<Chip v={h.validity} /></div>
+                  <div className="row"><b>{h.id}</b>{h.record && <span className={`cat cat-${h.record.category}`}>{h.record.category}</span>}<Chip v={h.validity} /><span className={`chip kind-${h.kind}`}>{h.kind}</span><span className={`chip match-${h.match}`}>{h.match} match</span></div>
                   <div className="body clamp">{h.text}</div>
                   <div className="muted small">{h.path}:{h.lines[0]} · {h.retrievers.join('+')}</div>
                 </button>
+                {h.code_refs?.length > 0 && (
+                  <div className="refs small">implemented in {h.code_refs.map((c) => (
+                    <button key={`${c.path}:${c.line}`} className="ref" onClick={() => open(c.path)} title={`${c.path}:${c.line}`}><code>{c.name}</code></button>
+                  ))}</div>
+                )}
               </li>
             ))}
           </ul>
