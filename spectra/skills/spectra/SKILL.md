@@ -50,3 +50,7 @@ before `verify` passes. CLI: `.spectra/spectra` (no args lists commands). Prefli
 Behaviour (onPress, state, data) is not generated: screens are static and need a typed interface for native code to
 fill. Lists (`FlatList`) become fixed trees, not lazy lists. Images are placeholders. Navigation chrome isn't converted.
 Design-system components: use `spectra-components` so generated screens use real native components instead of primitives.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = the screen's IR captured and `verify` failing or unrun, before generating; gate = `.spectra/spectra verify` (PARITY n/n within 1pt); oracle = the source's own layout (rn-runtime, or jest for unreachable states), never edited to pass; floor = screens at PARITY (ready) / screens captured (breadth); log = `.spectra/DEVLOG.md`; next = this skill's "Not done yet" and the gap list from `verify`. Every misjudge fix ships a fixture.

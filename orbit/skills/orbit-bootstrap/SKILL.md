@@ -82,3 +82,7 @@ The `routing` table in the proposal comes from `[tasks.*]` in the catalog, filte
   - `refs` use counts are textual, so a name like `API` also counts prose.
   - `skill-ref` skips runtime paths (`/tmp`, `/etc`).
   - Line counts are newline counts.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = the `propose --json` before-snapshot; gate = `.orbit/engine-tests` + `.orbit/orbit verify fast`, goldens unchanged unless `UPDATE_GOLDEN=1` with a reason; oracle = golden fixtures and labelled router questions; floor = covered files per language, which must rise (ready) / files (breadth); log = `docs/orbit/<area>/BOOTSTRAP-<REPO>.md`; next = the ranked proposal items.

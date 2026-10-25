@@ -104,3 +104,7 @@ animation?), and the caveats: metrics that aren't comparable across arms, simula
 - **A flow re-taps Back and double-pops.** The back button reappears in place, so pass `until`.
 - **`describe` shows another app's tree.** A transition frame was captured; describe again.
 - **Native-devtools RPC times out.** Use a temporary NSLog + `simctl spawn <udid> log show` instead.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = the hypothesis and knob sweep written before the app code; gate = both arms' walks `--repeat 3` after every change, plus the hygiene rules (§5); oracle = the native twin; floor = knees measured (ready) / configs swept (breadth), each labelled measured or estimated; log = the lab's `DEVLOG.md`; next = the widest unmeasured knob.

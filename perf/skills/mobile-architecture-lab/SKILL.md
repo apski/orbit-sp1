@@ -73,3 +73,7 @@ lists, startup, images, state management, animations/gestures, native modules/JS
 4. The real-app audit: hot paths, predicted vs measured, unexplained.
 5. Decisions: keep / restructure / migrate, with ROI and confidence; the CI gate.
 6. Caveats and the next experiment that would most reduce uncertainty (usually a device run, or the measured twin of an inferred claim).
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = each stage's outside judge chosen before the stage runs; gate = that judge (never the model grading itself); oracle = the native twin; floor = stages with a judged result (ready) / stages built (breadth); log = the lab's `DEVLOG.md`; next = "Choosing the next lab".

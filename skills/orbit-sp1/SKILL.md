@@ -16,6 +16,8 @@ CLI: `$OP/bin/orbit`.
 Each subsystem has its own L1 bootstrap skill; this skill runs them in order and keeps the user oriented. Everything
 learned goes into the subsystem's files (navlab.config.json, .orbit/orbit.toml, .spectra/profile.json), never only chat.
 
+Long tasks follow `$OP/HARNESS.md` (gate, ratchet, dev log, owned files, escalation).
+
 ## "install" (into the current RN repo, or the one the user names)
 
 1. `$OP/bin/orbit install <repo>`: NavLab bootstrap, Orbit shims + census, Spectra install,

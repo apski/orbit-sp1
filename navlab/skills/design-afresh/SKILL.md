@@ -118,3 +118,7 @@ Use mermaid for as-is vs target. Record the expected effect as a ledger predicti
 
 ## When this skill falls short
 Log it before working around it: `python3 $NAVLAB_HOME/arch/gaps.py add --skill design-afresh --kind <missing-pattern|false-positive|false-negative|missing-tool|missing-skill|missing-data|wrong-answer|slow|ux> --impact <blocked|wrong-answer|degraded|slow> --repo <short name> --what "..." --evidence <file:line> --workaround "..."`. List what you logged in the report. Rules: AGENTS.md "Learning loop".
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = `featuremodel.py check` passing on the as-is model and the intents listed, before any candidate; gate = `check --strict` + `contracts.py diff` (only intended removals); oracle = the blind reviewer and history replay, never your own grading; floor = migration steps shipped (ready) / candidates judged (breadth); log = `docs/design-afresh/<f>/README.md` plus a `DEVLOG.md` beside it; next = hotspots first.

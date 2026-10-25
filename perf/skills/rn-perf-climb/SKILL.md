@@ -92,3 +92,7 @@ profiler can't see app init. For startup, use the spans, the import graph and th
 - `react-profiler-start` needs a live runtime. A relaunch mid-recording kills the session.
 - npm's 2-day release-age guard (`before` in npmrc) blocks the newest Expo template; use
   `--template blank-typescript@sdk-<prev>`.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: the loop's rules are `perf-climb`'s (accept = gate, accepted baseline = floor, `perf/ledger.jsonl` = log). RN-specific: a ruler change (new `mark`/`count`/`fixture`) is its own re-baseline move, never folded into a fix.

@@ -92,3 +92,7 @@ pause the program and re-plan (`ledger.py score`, revisit §1–3).
 
 ## When this skill falls short
 Log it before working around it: `python3 $NAVLAB_HOME/arch/gaps.py add --skill rn-native-migration --kind <missing-pattern|false-positive|false-negative|missing-tool|missing-skill|missing-data|wrong-answer|slow|ux> --impact <blocked|wrong-answer|degraded|slow> --repo <short name> --what "..." --evidence <file:line> --workaround "..."`. List what you logged in the report. Rules: AGENTS.md "Learning loop".
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = a ledger prediction per surface, before the seam; gate = `ledger.py measure`, `contracts.py diff` (nothing lost), journeys on device; oracle = the measured twin and field data; floor = surfaces migrated within prediction (ready) / surfaces ranked (breadth); log = the `.navlab/` ledger plus `.navlab/DEVLOG.md`; next = the stop rules, then the next ROI rank.

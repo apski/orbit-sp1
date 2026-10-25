@@ -247,3 +247,7 @@ build. Each round runs one rep per device concurrently in worker processes.
 - Native deep links pop "Open in …?" on every external open, and the alerts queue up in SpringBoard.
   Level 2 uses the route file instead. To clear stuck alerts, reboot the simulator
   (`argent run boot-device --udid <u> --force`). The HEAD check stops a stale run from being accepted.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = a one-line hypothesis with evidence and its target metric, before the fix; gate = `$H accept` (guard + CI verdict, Release); floor = the accepted baseline per scenario (ready) / scenarios benched (breadth); log = `perf/ledger.jsonl` (`$H report`), plus `perf/DEVLOG.md` for next steps and questions; next = the biggest user-felt gap in `$H profile`.

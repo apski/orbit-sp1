@@ -26,6 +26,8 @@ skill: it runs each subsystem's L1 bootstrap in order and reports status.
 `orbit-rag/` has its own README
 (index in `<repo>/.orbit-rag/`, separate from Orbit's `.orbit/`).
 
+Long tasks follow HARNESS.md (gate, ratchet, dev log, owned files, escalation).
+
 **Repo with its own Orbit** (`agents/orbit/`): SP1 installs into it (a block in its `ORBIT.md`, no second engine,
 its skills kept), then `RECONCILE.md` says which side wins per subsystem.
 

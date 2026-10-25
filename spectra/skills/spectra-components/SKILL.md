@@ -146,3 +146,7 @@ Judge runs land in `runs/` like any `orbit verify` check, so a regression in a p
 
 ## When this skill falls short
 Log it before working around it: `python3 $NAVLAB_HOME/arch/gaps.py add --skill spectra-components --kind <missing-tool|missing-pattern|wrong-answer|...> --impact <blocked|wrong-answer|degraded|slow> --repo <name> --what "..." --evidence <file:line> --workaround "..."`.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = each variant captured and judged before the layer above starts; gate = `.spectra/spectra verify` per variant (±1pt; UIKit also `ORBIT_AMBIGUOUS 0`); oracle = the captured RN layout; floor = variants at PARITY (ready) / variants captured (breadth), per layer; log = `.spectra/DEVLOG.md`; next = the lowest layer with a failing variant.

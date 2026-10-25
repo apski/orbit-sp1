@@ -111,3 +111,7 @@ Pick from the platform reference. Cross-cutting rules:
   at once, a native module with `requiresMainQueueSetup`.
 - Debug timings are meaningless (dev JS is ~3× slower). Simulator inflates launch ~4× and
   AX-timed taps. Locate on the simulator, report numbers from a device in Release.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: acceptance = the long task on the waited-on thread, shown in a profile before any move; gate = the same profile and flow rerun with the task gone (device, Release, for numbers); floor = responses moved with a measured win (ready) / long tasks found (breadth); log = `perf/DEVLOG.md`; next = the longest task on a response path.

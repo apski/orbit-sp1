@@ -146,3 +146,7 @@ Then baseline and climb per `perf-climb`.
 - Swift 6 strict concurrency: Perf.swift compiles clean (`nonisolated(unsafe)` statics,
   `@MainActor` start and hitch monitor).
 - `com.apple.*` apps can't be flow targets.
+
+## Harness (long task)
+Runs under orbit-SP1's `HARNESS.md` (`$(.orbit/home)/HARNESS.md`): acceptance test first, a floor that only rises (measured vs estimated, ready vs breadth), a log entry and a green gate before you stop, edit only files you own, and ask a human only about licences, spending, publishing, personal data, destructive git or anything unclear.
+Here: the loop's rules are `perf-climb`'s (accept = gate, accepted baseline = floor, `perf/ledger.jsonl` = log). Native-specific: adding a counter is a ruler change, re-baselined with `accept --force --note` before climbing on it.
