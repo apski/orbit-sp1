@@ -1,0 +1,19 @@
+{
+  "config": "sqlite-ann-vector",
+  "queries": 120,
+  "recall_at_1": 0.30833333333333335,
+  "recall_at_5": 0.7,
+  "recall_at_10": 0.8083333333333333,
+  "mrr_at_10": 0.4756084656084657,
+  "ndcg_at_10": 0.5561339612639816,
+  "latency": {
+    "n": 120,
+    "p50_ms": 1.3427499999999999,
+    "p95_ms": 3.338875,
+    "max_ms": 4.756291999999999
+  },
+  "setup_ms": 0.0,
+  "peak_rss_mb": 24.65625,
+  "index_bytes": 1836008,
+  "notes": "usearch HNSW (bf16, M=16) nominates, exact re-score from SQLite"
+}

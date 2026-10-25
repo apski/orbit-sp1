@@ -1,0 +1,216 @@
+{
+ "screen": "HomeScreen",
+ "capturedAt": 1792891142406,
+ "roots": [
+  {
+   "type": "RCTView",
+   "style": {
+    "flexGrow": 1,
+    "flexShrink": 1,
+    "flexBasis": "0%",
+    "backgroundColor": "rgba(255, 255, 255, 1)"
+   },
+   "frame": [
+    0,
+    0,
+    402,
+    874
+   ],
+   "children": [
+    {
+     "type": "RCTScrollView",
+     "style": {
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "flexDirection": "column",
+      "overflow": "scroll",
+      "paddingLeft": 28,
+      "paddingRight": 28
+     },
+     "frame": [
+      0,
+      0,
+      402,
+      737.3333129882812
+     ],
+     "contentInsetAdjustmentBehavior": "automatic",
+     "children": [
+      {
+       "type": "RCTScrollContentView",
+       "style": {},
+       "frame": [
+        28,
+        62,
+        346,
+        245
+       ],
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {},
+         "frame": [
+          28,
+          62,
+          346,
+          17
+         ],
+         "text": "Loading..."
+        },
+        {
+         "type": "RCTView",
+         "style": {},
+         "frame": [
+          28,
+          79,
+          346,
+          228
+         ],
+         "children": [
+          {
+           "type": "RCTText",
+           "style": {
+            "marginBottom": 35,
+            "marginTop": 70,
+            "fontSize": 26.25,
+            "lineHeight": 31.5,
+            "fontWeight": "700"
+           },
+           "frame": [
+            28,
+            149,
+            346,
+            31.666664123535156
+           ],
+           "text": "Welcome"
+          },
+          {
+           "type": "RCTText",
+           "style": {
+            "marginBottom": 7,
+            "fontSize": 17.5,
+            "lineHeight": 24.5,
+            "fontWeight": "600"
+           },
+           "frame": [
+            28,
+            215.6666717529297,
+            346,
+            24.666656494140625
+           ],
+           "text": "Everything you track, in one place"
+          },
+          {
+           "type": "RCTText",
+           "style": {
+            "marginBottom": 35,
+            "fontSize": 17.5,
+            "lineHeight": 24.5,
+            "fontWeight": "600",
+            "color": "rgba(34, 197, 94, 1)"
+           },
+           "frame": [
+            28,
+            247.3333282470703,
+            346,
+            24.666671752929688
+           ],
+           "text": "for teams and makers"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "paddingLeft": 28,
+      "paddingRight": 28,
+      "paddingBottom": 35
+     },
+     "frame": [
+      0,
+      737.3333129882812,
+      402,
+      136.66668701171875
+     ],
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {
+        "marginBottom": 10.5,
+        "borderRadius": 10.5,
+        "backgroundColor": "rgba(34, 197, 94, 1)",
+        "paddingLeft": 14,
+        "paddingRight": 14,
+        "paddingTop": 14,
+        "paddingBottom": 14,
+        "opacity": 1
+       },
+       "frame": [
+        28,
+        737.3333129882812,
+        346,
+        52.66668701171875
+       ],
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "textAlign": "center",
+          "fontSize": 15.75,
+          "lineHeight": 24.5,
+          "fontWeight": "600",
+          "color": "rgba(255, 255, 255, 1)"
+         },
+         "frame": [
+          42,
+          751.3333129882812,
+          318,
+          24.66668701171875
+         ],
+         "text": "Sign up"
+        }
+       ]
+      },
+      {
+       "type": "RCTView",
+       "style": {
+        "borderRadius": 9999,
+        "backgroundColor": "rgba(229, 231, 235, 1)",
+        "paddingTop": 7,
+        "paddingBottom": 7,
+        "opacity": 1
+       },
+       "frame": [
+        28,
+        800.6666450500488,
+        346,
+        38.66668701171875
+       ],
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "textAlign": "center",
+          "fontSize": 15.75,
+          "lineHeight": 24.5,
+          "color": "rgba(55, 65, 81, 1)"
+         },
+         "frame": [
+          28,
+          807.6666450500488,
+          346,
+          24.66668701171875
+         ],
+         "text": "Log in"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

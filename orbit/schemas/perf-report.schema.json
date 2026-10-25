@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/perf-report",
+  "title": "perf-report",
+  "description": "`orbit perf` output: per window (`@journey` or a screen), per arm, milestone distributions, exclusive phase buckets of the median rep (they sum to window_ms), main-thread busy time, and seeded-bootstrap speedups vs the base arm. Speedups are omitted when `comparable` is false. docs/orbit/perf/PERFSTACK.md section 6.",
+  "type": "object",
+  "required": ["version", "base", "arms", "comparable", "refused", "phases", "windows", "errors"],
+  "properties": {
+    "version": {"const": 1},
+    "base": {"type": "string"},
+    "arms": {"type": "array"},
+    "comparable": {"type": "boolean"},
+    "refused": {"type": "array", "items": {"type": "string"}},
+    "phases": {"type": "array", "items": {"type": "string"}},
+    "labels": {"type": "object"},
+    "windows": {"type": "array"},
+    "clock": {"type": "object"},
+    "errors": {"type": "array"}
+  }
+}

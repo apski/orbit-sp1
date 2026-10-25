@@ -1,0 +1,48 @@
+[[principle]]
+id = "p-layers"
+statement = "Every py-svc has domain and data layers."
+why = "fixture"
+source = "fixture"
+status = "observed"
+scope = { unit_kinds = ["py-svc"] }
+predicate = { kind = "layers_present", layers = ["domain", "data"] }
+[[principle]]
+id = "p-no-requests"
+statement = "billing domain does not import requests."
+why = "fixture"
+source = "fixture"
+status = "observed"
+scope = { unit_kinds = ["py-svc"], units = ["billing"] }
+predicate = { kind = "forbid_import", pattern = '^requests$', layers = ["domain"] }
+[[principle]]
+id = "p-no-userdefaults"
+statement = "Swift View layer does not touch UserDefaults."
+why = "fixture"
+source = "fixture"
+status = "enforced"
+scope = { unit_kinds = ["swift-feat"] }
+predicate = { kind = "forbid_symbol", pattern = '^UserDefaults$', layers = ["View"] }
+[[principle]]
+id = "p-small"
+statement = "billing domain files stay under 8 lines."
+why = "fixture"
+source = "fixture"
+status = "observed"
+scope = { unit_kinds = ["py-svc"] }
+predicate = { kind = "max_loc", max = 8, layers = ["domain"] }
+[[principle]]
+id = "p-one-rule"
+statement = "At most one Rule conformer per py-svc."
+why = "fixture"
+source = "fixture"
+status = "observed"
+scope = { unit_kinds = ["py-svc"] }
+predicate = { kind = "single_conformer", protocol = '^Rule$', max = 1 }
+[[principle]]
+id = "p-localized"
+statement = "Swift features show no user-visible literal that bypasses L()."
+why = "fixture"
+source = "fixture"
+status = "observed"
+scope = { unit_kinds = ["swift-feat"] }
+predicate = { kind = "forbid_ui_literal", pattern = "." }

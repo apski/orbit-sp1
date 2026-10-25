@@ -1,0 +1,17 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'lab'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.lab"
+  defaultConfig {
+    versionCode 1
+    versionName '1.0.0'
+  }
+  // core/ (LabCore.kt) is shared with the Compose twin in native-android/, like LabCore.swift on iOS.
+  sourceSets { main.java.srcDirs += 'core' }
+}

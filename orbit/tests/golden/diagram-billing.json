@@ -1,0 +1,69 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "edges": [
+    {
+      "count": 1,
+      "from": "_root",
+      "sites": [
+        "py/billing/__init__.py:1"
+      ],
+      "to": "data",
+      "violations": []
+    },
+    {
+      "count": 1,
+      "from": "domain",
+      "sites": [
+        "py/billing/domain/pricing.py:5"
+      ],
+      "to": "data",
+      "violations": []
+    },
+    {
+      "count": 1,
+      "from": "domain",
+      "sites": [
+        "py/billing/domain/pricing.py:2"
+      ],
+      "to": "shell:requests",
+      "violations": [
+        {
+          "principle": "p-no-requests",
+          "site": "py/billing/domain/pricing.py:2"
+        }
+      ]
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "mermaid": "flowchart LR\n  subgraph unit[\"py-svc:billing\"]\n    n__root[\"_root\"]\n    n_data[\"data\"]\n    n_domain[\"domain\"]\n  end\n  n_shell_requests[(\"requests\")]\n  n__root --> n_data\n  n_domain --> n_data\n  n_domain --> n_shell_requests\n  linkStyle 2 stroke:#d33,stroke-width:2px",
+  "module": "billing",
+  "nodes": [
+    {
+      "files": 1,
+      "id": "_root",
+      "kind": "layer",
+      "loc": 1
+    },
+    {
+      "files": 1,
+      "id": "data",
+      "kind": "layer",
+      "loc": 5
+    },
+    {
+      "files": 2,
+      "id": "domain",
+      "kind": "layer",
+      "loc": 24
+    },
+    {
+      "files": 0,
+      "id": "shell:requests",
+      "kind": "shell",
+      "loc": 0
+    }
+  ],
+  "root": "py/billing",
+  "unit": "py-svc:billing",
+  "version": 1
+}

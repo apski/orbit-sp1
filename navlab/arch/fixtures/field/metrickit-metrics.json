@@ -1,0 +1,312 @@
+[
+ {
+  "appVersion": "2.3.0",
+  "timeStampBegin": "2026-09-05 00:00:00 +0000",
+  "timeStampEnd": "2026-09-05 23:59:00 +0000",
+  "metaData": {
+   "appBuildVersion": "400",
+   "osVersion": "iPhone OS 18.6 (22G86)",
+   "regionFormat": "GB",
+   "platformArchitecture": "arm64e",
+   "deviceType": "iPhone14,5",
+   "bundleIdentifier": "com.acme.card"
+  },
+  "applicationLaunchMetrics": {
+   "histogrammedTimeToFirstDrawKey": {
+    "histogramNumBuckets": 5,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "1000 ms",
+      "bucketEnd": "1100 ms",
+      "bucketCount": 4
+     },
+     "1": {
+      "bucketStart": "1100 ms",
+      "bucketEnd": "1200 ms",
+      "bucketCount": 11
+     },
+     "2": {
+      "bucketStart": "1200 ms",
+      "bucketEnd": "1300 ms",
+      "bucketCount": 9
+     },
+     "3": {
+      "bucketStart": "1300 ms",
+      "bucketEnd": "1500 ms",
+      "bucketCount": 5
+     },
+     "4": {
+      "bucketStart": "1500 ms",
+      "bucketEnd": "2000 ms",
+      "bucketCount": 2
+     }
+    }
+   },
+   "histogrammedResumeTime": {
+    "histogramNumBuckets": 3,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "100 ms",
+      "bucketEnd": "200 ms",
+      "bucketCount": 30
+     },
+     "1": {
+      "bucketStart": "200 ms",
+      "bucketEnd": "300 ms",
+      "bucketCount": 18
+     },
+     "2": {
+      "bucketStart": "300 ms",
+      "bucketEnd": "500 ms",
+      "bucketCount": 4
+     }
+    }
+   },
+   "histogrammedOptimizedTimeToFirstDrawKey": {
+    "histogramNumBuckets": 2,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "500 ms",
+      "bucketEnd": "600 ms",
+      "bucketCount": 6
+     },
+     "1": {
+      "bucketStart": "600 ms",
+      "bucketEnd": "700 ms",
+      "bucketCount": 3
+     }
+    }
+   }
+  },
+  "applicationResponsivenessMetrics": {
+   "histogrammedAppHangTime": {
+    "histogramNumBuckets": 3,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "250 ms",
+      "bucketEnd": "500 ms",
+      "bucketCount": 7
+     },
+     "1": {
+      "bucketStart": "500 ms",
+      "bucketEnd": "1000 ms",
+      "bucketCount": 3
+     },
+     "2": {
+      "bucketStart": "1000 ms",
+      "bucketEnd": "2000 ms",
+      "bucketCount": 1
+     }
+    }
+   }
+  },
+  "animationMetrics": {
+   "scrollHitchTimeRatio": "2.4 ms per s"
+  },
+  "signpostMetrics": [
+   {
+    "signpostName": "Checkout",
+    "signpostCategory": "transition",
+    "totalCount": 40,
+    "signpostIntervalData": {
+     "histogrammedSignpostDurations": {
+      "histogramNumBuckets": 3,
+      "histogramValue": {
+       "0": {
+        "bucketStart": "300 ms",
+        "bucketEnd": "400 ms",
+        "bucketCount": 10
+       },
+       "1": {
+        "bucketStart": "400 ms",
+        "bucketEnd": "500 ms",
+        "bucketCount": 20
+       },
+       "2": {
+        "bucketStart": "500 ms",
+        "bucketEnd": "700 ms",
+        "bucketCount": 10
+       }
+      }
+     },
+     "signpostAverageMemory": "120,000 kB"
+    }
+   },
+   {
+    "signpostName": "nav.push",
+    "signpostCategory": "navlab",
+    "totalCount": 5,
+    "signpostIntervalData": {
+     "histogrammedSignpostDurations": {
+      "histogramNumBuckets": 1,
+      "histogramValue": {
+       "0": {
+        "bucketStart": "50 ms",
+        "bucketEnd": "60 ms",
+        "bucketCount": 5
+       }
+      }
+     }
+    }
+   }
+  ],
+  "memoryMetrics": {
+   "peakMemoryUsage": "210,000 kB"
+  }
+ },
+ {
+  "appVersion": "2.4.0",
+  "timeStampBegin": "2026-09-12 00:00:00 +0000",
+  "timeStampEnd": "2026-09-12 23:59:00 +0000",
+  "metaData": {
+   "appBuildVersion": "412",
+   "osVersion": "iPhone OS 18.6 (22G86)",
+   "regionFormat": "GB",
+   "platformArchitecture": "arm64e",
+   "deviceType": "iPhone14,5",
+   "bundleIdentifier": "com.acme.card"
+  },
+  "applicationLaunchMetrics": {
+   "histogrammedTimeToFirstDrawKey": {
+    "histogramNumBuckets": 5,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "1000 ms",
+      "bucketEnd": "1100 ms",
+      "bucketCount": 4
+     },
+     "1": {
+      "bucketStart": "1100 ms",
+      "bucketEnd": "1200 ms",
+      "bucketCount": 12
+     },
+     "2": {
+      "bucketStart": "1200 ms",
+      "bucketEnd": "1300 ms",
+      "bucketCount": 9
+     },
+     "3": {
+      "bucketStart": "1300 ms",
+      "bucketEnd": "1500 ms",
+      "bucketCount": 4
+     },
+     "4": {
+      "bucketStart": "1500 ms",
+      "bucketEnd": "2000 ms",
+      "bucketCount": 2
+     }
+    }
+   },
+   "histogrammedResumeTime": {
+    "histogramNumBuckets": 3,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "100 ms",
+      "bucketEnd": "200 ms",
+      "bucketCount": 30
+     },
+     "1": {
+      "bucketStart": "200 ms",
+      "bucketEnd": "300 ms",
+      "bucketCount": 18
+     },
+     "2": {
+      "bucketStart": "300 ms",
+      "bucketEnd": "500 ms",
+      "bucketCount": 4
+     }
+    }
+   },
+   "histogrammedOptimizedTimeToFirstDrawKey": {
+    "histogramNumBuckets": 2,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "500 ms",
+      "bucketEnd": "600 ms",
+      "bucketCount": 6
+     },
+     "1": {
+      "bucketStart": "600 ms",
+      "bucketEnd": "700 ms",
+      "bucketCount": 3
+     }
+    }
+   }
+  },
+  "applicationResponsivenessMetrics": {
+   "histogrammedAppHangTime": {
+    "histogramNumBuckets": 3,
+    "histogramValue": {
+     "0": {
+      "bucketStart": "250 ms",
+      "bucketEnd": "500 ms",
+      "bucketCount": 7
+     },
+     "1": {
+      "bucketStart": "500 ms",
+      "bucketEnd": "1000 ms",
+      "bucketCount": 2
+     },
+     "2": {
+      "bucketStart": "1000 ms",
+      "bucketEnd": "2000 ms",
+      "bucketCount": 1
+     }
+    }
+   }
+  },
+  "animationMetrics": {
+   "scrollHitchTimeRatio": "1.8 ms per s"
+  },
+  "signpostMetrics": [
+   {
+    "signpostName": "Checkout",
+    "signpostCategory": "transition",
+    "totalCount": 40,
+    "signpostIntervalData": {
+     "histogrammedSignpostDurations": {
+      "histogramNumBuckets": 3,
+      "histogramValue": {
+       "0": {
+        "bucketStart": "300 ms",
+        "bucketEnd": "400 ms",
+        "bucketCount": 18
+       },
+       "1": {
+        "bucketStart": "400 ms",
+        "bucketEnd": "500 ms",
+        "bucketCount": 12
+       },
+       "2": {
+        "bucketStart": "500 ms",
+        "bucketEnd": "700 ms",
+        "bucketCount": 10
+       }
+      }
+     },
+     "signpostAverageMemory": "120,000 kB"
+    }
+   },
+   {
+    "signpostName": "nav.push",
+    "signpostCategory": "navlab",
+    "totalCount": 5,
+    "signpostIntervalData": {
+     "histogrammedSignpostDurations": {
+      "histogramNumBuckets": 1,
+      "histogramValue": {
+       "0": {
+        "bucketStart": "50 ms",
+        "bucketEnd": "60 ms",
+        "bucketCount": 5
+       }
+      }
+     }
+    }
+   }
+  ],
+  "memoryMetrics": {
+   "peakMemoryUsage": "210,000 kB"
+  }
+ }
+]

@@ -1,0 +1,163 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "index_digest": "a5c9f609e79e45ba",
+  "principles": [
+    {
+      "id": "p-layers",
+      "statement": "Every py-svc has domain and data layers.",
+      "status": "observed",
+      "violations": [
+        {
+          "detail": "py-svc:ledger lacks layer data",
+          "file": "py/ledger",
+          "line": 1,
+          "principle": "p-layers"
+        },
+        {
+          "detail": "py-svc:ledger lacks layer domain",
+          "file": "py/ledger",
+          "line": 1,
+          "principle": "p-layers"
+        }
+      ]
+    },
+    {
+      "id": "p-localized",
+      "statement": "Swift features show no user-visible literal that bypasses L().",
+      "status": "observed",
+      "violations": [
+        {
+          "detail": "shows Welcome back",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 9,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows \\(n) sources connected",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 15,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Add source",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 16,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Settings",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 17,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Search assets",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 18,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Hello",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 21,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows world",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 21,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Feed",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 23,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Delete source?",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 24,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows Feed list",
+          "file": "swift/Feed/View/FeedStrings.swift",
+          "line": 25,
+          "principle": "p-localized"
+        },
+        {
+          "detail": "shows feed",
+          "file": "swift/Feed/View/FeedView.swift",
+          "line": 5,
+          "principle": "p-localized"
+        }
+      ]
+    },
+    {
+      "id": "p-no-requests",
+      "statement": "billing domain does not import requests.",
+      "status": "observed",
+      "violations": [
+        {
+          "detail": "imports requests",
+          "file": "py/billing/domain/pricing.py",
+          "line": 2,
+          "principle": "p-no-requests"
+        }
+      ]
+    },
+    {
+      "id": "p-no-userdefaults",
+      "statement": "Swift View layer does not touch UserDefaults.",
+      "status": "enforced",
+      "violations": [
+        {
+          "detail": "references UserDefaults",
+          "file": "swift/Feed/View/FeedView.swift",
+          "line": 4,
+          "principle": "p-no-userdefaults"
+        }
+      ]
+    },
+    {
+      "id": "p-one-rule",
+      "statement": "At most one Rule conformer per py-svc.",
+      "status": "observed",
+      "violations": [
+        {
+          "detail": "Taxer is conformer #2 of ^Rule$ (max 1)",
+          "file": "py/billing/domain/pricing.py",
+          "line": 12,
+          "principle": "p-one-rule"
+        }
+      ]
+    },
+    {
+      "id": "p-small",
+      "statement": "billing domain files stay under 8 lines.",
+      "status": "observed",
+      "violations": [
+        {
+          "detail": "10 lines > 8",
+          "file": "py/billing/domain/big.py",
+          "line": 1,
+          "principle": "p-small"
+        },
+        {
+          "detail": "14 lines > 8",
+          "file": "py/billing/domain/pricing.py",
+          "line": 1,
+          "principle": "p-small"
+        }
+      ]
+    }
+  ],
+  "principles_hash": "e4fa6851fabbb33f",
+  "summary": {
+    "enforced_violations": 1,
+    "observed_violations": 17,
+    "principles": 6
+  },
+  "version": 1
+}

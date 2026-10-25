@@ -1,0 +1,137 @@
+# Fixture config: four languages, one unit kind each. Changing it changes every golden (config_hash).
+[project]
+name = "fixture"
+root = "."
+routes = "routes.toml"
+principles = "principles.toml"
+runs = ".runs"
+
+[index]
+db = ".cache/index.db"
+include = ["py/**", "ts/**", "swift/**", "rs/**", "tests/**/*.py", "docs/**/*.md"]
+ignore = ["**/__pycache__/**", "**/target/**"]
+
+[platform]
+root_layer = "_root"
+
+[[units]]
+kind = "py-svc"
+glob = "py/*"
+[[units]]
+kind = "ts-feat"
+glob = "ts/*"
+[[units]]
+kind = "swift-feat"
+glob = "swift/*"
+[[units]]
+kind = "rs-crate"
+glob = "rs/*"
+layer_root = "src"
+
+# Language blocks are copied verbatim from ../../orbit.toml so goldens exercise the real adapter patterns.
+[languages.python]
+ext = [".py"]
+comment = ["#"]
+block = [['"""', '"""'], ["'''", "'''"]]
+imports = ['^\s*from\s+([.\w]+)\s+import\b', '^\s*import\s+([\w., ]+?)\s*(?:#.*)?$']
+type = '^\s*(?P<kind>class)\s+(?P<name>\w+)\s*(?:\((?P<bases>[^)]*)\))?'
+ref = '\b[A-Z](?=\w{3})[A-Za-z0-9]*[a-z][A-Za-z0-9]*\b'
+
+[languages.typescript]
+ext = [".ts", ".tsx", ".js", ".jsx"]
+comment = ["//", "/*", "*"]
+imports = [
+  '''^\s*import\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)['"]''',
+  '''^\s*export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]''',
+  '''^\s*(?:const|let|var)\b.*\brequire\(\s*['"]([^'"]+)['"]\s*\)''',
+]
+type = '^\s*(?P<vis>export\s+(?:default\s+)?)?(?:declare\s+)?(?:abstract\s+)?(?P<kind>class|interface|enum|type)\s+(?P<name>\w+)(?:\s*<[^>]*>)?(?:\s+extends\s+(?P<bases>[\w.]+(?:\s*<[^>]*>)?(?:\s*,\s*[\w.]+)*))?(?:\s+implements\s+(?P<impls>[\w.,\s<>]+?))?\s*(?:\{|=|$)'
+ref = '\b[A-Z](?=\w{3})[A-Za-z0-9]*[a-z][A-Za-z0-9]*\b'
+
+[languages.swift]
+ext = [".swift"]
+comment = ["//", "/*", "*"]
+imports = ['^\s*(?:@\w+\s+)?import\s+(?:(?:struct|class|enum|protocol|func|var|let|typealias)\s+)?([\w.]+)']
+type = '^\s*(?:@[\w.]+(?:\([^)]*\))?\s+)*(?P<vis>(?:public|internal|private|fileprivate|open)\s+)?(?:(?:final|indirect|nonisolated|package)\s+)*(?P<kind>struct|class|enum|protocol|actor|extension)\s+(?P<name>[\w.]+)(?:\s*<[^>]*>)?\s*(?::\s*(?P<bases>[^{]*?))?\s*(?:where\b[^{]*)?(?:\{.*)?$'
+ref = '\b[A-Z](?=\w{3})[A-Za-z0-9]*[a-z][A-Za-z0-9]*\b'
+# User-visible literals not wrapped in L(). SwiftUI looks a Text literal up as a key in the system locale, but the
+# app's keys are snake_case and L() follows the in-app language, so these render in English. First string argument
+# only: systemImage/Image names, accessibilityIdentifier and print never match. Limits: orbit/adapters.py docstring.
+ui_literal = '\b(?P<api>Text|Button|Label|TextField|SecureField|navigationTitle|alert|confirmationDialog|accessibilityLabel)\(\s*"(?P<text>(?:[^"\\]|\\.)*)"'
+ui_skip = ["#Preview"]
+
+[languages.rust]
+ext = [".rs"]
+comment = ["//"]                  # also /// and //! doc comments; not "*", a line can start with a deref
+block = [["/*", "*/"]]
+# `use a::b::{C, D};` -> a::b, `use a::b::C as X;` -> a::b::C, `mod x;` -> x (structural: the file owns module x)
+imports = ['^\s*(?:pub(?:\s*\([^)]*\))?\s+)?use\s+(?:::)?(\w+(?:::\w+)*)', '^\s*(?:pub(?:\s*\([^)]*\))?\s+)?mod\s+(\w+)\s*;']
+# struct/enum/trait/type/union, and `impl [Trait for] X` (kind impl, name X, bases Trait: who implements a trait)
+type = '^\s*(?P<vis>pub(?:\s*\([^)]*\))?\s+)?(?:(?:unsafe|default)\s+)*(?P<kind>struct|enum|trait|type|union|impl)(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?\s+(?:!?(?:\w+::)*(?P<bases>\w+(?:<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?)\s+for\s+)?&?(?:\x27\w+\s+)?(?:mut\s+)?(?:\w+::)*(?P<name>\w+)'
+ref = '\b[A-Z](?=\w{3})[A-Za-z0-9]*[a-z][A-Za-z0-9]*\b'
+
+[languages.markdown]
+ext = [".md"]
+heading = '^(?P<level>#{1,4})\s+(?P<name>.+?)\s*$'
+
+[[artifacts]]
+name = "facts"
+kind = "derived"
+level = "index"
+[[artifacts]]
+name = "tests"
+kind = "file"
+level = "merge"
+unit_kinds = ["py-svc"]
+stale_if_source_newer = false
+paths = ["tests/**/test_{snake}*.py"]
+[[artifacts]]
+name = "doc"
+kind = "file"
+level = "release"
+unit_kinds = ["py-svc"]
+stale_if_source_newer = false
+paths = ["docs/{name}-*.md"]
+
+[[spec]]
+role = "contract"
+unit_kinds = ["py-svc"]
+units = ["billing"]
+path = "docs/billing-spec.md"
+
+[sources.notes]
+kind = "note"
+glob = "docs/billing-*.md"
+[sources.figma]
+kind = "design"
+glob = "design/*.json"
+
+[budget]
+default = 400
+mechanical = 200
+build = 400
+explain = 1200
+[models]
+mechanical = "small"
+build = "mid"
+explain = "large"
+
+[checks.ok-check]
+command = ["python3", "-c", "pass"]
+required = true
+[checks.bad-check]
+command = ["python3", "-c", "import sys; sys.exit(3)"]
+required = true
+[checks.optional-bad]
+command = ["python3", "-c", "import sys; sys.exit(1)"]
+required = false
+[checks.no-tool]
+command = ["no-such-tool-xyz"]
+required = true
+[checks.later]
+required = true
+[check_sets]
+good = ["ok-check", "later", "no-tool"]
+all = ["ok-check", "bad-check", "optional-bad", "no-tool", "later"]
+[reqlog]
+slow_ms = 1000

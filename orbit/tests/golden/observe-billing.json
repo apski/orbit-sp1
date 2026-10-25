@@ -1,0 +1,114 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "imports": [
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "billing.data",
+      "source": "py/billing/__init__.py:1"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "domain"
+      ],
+      "module": "billing.data.store",
+      "source": "py/billing/domain/pricing.py:5"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "domain"
+      ],
+      "module": "json",
+      "source": "py/billing/domain/pricing.py:3"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "domain"
+      ],
+      "module": "os",
+      "source": "py/billing/domain/pricing.py:3"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "domain"
+      ],
+      "module": "requests",
+      "source": "py/billing/domain/pricing.py:2"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "data"
+      ],
+      "module": "sqlite3",
+      "source": "py/billing/data/store.py:1"
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "layers": [
+    {
+      "files": 1,
+      "loc": 1,
+      "name": "_root"
+    },
+    {
+      "files": 1,
+      "loc": 5,
+      "name": "data"
+    },
+    {
+      "files": 2,
+      "loc": 24,
+      "name": "domain"
+    }
+  ],
+  "protocols": [
+    {
+      "conformers": [
+        "Taxer"
+      ],
+      "name": "Auditable",
+      "source": "py/billing/domain/pricing.py:12"
+    },
+    {
+      "conformers": [
+        "Pricer",
+        "Taxer"
+      ],
+      "name": "Rule",
+      "source": "py/billing/domain/pricing.py:8"
+    }
+  ],
+  "root": "py/billing",
+  "types": [
+    {
+      "kind": "class",
+      "layer": "data",
+      "name": "Store",
+      "source": "py/billing/data/store.py:4",
+      "visibility": null
+    },
+    {
+      "kind": "class",
+      "layer": "domain",
+      "name": "Pricer",
+      "source": "py/billing/domain/pricing.py:8",
+      "visibility": null
+    },
+    {
+      "kind": "class",
+      "layer": "domain",
+      "name": "Taxer",
+      "source": "py/billing/domain/pricing.py:12",
+      "visibility": null
+    }
+  ],
+  "unit": "py-svc:billing",
+  "version": 1
+}

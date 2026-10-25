@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/principle",
+  "title": "principle",
+  "description": "A [[principle]] entry in principles.toml. The predicate set is closed (SPEC 9.1); adding one is a core change with a golden test. observed never blocks; enforced fails verify.",
+  "type": "object",
+  "required": [
+    "id",
+    "statement",
+    "why",
+    "source",
+    "status",
+    "scope",
+    "predicate"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "why": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "observed",
+        "enforced"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "unit_kinds": {
+          "type": "array"
+        },
+        "units": {
+          "type": "array"
+        }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "layers_present",
+            "forbid_import",
+            "forbid_symbol",
+            "forbid_ui_literal",
+            "max_loc",
+            "single_conformer"
+          ]
+        }
+      }
+    }
+  }
+}

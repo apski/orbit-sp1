@@ -1,0 +1,9 @@
+[package]
+name = "orbit-rerank"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+orbit-core = { path = "../core" }
+anyhow.workspace = true
+fastembed = { version = "7.5", default-features = false, features = ["ort-download-binaries-native-tls", "hf-hub-native-tls"] }

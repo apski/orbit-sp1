@@ -1,0 +1,3 @@
+name: smoke-home
+steps:
+  - tool: launch-app

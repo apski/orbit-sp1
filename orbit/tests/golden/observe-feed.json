@@ -1,0 +1,105 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "imports": [
+    {
+      "count": 1,
+      "layers": [
+        "Reducer"
+      ],
+      "module": "Foundation",
+      "source": "swift/Feed/Reducer/FeedReducer.swift:1"
+    },
+    {
+      "count": 2,
+      "layers": [
+        "View"
+      ],
+      "module": "SwiftUI",
+      "source": "swift/Feed/View/FeedStrings.swift:1"
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "layers": [
+    {
+      "files": 1,
+      "loc": 6,
+      "name": "Reducer"
+    },
+    {
+      "files": 2,
+      "loc": 44,
+      "name": "View"
+    }
+  ],
+  "protocols": [
+    {
+      "conformers": [
+        "FeedReducer"
+      ],
+      "name": "Equatable",
+      "source": "swift/Feed/Reducer/FeedReducer.swift:3"
+    },
+    {
+      "conformers": [
+        "FeedView"
+      ],
+      "name": "Identifiable",
+      "source": "swift/Feed/View/FeedView.swift:7"
+    },
+    {
+      "conformers": [
+        "FeedReducer"
+      ],
+      "name": "Reducer",
+      "source": "swift/Feed/Reducer/FeedReducer.swift:3"
+    },
+    {
+      "conformers": [
+        "FeedStrings",
+        "FeedView"
+      ],
+      "name": "View",
+      "source": "swift/Feed/View/FeedStrings.swift:4"
+    }
+  ],
+  "root": "swift/Feed",
+  "types": [
+    {
+      "kind": "struct",
+      "layer": "Reducer",
+      "name": "FeedReducer",
+      "source": "swift/Feed/Reducer/FeedReducer.swift:3",
+      "visibility": "public"
+    },
+    {
+      "kind": "enum",
+      "layer": "Reducer",
+      "name": "FeedAction",
+      "source": "swift/Feed/Reducer/FeedReducer.swift:6",
+      "visibility": null
+    },
+    {
+      "kind": "struct",
+      "layer": "View",
+      "name": "FeedStrings",
+      "source": "swift/Feed/View/FeedStrings.swift:4",
+      "visibility": null
+    },
+    {
+      "kind": "struct",
+      "layer": "View",
+      "name": "FeedView",
+      "source": "swift/Feed/View/FeedView.swift:3",
+      "visibility": null
+    },
+    {
+      "kind": "extension",
+      "layer": "View",
+      "name": "FeedView",
+      "source": "swift/Feed/View/FeedView.swift:7",
+      "visibility": null
+    }
+  ],
+  "unit": "swift-feat:Feed",
+  "version": 1
+}

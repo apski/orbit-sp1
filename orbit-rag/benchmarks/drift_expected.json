@@ -1,0 +1,20 @@
+{
+  "_note": "Code constants in fixtures/tidepool-src/config.ts vs fixtures/agent-repo docs. Written before the checker was run. drift = a current doc states another value; history = changelog, incident or meeting note (expected to differ).",
+  "expected": [
+    {"constant": "RATE_LIMIT_PER_MINUTE", "doc": "docs/api.md", "verdict": "drift"},
+    {"constant": "MAX_SYNC_ATTEMPTS", "doc": "docs/offline-sync.md", "verdict": "drift"},
+    {"constant": "TOKEN_TTL_MINUTES", "doc": "docs/onboarding.md", "verdict": "drift"},
+    {"constant": "PAGE_SIZE_MAX", "doc": "docs/performance.md", "verdict": "drift"},
+    {"constant": "MAX_UPLOAD_MB", "doc": "docs/api.md", "verdict": "drift"},
+    {"constant": "TILE_CACHE_MB", "doc": "docs/performance.md", "verdict": "drift"},
+    {"constant": "ANALYTICS_FLUSH_SECONDS", "doc": "docs/performance.md", "verdict": "drift"},
+    {"constant": "MIN_TOUCH_TARGET_POINTS", "doc": "docs/accessibility.md", "verdict": "drift"},
+    {"constant": "PASSWORD_MIN_LENGTH", "doc": "docs/testing.md", "verdict": "drift"},
+    {"constant": "RATE_LIMIT_PER_MINUTE", "doc": "CHANGELOG.md", "verdict": "history"},
+    {"constant": "RATE_LIMIT_PER_MINUTE", "doc": "docs/meetings/2025-03-architecture-sync.md", "verdict": "history"},
+    {"constant": "MAX_SYNC_ATTEMPTS", "doc": "CHANGELOG.md", "verdict": "history"},
+    {"constant": "BACKOFF_START_SECONDS", "doc": "CHANGELOG.md", "verdict": "history"},
+    {"constant": "MAX_SYNC_ATTEMPTS", "doc": "docs/incidents/2025-06-sync-storm.md", "verdict": "history"},
+    {"constant": "BACKOFF_START_SECONDS", "doc": "docs/incidents/2025-06-sync-storm.md", "verdict": "history"}
+  ]
+}

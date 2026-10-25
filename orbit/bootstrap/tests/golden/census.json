@@ -1,0 +1,1054 @@
+{
+  "areas": [
+    {
+      "code_files": 0,
+      "commits": 0,
+      "files": 3,
+      "lines": 0,
+      "path": "."
+    },
+    {
+      "code_files": 0,
+      "commits": 0,
+      "files": 1,
+      "lines": 0,
+      "path": ".agents"
+    },
+    {
+      "code_files": 0,
+      "commits": 0,
+      "files": 1,
+      "lines": 0,
+      "path": ".github"
+    },
+    {
+      "code_files": 3,
+      "commits": 1,
+      "files": 4,
+      "lines": 13,
+      "path": "api"
+    },
+    {
+      "code_files": 0,
+      "commits": 0,
+      "files": 2,
+      "lines": 0,
+      "path": "docs"
+    },
+    {
+      "code_files": 7,
+      "commits": 1,
+      "files": 12,
+      "lines": 51,
+      "path": "ios"
+    },
+    {
+      "code_files": 4,
+      "commits": 0,
+      "files": 6,
+      "lines": 18,
+      "path": "mobile"
+    },
+    {
+      "code_files": 2,
+      "commits": 1,
+      "files": 5,
+      "lines": 12,
+      "path": "rust"
+    },
+    {
+      "code_files": 1,
+      "commits": 0,
+      "files": 2,
+      "lines": 1,
+      "path": "shared"
+    },
+    {
+      "code_files": 1,
+      "commits": 1,
+      "files": 2,
+      "lines": 4,
+      "path": "web"
+    }
+  ],
+  "demand": [],
+  "hotspots": [
+    {
+      "commits": 1,
+      "path": "api"
+    },
+    {
+      "commits": 1,
+      "path": "api/services"
+    },
+    {
+      "commits": 1,
+      "path": "api/services/billing"
+    },
+    {
+      "commits": 1,
+      "path": "ios"
+    },
+    {
+      "commits": 1,
+      "path": "ios/App"
+    },
+    {
+      "commits": 1,
+      "path": "ios/App/Views"
+    },
+    {
+      "commits": 1,
+      "path": "ios/App/Views/Home"
+    },
+    {
+      "commits": 1,
+      "path": "rust"
+    },
+    {
+      "commits": 1,
+      "path": "rust/core"
+    },
+    {
+      "commits": 1,
+      "path": "rust/core/src"
+    },
+    {
+      "commits": 1,
+      "path": "web"
+    },
+    {
+      "commits": 1,
+      "path": "web/src"
+    }
+  ],
+  "languages": [
+    {
+      "code": true,
+      "files": 7,
+      "lang": "swift",
+      "lines": 51
+    },
+    {
+      "code": false,
+      "files": 5,
+      "lang": "toml",
+      "lines": 48
+    },
+    {
+      "code": false,
+      "files": 4,
+      "lang": "json",
+      "lines": 22
+    },
+    {
+      "code": true,
+      "files": 5,
+      "lang": "typescript",
+      "lines": 22
+    },
+    {
+      "code": false,
+      "files": 4,
+      "lang": "markdown",
+      "lines": 21
+    },
+    {
+      "code": true,
+      "files": 3,
+      "lang": "python",
+      "lines": 13
+    },
+    {
+      "code": true,
+      "files": 2,
+      "lang": "rust",
+      "lines": 12
+    },
+    {
+      "code": false,
+      "files": 2,
+      "lang": "yaml",
+      "lines": 10
+    },
+    {
+      "code": true,
+      "files": 1,
+      "lang": "javascript",
+      "lines": 1
+    }
+  ],
+  "policy": null,
+  "repo": {
+    "commits": 1,
+    "files": 38,
+    "head": "39edb28973a93dd64b7cf8719c1edcaba9a0c2a1",
+    "head_date": "2026-02-01",
+    "large_files": 0,
+    "name": "repo",
+    "since": "2025-11-03"
+  },
+  "schema": "orbit-census/2",
+  "signals": [
+    {
+      "category": "platform",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "ios"
+        }
+      ],
+      "id": "xcodeproj",
+      "paths": [
+        "ios/App.xcodeproj/project.pbxproj"
+      ]
+    },
+    {
+      "category": "platform",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "mobile"
+        }
+      ],
+      "id": "react-native",
+      "paths": [
+        "mobile/package.json"
+      ]
+    },
+    {
+      "category": "platform",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "mobile"
+        }
+      ],
+      "id": "expo",
+      "paths": [
+        "mobile/package.json"
+      ]
+    },
+    {
+      "category": "platform",
+      "domain": "",
+      "files": 3,
+      "groups": [
+        {
+          "files": 1,
+          "root": "mobile"
+        },
+        {
+          "files": 1,
+          "root": "shared"
+        },
+        {
+          "files": 1,
+          "root": "web"
+        }
+      ],
+      "id": "node-package",
+      "paths": [
+        "mobile/package.json",
+        "shared/package.json",
+        "web/package.json"
+      ]
+    },
+    {
+      "category": "platform",
+      "domain": "backend",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "api"
+        }
+      ],
+      "id": "python-project",
+      "paths": [
+        "api/requirements.txt"
+      ]
+    },
+    {
+      "category": "platform",
+      "domain": "backend",
+      "files": 3,
+      "groups": [
+        {
+          "files": 1,
+          "root": "rust"
+        },
+        {
+          "files": 1,
+          "root": "rust/core"
+        },
+        {
+          "files": 1,
+          "root": "rust/worker"
+        }
+      ],
+      "id": "cargo",
+      "paths": [
+        "rust/Cargo.toml",
+        "rust/core/Cargo.toml",
+        "rust/worker/Cargo.toml"
+      ]
+    },
+    {
+      "category": "framework",
+      "domain": "mobile",
+      "files": 4,
+      "groups": [
+        {
+          "files": 4,
+          "root": "ios"
+        }
+      ],
+      "id": "swiftui",
+      "paths": [
+        "ios/App/Views/Home/HomeView.swift",
+        "ios/App/Views/Next/Feed/FeedScreen.swift",
+        "ios/App/Views/Next/Kit/SKD.swift",
+        "ios/App/Views/Settings/SettingsView.swift"
+      ]
+    },
+    {
+      "category": "framework",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "ios"
+        }
+      ],
+      "id": "uikit",
+      "paths": [
+        "ios/App/Legacy/LegacyController.swift"
+      ]
+    },
+    {
+      "category": "framework",
+      "domain": "web",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "web"
+        }
+      ],
+      "id": "react-web",
+      "paths": [
+        "web/package.json"
+      ]
+    },
+    {
+      "category": "framework",
+      "domain": "backend",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "api"
+        }
+      ],
+      "id": "python-web",
+      "paths": [
+        "api/requirements.txt"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "mobile",
+      "files": 2,
+      "groups": [
+        {
+          "files": 2,
+          "root": "ios"
+        }
+      ],
+      "id": "xctest",
+      "paths": [
+        "ios/AppTests/AppTests.swift",
+        "ios/AppUITests/AppUITests.swift"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "mobile"
+        }
+      ],
+      "id": "jest",
+      "paths": [
+        "mobile/jest.config.js"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "mobile"
+        }
+      ],
+      "id": "js-test-files",
+      "paths": [
+        "mobile/__tests__/HomeScreen.test.tsx"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "api"
+        }
+      ],
+      "id": "pytest",
+      "paths": [
+        "api/conftest.py"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "api"
+        }
+      ],
+      "id": "py-test-files",
+      "paths": [
+        "api/tests/test_pricing.py"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "rust/core"
+        }
+      ],
+      "id": "rust-tests",
+      "paths": [
+        "rust/core/src/lib.rs"
+      ]
+    },
+    {
+      "category": "test",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "ios"
+        }
+      ],
+      "id": "mobile-e2e",
+      "paths": [
+        "ios/AppUITests/AppUITests.swift"
+      ]
+    },
+    {
+      "category": "framework",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "ios"
+        }
+      ],
+      "id": "storekit",
+      "paths": [
+        "ios/App/Config/Products.storekit"
+      ]
+    },
+    {
+      "category": "framework",
+      "domain": "mobile",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "ios"
+        }
+      ],
+      "id": "ios-strings",
+      "paths": [
+        "ios/App/en.lproj/Localizable.strings"
+      ]
+    },
+    {
+      "category": "ci",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": ".github"
+        }
+      ],
+      "id": "github-actions",
+      "paths": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "category": "agent-context",
+      "domain": "",
+      "files": 1,
+      "groups": [
+        {
+          "files": 1,
+          "root": "."
+        }
+      ],
+      "id": "claude-md",
+      "paths": [
+        "CLAUDE.md"
+      ]
+    }
+  ],
+  "skills": {
+    "found": [
+      {
+        "description": "Fixture copy of a user-level SwiftUI skill, folded over two lines.",
+        "missing_refs": [],
+        "name": "axiom-swiftui",
+        "path": "../skills-home/axiom-swiftui/SKILL.md",
+        "roots": [
+          "../skills-home"
+        ],
+        "tools": []
+      },
+      {
+        "description": "Repo-local helper skill used by the census golden test.",
+        "missing_refs": [
+          "GoneService.swift",
+          "ios/App/Missing.swift"
+        ],
+        "name": "local-helper",
+        "path": ".agents/skills/local-helper/SKILL.md",
+        "roots": [
+          ".agents/skills"
+        ],
+        "tools": [
+          "jq"
+        ]
+      },
+      {
+        "description": "Fixture copy of a user-level RN perf skill.",
+        "missing_refs": [],
+        "name": "rn-perf-climb",
+        "path": "../skills-home/rn-perf-climb/SKILL.md",
+        "roots": [
+          "../skills-home"
+        ],
+        "tools": []
+      }
+    ],
+    "roots": [
+      {
+        "exists": true,
+        "root": ".agents/skills",
+        "skills": 1
+      },
+      {
+        "exists": true,
+        "root": "../skills-home",
+        "skills": 2
+      }
+    ]
+  },
+  "targets": [
+    {
+      "code_files": 3,
+      "commits": 1,
+      "domain": "backend",
+      "files": 4,
+      "flows": [],
+      "kinds": [
+        "python-project"
+      ],
+      "langs": {
+        "python": 13
+      },
+      "last_commit": "2026-02-01",
+      "lines": 13,
+      "retired": false,
+      "root": "api",
+      "signals": [
+        "py-test-files",
+        "pytest",
+        "python-project",
+        "python-web"
+      ],
+      "test_bundles": [],
+      "tree": [
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 4,
+          "path": "api/services"
+        },
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 4,
+          "path": "api/services/billing"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 5,
+          "path": "api/tests"
+        }
+      ],
+      "workspace_deps": []
+    },
+    {
+      "code_files": 7,
+      "commits": 1,
+      "domain": "mobile",
+      "files": 12,
+      "flows": [
+        {
+          "count": 1,
+          "dir": "ios/.argent/flows"
+        }
+      ],
+      "kinds": [
+        "xcodeproj"
+      ],
+      "langs": {
+        "swift": 51
+      },
+      "last_commit": "2026-02-01",
+      "lines": 51,
+      "retired": false,
+      "root": "ios",
+      "schemes": [
+        "SampleApp"
+      ],
+      "signals": [
+        "ios-strings",
+        "mobile-e2e",
+        "storekit",
+        "swiftui",
+        "uikit",
+        "xcodeproj",
+        "xctest"
+      ],
+      "test_bundles": [
+        "ios/AppTests",
+        "ios/AppUITests"
+      ],
+      "tree": [
+        {
+          "code_files": 5,
+          "commits": 1,
+          "lines": 36,
+          "path": "ios/App"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 7,
+          "path": "ios/App/Legacy"
+        },
+        {
+          "code_files": 4,
+          "commits": 1,
+          "lines": 29,
+          "path": "ios/App/Views"
+        },
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 9,
+          "path": "ios/App/Views/Home"
+        },
+        {
+          "code_files": 2,
+          "commits": 0,
+          "lines": 13,
+          "path": "ios/App/Views/Next"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 7,
+          "path": "ios/App/Views/Settings"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 8,
+          "path": "ios/AppTests"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 7,
+          "path": "ios/AppUITests"
+        }
+      ],
+      "workspace_deps": []
+    },
+    {
+      "code_files": 4,
+      "commits": 0,
+      "domain": "mobile",
+      "files": 6,
+      "flows": [],
+      "kinds": [
+        "expo",
+        "node-package",
+        "react-native"
+      ],
+      "langs": {
+        "javascript": 1,
+        "typescript": 17
+      },
+      "last_commit": "2025-06-01",
+      "lines": 18,
+      "retired": false,
+      "root": "mobile",
+      "signals": [
+        "expo",
+        "jest",
+        "js-test-files",
+        "node-package",
+        "react-native"
+      ],
+      "test_bundles": [],
+      "tree": [
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 5,
+          "path": "mobile/__tests__"
+        },
+        {
+          "code_files": 2,
+          "commits": 0,
+          "lines": 12,
+          "path": "mobile/src"
+        },
+        {
+          "code_files": 2,
+          "commits": 0,
+          "lines": 12,
+          "path": "mobile/src/screens"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 6,
+          "path": "mobile/src/screens/Home"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 6,
+          "path": "mobile/src/screens/Profile"
+        }
+      ],
+      "workspace_deps": [
+        "shared"
+      ]
+    },
+    {
+      "code_files": 0,
+      "commits": 0,
+      "domain": "backend",
+      "files": 1,
+      "flows": [],
+      "kinds": [
+        "cargo"
+      ],
+      "langs": {},
+      "last_commit": "2026-02-01",
+      "lines": 0,
+      "retired": false,
+      "root": "rust",
+      "signals": [
+        "cargo"
+      ],
+      "test_bundles": [],
+      "tree": [
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 9,
+          "path": "rust/core"
+        },
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 9,
+          "path": "rust/core/src"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 3,
+          "path": "rust/worker"
+        },
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 3,
+          "path": "rust/worker/src"
+        }
+      ],
+      "workspace_deps": []
+    },
+    {
+      "code_files": 1,
+      "commits": 1,
+      "domain": "backend",
+      "files": 2,
+      "flows": [],
+      "kinds": [
+        "cargo"
+      ],
+      "langs": {
+        "rust": 9
+      },
+      "last_commit": "2026-02-01",
+      "lines": 9,
+      "retired": false,
+      "root": "rust/core",
+      "signals": [
+        "cargo",
+        "rust-tests"
+      ],
+      "test_bundles": [],
+      "tree": [
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 9,
+          "path": "rust/core/src"
+        }
+      ],
+      "workspace_deps": []
+    },
+    {
+      "code_files": 1,
+      "commits": 0,
+      "domain": "backend",
+      "files": 2,
+      "flows": [],
+      "kinds": [
+        "cargo"
+      ],
+      "langs": {
+        "rust": 3
+      },
+      "last_commit": "2025-06-01",
+      "lines": 3,
+      "retired": false,
+      "root": "rust/worker",
+      "signals": [
+        "cargo"
+      ],
+      "test_bundles": [],
+      "tree": [
+        {
+          "code_files": 1,
+          "commits": 0,
+          "lines": 3,
+          "path": "rust/worker/src"
+        }
+      ],
+      "workspace_deps": []
+    },
+    {
+      "code_files": 1,
+      "commits": 0,
+      "domain": "other",
+      "files": 2,
+      "flows": [],
+      "kinds": [
+        "node-package"
+      ],
+      "langs": {
+        "typescript": 1
+      },
+      "last_commit": "2025-06-01",
+      "lines": 1,
+      "retired": false,
+      "root": "shared",
+      "signals": [
+        "node-package"
+      ],
+      "test_bundles": [],
+      "tree": [],
+      "workspace_deps": []
+    },
+    {
+      "code_files": 1,
+      "commits": 1,
+      "domain": "web",
+      "files": 2,
+      "flows": [],
+      "kinds": [
+        "node-package"
+      ],
+      "langs": {
+        "typescript": 4
+      },
+      "last_commit": "2026-02-01",
+      "lines": 4,
+      "retired": false,
+      "root": "web",
+      "signals": [
+        "node-package",
+        "react-web"
+      ],
+      "test_bundles": [],
+      "tree": [
+        {
+          "code_files": 1,
+          "commits": 1,
+          "lines": 4,
+          "path": "web/src"
+        }
+      ],
+      "workspace_deps": [
+        "shared"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "always": false,
+      "any": [
+        "argent"
+      ],
+      "found": null,
+      "id": "argent",
+      "signals": [
+        "xcodeproj"
+      ],
+      "skills": []
+    },
+    {
+      "always": false,
+      "any": [
+        "cargo"
+      ],
+      "found": null,
+      "id": "cargo",
+      "signals": [
+        "cargo"
+      ],
+      "skills": []
+    },
+    {
+      "always": false,
+      "any": [
+        "gh"
+      ],
+      "found": null,
+      "id": "gh",
+      "signals": [],
+      "skills": []
+    },
+    {
+      "always": true,
+      "any": [
+        "markitdown",
+        "pandoc",
+        "trafilatura",
+        "html2text",
+        "w3m",
+        "lynx"
+      ],
+      "found": null,
+      "id": "html-to-text",
+      "signals": [],
+      "skills": []
+    },
+    {
+      "always": false,
+      "any": [
+        "jq"
+      ],
+      "found": null,
+      "id": "jq",
+      "signals": [],
+      "skills": [
+        "local-helper"
+      ]
+    },
+    {
+      "always": false,
+      "any": [
+        "node"
+      ],
+      "found": null,
+      "id": "node",
+      "signals": [],
+      "skills": []
+    },
+    {
+      "always": true,
+      "any": [
+        "pdftotext",
+        "markitdown",
+        "pandoc",
+        "mutool"
+      ],
+      "found": null,
+      "id": "pdf-to-text",
+      "signals": [],
+      "skills": []
+    },
+    {
+      "always": true,
+      "any": [
+        "rg"
+      ],
+      "found": "rg",
+      "id": "ripgrep",
+      "signals": [],
+      "skills": []
+    },
+    {
+      "always": false,
+      "any": [
+        "xcodebuild"
+      ],
+      "found": null,
+      "id": "xcodebuild",
+      "signals": [
+        "xcodeproj"
+      ],
+      "skills": []
+    }
+  ]
+}

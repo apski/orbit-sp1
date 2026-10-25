@@ -1,0 +1,53 @@
+{
+ "timeStampBegin": "2026-09-12 00:00:00 +0000",
+ "timeStampEnd": "2026-09-12 23:59:00 +0000",
+ "hangDiagnostics": [
+  {
+   "diagnosticMetaData": {
+    "hangDuration": "1.2 sec",
+    "appVersion": "2.4.0",
+    "appBuildVersion": "412",
+    "deviceType": "iPhone12,8",
+    "osVersion": "iPhone OS 17.5 (21F79)"
+   },
+   "callStackTree": {
+    "callStackPerThread": true,
+    "callStacks": []
+   }
+  },
+  {
+   "diagnosticMetaData": {
+    "hangDuration": "2.5 sec",
+    "appVersion": "2.4.0",
+    "appBuildVersion": "412",
+    "deviceType": "iPhone12,8",
+    "osVersion": "iPhone OS 17.5 (21F79)"
+   },
+   "callStackTree": {
+    "callStackPerThread": true,
+    "callStacks": []
+   }
+  },
+  {
+   "diagnosticMetaData": {
+    "hangDuration": "3.0 sec",
+    "appVersion": "2.4.0",
+    "appBuildVersion": "412",
+    "deviceType": "iPhone12,8",
+    "osVersion": "iPhone OS 17.5 (21F79)"
+   },
+   "callStackTree": {
+    "callStackPerThread": true,
+    "callStacks": []
+   }
+  }
+ ],
+ "crashDiagnostics": [
+  {
+   "diagnosticMetaData": {
+    "exceptionType": 1,
+    "appVersion": "2.4.0"
+   }
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/observation",
+  "title": "observation",
+  "description": "Output of `orbit observe <unit>`. Lists sorted by stable key; every entry cites file:line.",
+  "type": "object",
+  "required": [
+    "version",
+    "unit",
+    "layers",
+    "imports",
+    "types",
+    "protocols"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "config_hash": {
+      "type": "string"
+    },
+    "index_digest": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "root": {
+      "type": "string"
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "files",
+          "loc"
+        ]
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "module",
+          "count",
+          "layers",
+          "source"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^.+:\\d+$"
+          }
+        }
+      }
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "visibility",
+          "layer",
+          "source"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^.+:\\d+$"
+          }
+        }
+      }
+    },
+    "protocols": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "conformers",
+          "source"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^.+:\\d+$"
+          }
+        }
+      }
+    }
+  }
+}

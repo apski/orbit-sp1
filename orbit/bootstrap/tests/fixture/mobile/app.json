@@ -1,0 +1,1 @@
+{ "expo": { "name": "Mobile", "slug": "mobile", "ios": { "bundleIdentifier": "com.fx.app" }, "android": { "package": "com.fx.mobile" } } }

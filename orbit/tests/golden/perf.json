@@ -1,0 +1,913 @@
+{
+  "arms": [
+    {
+      "impl": "legacy",
+      "meta": {
+        "debug": false,
+        "device": "iPhone 17 Pro",
+        "impl": "legacy",
+        "journey": "markets-trade",
+        "platform": "ios"
+      },
+      "reps": 3
+    },
+    {
+      "impl": "next",
+      "meta": {
+        "debug": false,
+        "device": "iPhone 17 Pro",
+        "impl": "next",
+        "journey": "markets-trade",
+        "platform": "ios"
+      },
+      "reps": 3
+    }
+  ],
+  "base": "legacy",
+  "clock": {},
+  "comparable": true,
+  "errors": [],
+  "labels": {},
+  "phases": [
+    "navigation",
+    "data",
+    "render",
+    "layout",
+    "main:uninstrumented",
+    "waiting"
+  ],
+  "refused": [],
+  "version": 1,
+  "windows": [
+    {
+      "arms": {
+        "legacy": {
+          "buckets_p50": {
+            "data": 250.5,
+            "layout": 108.5,
+            "main:uninstrumented": 69.0,
+            "navigation": 190.0,
+            "render": 384.5,
+            "waiting": 77.5
+          },
+          "main_busy": {
+            "n": 3,
+            "p50": 922.0,
+            "p95": 958.9,
+            "p95_low_n": true
+          },
+          "median_rep": {
+            "between_ms": 900.0,
+            "buckets": {
+              "data": 250.5,
+              "layout": 108.5,
+              "main:uninstrumented": 69.0,
+              "navigation": 190.0,
+              "render": 384.5,
+              "waiting": 77.5
+            },
+            "busy": [
+              [
+                1750.0,
+                1819.0
+              ]
+            ],
+            "main_busy_ms": 922.0,
+            "milestones": {
+              "interactive": 1080.0,
+              "wall": 1980.0
+            },
+            "overlapped": {
+              "data": 256.0
+            },
+            "spans": [
+              {
+                "depth": 0,
+                "end_ms": 60.0,
+                "id": "1",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 60.0,
+                "start_ms": 0.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 220.0,
+                "id": "2",
+                "name": "list:build",
+                "phase": "render",
+                "self_ms": 160.0,
+                "start_ms": 60.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1270.0,
+                "id": "3",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 130.0,
+                "start_ms": 1140.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1657.0,
+                "id": "6",
+                "name": "fetch:orderbook",
+                "phase": "data",
+                "self_ms": 0.0,
+                "start_ms": 1231.0,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1440.0,
+                "id": "4",
+                "name": "model:prepare",
+                "phase": "data",
+                "self_ms": 59.5,
+                "start_ms": 1270.0,
+                "thread": "main"
+              },
+              {
+                "depth": 1,
+                "end_ms": 1397.5,
+                "id": "5",
+                "name": "decode:orderbook",
+                "phase": "data",
+                "self_ms": 110.5,
+                "start_ms": 1287.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1641.5,
+                "id": "7",
+                "name": "view:setup",
+                "phase": "render",
+                "self_ms": 201.5,
+                "start_ms": 1440.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1750.0,
+                "id": "8",
+                "name": "layout:ticket",
+                "phase": "layout",
+                "self_ms": 108.5,
+                "start_ms": 1641.5,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1957.0,
+                "id": "9",
+                "name": "fetch:quotes",
+                "phase": "data",
+                "self_ms": 80.5,
+                "start_ms": 1876.5,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1980.0,
+                "id": "10",
+                "name": "apply:quotes",
+                "phase": "render",
+                "self_ms": 23.0,
+                "start_ms": 1957.0,
+                "thread": "main"
+              }
+            ],
+            "spans_dropped": 0,
+            "trace": "legacy/rep-2.jsonl",
+            "wall_ms": 1980.0,
+            "window_ms": 1080.0
+          },
+          "milestones": {
+            "interactive": {
+              "n": 3,
+              "p50": 1080.0,
+              "p95": 1123.2,
+              "p95_low_n": true
+            },
+            "wall": {
+              "n": 3,
+              "p50": 1980.0,
+              "p95": 2023.2,
+              "p95_low_n": true
+            }
+          },
+          "n": 3
+        },
+        "next": {
+          "buckets_p50": {
+            "data": 135.0,
+            "layout": 38.5,
+            "main:uninstrumented": 30.0,
+            "navigation": 65.2,
+            "render": 148.7,
+            "waiting": 33.4
+          },
+          "main_busy": {
+            "n": 3,
+            "p50": 382.4,
+            "p95": 397.7,
+            "p95_low_n": true
+          },
+          "median_rep": {
+            "between_ms": 900.0,
+            "buckets": {
+              "data": 135.0,
+              "layout": 38.5,
+              "main:uninstrumented": 30.0,
+              "navigation": 65.2,
+              "render": 148.7,
+              "waiting": 33.4
+            },
+            "busy": [
+              [
+                1250.8,
+                1280.8
+              ]
+            ],
+            "main_busy_ms": 382.4,
+            "milestones": {
+              "interactive": 450.8,
+              "wall": 1350.8
+            },
+            "overlapped": {
+              "data": 89.0
+            },
+            "spans": [
+              {
+                "depth": 0,
+                "end_ms": 25.2,
+                "id": "1",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 25.2,
+                "start_ms": 0.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 92.4,
+                "id": "2",
+                "name": "list:build",
+                "phase": "render",
+                "self_ms": 67.2,
+                "start_ms": 25.2,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1040.8,
+                "id": "3",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 40.0,
+                "start_ms": 1000.8,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1217.8,
+                "id": "6",
+                "name": "fetch:orderbook",
+                "phase": "data",
+                "self_ms": 0.0,
+                "start_ms": 1028.8,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1140.8,
+                "id": "4",
+                "name": "model:prepare",
+                "phase": "data",
+                "self_ms": 35.0,
+                "start_ms": 1040.8,
+                "thread": "main"
+              },
+              {
+                "depth": 1,
+                "end_ms": 1115.8,
+                "id": "5",
+                "name": "decode:orderbook",
+                "phase": "data",
+                "self_ms": 65.0,
+                "start_ms": 1050.8,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1212.3,
+                "id": "7",
+                "name": "view:setup",
+                "phase": "render",
+                "self_ms": 71.5,
+                "start_ms": 1140.8,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1250.8,
+                "id": "8",
+                "name": "layout:ticket",
+                "phase": "layout",
+                "self_ms": 38.5,
+                "start_ms": 1212.3,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1340.8,
+                "id": "9",
+                "name": "fetch:quotes",
+                "phase": "data",
+                "self_ms": 35.0,
+                "start_ms": 1305.8,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 1350.8,
+                "id": "10",
+                "name": "apply:quotes",
+                "phase": "render",
+                "self_ms": 10.0,
+                "start_ms": 1340.8,
+                "thread": "main"
+              }
+            ],
+            "spans_dropped": 0,
+            "trace": "next/rep-2.jsonl",
+            "wall_ms": 1350.8,
+            "window_ms": 450.8
+          },
+          "milestones": {
+            "interactive": {
+              "n": 3,
+              "p50": 450.8,
+              "p95": 468.8,
+              "p95_low_n": true
+            },
+            "wall": {
+              "n": 3,
+              "p50": 1350.8,
+              "p95": 1368.8,
+              "p95_low_n": true
+            }
+          },
+          "n": 3
+        }
+      },
+      "speedup": {
+        "next": {
+          "interactive": {
+            "hi": 2.6,
+            "lo": 2.21,
+            "ratio": 2.4
+          },
+          "main_busy": {
+            "hi": 2.61,
+            "lo": 2.23,
+            "ratio": 2.41
+          }
+        }
+      },
+      "window": "@journey"
+    },
+    {
+      "arms": {
+        "legacy": {
+          "buckets_p50": {
+            "navigation": 60.0,
+            "render": 160.0,
+            "waiting": 20.0
+          },
+          "main_busy": {
+            "n": 3,
+            "p50": 220.0,
+            "p95": 228.8,
+            "p95_low_n": true
+          },
+          "median_rep": {
+            "between_ms": 0.0,
+            "buckets": {
+              "navigation": 60.0,
+              "render": 160.0,
+              "waiting": 20.0
+            },
+            "busy": [],
+            "main_busy_ms": 220.0,
+            "milestones": {
+              "first_frame": 232.0,
+              "interactive": 240.0,
+              "settled": 240.0
+            },
+            "overlapped": {},
+            "spans": [
+              {
+                "depth": 0,
+                "end_ms": 60.0,
+                "id": "1",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 60.0,
+                "start_ms": 0.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 220.0,
+                "id": "2",
+                "name": "list:build",
+                "phase": "render",
+                "self_ms": 160.0,
+                "start_ms": 60.0,
+                "thread": "main"
+              }
+            ],
+            "spans_dropped": 0,
+            "trace": "legacy/rep-2.jsonl",
+            "wall_ms": 240.0,
+            "window_ms": 240.0
+          },
+          "milestones": {
+            "first_frame": {
+              "n": 3,
+              "p50": 232.0,
+              "p95": 241.6,
+              "p95_low_n": true
+            },
+            "interactive": {
+              "n": 3,
+              "p50": 240.0,
+              "p95": 249.6,
+              "p95_low_n": true
+            },
+            "settled": {
+              "n": 3,
+              "p50": 240.0,
+              "p95": 249.6,
+              "p95_low_n": true
+            }
+          },
+          "n": 3
+        },
+        "next": {
+          "buckets_p50": {
+            "navigation": 25.2,
+            "render": 67.2,
+            "waiting": 8.4
+          },
+          "main_busy": {
+            "n": 3,
+            "p50": 92.4,
+            "p95": 96.1,
+            "p95_low_n": true
+          },
+          "median_rep": {
+            "between_ms": 0.0,
+            "buckets": {
+              "navigation": 25.2,
+              "render": 67.2,
+              "waiting": 8.4
+            },
+            "busy": [],
+            "main_busy_ms": 92.4,
+            "milestones": {
+              "first_frame": 92.8,
+              "interactive": 100.8,
+              "settled": 100.8
+            },
+            "overlapped": {},
+            "spans": [
+              {
+                "depth": 0,
+                "end_ms": 25.2,
+                "id": "1",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 25.2,
+                "start_ms": 0.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 92.4,
+                "id": "2",
+                "name": "list:build",
+                "phase": "render",
+                "self_ms": 67.2,
+                "start_ms": 25.2,
+                "thread": "main"
+              }
+            ],
+            "spans_dropped": 0,
+            "trace": "next/rep-2.jsonl",
+            "wall_ms": 100.8,
+            "window_ms": 100.8
+          },
+          "milestones": {
+            "first_frame": {
+              "n": 3,
+              "p50": 92.8,
+              "p95": 96.8,
+              "p95_low_n": true
+            },
+            "interactive": {
+              "n": 3,
+              "p50": 100.8,
+              "p95": 104.8,
+              "p95_low_n": true
+            },
+            "settled": {
+              "n": 3,
+              "p50": 100.8,
+              "p95": 104.8,
+              "p95_low_n": true
+            }
+          },
+          "n": 3
+        }
+      },
+      "speedup": {
+        "next": {
+          "first_frame": {
+            "hi": 2.72,
+            "lo": 2.3,
+            "ratio": 2.5
+          },
+          "interactive": {
+            "hi": 2.58,
+            "lo": 2.2,
+            "ratio": 2.38
+          },
+          "main_busy": {
+            "hi": 2.58,
+            "lo": 2.2,
+            "ratio": 2.38
+          },
+          "settled": {
+            "hi": 2.58,
+            "lo": 2.2,
+            "ratio": 2.38
+          }
+        }
+      },
+      "window": "markets"
+    },
+    {
+      "arms": {
+        "legacy": {
+          "buckets_p50": {
+            "data": 250.5,
+            "layout": 108.5,
+            "main:uninstrumented": 69.0,
+            "navigation": 130.0,
+            "render": 224.5,
+            "waiting": 57.5
+          },
+          "main_busy": {
+            "n": 3,
+            "p50": 702.0,
+            "p95": 730.1,
+            "p95_low_n": true
+          },
+          "median_rep": {
+            "between_ms": 0.0,
+            "buckets": {
+              "data": 250.5,
+              "layout": 108.5,
+              "main:uninstrumented": 69.0,
+              "navigation": 130.0,
+              "render": 224.5,
+              "waiting": 57.5
+            },
+            "busy": [
+              [
+                610.0,
+                679.0
+              ]
+            ],
+            "main_busy_ms": 702.0,
+            "milestones": {
+              "data_ready": 817.0,
+              "first_frame": 620.0,
+              "interactive": 840.0,
+              "settled": 865.0
+            },
+            "overlapped": {
+              "data": 256.0
+            },
+            "spans": [
+              {
+                "depth": 0,
+                "end_ms": 130.0,
+                "id": "3",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 130.0,
+                "start_ms": 0.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 517.0,
+                "id": "6",
+                "name": "fetch:orderbook",
+                "phase": "data",
+                "self_ms": 0.0,
+                "start_ms": 91.0,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 300.0,
+                "id": "4",
+                "name": "model:prepare",
+                "phase": "data",
+                "self_ms": 59.5,
+                "start_ms": 130.0,
+                "thread": "main"
+              },
+              {
+                "depth": 1,
+                "end_ms": 257.5,
+                "id": "5",
+                "name": "decode:orderbook",
+                "phase": "data",
+                "self_ms": 110.5,
+                "start_ms": 147.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 501.5,
+                "id": "7",
+                "name": "view:setup",
+                "phase": "render",
+                "self_ms": 201.5,
+                "start_ms": 300.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 610.0,
+                "id": "8",
+                "name": "layout:ticket",
+                "phase": "layout",
+                "self_ms": 108.5,
+                "start_ms": 501.5,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 817.0,
+                "id": "9",
+                "name": "fetch:quotes",
+                "phase": "data",
+                "self_ms": 80.5,
+                "start_ms": 736.5,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 840.0,
+                "id": "10",
+                "name": "apply:quotes",
+                "phase": "render",
+                "self_ms": 23.0,
+                "start_ms": 817.0,
+                "thread": "main"
+              }
+            ],
+            "spans_dropped": 0,
+            "trace": "legacy/rep-2.jsonl",
+            "wall_ms": 840.0,
+            "window_ms": 840.0
+          },
+          "milestones": {
+            "data_ready": {
+              "n": 3,
+              "p50": 817.0,
+              "p95": 849.7,
+              "p95_low_n": true
+            },
+            "first_frame": {
+              "n": 3,
+              "p50": 620.0,
+              "p95": 644.8,
+              "p95_low_n": true
+            },
+            "interactive": {
+              "n": 3,
+              "p50": 840.0,
+              "p95": 873.6,
+              "p95_low_n": true
+            },
+            "settled": {
+              "n": 3,
+              "p50": 865.0,
+              "p95": 898.6,
+              "p95_low_n": true
+            }
+          },
+          "n": 3
+        },
+        "next": {
+          "buckets_p50": {
+            "data": 135.0,
+            "layout": 38.5,
+            "main:uninstrumented": 30.0,
+            "navigation": 40.0,
+            "render": 81.5,
+            "waiting": 25.0
+          },
+          "main_busy": {
+            "n": 3,
+            "p50": 290.0,
+            "p95": 301.6,
+            "p95_low_n": true
+          },
+          "median_rep": {
+            "between_ms": 0.0,
+            "buckets": {
+              "data": 135.0,
+              "layout": 38.5,
+              "main:uninstrumented": 30.0,
+              "navigation": 40.0,
+              "render": 81.5,
+              "waiting": 25.0
+            },
+            "busy": [
+              [
+                250.0,
+                280.0
+              ]
+            ],
+            "main_busy_ms": 290.0,
+            "milestones": {
+              "data_ready": 340.0,
+              "first_frame": 254.2,
+              "interactive": 350.0,
+              "settled": 375.0
+            },
+            "overlapped": {
+              "data": 89.0
+            },
+            "spans": [
+              {
+                "depth": 0,
+                "end_ms": 40.0,
+                "id": "3",
+                "name": "coordinator",
+                "phase": "navigation",
+                "self_ms": 40.0,
+                "start_ms": 0.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 217.0,
+                "id": "6",
+                "name": "fetch:orderbook",
+                "phase": "data",
+                "self_ms": 0.0,
+                "start_ms": 28.0,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 140.0,
+                "id": "4",
+                "name": "model:prepare",
+                "phase": "data",
+                "self_ms": 35.0,
+                "start_ms": 40.0,
+                "thread": "main"
+              },
+              {
+                "depth": 1,
+                "end_ms": 115.0,
+                "id": "5",
+                "name": "decode:orderbook",
+                "phase": "data",
+                "self_ms": 65.0,
+                "start_ms": 50.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 211.5,
+                "id": "7",
+                "name": "view:setup",
+                "phase": "render",
+                "self_ms": 71.5,
+                "start_ms": 140.0,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 250.0,
+                "id": "8",
+                "name": "layout:ticket",
+                "phase": "layout",
+                "self_ms": 38.5,
+                "start_ms": 211.5,
+                "thread": "main"
+              },
+              {
+                "depth": 0,
+                "end_ms": 340.0,
+                "id": "9",
+                "name": "fetch:quotes",
+                "phase": "data",
+                "self_ms": 35.0,
+                "start_ms": 305.0,
+                "thread": "bg:25"
+              },
+              {
+                "depth": 0,
+                "end_ms": 350.0,
+                "id": "10",
+                "name": "apply:quotes",
+                "phase": "render",
+                "self_ms": 10.0,
+                "start_ms": 340.0,
+                "thread": "main"
+              }
+            ],
+            "spans_dropped": 0,
+            "trace": "next/rep-2.jsonl",
+            "wall_ms": 350.0,
+            "window_ms": 350.0
+          },
+          "milestones": {
+            "data_ready": {
+              "n": 3,
+              "p50": 340.0,
+              "p95": 353.6,
+              "p95_low_n": true
+            },
+            "first_frame": {
+              "n": 3,
+              "p50": 254.2,
+              "p95": 264.4,
+              "p95_low_n": true
+            },
+            "interactive": {
+              "n": 3,
+              "p50": 350.0,
+              "p95": 364.0,
+              "p95_low_n": true
+            },
+            "settled": {
+              "n": 3,
+              "p50": 375.0,
+              "p95": 389.0,
+              "p95_low_n": true
+            }
+          },
+          "n": 3
+        }
+      },
+      "speedup": {
+        "next": {
+          "data_ready": {
+            "hi": 2.6,
+            "lo": 2.22,
+            "ratio": 2.4
+          },
+          "first_frame": {
+            "hi": 2.64,
+            "lo": 2.25,
+            "ratio": 2.44
+          },
+          "interactive": {
+            "hi": 2.6,
+            "lo": 2.22,
+            "ratio": 2.4
+          },
+          "main_busy": {
+            "hi": 2.62,
+            "lo": 2.23,
+            "ratio": 2.42
+          },
+          "settled": {
+            "hi": 2.49,
+            "lo": 2.14,
+            "ratio": 2.31
+          }
+        }
+      },
+      "window": "trade"
+    }
+  ]
+}

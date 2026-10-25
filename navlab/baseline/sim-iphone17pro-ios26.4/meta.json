@@ -1,0 +1,29 @@
+{
+ "name": "sim-iphone17pro-ios26.4",
+ "source": "traces/sim",
+ "snapshot": "2026-10-24",
+ "device": "iPhone 17 Pro simulator",
+ "os": "26.4",
+ "react-native": "0.88.0",
+ "react-navigation": "^7.5.1",
+ "expo": "~58.0.17",
+ "xcode": "Xcode 27.1",
+ "host": "dev-mac",
+ "build": "Release",
+ "sweeps": [
+  "app",
+  "app-native",
+  "grid",
+  "grid-native",
+  "gridfix-native",
+  "nest",
+  "nest-native",
+  "probecal",
+  "rows",
+  "rows-native",
+  "screens",
+  "screens-native",
+  "stack",
+  "stack-native"
+ ]
+}

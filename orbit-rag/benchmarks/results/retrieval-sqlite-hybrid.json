@@ -1,0 +1,19 @@
+{
+  "config": "sqlite-hybrid",
+  "queries": 120,
+  "recall_at_1": 0.2916666666666667,
+  "recall_at_5": 0.6916666666666667,
+  "recall_at_10": 0.8333333333333334,
+  "mrr_at_10": 0.4585912698412701,
+  "ndcg_at_10": 0.5483742502010215,
+  "latency": {
+    "n": 120,
+    "p50_ms": 13.541875,
+    "p95_ms": 17.5725,
+    "max_ms": 41.875125
+  },
+  "setup_ms": 0.0,
+  "peak_rss_mb": 18.203125,
+  "index_bytes": 7266304,
+  "notes": "FTS5 + vector, orbit RRF k=60"
+}

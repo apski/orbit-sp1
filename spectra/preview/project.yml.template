@@ -1,0 +1,19 @@
+# Native preview host template. `spectra verify` copies it to <repo>/.spectra/preview, fills the FlexLayout path, runs xcodegen.
+name: SpectraPreview
+options:
+  deploymentTarget: { iOS: "26.0" }
+packages:
+  FlexLayout: { path: "{{FLEXLAYOUT}}" }
+targets:
+  SpectraPreview:
+    type: application
+    platform: iOS
+    sources: [Sources]
+    dependencies: [{ package: FlexLayout }]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: app.spectra.preview
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+      SWIFT_VERSION: "6.0"
+      CODE_SIGNING_ALLOWED: NO

@@ -1,0 +1,10 @@
+{
+  "command": "orbit observe billing",
+  "model": null,
+  "question": "what does billing contain, which layers",
+  "route": "observe",
+  "score": 2,
+  "tier": "none",
+  "unresolved": [],
+  "version": 1
+}

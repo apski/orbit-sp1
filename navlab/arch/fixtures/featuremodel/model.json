@@ -1,0 +1,8 @@
+{"feature": "f", "repo": ".", "units": [
+  {"id": "Screen", "file": "screens/F/Screen.tsx", "line": 3}, {"id": "Row", "file": "screens/F/Row.tsx", "line": 1},
+  {"id": "useConvo", "file": "state/f/core.ts", "line": 2}, {"id": "Badge", "file": "other/Badge.tsx", "line": 3}],
+ "contracts": {},
+ "concepts": [{"name": "Conversation", "evidence": ["state/f/core.ts:2"]}],
+ "state": [{"name": "conversation", "owner": "useConvo", "writers": ["Badge"], "readers": ["Screen"], "cite": "state/f/core.ts:2"}],
+ "responsibilities": [{"id": "show", "description": "render", "units": ["Screen", "Row", "useConvo", "Badge"], "cite": ["screens/F/Screen.tsx:3"]}],
+ "flows": [{"name": "open", "steps": ["show"], "cite": []}], "dropped": []}

@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+__pycache__/
+.build/
+# Install output if this checkout is itself a target repo (sources live in */skills).
+/.claude/skills/
+/.agents/skills/
+/.spectra/
+/.orbit/
+/.orbit-rag/
+xcuserdata/
+.swiftpm/

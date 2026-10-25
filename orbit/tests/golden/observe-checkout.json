@@ -1,0 +1,114 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "imports": [
+    {
+      "count": 1,
+      "layers": [
+        "__tests__"
+      ],
+      "module": "../cart",
+      "source": "ts/checkout/__tests__/cart.test.ts:1"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "./cart",
+      "source": "ts/checkout/index.ts:1"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "./rule",
+      "source": "ts/checkout/index.ts:3"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "@fixture/money",
+      "source": "ts/checkout/index.ts:2"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "fs",
+      "source": "ts/checkout/index.ts:4"
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "layers": [
+    {
+      "files": 1,
+      "loc": 2,
+      "name": "__tests__"
+    },
+    {
+      "files": 2,
+      "loc": 14,
+      "name": "_root"
+    }
+  ],
+  "protocols": [
+    {
+      "conformers": [
+        "CartView"
+      ],
+      "name": "Component",
+      "source": "ts/checkout/index.ts:7"
+    },
+    {
+      "conformers": [
+        "CartView"
+      ],
+      "name": "Disposable",
+      "source": "ts/checkout/index.ts:7"
+    },
+    {
+      "conformers": [
+        "CartView"
+      ],
+      "name": "Renderable",
+      "source": "ts/checkout/index.ts:7"
+    }
+  ],
+  "root": "ts/checkout",
+  "types": [
+    {
+      "kind": "class",
+      "layer": "_root",
+      "name": "Cart",
+      "source": "ts/checkout/cart.ts:1",
+      "visibility": "export"
+    },
+    {
+      "kind": "class",
+      "layer": "_root",
+      "name": "CartView",
+      "source": "ts/checkout/index.ts:7",
+      "visibility": "export"
+    },
+    {
+      "kind": "interface",
+      "layer": "_root",
+      "name": "Renderable",
+      "source": "ts/checkout/index.ts:10",
+      "visibility": "export"
+    },
+    {
+      "kind": "type",
+      "layer": "_root",
+      "name": "Alias",
+      "source": "ts/checkout/index.ts:11",
+      "visibility": null
+    }
+  ],
+  "unit": "ts-feat:checkout",
+  "version": 1
+}

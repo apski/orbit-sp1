@@ -1,0 +1,5 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": { "modules": ["LabModule"] },
+  "android": { "modules": ["expo.modules.lab.LabModule"] }
+}

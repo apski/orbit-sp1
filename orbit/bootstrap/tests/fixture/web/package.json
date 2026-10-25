@@ -1,0 +1,6 @@
+{
+  "name": "web",
+  "private": true,
+  "dependencies": { "@fx/shared": "*", "react-dom": "18.3.1" },
+  "devDependencies": { "vite": "^5.4.0" }
+}

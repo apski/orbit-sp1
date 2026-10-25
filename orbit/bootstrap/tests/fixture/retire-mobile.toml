@@ -1,0 +1,9 @@
+# Fixture policy: the RN app is retired; one inline demand bucket.
+[policy]
+retire = ["mobile"]
+
+[policy.why]
+mobile = "RN app retired"
+
+[policy.demand]
+ios-home = "^ios/App/Views/Home/"

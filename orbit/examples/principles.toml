@@ -1,0 +1,3 @@
+# House rules with predicates (spec R8, 9.1). Status starts `observed` (reported, never blocks); promote to
+# `enforced` only after a measured zero-violation run and a person's sign-off. See tests/fixture/principles.toml for
+# every predicate kind.

@@ -1,0 +1,155 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "imports": [
+    {
+      "count": 1,
+      "layers": [
+        "lots"
+      ],
+      "module": "crate::model",
+      "source": "rs/tally/src/lots/mod.rs:2"
+    },
+    {
+      "count": 2,
+      "layers": [
+        "_root"
+      ],
+      "module": "lots",
+      "source": "rs/tally/src/lib.rs:2"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "model",
+      "source": "rs/tally/src/lib.rs:3"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "_root"
+      ],
+      "module": "model::Method",
+      "source": "rs/tally/src/lib.rs:6"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "lots"
+      ],
+      "module": "std::fmt",
+      "source": "rs/tally/src/lots/mod.rs:1"
+    },
+    {
+      "count": 1,
+      "layers": [
+        "tests"
+      ],
+      "module": "tally::lots",
+      "source": "rs/tally/tests/props.rs:1"
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "layers": [
+    {
+      "files": 3,
+      "loc": 35,
+      "name": "_root"
+    },
+    {
+      "files": 1,
+      "loc": 26,
+      "name": "lots"
+    },
+    {
+      "files": 1,
+      "loc": 6,
+      "name": "tests"
+    }
+  ],
+  "protocols": [
+    {
+      "conformers": [
+        "Lot"
+      ],
+      "name": "Display",
+      "source": "rs/tally/src/lots/mod.rs:16"
+    },
+    {
+      "conformers": [
+        "Fifo"
+      ],
+      "name": "Matcher",
+      "source": "rs/tally/src/lots/mod.rs:10"
+    }
+  ],
+  "root": "rs/tally",
+  "types": [
+    {
+      "kind": "trait",
+      "layer": "lots",
+      "name": "Matcher",
+      "source": "rs/tally/src/lots/mod.rs:4",
+      "visibility": "pub"
+    },
+    {
+      "kind": "struct",
+      "layer": "lots",
+      "name": "Fifo",
+      "source": "rs/tally/src/lots/mod.rs:8",
+      "visibility": "pub"
+    },
+    {
+      "kind": "impl",
+      "layer": "lots",
+      "name": "Fifo",
+      "source": "rs/tally/src/lots/mod.rs:10",
+      "visibility": null
+    },
+    {
+      "kind": "impl",
+      "layer": "lots",
+      "name": "Lot",
+      "source": "rs/tally/src/lots/mod.rs:16",
+      "visibility": null
+    },
+    {
+      "kind": "impl",
+      "layer": "lots",
+      "name": "Fifo",
+      "source": "rs/tally/src/lots/mod.rs:22",
+      "visibility": null
+    },
+    {
+      "kind": "enum",
+      "layer": "_root",
+      "name": "Method",
+      "source": "rs/tally/src/model.rs:2",
+      "visibility": "pub"
+    },
+    {
+      "kind": "type",
+      "layer": "_root",
+      "name": "LotId",
+      "source": "rs/tally/src/model.rs:7",
+      "visibility": "pub(crate)"
+    },
+    {
+      "kind": "struct",
+      "layer": "_root",
+      "name": "Lot",
+      "source": "rs/tally/src/model.rs:9",
+      "visibility": "pub"
+    },
+    {
+      "kind": "union",
+      "layer": "_root",
+      "name": "Bits",
+      "source": "rs/tally/src/model.rs:15",
+      "visibility": null
+    }
+  ],
+  "unit": "rs-crate:tally",
+  "version": 1
+}

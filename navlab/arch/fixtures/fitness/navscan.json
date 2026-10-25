@@ -1,0 +1,5 @@
+{"tree": [
+  {"id": "nav.tsx:10", "label": "Tab in Tabs", "kind": "tabs", "routes": 8, "children": ["nav.tsx:20"], "reached": true},
+  {"id": "nav.tsx:20", "label": "Home in Stack", "kind": "stack", "routes": 30, "children": [], "reached": true}],
+ "paths": [{"path": "tabs(8) > stack(30)", "at": "nav.tsx:20", "navigators": 2, "tabRoutes": 8, "lag": 20.0, "ids": ["nav.tsx:10", "nav.tsx:20"]}],
+ "flags": ["INLINE COMPONENT: nav.tsx:25 component={() => ...} for \"Feed\" remounts the screen on every navigator render"]}

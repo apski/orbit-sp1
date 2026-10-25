@@ -1,0 +1,25 @@
+[package]
+name = "orbit-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+rusqlite.workspace = true
+pulldown-cmark = { version = "0.12", default-features = false }
+similar = "2"
+strsim = "0.11"
+sha2 = "0.10"
+ureq = { version = "2", features = ["json"] }
+tree-sitter = "0.25"
+tree-sitter-rust = "0.24"
+tree-sitter-typescript = "0.23"
+tree-sitter-javascript = "0.23"
+tree-sitter-python = "0.23"
+tiktoken-rs = "0.12.1"
+usearch = { version = "2.26", optional = true }
+
+[features]
+ann = ["dep:usearch"]

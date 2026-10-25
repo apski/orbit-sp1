@@ -1,0 +1,27 @@
+{
+  "definitions": [
+    {
+      "kind": "trait",
+      "source": "rs/tally/src/lots/mod.rs:4",
+      "unit": "rs-crate:tally"
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "reference_count": 3,
+  "references": [
+    {
+      "source": "rs/tally/src/lib.rs:11",
+      "unit": "rs-crate:tally"
+    },
+    {
+      "source": "rs/tally/src/lots/mod.rs:4",
+      "unit": "rs-crate:tally"
+    },
+    {
+      "source": "rs/tally/src/lots/mod.rs:10",
+      "unit": "rs-crate:tally"
+    }
+  ],
+  "symbol": "Matcher",
+  "version": 1
+}

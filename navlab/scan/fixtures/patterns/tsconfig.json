@@ -1,0 +1,5 @@
+{
+  // comments and "app/*"-style paths must not break parsing
+  "compilerOptions": { "baseUrl": ".", "paths": { "nav/*": ["src/nav/*"], "screens/*": ["src/screens/*"] } },
+  "exclude": ["**/node_modules/*"],
+}

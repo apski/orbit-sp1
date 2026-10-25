@@ -1,0 +1,14 @@
+[router]
+threshold = 2
+bin = "orbit"
+[[routes]]
+id = "observe"
+command = "observe {unit}"
+tier = "none"
+words = ["contain", "layers", "imports", "types"]
+[[routes]]
+id = "packet"
+command = 'packet {unit} "{task}"'
+tier = "build"
+words = ["fix", "change", "implement", "bug"]
+headers = ["fix", "feat"]

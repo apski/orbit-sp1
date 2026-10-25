@@ -1,0 +1,97 @@
+# The router (spec 8.2): score = distinct route words in the question (plural 's' stripped) + 2 per `strong` word.
+# `strong` words are unambiguous on their own, so one of them clears the threshold.
+# `exact` words score 3 (like a strong word) but match the raw token, no plural stripping.
+# Deterministic, no model. Ties go to the earlier route. Below `threshold` the question is logged as no-match.
+# `orbit review` proposes word changes; a person merges them (open decision 3). tests/questions.toml is the
+# labelled set; accuracy is measured and a drop below its floor fails the test.
+# Slots: {unit} {symbol} {task}. Tiers: none | mechanical | build | explain (spec 7.3).
+
+[router]
+threshold = 2
+bin = "orbit"
+
+[[routes]]
+id = "observe"
+command = "observe {unit}"
+tier = "none"
+words = ["contain", "contents", "layers", "layer", "imports", "import", "types", "type", "structure", "inside", "shape", "depend", "dependencies", "observe", "made", "protocols"]
+strong = ["structure", "contents", "imports", "layers", "protocols", "observe"]
+
+[[routes]]
+id = "refs"
+command = "refs {symbol}"
+tier = "none"
+words = ["where", "defined", "definition", "used", "uses", "usage", "references", "reference", "callers", "who", "symbol", "declared", "find", "refs"]
+strong = ["refs", "defined", "definition", "callers"]
+exact = ["implements", "implementors", "implementers", "implementations", "conformers"]
+
+[[routes]]
+id = "artifacts"
+command = "artifacts {unit}"
+tier = "none"
+words = ["missing", "stale", "tests", "docs", "doc", "artifacts", "artifact", "documentation", "covered", "coverage", "present", "ladder"]
+strong = ["artifacts", "stale", "missing"]
+
+[[routes]]
+id = "principles"
+command = "principles check"
+tier = "none"
+words = ["rule", "rules", "principle", "principles", "violate", "violation", "violations", "house", "break", "breaking", "conform", "conforms", "obey", "lint"]
+strong = ["principles", "violations", "violation"]
+
+[[routes]]
+id = "verify"
+command = "verify fast"
+tier = "none"
+words = ["verify", "check", "checks", "run", "typecheck", "compile", "passing", "pass", "ci", "green", "gate", "cargo"]
+strong = ["typecheck", "verify", "cargo"]
+
+[[routes]]
+id = "review"
+command = "review"
+tier = "none"
+words = ["review", "misrouted", "misroute", "requests", "request", "log", "router", "slow", "errors", "weekly", "usage"]
+strong = ["review", "misrouted"]
+
+[[routes]]
+id = "index"
+command = "index"
+tier = "none"
+words = ["index", "reindex", "rebuild", "refresh", "cache", "parse", "parsed", "incremental"]
+strong = ["reindex", "rebuild", "refresh"]
+
+[[routes]]
+id = "status"
+command = "status"
+tier = "none"
+words = ["status", "units", "languages", "language", "exist", "which", "list", "indexed", "codebase", "repo", "available", "sources"]
+strong = ["languages"]
+
+[[routes]]
+id = "summarize"
+command = "observe {unit}"
+tier = "mechanical"
+words = ["summarize", "summarise", "summary", "describe", "overview", "table", "format", "brief", "tldr"]
+strong = ["summarize", "summarise", "summary", "overview", "tldr"]
+
+[[routes]]
+id = "packet-build"
+command = 'packet {unit} "{task}"'
+tier = "build"
+words = ["context", "packet", "implement", "change", "edit", "fix", "add", "build", "modify", "update", "refactor", "task", "write", "bug", "feature", "refactoring", "implementing", "fixing", "adding"]
+strong = ["packet", "refactor", "implement", "add", "fix"]
+headers = ["feat", "fix", "chore", "refactor", "perf", "style"]
+
+[[routes]]
+id = "packet-explain"
+command = 'packet {unit} "{task}" --tier explain'
+tier = "explain"
+words = ["plan", "design", "why", "explain", "decide", "decision", "tradeoff", "approach", "strategy", "propose", "rethink", "redesign", "architecture"]
+strong = ["redesign", "tradeoff", "explain"]
+
+[[routes]]
+id = "perf"
+command = "perf <traces dir> --html runs/perf.html"
+tier = "none"
+words = ["perf", "performance", "speedup", "faster", "latency", "interactive", "attribution", "timeline", "trace", "traces", "milestone", "frame", "jank", "hitch", "hitches", "time", "goes", "go"]
+strong = ["perf", "performance", "speedup", "faster", "latency", "attribution", "traces"]

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/trace-event",
+  "title": "trace-event",
+  "description": "One line of a PerfStack trace file (JSONL; one file = one rep of one arm). Times are host-epoch ms, except events with `src`, which are shifted by that source's sync offset. Written by Perf.swift (native), perf.ts (RN) and the perf-climb harness (meta). docs/orbit/perf/PERFSTACK.md section 4.",
+  "type": "object",
+  "required": ["k"],
+  "properties": {
+    "k": {"enum": ["meta", "b", "e", "m", "busy", "c", "f", "sync"], "description": "meta | span begin | span end | mark | main-runloop busy stretch | count | fixture | clock sync sample"},
+    "t": {"type": "number", "description": "ms; absent only on harness meta"},
+    "id": {"type": ["integer", "string"], "description": "b/e: span id, unique per trace"},
+    "p": {"type": ["integer", "string"], "description": "b: parent span id"},
+    "n": {"type": "string", "description": "b: span name; m: mark (`<screen>:<milestone>`, milestone in tap|first_frame|data_ready|interactive); c/f: counter or fixture name"},
+    "ph": {"type": "string", "description": "b: phase bucket (navigation, data, render, layout, ...); inherited from the parent when absent"},
+    "th": {"type": "string", "description": "b/busy: thread, `main` or `bg:<qos>`; inherited when absent"},
+    "sc": {"type": "string", "description": "b: screen id"},
+    "d": {"type": "number", "description": "busy: duration ms"},
+    "v": {"type": "number", "description": "c: increment; f: value"},
+    "src": {"type": "string", "description": "non-native clock source, e.g. js"},
+    "t0": {"type": "number", "description": "sync: source clock before the bridge call"},
+    "t1": {"type": "number", "description": "sync: source clock after it"},
+    "tn": {"type": "number", "description": "sync: native clock inside it"},
+    "impl": {"type": "string", "description": "meta: the arm, e.g. legacy | next | rn | native"}
+  }
+}

@@ -1,0 +1,7 @@
+trace,depth,kind,screens,pushes,screen,rows,freeze,auto,settle,arm,thermal,startup_ms,descend_ms,descend_jsms,layout_ms,layouts,render_ms,render_first5,render_last5,push_ms,push_first5,push_last5,push_js_cpu,push_main_cpu,push_renders,push_nav,push_hitches,push_hitch_ms,pop_ms,mb_peak,complete,thermal_end
+depth3_kindtabroot_screens4_pushes40_r1.trace,3,tabroot,4,40,mix,40,false,true,300,native,nominal,1462.0,97.1,0,52.8,1.0,74.7,81.4,74.9,553.5,562.7,549.4,0.0,92.0,1.0,0.0,48,2469,515.5,150.9,True,nominal
+depth3_kindtabroot_screens4_pushes40_r2.trace,3,tabroot,4,40,mix,40,false,true,300,native,nominal,1444.6,102.0,0,52.5,1.0,71.2,74.5,75.7,547.3,554.5,557.7,0.0,89.0,1.0,0.0,46,2331,517.6,151.0,True,nominal
+depth3_kindtabroot_screens4_pushes40_r3.trace,3,tabroot,4,40,mix,40,false,true,300,native,nominal,1451.7,101.8,0,50.4,1.0,71.7,92.6,59.4,549.3,563.0,545.0,0.0,90.5,1.0,0.0,50,2428,517.6,151.7,True,nominal
+depth4_kindtabroot_screens4_pushes40_r1.trace,4,tabroot,4,40,mix,40,false,true,300,native,nominal,1433.6,100.2,0,45.2,1.0,66.6,77.2,62.2,553.3,561.0,540.7,0.0,90.0,1.0,0.0,45,2348,515.5,151.4,True,nominal
+depth4_kindtabroot_screens4_pushes40_r2.trace,4,tabroot,4,40,mix,40,false,true,300,native,nominal,1475.1,94.4,0,52.5,1.0,74.7,80.1,71.3,557.2,564.4,557.2,0.0,101.0,1.0,0.0,47,2362,519.0,150.3,True,nominal
+depth4_kindtabroot_screens4_pushes40_r3.trace,4,tabroot,4,40,mix,40,false,true,300,native,nominal,1421.0,103.6,0,52.2,1.0,73.7,78.8,74.8,551.2,557.1,561.3,0.0,93.5,1.0,0.0,48,2421,516.7,151.6,True,nominal

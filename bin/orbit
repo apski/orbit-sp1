@@ -1,0 +1,3 @@
+#!/bin/sh
+# orbit: Orbit + service pack 1. Put this directory on PATH (or alias orbit=<checkout>/bin/orbit).
+exec node "$(cd "$(dirname "$0")" && pwd)/orbit.mjs" "$@"

@@ -1,0 +1,8186 @@
+{
+ "app": [
+  {
+   "depth": "3",
+   "kind": "tabroot",
+   "screens": "4",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "40",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1525.7,
+   "startup_ms_range": [
+    1517.4,
+    1554.7
+   ],
+   "descend_ms": 77.3,
+   "descend_ms_range": [
+    61.3,
+    77.6
+   ],
+   "layout_ms": 20.5,
+   "layout_ms_range": [
+    20.5,
+    22.3
+   ],
+   "render_ms": 83.4,
+   "render_ms_range": [
+    78.9,
+    84.0
+   ],
+   "push_ms": 565.8,
+   "push_ms_range": [
+    562.2,
+    569.2
+   ],
+   "push_js_cpu": 37.5,
+   "push_js_cpu_range": [
+    36.5,
+    38.0
+   ],
+   "push_main_cpu": 114.0,
+   "push_main_cpu_range": [
+    109.5,
+    117.5
+   ],
+   "push_nav": 3.0,
+   "push_nav_range": [
+    3.0,
+    3.0
+   ],
+   "push_hitches": 56.0,
+   "push_hitches_range": [
+    52.0,
+    59.0
+   ],
+   "pop_ms": 12.6,
+   "pop_ms_range": [
+    11.7,
+    13.6
+   ],
+   "mb_peak": 217.2,
+   "mb_peak_range": [
+    215.8,
+    219.1
+   ],
+   "render_buckets": {
+    "fabric-mount": 18.5,
+    "uikit-nav": 17.1,
+    "hermes": 16.6,
+    "rn-screens": 7.1,
+    "uikit": 5.2,
+    "text-layout": 4.9,
+    "autolayout": 2.8,
+    "fabric-commit": 1.8,
+    "hermes-gc": 1.5,
+    "yoga": 1.5,
+    "uikit-layout": 0.3,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "tabroot",
+   "screens": "4",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "40",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1473.9,
+   "startup_ms_range": [
+    1445.9,
+    1522.2
+   ],
+   "descend_ms": 80.8,
+   "descend_ms_range": [
+    77.1,
+    81.7
+   ],
+   "layout_ms": 22.6,
+   "layout_ms_range": [
+    22.2,
+    23.1
+   ],
+   "render_ms": 82.5,
+   "render_ms_range": [
+    76.5,
+    83.0
+   ],
+   "push_ms": 564.8,
+   "push_ms_range": [
+    564.5,
+    566.2
+   ],
+   "push_js_cpu": 40.0,
+   "push_js_cpu_range": [
+    38.0,
+    41.0
+   ],
+   "push_main_cpu": 115.0,
+   "push_main_cpu_range": [
+    113.0,
+    116.5
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 60.0,
+   "push_hitches_range": [
+    56.0,
+    67.0
+   ],
+   "pop_ms": 12.7,
+   "pop_ms_range": [
+    12.5,
+    12.9
+   ],
+   "mb_peak": 219.1,
+   "mb_peak_range": [
+    217.2,
+    219.5
+   ],
+   "render_buckets": {
+    "fabric-mount": 18.4,
+    "hermes": 17.4,
+    "uikit-nav": 17.0,
+    "rn-screens": 7.1,
+    "text-layout": 4.8,
+    "uikit": 4.8,
+    "autolayout": 2.7,
+    "fabric-commit": 1.9,
+    "hermes-gc": 1.7,
+    "yoga": 1.5,
+    "uikit-layout": 0.2,
+    "other": 0.2
+   }
+  }
+ ],
+ "app_render_ms": {
+  "freeze=false k=1-10": 69.5,
+  "freeze=false k=11-20": 70.8,
+  "freeze=false k=21-30": 85.5,
+  "freeze=false k=31-40": 89.0
+ },
+ "app_push_js_cpu": {
+  "freeze=false k=1-10": 31.5,
+  "freeze=false k=11-20": 37.0,
+  "freeze=false k=21-30": 43.0,
+  "freeze=false k=31-40": 43.5
+ },
+ "app_push_mb": {
+  "freeze=false k=1-10": 83.4,
+  "freeze=false k=11-20": 125.4,
+  "freeze=false k=21-30": 159.2,
+  "freeze=false k=31-40": 196.1
+ },
+ "app_push_mounted": {
+  "freeze=false k=1-10": 7.5,
+  "freeze=false k=11-20": 17.5,
+  "freeze=false k=21-30": 27.5,
+  "freeze=false k=31-40": 37.5
+ },
+ "app-native": [
+  {
+   "depth": "3",
+   "kind": "tabroot",
+   "screens": "4",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "40",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1451.7,
+   "startup_ms_range": [
+    1444.6,
+    1462.0
+   ],
+   "descend_ms": 101.8,
+   "descend_ms_range": [
+    97.1,
+    102.0
+   ],
+   "layout_ms": 52.5,
+   "layout_ms_range": [
+    50.4,
+    52.8
+   ],
+   "render_ms": 71.7,
+   "render_ms_range": [
+    71.2,
+    74.7
+   ],
+   "push_ms": 549.3,
+   "push_ms_range": [
+    547.3,
+    553.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 90.5,
+   "push_main_cpu_range": [
+    89.0,
+    92.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 48.0,
+   "push_hitches_range": [
+    46.0,
+    50.0
+   ],
+   "pop_ms": 517.6,
+   "pop_ms_range": [
+    515.5,
+    517.6
+   ],
+   "mb_peak": 151.0,
+   "mb_peak_range": [
+    150.9,
+    151.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.6,
+    "autolayout": 20.9,
+    "app-native": 8.6,
+    "uikit": 4.1,
+    "text-layout": 3.3,
+    "uikit-layout": 0.1,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "tabroot",
+   "screens": "4",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "40",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1433.6,
+   "startup_ms_range": [
+    1421.0,
+    1475.1
+   ],
+   "descend_ms": 100.2,
+   "descend_ms_range": [
+    94.4,
+    103.6
+   ],
+   "layout_ms": 52.2,
+   "layout_ms_range": [
+    45.2,
+    52.5
+   ],
+   "render_ms": 73.7,
+   "render_ms_range": [
+    66.6,
+    74.7
+   ],
+   "push_ms": 553.3,
+   "push_ms_range": [
+    551.2,
+    557.2
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 93.5,
+   "push_main_cpu_range": [
+    90.0,
+    101.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 47.0,
+   "push_hitches_range": [
+    45.0,
+    48.0
+   ],
+   "pop_ms": 516.7,
+   "pop_ms_range": [
+    515.5,
+    519.0
+   ],
+   "mb_peak": 151.4,
+   "mb_peak_range": [
+    150.3,
+    151.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.3,
+    "autolayout": 20.8,
+    "app-native": 8.4,
+    "uikit": 4.2,
+    "text-layout": 3.5,
+    "uikit-layout": 0.2,
+    "other": 0.0
+   }
+  }
+ ],
+ "app-native_render_ms": {
+  "freeze=false k=1-10": 69.9,
+  "freeze=false k=11-20": 72.0,
+  "freeze=false k=21-30": 72.0,
+  "freeze=false k=31-40": 74.1
+ },
+ "app-native_push_js_cpu": {
+  "freeze=false k=1-10": 0.0,
+  "freeze=false k=11-20": 0.0,
+  "freeze=false k=21-30": 0.0,
+  "freeze=false k=31-40": 0.0
+ },
+ "app-native_push_mb": {
+  "freeze=false k=1-10": 54.5,
+  "freeze=false k=11-20": 82.8,
+  "freeze=false k=21-30": 110.0,
+  "freeze=false k=31-40": 138.4
+ },
+ "app-native_push_mounted": {
+  "freeze=false k=1-10": 9.5,
+  "freeze=false k=11-20": 19.5,
+  "freeze=false k=21-30": 29.5,
+  "freeze=false k=31-40": 39.5
+ },
+ "nest": [
+  {
+   "depth": "12",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1473.2,
+   "startup_ms_range": [
+    1472.6,
+    1488.2
+   ],
+   "descend_ms": 130.1,
+   "descend_ms_range": [
+    127.3,
+    130.6
+   ],
+   "layout_ms": 28.0,
+   "layout_ms_range": [
+    22.9,
+    30.4
+   ],
+   "render_ms": 80.8,
+   "render_ms_range": [
+    63.3,
+    83.1
+   ],
+   "push_ms": 562.1,
+   "push_ms_range": [
+    549.9,
+    565.1
+   ],
+   "push_js_cpu": 42.0,
+   "push_js_cpu_range": [
+    41.5,
+    49.5
+   ],
+   "push_main_cpu": 103.5,
+   "push_main_cpu_range": [
+    97.0,
+    107.5
+   ],
+   "push_nav": 12.0,
+   "push_nav_range": [
+    12.0,
+    12.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    14.0,
+    15.0
+   ],
+   "pop_ms": 23.0,
+   "pop_ms_range": [
+    18.9,
+    24.2
+   ],
+   "mb_peak": 105.6,
+   "mb_peak_range": [
+    105.4,
+    111.6
+   ],
+   "render_buckets": {
+    "hermes": 21.8,
+    "uikit-nav": 16.9,
+    "fabric-mount": 14.1,
+    "rn-screens": 6.5,
+    "uikit": 5.7,
+    "text-layout": 5.1,
+    "hermes-gc": 2.9,
+    "autolayout": 2.4,
+    "fabric-commit": 1.8,
+    "yoga": 1.6,
+    "other": 0.2,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "12",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1479.0,
+   "startup_ms_range": [
+    1470.8,
+    1480.9
+   ],
+   "descend_ms": 126.0,
+   "descend_ms_range": [
+    122.8,
+    143.5
+   ],
+   "layout_ms": 38.9,
+   "layout_ms_range": [
+    32.4,
+    42.6
+   ],
+   "render_ms": 80.9,
+   "render_ms_range": [
+    79.9,
+    82.4
+   ],
+   "push_ms": 564.6,
+   "push_ms_range": [
+    563.7,
+    565.1
+   ],
+   "push_js_cpu": 46.5,
+   "push_js_cpu_range": [
+    40.5,
+    48.5
+   ],
+   "push_main_cpu": 107.5,
+   "push_main_cpu_range": [
+    102.0,
+    108.5
+   ],
+   "push_nav": 12.0,
+   "push_nav_range": [
+    12.0,
+    12.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    15.0
+   ],
+   "pop_ms": 15.3,
+   "pop_ms_range": [
+    13.0,
+    16.4
+   ],
+   "mb_peak": 110.4,
+   "mb_peak_range": [
+    110.3,
+    114.4
+   ],
+   "render_buckets": {
+    "hermes": 20.4,
+    "uikit-nav": 19.8,
+    "fabric-mount": 14.9,
+    "rn-screens": 8.1,
+    "uikit": 7.4,
+    "text-layout": 5.7,
+    "autolayout": 2.7,
+    "hermes-gc": 2.1,
+    "fabric-commit": 1.7,
+    "yoga": 1.5,
+    "other": 0.4,
+    "uikit-layout": 0.3
+   }
+  },
+  {
+   "depth": "12",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1468.2,
+   "startup_ms_range": [
+    1452.2,
+    1475.3
+   ],
+   "descend_ms": 123.0,
+   "descend_ms_range": [
+    117.3,
+    129.5
+   ],
+   "layout_ms": 32.3,
+   "layout_ms_range": [
+    29.6,
+    34.4
+   ],
+   "render_ms": 82.6,
+   "render_ms_range": [
+    81.2,
+    85.0
+   ],
+   "push_ms": 566.2,
+   "push_ms_range": [
+    565.3,
+    573.4
+   ],
+   "push_js_cpu": 48.0,
+   "push_js_cpu_range": [
+    44.0,
+    50.5
+   ],
+   "push_main_cpu": 100.0,
+   "push_main_cpu_range": [
+    96.0,
+    105.0
+   ],
+   "push_nav": 12.0,
+   "push_nav_range": [
+    12.0,
+    12.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    11.0,
+    19.0
+   ],
+   "pop_ms": 22.6,
+   "pop_ms_range": [
+    14.9,
+    25.8
+   ],
+   "mb_peak": 107.7,
+   "mb_peak_range": [
+    107.1,
+    111.0
+   ],
+   "render_buckets": {
+    "hermes": 26.3,
+    "uikit-nav": 16.8,
+    "fabric-mount": 13.5,
+    "rn-screens": 6.7,
+    "uikit": 5.7,
+    "text-layout": 5.2,
+    "hermes-gc": 3.4,
+    "autolayout": 2.9,
+    "fabric-commit": 2.1,
+    "yoga": 1.3,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "16",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1486.9,
+   "startup_ms_range": [
+    1472.6,
+    1529.6
+   ],
+   "descend_ms": 162.1,
+   "descend_ms_range": [
+    151.8,
+    162.4
+   ],
+   "layout_ms": 36.2,
+   "layout_ms_range": [
+    27.1,
+    38.3
+   ],
+   "render_ms": 90.5,
+   "render_ms_range": [
+    81.3,
+    93.4
+   ],
+   "push_ms": 576.8,
+   "push_ms_range": [
+    565.1,
+    578.3
+   ],
+   "push_js_cpu": 55.0,
+   "push_js_cpu_range": [
+    48.0,
+    55.5
+   ],
+   "push_main_cpu": 100.5,
+   "push_main_cpu_range": [
+    98.0,
+    103.0
+   ],
+   "push_nav": 16.0,
+   "push_nav_range": [
+    16.0,
+    16.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    10.0,
+    14.0
+   ],
+   "pop_ms": 27.3,
+   "pop_ms_range": [
+    21.8,
+    29.5
+   ],
+   "mb_peak": 111.7,
+   "mb_peak_range": [
+    110.7,
+    112.1
+   ],
+   "render_buckets": {
+    "hermes": 29.8,
+    "uikit-nav": 17.9,
+    "fabric-mount": 14.4,
+    "rn-screens": 7.4,
+    "uikit": 5.7,
+    "text-layout": 5.6,
+    "hermes-gc": 3.5,
+    "autolayout": 2.8,
+    "fabric-commit": 1.7,
+    "yoga": 1.4,
+    "uikit-layout": 0.2,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "16",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1478.5,
+   "startup_ms_range": [
+    1457.6,
+    1519.9
+   ],
+   "descend_ms": 161.8,
+   "descend_ms_range": [
+    151.8,
+    165.3
+   ],
+   "layout_ms": 39.7,
+   "layout_ms_range": [
+    37.0,
+    42.1
+   ],
+   "render_ms": 79.7,
+   "render_ms_range": [
+    76.5,
+    81.2
+   ],
+   "push_ms": 566.8,
+   "push_ms_range": [
+    559.1,
+    567.0
+   ],
+   "push_js_cpu": 48.5,
+   "push_js_cpu_range": [
+    45.5,
+    49.0
+   ],
+   "push_main_cpu": 110.0,
+   "push_main_cpu_range": [
+    97.0,
+    111.5
+   ],
+   "push_nav": 16.0,
+   "push_nav_range": [
+    16.0,
+    16.0
+   ],
+   "push_hitches": 18.0,
+   "push_hitches_range": [
+    16.0,
+    21.0
+   ],
+   "pop_ms": 18.3,
+   "pop_ms_range": [
+    17.3,
+    21.6
+   ],
+   "mb_peak": 113.0,
+   "mb_peak_range": [
+    112.9,
+    113.0
+   ],
+   "render_buckets": {
+    "hermes": 21.9,
+    "uikit-nav": 19.7,
+    "fabric-mount": 15.1,
+    "rn-screens": 8.5,
+    "uikit": 8.2,
+    "text-layout": 5.0,
+    "hermes-gc": 2.7,
+    "autolayout": 2.7,
+    "fabric-commit": 2.4,
+    "yoga": 1.4,
+    "uikit-layout": 0.3,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "16",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1460.4,
+   "startup_ms_range": [
+    1453.1,
+    1523.9
+   ],
+   "descend_ms": 165.2,
+   "descend_ms_range": [
+    160.8,
+    166.3
+   ],
+   "layout_ms": 39.5,
+   "layout_ms_range": [
+    32.5,
+    42.0
+   ],
+   "render_ms": 85.1,
+   "render_ms_range": [
+    80.9,
+    96.1
+   ],
+   "push_ms": 572.9,
+   "push_ms_range": [
+    566.1,
+    581.1
+   ],
+   "push_js_cpu": 58.5,
+   "push_js_cpu_range": [
+    50.0,
+    59.0
+   ],
+   "push_main_cpu": 99.5,
+   "push_main_cpu_range": [
+    93.5,
+    99.5
+   ],
+   "push_nav": 16.0,
+   "push_nav_range": [
+    16.0,
+    16.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    12.0,
+    13.0
+   ],
+   "pop_ms": 31.4,
+   "pop_ms_range": [
+    28.4,
+    32.2
+   ],
+   "mb_peak": 115.5,
+   "mb_peak_range": [
+    115.1,
+    116.0
+   ],
+   "render_buckets": {
+    "hermes": 31.8,
+    "uikit-nav": 17.3,
+    "fabric-mount": 13.6,
+    "rn-screens": 6.8,
+    "uikit": 6.1,
+    "text-layout": 5.3,
+    "hermes-gc": 4.4,
+    "autolayout": 2.5,
+    "fabric-commit": 1.9,
+    "yoga": 1.5,
+    "other": 0.2,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1486.1,
+   "startup_ms_range": [
+    1473.3,
+    1494.2
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 31.8,
+   "layout_ms_range": [
+    25.6,
+    32.3
+   ],
+   "render_ms": 65.2,
+   "render_ms_range": [
+    61.9,
+    67.9
+   ],
+   "push_ms": 547.5,
+   "push_ms_range": [
+    546.4,
+    556.7
+   ],
+   "push_js_cpu": 27.0,
+   "push_js_cpu_range": [
+    23.0,
+    28.5
+   ],
+   "push_main_cpu": 92.5,
+   "push_main_cpu_range": [
+    85.0,
+    111.0
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    14.0,
+    16.0
+   ],
+   "pop_ms": 6.9,
+   "pop_ms_range": [
+    6.2,
+    7.3
+   ],
+   "mb_peak": 97.6,
+   "mb_peak_range": [
+    97.4,
+    98.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.1,
+    "fabric-mount": 13.6,
+    "hermes": 9.6,
+    "rn-screens": 6.5,
+    "text-layout": 5.1,
+    "uikit": 4.8,
+    "autolayout": 2.5,
+    "fabric-commit": 2.5,
+    "hermes-gc": 1.6,
+    "yoga": 1.5,
+    "uikit-layout": 0.1,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1474.0,
+   "startup_ms_range": [
+    1473.7,
+    1530.9
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 29.3,
+   "layout_ms_range": [
+    23.8,
+    29.8
+   ],
+   "render_ms": 64.7,
+   "render_ms_range": [
+    59.3,
+    65.4
+   ],
+   "push_ms": 545.6,
+   "push_ms_range": [
+    544.6,
+    548.3
+   ],
+   "push_js_cpu": 26.0,
+   "push_js_cpu_range": [
+    22.5,
+    28.0
+   ],
+   "push_main_cpu": 106.0,
+   "push_main_cpu_range": [
+    99.5,
+    107.0
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    12.0,
+    17.0
+   ],
+   "pop_ms": 7.1,
+   "pop_ms_range": [
+    5.5,
+    7.3
+   ],
+   "mb_peak": 97.6,
+   "mb_peak_range": [
+    96.7,
+    97.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.3,
+    "fabric-mount": 14.0,
+    "hermes": 10.1,
+    "rn-screens": 6.4,
+    "text-layout": 5.0,
+    "uikit": 4.7,
+    "autolayout": 2.8,
+    "fabric-commit": 2.1,
+    "yoga": 1.6,
+    "hermes-gc": 1.4,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1501.8,
+   "startup_ms_range": [
+    1471.3,
+    1504.4
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 27.8,
+   "layout_ms_range": [
+    27.5,
+    28.8
+   ],
+   "render_ms": 64.6,
+   "render_ms_range": [
+    64.6,
+    65.7
+   ],
+   "push_ms": 546.7,
+   "push_ms_range": [
+    544.8,
+    547.2
+   ],
+   "push_js_cpu": 28.5,
+   "push_js_cpu_range": [
+    24.5,
+    30.0
+   ],
+   "push_main_cpu": 104.0,
+   "push_main_cpu_range": [
+    94.5,
+    105.5
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 16.0,
+   "push_hitches_range": [
+    13.0,
+    18.0
+   ],
+   "pop_ms": 7.0,
+   "pop_ms_range": [
+    4.8,
+    7.2
+   ],
+   "mb_peak": 98.0,
+   "mb_peak_range": [
+    97.4,
+    98.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.2,
+    "fabric-mount": 13.8,
+    "hermes": 9.2,
+    "rn-screens": 6.0,
+    "text-layout": 5.2,
+    "uikit": 4.6,
+    "autolayout": 2.9,
+    "fabric-commit": 2.5,
+    "hermes-gc": 1.4,
+    "yoga": 1.4,
+    "other": 0.4,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1456.8,
+   "startup_ms_range": [
+    1444.3,
+    1527.3
+   ],
+   "descend_ms": 65.1,
+   "descend_ms_range": [
+    60.4,
+    70.5
+   ],
+   "layout_ms": 20.7,
+   "layout_ms_range": [
+    17.2,
+    21.7
+   ],
+   "render_ms": 63.2,
+   "render_ms_range": [
+    62.6,
+    67.5
+   ],
+   "push_ms": 545.9,
+   "push_ms_range": [
+    545.7,
+    550.6
+   ],
+   "push_js_cpu": 29.0,
+   "push_js_cpu_range": [
+    27.5,
+    33.5
+   ],
+   "push_main_cpu": 96.0,
+   "push_main_cpu_range": [
+    89.0,
+    106.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    14.0
+   ],
+   "pop_ms": 8.2,
+   "pop_ms_range": [
+    7.8,
+    8.4
+   ],
+   "mb_peak": 101.0,
+   "mb_peak_range": [
+    100.8,
+    101.4
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.1,
+    "fabric-mount": 12.6,
+    "hermes": 11.3,
+    "rn-screens": 6.2,
+    "text-layout": 5.1,
+    "uikit": 4.6,
+    "fabric-commit": 2.7,
+    "autolayout": 2.6,
+    "yoga": 1.2,
+    "hermes-gc": 1.0,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1532.4,
+   "startup_ms_range": [
+    1474.5,
+    1543.6
+   ],
+   "descend_ms": 67.0,
+   "descend_ms_range": [
+    66.7,
+    83.6
+   ],
+   "layout_ms": 24.3,
+   "layout_ms_range": [
+    19.9,
+    34.5
+   ],
+   "render_ms": 65.7,
+   "render_ms_range": [
+    63.4,
+    67.7
+   ],
+   "push_ms": 547.4,
+   "push_ms_range": [
+    545.5,
+    550.2
+   ],
+   "push_js_cpu": 28.0,
+   "push_js_cpu_range": [
+    25.0,
+    34.5
+   ],
+   "push_main_cpu": 107.5,
+   "push_main_cpu_range": [
+    87.5,
+    108.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    10.0,
+    15.0
+   ],
+   "pop_ms": 7.1,
+   "pop_ms_range": [
+    6.9,
+    7.2
+   ],
+   "mb_peak": 103.9,
+   "mb_peak_range": [
+    103.7,
+    104.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.3,
+    "fabric-mount": 13.4,
+    "hermes": 11.2,
+    "rn-screens": 6.9,
+    "uikit": 6.2,
+    "text-layout": 5.2,
+    "fabric-commit": 2.5,
+    "autolayout": 2.3,
+    "yoga": 1.7,
+    "hermes-gc": 0.8,
+    "uikit-layout": 0.1,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1490.7,
+   "startup_ms_range": [
+    1468.0,
+    1536.1
+   ],
+   "descend_ms": 63.6,
+   "descend_ms_range": [
+    62.5,
+    63.9
+   ],
+   "layout_ms": 16.4,
+   "layout_ms_range": [
+    14.6,
+    19.5
+   ],
+   "render_ms": 63.9,
+   "render_ms_range": [
+    62.2,
+    69.4
+   ],
+   "push_ms": 546.6,
+   "push_ms_range": [
+    545.4,
+    551.0
+   ],
+   "push_js_cpu": 26.5,
+   "push_js_cpu_range": [
+    25.0,
+    31.0
+   ],
+   "push_main_cpu": 91.5,
+   "push_main_cpu_range": [
+    84.0,
+    110.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    13.0,
+    15.0
+   ],
+   "pop_ms": 9.0,
+   "pop_ms_range": [
+    8.4,
+    9.2
+   ],
+   "mb_peak": 101.3,
+   "mb_peak_range": [
+    100.4,
+    102.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.4,
+    "fabric-mount": 13.1,
+    "hermes": 11.3,
+    "rn-screens": 6.2,
+    "text-layout": 5.6,
+    "uikit": 4.9,
+    "fabric-commit": 2.6,
+    "autolayout": 2.3,
+    "yoga": 1.3,
+    "hermes-gc": 0.8,
+    "uikit-layout": 0.2,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "3",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1500.4,
+   "startup_ms_range": [
+    1495.4,
+    1521.6
+   ],
+   "descend_ms": 65.3,
+   "descend_ms_range": [
+    64.1,
+    76.1
+   ],
+   "layout_ms": 19.1,
+   "layout_ms_range": [
+    18.8,
+    20.7
+   ],
+   "render_ms": 62.0,
+   "render_ms_range": [
+    61.5,
+    64.3
+   ],
+   "push_ms": 546.5,
+   "push_ms_range": [
+    545.0,
+    548.3
+   ],
+   "push_js_cpu": 27.5,
+   "push_js_cpu_range": [
+    27.0,
+    33.0
+   ],
+   "push_main_cpu": 94.5,
+   "push_main_cpu_range": [
+    86.0,
+    104.5
+   ],
+   "push_nav": 3.0,
+   "push_nav_range": [
+    3.0,
+    3.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    13.0,
+    15.0
+   ],
+   "pop_ms": 9.6,
+   "pop_ms_range": [
+    8.5,
+    9.9
+   ],
+   "mb_peak": 103.7,
+   "mb_peak_range": [
+    103.2,
+    104.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.8,
+    "fabric-mount": 12.4,
+    "hermes": 11.4,
+    "rn-screens": 5.9,
+    "uikit": 4.8,
+    "text-layout": 4.6,
+    "autolayout": 2.5,
+    "fabric-commit": 1.9,
+    "yoga": 1.6,
+    "hermes-gc": 1.2,
+    "uikit-layout": 0.2,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "3",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1521.8,
+   "startup_ms_range": [
+    1489.1,
+    1528.2
+   ],
+   "descend_ms": 88.5,
+   "descend_ms_range": [
+    69.8,
+    89.4
+   ],
+   "layout_ms": 26.4,
+   "layout_ms_range": [
+    22.6,
+    30.4
+   ],
+   "render_ms": 64.7,
+   "render_ms_range": [
+    64.4,
+    66.1
+   ],
+   "push_ms": 547.9,
+   "push_ms_range": [
+    545.6,
+    548.3
+   ],
+   "push_js_cpu": 30.5,
+   "push_js_cpu_range": [
+    27.0,
+    33.5
+   ],
+   "push_main_cpu": 99.5,
+   "push_main_cpu_range": [
+    87.0,
+    103.0
+   ],
+   "push_nav": 3.0,
+   "push_nav_range": [
+    3.0,
+    3.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    13.0,
+    17.0
+   ],
+   "pop_ms": 8.0,
+   "pop_ms_range": [
+    7.3,
+    8.9
+   ],
+   "mb_peak": 104.2,
+   "mb_peak_range": [
+    103.8,
+    104.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 19.0,
+    "fabric-mount": 12.4,
+    "hermes": 11.9,
+    "rn-screens": 6.8,
+    "uikit": 6.8,
+    "text-layout": 5.0,
+    "autolayout": 2.6,
+    "fabric-commit": 1.9,
+    "hermes-gc": 1.2,
+    "yoga": 1.2,
+    "uikit-layout": 0.4,
+    "other": 0.3
+   }
+  },
+  {
+   "depth": "3",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1475.9,
+   "startup_ms_range": [
+    1457.4,
+    1514.3
+   ],
+   "descend_ms": 69.0,
+   "descend_ms_range": [
+    51.7,
+    77.8
+   ],
+   "layout_ms": 16.1,
+   "layout_ms_range": [
+    15.9,
+    19.3
+   ],
+   "render_ms": 62.6,
+   "render_ms_range": [
+    62.6,
+    68.4
+   ],
+   "push_ms": 548.8,
+   "push_ms_range": [
+    546.1,
+    554.2
+   ],
+   "push_js_cpu": 29.0,
+   "push_js_cpu_range": [
+    27.5,
+    33.0
+   ],
+   "push_main_cpu": 100.0,
+   "push_main_cpu_range": [
+    93.5,
+    100.0
+   ],
+   "push_nav": 3.0,
+   "push_nav_range": [
+    3.0,
+    3.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    13.0,
+    18.0
+   ],
+   "pop_ms": 10.4,
+   "pop_ms_range": [
+    9.4,
+    13.6
+   ],
+   "mb_peak": 103.0,
+   "mb_peak_range": [
+    102.5,
+    103.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.0,
+    "fabric-mount": 12.9,
+    "hermes": 12.4,
+    "rn-screens": 6.5,
+    "text-layout": 5.4,
+    "uikit": 4.0,
+    "autolayout": 2.8,
+    "fabric-commit": 1.7,
+    "hermes-gc": 1.6,
+    "yoga": 1.3,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1503.8,
+   "startup_ms_range": [
+    1468.5,
+    1616.2
+   ],
+   "descend_ms": 80.4,
+   "descend_ms_range": [
+    71.7,
+    86.6
+   ],
+   "layout_ms": 20.5,
+   "layout_ms_range": [
+    15.3,
+    22.4
+   ],
+   "render_ms": 66.0,
+   "render_ms_range": [
+    62.6,
+    83.1
+   ],
+   "push_ms": 551.9,
+   "push_ms_range": [
+    545.0,
+    564.4
+   ],
+   "push_js_cpu": 33.5,
+   "push_js_cpu_range": [
+    30.5,
+    36.0
+   ],
+   "push_main_cpu": 96.5,
+   "push_main_cpu_range": [
+    91.0,
+    98.0
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    11.0,
+    18.0
+   ],
+   "pop_ms": 12.8,
+   "pop_ms_range": [
+    11.7,
+    13.5
+   ],
+   "mb_peak": 105.3,
+   "mb_peak_range": [
+    105.1,
+    106.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.2,
+    "hermes": 14.5,
+    "fabric-mount": 13.3,
+    "rn-screens": 6.0,
+    "text-layout": 5.1,
+    "uikit": 4.8,
+    "autolayout": 2.5,
+    "fabric-commit": 1.9,
+    "hermes-gc": 1.8,
+    "yoga": 1.5,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1507.7,
+   "startup_ms_range": [
+    1501.2,
+    1521.3
+   ],
+   "descend_ms": 77.4,
+   "descend_ms_range": [
+    73.0,
+    96.5
+   ],
+   "layout_ms": 25.1,
+   "layout_ms_range": [
+    24.1,
+    26.8
+   ],
+   "render_ms": 63.3,
+   "render_ms_range": [
+    62.8,
+    63.9
+   ],
+   "push_ms": 545.8,
+   "push_ms_range": [
+    545.4,
+    548.8
+   ],
+   "push_js_cpu": 30.0,
+   "push_js_cpu_range": [
+    27.0,
+    33.0
+   ],
+   "push_main_cpu": 97.0,
+   "push_main_cpu_range": [
+    90.5,
+    102.5
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    15.0
+   ],
+   "pop_ms": 9.7,
+   "pop_ms_range": [
+    9.0,
+    11.5
+   ],
+   "mb_peak": 106.3,
+   "mb_peak_range": [
+    106.0,
+    107.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.6,
+    "fabric-mount": 13.2,
+    "hermes": 11.3,
+    "rn-screens": 6.7,
+    "uikit": 5.9,
+    "text-layout": 4.7,
+    "autolayout": 2.2,
+    "fabric-commit": 1.7,
+    "hermes-gc": 1.4,
+    "yoga": 1.3,
+    "uikit-layout": 0.1,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1495.0,
+   "startup_ms_range": [
+    1479.9,
+    1519.8
+   ],
+   "descend_ms": 69.8,
+   "descend_ms_range": [
+    67.6,
+    75.4
+   ],
+   "layout_ms": 16.2,
+   "layout_ms_range": [
+    16.0,
+    20.6
+   ],
+   "render_ms": 62.0,
+   "render_ms_range": [
+    60.2,
+    74.0
+   ],
+   "push_ms": 545.1,
+   "push_ms_range": [
+    544.1,
+    557.5
+   ],
+   "push_js_cpu": 27.5,
+   "push_js_cpu_range": [
+    25.0,
+    34.5
+   ],
+   "push_main_cpu": 86.0,
+   "push_main_cpu_range": [
+    85.0,
+    106.5
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 17.0,
+   "push_hitches_range": [
+    15.0,
+    18.0
+   ],
+   "pop_ms": 11.8,
+   "pop_ms_range": [
+    10.6,
+    14.6
+   ],
+   "mb_peak": 104.6,
+   "mb_peak_range": [
+    104.4,
+    105.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.0,
+    "hermes": 13.5,
+    "fabric-mount": 12.7,
+    "rn-screens": 6.1,
+    "uikit": 4.9,
+    "text-layout": 4.8,
+    "autolayout": 2.7,
+    "hermes-gc": 1.7,
+    "fabric-commit": 1.5,
+    "yoga": 1.0,
+    "uikit-layout": 0.1,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "6",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1505.7,
+   "startup_ms_range": [
+    1486.5,
+    1508.2
+   ],
+   "descend_ms": 92.1,
+   "descend_ms_range": [
+    82.6,
+    93.8
+   ],
+   "layout_ms": 20.6,
+   "layout_ms_range": [
+    16.6,
+    23.4
+   ],
+   "render_ms": 68.2,
+   "render_ms_range": [
+    64.6,
+    73.4
+   ],
+   "push_ms": 550.0,
+   "push_ms_range": [
+    546.4,
+    555.6
+   ],
+   "push_js_cpu": 37.5,
+   "push_js_cpu_range": [
+    34.5,
+    38.5
+   ],
+   "push_main_cpu": 96.5,
+   "push_main_cpu_range": [
+    96.5,
+    102.5
+   ],
+   "push_nav": 6.0,
+   "push_nav_range": [
+    6.0,
+    6.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    13.0,
+    14.0
+   ],
+   "pop_ms": 12.2,
+   "pop_ms_range": [
+    11.0,
+    15.9
+   ],
+   "mb_peak": 108.0,
+   "mb_peak_range": [
+    107.8,
+    108.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.4,
+    "hermes": 15.3,
+    "fabric-mount": 13.4,
+    "rn-screens": 6.3,
+    "uikit": 5.1,
+    "text-layout": 4.9,
+    "autolayout": 2.4,
+    "hermes-gc": 2.3,
+    "fabric-commit": 2.2,
+    "yoga": 1.5,
+    "uikit-layout": 0.3,
+    "other": 0.3
+   }
+  },
+  {
+   "depth": "6",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1480.9,
+   "startup_ms_range": [
+    1466.5,
+    1586.0
+   ],
+   "descend_ms": 100.7,
+   "descend_ms_range": [
+    83.0,
+    104.1
+   ],
+   "layout_ms": 25.4,
+   "layout_ms_range": [
+    25.1,
+    30.5
+   ],
+   "render_ms": 75.3,
+   "render_ms_range": [
+    63.9,
+    82.4
+   ],
+   "push_ms": 557.4,
+   "push_ms_range": [
+    545.2,
+    563.9
+   ],
+   "push_js_cpu": 38.0,
+   "push_js_cpu_range": [
+    35.0,
+    39.0
+   ],
+   "push_main_cpu": 96.5,
+   "push_main_cpu_range": [
+    89.0,
+    110.5
+   ],
+   "push_nav": 6.0,
+   "push_nav_range": [
+    6.0,
+    6.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    12.0,
+    15.0
+   ],
+   "pop_ms": 12.1,
+   "pop_ms_range": [
+    11.6,
+    14.2
+   ],
+   "mb_peak": 108.7,
+   "mb_peak_range": [
+    108.2,
+    109.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.9,
+    "hermes": 16.0,
+    "fabric-mount": 14.2,
+    "uikit": 7.5,
+    "rn-screens": 6.6,
+    "text-layout": 5.4,
+    "autolayout": 2.6,
+    "fabric-commit": 1.8,
+    "yoga": 1.5,
+    "hermes-gc": 1.0,
+    "uikit-layout": 0.2,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "6",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1474.1,
+   "startup_ms_range": [
+    1472.2,
+    1488.5
+   ],
+   "descend_ms": 93.1,
+   "descend_ms_range": [
+    88.4,
+    93.8
+   ],
+   "layout_ms": 22.2,
+   "layout_ms_range": [
+    20.8,
+    23.9
+   ],
+   "render_ms": 77.2,
+   "render_ms_range": [
+    68.1,
+    79.9
+   ],
+   "push_ms": 561.2,
+   "push_ms_range": [
+    545.8,
+    562.2
+   ],
+   "push_js_cpu": 34.5,
+   "push_js_cpu_range": [
+    34.0,
+    35.5
+   ],
+   "push_main_cpu": 100.5,
+   "push_main_cpu_range": [
+    92.0,
+    107.0
+   ],
+   "push_nav": 6.0,
+   "push_nav_range": [
+    6.0,
+    6.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    16.0
+   ],
+   "pop_ms": 14.4,
+   "pop_ms_range": [
+    14.1,
+    15.6
+   ],
+   "mb_peak": 105.2,
+   "mb_peak_range": [
+    105.1,
+    105.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.7,
+    "hermes": 17.7,
+    "fabric-mount": 13.7,
+    "rn-screens": 6.7,
+    "uikit": 5.3,
+    "text-layout": 4.5,
+    "autolayout": 2.5,
+    "fabric-commit": 2.3,
+    "hermes-gc": 1.9,
+    "yoga": 1.6,
+    "uikit-layout": 0.4,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1480.5,
+   "startup_ms_range": [
+    1463.2,
+    1529.2
+   ],
+   "descend_ms": 107.5,
+   "descend_ms_range": [
+    107.3,
+    108.9
+   ],
+   "layout_ms": 27.1,
+   "layout_ms_range": [
+    23.1,
+    27.3
+   ],
+   "render_ms": 80.9,
+   "render_ms_range": [
+    66.3,
+    81.1
+   ],
+   "push_ms": 564.7,
+   "push_ms_range": [
+    547.4,
+    565.0
+   ],
+   "push_js_cpu": 43.0,
+   "push_js_cpu_range": [
+    38.5,
+    43.0
+   ],
+   "push_main_cpu": 100.5,
+   "push_main_cpu_range": [
+    99.0,
+    105.0
+   ],
+   "push_nav": 8.0,
+   "push_nav_range": [
+    8.0,
+    8.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    14.0,
+    15.0
+   ],
+   "pop_ms": 14.1,
+   "pop_ms_range": [
+    13.9,
+    16.3
+   ],
+   "mb_peak": 106.9,
+   "mb_peak_range": [
+    106.8,
+    107.9
+   ],
+   "render_buckets": {
+    "hermes": 20.0,
+    "uikit-nav": 18.1,
+    "fabric-mount": 13.9,
+    "rn-screens": 6.9,
+    "text-layout": 5.1,
+    "uikit": 5.0,
+    "autolayout": 2.6,
+    "hermes-gc": 2.5,
+    "fabric-commit": 2.3,
+    "yoga": 1.8,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1488.4,
+   "startup_ms_range": [
+    1483.8,
+    1489.5
+   ],
+   "descend_ms": 108.1,
+   "descend_ms_range": [
+    88.5,
+    108.6
+   ],
+   "layout_ms": 34.6,
+   "layout_ms_range": [
+    28.5,
+    35.7
+   ],
+   "render_ms": 68.8,
+   "render_ms_range": [
+    63.8,
+    75.3
+   ],
+   "push_ms": 554.9,
+   "push_ms_range": [
+    548.6,
+    557.9
+   ],
+   "push_js_cpu": 39.0,
+   "push_js_cpu_range": [
+    34.5,
+    41.5
+   ],
+   "push_main_cpu": 106.0,
+   "push_main_cpu_range": [
+    104.0,
+    108.0
+   ],
+   "push_nav": 8.0,
+   "push_nav_range": [
+    8.0,
+    8.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    11.0,
+    16.0
+   ],
+   "pop_ms": 11.9,
+   "pop_ms_range": [
+    11.8,
+    14.7
+   ],
+   "mb_peak": 111.9,
+   "mb_peak_range": [
+    111.8,
+    112.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 19.0,
+    "hermes": 16.5,
+    "fabric-mount": 14.5,
+    "uikit": 7.4,
+    "rn-screens": 6.7,
+    "text-layout": 5.7,
+    "autolayout": 2.5,
+    "fabric-commit": 2.0,
+    "hermes-gc": 1.9,
+    "yoga": 1.8,
+    "uikit-layout": 0.4,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1488.0,
+   "startup_ms_range": [
+    1478.4,
+    1517.9
+   ],
+   "descend_ms": 103.7,
+   "descend_ms_range": [
+    97.6,
+    103.9
+   ],
+   "layout_ms": 27.0,
+   "layout_ms_range": [
+    20.6,
+    27.2
+   ],
+   "render_ms": 77.6,
+   "render_ms_range": [
+    61.2,
+    82.1
+   ],
+   "push_ms": 565.1,
+   "push_ms_range": [
+    546.8,
+    565.4
+   ],
+   "push_js_cpu": 38.0,
+   "push_js_cpu_range": [
+    33.5,
+    44.0
+   ],
+   "push_main_cpu": 99.0,
+   "push_main_cpu_range": [
+    91.5,
+    105.0
+   ],
+   "push_nav": 8.0,
+   "push_nav_range": [
+    8.0,
+    8.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    11.0,
+    15.0
+   ],
+   "pop_ms": 17.9,
+   "pop_ms_range": [
+    16.8,
+    20.4
+   ],
+   "mb_peak": 105.5,
+   "mb_peak_range": [
+    105.4,
+    106.0
+   ],
+   "render_buckets": {
+    "hermes": 20.3,
+    "uikit-nav": 16.9,
+    "fabric-mount": 14.3,
+    "rn-screens": 6.1,
+    "text-layout": 5.5,
+    "uikit": 5.5,
+    "hermes-gc": 2.5,
+    "autolayout": 2.5,
+    "fabric-commit": 2.0,
+    "yoga": 1.5,
+    "uikit-layout": 0.2,
+    "other": 0.1
+   }
+  }
+ ],
+ "nest-native": [
+  {
+   "depth": "12",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1417.3,
+   "startup_ms_range": [
+    1415.5,
+    1432.9
+   ],
+   "descend_ms": 146.9,
+   "descend_ms_range": [
+    139.3,
+    149.3
+   ],
+   "layout_ms": 52.1,
+   "layout_ms_range": [
+    51.1,
+    55.8
+   ],
+   "render_ms": 72.5,
+   "render_ms_range": [
+    71.3,
+    73.4
+   ],
+   "push_ms": 547.2,
+   "push_ms_range": [
+    541.0,
+    548.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 88.5,
+   "push_main_cpu_range": [
+    85.5,
+    96.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 511.6,
+   "pop_ms_range": [
+    507.3,
+    511.8
+   ],
+   "mb_peak": 69.8,
+   "mb_peak_range": [
+    69.7,
+    70.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.6,
+    "autolayout": 21.1,
+    "app-native": 8.8,
+    "uikit": 4.4,
+    "text-layout": 3.8,
+    "uikit-layout": 0.2,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "12",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1432.7,
+   "startup_ms_range": [
+    1427.7,
+    1445.0
+   ],
+   "descend_ms": 610.4,
+   "descend_ms_range": [
+    600.2,
+    621.7
+   ],
+   "layout_ms": 52.7,
+   "layout_ms_range": [
+    49.1,
+    54.9
+   ],
+   "render_ms": 73.1,
+   "render_ms_range": [
+    69.8,
+    74.7
+   ],
+   "push_ms": 557.9,
+   "push_ms_range": [
+    548.6,
+    564.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 97.0,
+   "push_main_cpu_range": [
+    88.5,
+    102.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    10.0,
+    13.0
+   ],
+   "pop_ms": 517.5,
+   "pop_ms_range": [
+    511.4,
+    520.0
+   ],
+   "mb_peak": 68.3,
+   "mb_peak_range": [
+    68.3,
+    68.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.5,
+    "autolayout": 21.1,
+    "app-native": 9.8,
+    "text-layout": 4.3,
+    "uikit": 3.7,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "12",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1460.3,
+   "startup_ms_range": [
+    1436.3,
+    1465.5
+   ],
+   "descend_ms": 193.7,
+   "descend_ms_range": [
+    190.4,
+    264.6
+   ],
+   "layout_ms": 53.3,
+   "layout_ms_range": [
+    50.6,
+    55.2
+   ],
+   "render_ms": 78.4,
+   "render_ms_range": [
+    78.3,
+    80.8
+   ],
+   "push_ms": 548.5,
+   "push_ms_range": [
+    548.0,
+    558.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 94.5,
+   "push_main_cpu_range": [
+    87.0,
+    95.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 10.0,
+   "push_hitches_range": [
+    10.0,
+    11.0
+   ],
+   "pop_ms": 517.5,
+   "pop_ms_range": [
+    512.5,
+    521.5
+   ],
+   "mb_peak": 72.6,
+   "mb_peak_range": [
+    72.2,
+    72.7
+   ],
+   "render_buckets": {
+    "autolayout": 32.5,
+    "uikit-nav": 12.9,
+    "uikit": 8.1,
+    "app-native": 7.4,
+    "uikit-layout": 4.0,
+    "text-layout": 3.5
+   }
+  },
+  {
+   "depth": "16",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1445.6,
+   "startup_ms_range": [
+    1433.0,
+    1452.9
+   ],
+   "descend_ms": 161.5,
+   "descend_ms_range": [
+    160.6,
+    170.5
+   ],
+   "layout_ms": 46.5,
+   "layout_ms_range": [
+    43.5,
+    55.9
+   ],
+   "render_ms": 71.5,
+   "render_ms_range": [
+    68.2,
+    74.4
+   ],
+   "push_ms": 540.4,
+   "push_ms_range": [
+    534.4,
+    546.7
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 84.5,
+   "push_main_cpu_range": [
+    82.5,
+    87.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 508.0,
+   "pop_ms_range": [
+    500.9,
+    508.9
+   ],
+   "mb_peak": 70.5,
+   "mb_peak_range": [
+    70.5,
+    71.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.8,
+    "autolayout": 19.6,
+    "app-native": 7.9,
+    "uikit": 4.5,
+    "text-layout": 4.1,
+    "uikit-layout": 0.4
+   }
+  },
+  {
+   "depth": "16",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1437.1,
+   "startup_ms_range": [
+    1431.3,
+    1479.6
+   ],
+   "descend_ms": 622.5,
+   "descend_ms_range": [
+    605.5,
+    629.1
+   ],
+   "layout_ms": 53.8,
+   "layout_ms_range": [
+    44.6,
+    54.2
+   ],
+   "render_ms": 74.5,
+   "render_ms_range": [
+    67.7,
+    75.0
+   ],
+   "push_ms": 558.0,
+   "push_ms_range": [
+    545.2,
+    558.4
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 97.0,
+   "push_main_cpu_range": [
+    87.0,
+    106.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 516.2,
+   "pop_ms_range": [
+    502.6,
+    516.7
+   ],
+   "mb_peak": 69.6,
+   "mb_peak_range": [
+    69.5,
+    69.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 29.2,
+    "autolayout": 20.3,
+    "app-native": 9.7,
+    "uikit": 4.0,
+    "text-layout": 3.9,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "16",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1434.8,
+   "startup_ms_range": [
+    1432.1,
+    1459.1
+   ],
+   "descend_ms": 230.5,
+   "descend_ms_range": [
+    208.2,
+    232.0
+   ],
+   "layout_ms": 48.2,
+   "layout_ms_range": [
+    42.8,
+    50.7
+   ],
+   "render_ms": 77.5,
+   "render_ms_range": [
+    69.9,
+    79.8
+   ],
+   "push_ms": 554.4,
+   "push_ms_range": [
+    544.3,
+    563.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 96.0,
+   "push_main_cpu_range": [
+    84.5,
+    112.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    14.0,
+    17.0
+   ],
+   "pop_ms": 519.2,
+   "pop_ms_range": [
+    507.5,
+    524.9
+   ],
+   "mb_peak": 74.3,
+   "mb_peak_range": [
+    74.2,
+    74.4
+   ],
+   "render_buckets": {
+    "autolayout": 32.6,
+    "uikit-nav": 13.1,
+    "uikit": 10.0,
+    "app-native": 7.1,
+    "uikit-layout": 4.9,
+    "text-layout": 3.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1472.8,
+   "startup_ms_range": [
+    1436.3,
+    1544.9
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 49.0,
+   "layout_ms_range": [
+    40.8,
+    56.1
+   ],
+   "render_ms": 69.9,
+   "render_ms_range": [
+    59.4,
+    75.6
+   ],
+   "push_ms": 552.2,
+   "push_ms_range": [
+    543.8,
+    556.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 88.0,
+   "push_main_cpu_range": [
+    74.5,
+    100.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    12.0,
+    14.0
+   ],
+   "pop_ms": 512.3,
+   "pop_ms_range": [
+    508.2,
+    520.5
+   ],
+   "mb_peak": 65.7,
+   "mb_peak_range": [
+    65.4,
+    66.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.8,
+    "autolayout": 20.4,
+    "app-native": 9.0,
+    "uikit": 4.2,
+    "text-layout": 3.4
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1493.5,
+   "startup_ms_range": [
+    1448.6,
+    1497.9
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 47.3,
+   "layout_ms_range": [
+    44.7,
+    53.0
+   ],
+   "render_ms": 66.8,
+   "render_ms_range": [
+    64.0,
+    71.8
+   ],
+   "push_ms": 546.5,
+   "push_ms_range": [
+    541.9,
+    556.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 90.5,
+   "push_main_cpu_range": [
+    90.5,
+    97.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    12.0,
+    16.0
+   ],
+   "pop_ms": 513.0,
+   "pop_ms_range": [
+    507.5,
+    524.9
+   ],
+   "mb_peak": 65.6,
+   "mb_peak_range": [
+    65.5,
+    65.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.9,
+    "autolayout": 20.2,
+    "app-native": 9.3,
+    "text-layout": 4.3,
+    "uikit": 3.9,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1459.7,
+   "startup_ms_range": [
+    1428.5,
+    1474.7
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 48.3,
+   "layout_ms_range": [
+    47.7,
+    50.2
+   ],
+   "render_ms": 67.9,
+   "render_ms_range": [
+    67.5,
+    70.4
+   ],
+   "push_ms": 548.3,
+   "push_ms_range": [
+    547.7,
+    551.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 88.0,
+   "push_main_cpu_range": [
+    86.5,
+    90.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    12.0,
+    13.0
+   ],
+   "pop_ms": 512.1,
+   "pop_ms_range": [
+    509.8,
+    515.7
+   ],
+   "mb_peak": 65.8,
+   "mb_peak_range": [
+    65.7,
+    65.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.6,
+    "autolayout": 20.0,
+    "app-native": 9.0,
+    "uikit": 4.0,
+    "text-layout": 3.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1432.3,
+   "startup_ms_range": [
+    1407.3,
+    1435.7
+   ],
+   "descend_ms": 96.4,
+   "descend_ms_range": [
+    93.2,
+    102.6
+   ],
+   "layout_ms": 46.8,
+   "layout_ms_range": [
+    44.6,
+    52.2
+   ],
+   "render_ms": 66.8,
+   "render_ms_range": [
+    64.2,
+    71.8
+   ],
+   "push_ms": 542.3,
+   "push_ms_range": [
+    538.3,
+    552.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 96.0,
+   "push_main_cpu_range": [
+    77.0,
+    98.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 501.4,
+   "pop_ms_range": [
+    501.0,
+    518.3
+   ],
+   "mb_peak": 67.2,
+   "mb_peak_range": [
+    66.8,
+    67.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.1,
+    "autolayout": 19.3,
+    "app-native": 8.1,
+    "uikit": 4.0,
+    "text-layout": 3.8,
+    "uikit-layout": 0.2,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1418.8,
+   "startup_ms_range": [
+    1417.7,
+    1444.7
+   ],
+   "descend_ms": 89.6,
+   "descend_ms_range": [
+    89.0,
+    97.2
+   ],
+   "layout_ms": 45.6,
+   "layout_ms_range": [
+    40.7,
+    55.2
+   ],
+   "render_ms": 65.2,
+   "render_ms_range": [
+    61.1,
+    73.5
+   ],
+   "push_ms": 542.6,
+   "push_ms_range": [
+    537.0,
+    563.4
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 84.5,
+   "push_main_cpu_range": [
+    75.0,
+    93.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 507.7,
+   "pop_ms_range": [
+    504.0,
+    518.1
+   ],
+   "mb_peak": 67.1,
+   "mb_peak_range": [
+    66.9,
+    67.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.9,
+    "autolayout": 19.2,
+    "app-native": 7.7,
+    "uikit": 4.7,
+    "text-layout": 3.7,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1455.1,
+   "startup_ms_range": [
+    1426.7,
+    1459.2
+   ],
+   "descend_ms": 93.5,
+   "descend_ms_range": [
+    89.5,
+    97.1
+   ],
+   "layout_ms": 50.9,
+   "layout_ms_range": [
+    46.6,
+    54.7
+   ],
+   "render_ms": 70.7,
+   "render_ms_range": [
+    65.4,
+    72.3
+   ],
+   "push_ms": 550.1,
+   "push_ms_range": [
+    545.0,
+    559.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 97.0,
+   "push_main_cpu_range": [
+    75.0,
+    97.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 511.6,
+   "pop_ms_range": [
+    507.8,
+    519.1
+   ],
+   "mb_peak": 67.0,
+   "mb_peak_range": [
+    66.8,
+    67.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.2,
+    "autolayout": 20.2,
+    "app-native": 8.7,
+    "uikit": 4.2,
+    "text-layout": 3.3,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "3",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 2,
+   "hot": 0,
+   "startup_ms": 1435.5,
+   "startup_ms_range": [
+    1426.5,
+    1444.6
+   ],
+   "descend_ms": 94.9,
+   "descend_ms_range": [
+    91.1,
+    98.8
+   ],
+   "layout_ms": 47.4,
+   "layout_ms_range": [
+    45.2,
+    49.5
+   ],
+   "render_ms": 66.6,
+   "render_ms_range": [
+    64.3,
+    68.9
+   ],
+   "push_ms": 549.8,
+   "push_ms_range": [
+    544.5,
+    555.1
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 85.5,
+   "push_main_cpu_range": [
+    79.5,
+    91.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    12.0,
+    14.0
+   ],
+   "pop_ms": 511.1,
+   "pop_ms_range": [
+    510.1,
+    512.1
+   ],
+   "mb_peak": 67.1,
+   "mb_peak_range": [
+    67.0,
+    67.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.7,
+    "autolayout": 20.2,
+    "app-native": 8.7,
+    "uikit": 3.6,
+    "text-layout": 3.5,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "3",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1453.0,
+   "startup_ms_range": [
+    1448.2,
+    1465.6
+   ],
+   "descend_ms": 595.5,
+   "descend_ms_range": [
+    593.2,
+    596.5
+   ],
+   "layout_ms": 46.1,
+   "layout_ms_range": [
+    44.7,
+    50.4
+   ],
+   "render_ms": 65.4,
+   "render_ms_range": [
+    64.2,
+    69.9
+   ],
+   "push_ms": 541.9,
+   "push_ms_range": [
+    539.0,
+    547.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 85.5,
+   "push_main_cpu_range": [
+    76.0,
+    90.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 513.7,
+   "pop_ms_range": [
+    504.7,
+    520.0
+   ],
+   "mb_peak": 67.7,
+   "mb_peak_range": [
+    67.4,
+    67.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.2,
+    "autolayout": 20.3,
+    "app-native": 8.2,
+    "uikit": 4.2,
+    "text-layout": 3.6,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "3",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1433.6,
+   "startup_ms_range": [
+    1431.1,
+    1449.3
+   ],
+   "descend_ms": 109.5,
+   "descend_ms_range": [
+    107.2,
+    112.1
+   ],
+   "layout_ms": 44.3,
+   "layout_ms_range": [
+    38.5,
+    46.5
+   ],
+   "render_ms": 64.7,
+   "render_ms_range": [
+    58.9,
+    67.6
+   ],
+   "push_ms": 544.2,
+   "push_ms_range": [
+    539.2,
+    544.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 83.0,
+   "push_main_cpu_range": [
+    76.0,
+    83.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 513.2,
+   "pop_ms_range": [
+    508.0,
+    522.0
+   ],
+   "mb_peak": 67.9,
+   "mb_peak_range": [
+    67.8,
+    68.0
+   ],
+   "render_buckets": {
+    "autolayout": 30.8,
+    "uikit-nav": 13.7,
+    "app-native": 7.3,
+    "uikit": 4.7,
+    "text-layout": 3.2,
+    "uikit-layout": 1.2
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1430.3,
+   "startup_ms_range": [
+    1428.1,
+    1445.6
+   ],
+   "descend_ms": 111.4,
+   "descend_ms_range": [
+    102.4,
+    114.2
+   ],
+   "layout_ms": 45.0,
+   "layout_ms_range": [
+    44.1,
+    55.5
+   ],
+   "render_ms": 63.6,
+   "render_ms_range": [
+    62.3,
+    76.6
+   ],
+   "push_ms": 536.1,
+   "push_ms_range": [
+    533.2,
+    558.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 89.0,
+   "push_main_cpu_range": [
+    77.0,
+    99.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 515.8,
+   "pop_ms_range": [
+    515.6,
+    520.2
+   ],
+   "mb_peak": 67.5,
+   "mb_peak_range": [
+    67.4,
+    67.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.8,
+    "autolayout": 19.7,
+    "app-native": 8.4,
+    "uikit": 4.3,
+    "text-layout": 3.4,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1461.8,
+   "startup_ms_range": [
+    1438.6,
+    1475.2
+   ],
+   "descend_ms": 585.0,
+   "descend_ms_range": [
+    580.7,
+    609.4
+   ],
+   "layout_ms": 44.8,
+   "layout_ms_range": [
+    37.9,
+    52.6
+   ],
+   "render_ms": 62.5,
+   "render_ms_range": [
+    56.6,
+    71.4
+   ],
+   "push_ms": 541.4,
+   "push_ms_range": [
+    530.7,
+    562.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 77.5,
+   "push_main_cpu_range": [
+    75.5,
+    99.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    12.0,
+    13.0
+   ],
+   "pop_ms": 508.8,
+   "pop_ms_range": [
+    504.9,
+    520.3
+   ],
+   "mb_peak": 67.5,
+   "mb_peak_range": [
+    67.4,
+    67.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 24.3,
+    "autolayout": 19.6,
+    "app-native": 8.4,
+    "uikit": 4.1,
+    "text-layout": 3.1,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1458.2,
+   "startup_ms_range": [
+    1445.2,
+    1459.8
+   ],
+   "descend_ms": 113.6,
+   "descend_ms_range": [
+    103.1,
+    119.4
+   ],
+   "layout_ms": 42.9,
+   "layout_ms_range": [
+    39.0,
+    49.2
+   ],
+   "render_ms": 63.8,
+   "render_ms_range": [
+    60.5,
+    70.8
+   ],
+   "push_ms": 544.0,
+   "push_ms_range": [
+    539.9,
+    547.1
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 81.5,
+   "push_main_cpu_range": [
+    81.0,
+    101.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 513.2,
+   "pop_ms_range": [
+    503.4,
+    517.9
+   ],
+   "mb_peak": 68.5,
+   "mb_peak_range": [
+    67.7,
+    68.5
+   ],
+   "render_buckets": {
+    "autolayout": 31.5,
+    "uikit-nav": 12.8,
+    "app-native": 7.6,
+    "uikit": 5.1,
+    "text-layout": 3.6,
+    "uikit-layout": 1.5
+   }
+  },
+  {
+   "depth": "6",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1450.5,
+   "startup_ms_range": [
+    1429.6,
+    1505.1
+   ],
+   "descend_ms": 117.8,
+   "descend_ms_range": [
+    114.7,
+    123.4
+   ],
+   "layout_ms": 45.2,
+   "layout_ms_range": [
+    43.1,
+    51.6
+   ],
+   "render_ms": 64.1,
+   "render_ms_range": [
+    63.7,
+    72.8
+   ],
+   "push_ms": 539.5,
+   "push_ms_range": [
+    531.8,
+    547.4
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 81.0,
+   "push_main_cpu_range": [
+    79.5,
+    89.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    14.0
+   ],
+   "pop_ms": 517.4,
+   "pop_ms_range": [
+    509.3,
+    520.6
+   ],
+   "mb_peak": 68.0,
+   "mb_peak_range": [
+    67.9,
+    68.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.7,
+    "autolayout": 19.9,
+    "app-native": 8.3,
+    "uikit": 4.6,
+    "text-layout": 3.4,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "6",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1434.8,
+   "startup_ms_range": [
+    1389.0,
+    1439.4
+   ],
+   "descend_ms": 608.1,
+   "descend_ms_range": [
+    599.4,
+    616.2
+   ],
+   "layout_ms": 51.0,
+   "layout_ms_range": [
+    48.2,
+    51.6
+   ],
+   "render_ms": 70.4,
+   "render_ms_range": [
+    68.5,
+    71.5
+   ],
+   "push_ms": 552.8,
+   "push_ms_range": [
+    543.6,
+    556.4
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 101.0,
+   "push_main_cpu_range": [
+    86.0,
+    102.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    10.0,
+    13.0
+   ],
+   "pop_ms": 519.0,
+   "pop_ms_range": [
+    510.7,
+    520.4
+   ],
+   "mb_peak": 67.8,
+   "mb_peak_range": [
+    67.7,
+    68.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.7,
+    "autolayout": 20.6,
+    "app-native": 9.0,
+    "uikit": 4.0,
+    "text-layout": 3.6,
+    "uikit-layout": 0.2,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "6",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1424.6,
+   "startup_ms_range": [
+    1412.0,
+    1441.4
+   ],
+   "descend_ms": 137.2,
+   "descend_ms_range": [
+    125.4,
+    139.3
+   ],
+   "layout_ms": 50.6,
+   "layout_ms_range": [
+    47.2,
+    53.4
+   ],
+   "render_ms": 73.0,
+   "render_ms_range": [
+    70.1,
+    75.9
+   ],
+   "push_ms": 552.1,
+   "push_ms_range": [
+    548.7,
+    555.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 89.5,
+   "push_main_cpu_range": [
+    89.5,
+    93.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    14.0
+   ],
+   "pop_ms": 511.8,
+   "pop_ms_range": [
+    511.4,
+    514.6
+   ],
+   "mb_peak": 69.2,
+   "mb_peak_range": [
+    69.1,
+    69.5
+   ],
+   "render_buckets": {
+    "autolayout": 33.1,
+    "uikit-nav": 14.0,
+    "app-native": 9.1,
+    "uikit": 6.2,
+    "text-layout": 3.6,
+    "uikit-layout": 2.0
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1451.9,
+   "startup_ms_range": [
+    1449.1,
+    1456.1
+   ],
+   "descend_ms": 125.8,
+   "descend_ms_range": [
+    117.4,
+    130.7
+   ],
+   "layout_ms": 49.1,
+   "layout_ms_range": [
+    47.5,
+    54.6
+   ],
+   "render_ms": 71.7,
+   "render_ms_range": [
+    68.5,
+    78.1
+   ],
+   "push_ms": 546.8,
+   "push_ms_range": [
+    543.4,
+    548.6
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 93.0,
+   "push_main_cpu_range": [
+    88.5,
+    98.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    10.0,
+    15.0
+   ],
+   "pop_ms": 514.3,
+   "pop_ms_range": [
+    512.4,
+    523.4
+   ],
+   "mb_peak": 68.5,
+   "mb_peak_range": [
+    68.3,
+    69.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.9,
+    "autolayout": 21.0,
+    "app-native": 8.6,
+    "uikit": 4.3,
+    "text-layout": 3.7,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1444.4,
+   "startup_ms_range": [
+    1429.1,
+    1464.6
+   ],
+   "descend_ms": 604.2,
+   "descend_ms_range": [
+    598.9,
+    619.3
+   ],
+   "layout_ms": 49.0,
+   "layout_ms_range": [
+    44.5,
+    52.6
+   ],
+   "render_ms": 70.4,
+   "render_ms_range": [
+    63.5,
+    71.3
+   ],
+   "push_ms": 554.9,
+   "push_ms_range": [
+    541.4,
+    561.4
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 93.5,
+   "push_main_cpu_range": [
+    75.0,
+    101.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    12.0,
+    14.0
+   ],
+   "pop_ms": 514.6,
+   "pop_ms_range": [
+    506.4,
+    521.8
+   ],
+   "mb_peak": 68.1,
+   "mb_peak_range": [
+    67.8,
+    68.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.3,
+    "autolayout": 20.5,
+    "app-native": 8.8,
+    "uikit": 4.3,
+    "text-layout": 3.5,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1444.0,
+   "startup_ms_range": [
+    1392.7,
+    1453.1
+   ],
+   "descend_ms": 156.2,
+   "descend_ms_range": [
+    154.6,
+    162.5
+   ],
+   "layout_ms": 52.7,
+   "layout_ms_range": [
+    44.8,
+    54.0
+   ],
+   "render_ms": 74.7,
+   "render_ms_range": [
+    72.4,
+    76.2
+   ],
+   "push_ms": 553.8,
+   "push_ms_range": [
+    546.2,
+    554.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 90.0,
+   "push_main_cpu_range": [
+    86.5,
+    103.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    13.0,
+    15.0
+   ],
+   "pop_ms": 517.1,
+   "pop_ms_range": [
+    510.2,
+    519.0
+   ],
+   "mb_peak": 70.3,
+   "mb_peak_range": [
+    70.2,
+    70.5
+   ],
+   "render_buckets": {
+    "autolayout": 32.9,
+    "uikit-nav": 13.3,
+    "app-native": 8.1,
+    "uikit": 7.1,
+    "text-layout": 3.4,
+    "uikit-layout": 2.6
+   }
+  }
+ ],
+ "screens": [
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1468.0,
+   "startup_ms_range": [
+    1460.0,
+    1523.5
+   ],
+   "descend_ms": 83.3,
+   "descend_ms_range": [
+    67.3,
+    85.1
+   ],
+   "layout_ms": 26.4,
+   "layout_ms_range": [
+    26.2,
+    31.4
+   ],
+   "render_ms": 67.5,
+   "render_ms_range": [
+    67.2,
+    68.1
+   ],
+   "push_ms": 549.4,
+   "push_ms_range": [
+    549.2,
+    552.1
+   ],
+   "push_js_cpu": 31.5,
+   "push_js_cpu_range": [
+    31.0,
+    32.5
+   ],
+   "push_main_cpu": 111.0,
+   "push_main_cpu_range": [
+    103.0,
+    114.5
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    12.0,
+    20.0
+   ],
+   "pop_ms": 9.6,
+   "pop_ms_range": [
+    9.2,
+    10.3
+   ],
+   "mb_peak": 102.2,
+   "mb_peak_range": [
+    101.7,
+    102.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 19.3,
+    "fabric-mount": 14.4,
+    "hermes": 12.1,
+    "rn-screens": 6.9,
+    "uikit": 6.1,
+    "text-layout": 5.9,
+    "autolayout": 3.0,
+    "fabric-commit": 2.3,
+    "yoga": 1.8,
+    "hermes-gc": 1.2,
+    "other": 0.2,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1518.0,
+   "startup_ms_range": [
+    1516.6,
+    1556.3
+   ],
+   "descend_ms": 70.7,
+   "descend_ms_range": [
+    62.4,
+    73.1
+   ],
+   "layout_ms": 23.2,
+   "layout_ms_range": [
+    20.2,
+    24.1
+   ],
+   "render_ms": 76.1,
+   "render_ms_range": [
+    75.0,
+    76.9
+   ],
+   "push_ms": 551.5,
+   "push_ms_range": [
+    551.0,
+    565.0
+   ],
+   "push_js_cpu": 37.0,
+   "push_js_cpu_range": [
+    35.5,
+    38.0
+   ],
+   "push_main_cpu": 100.5,
+   "push_main_cpu_range": [
+    97.0,
+    110.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    14.0,
+    16.0
+   ],
+   "pop_ms": 12.0,
+   "pop_ms_range": [
+    11.3,
+    12.6
+   ],
+   "mb_peak": 115.9,
+   "mb_peak_range": [
+    115.8,
+    116.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.0,
+    "hermes": 17.3,
+    "fabric-mount": 13.7,
+    "rn-screens": 6.2,
+    "uikit": 5.9,
+    "text-layout": 5.1,
+    "autolayout": 2.5,
+    "fabric-commit": 2.3,
+    "hermes-gc": 1.8,
+    "yoga": 1.6,
+    "other": 0.3,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "10",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1467.2,
+   "startup_ms_range": [
+    1455.1,
+    1471.2
+   ],
+   "descend_ms": 82.8,
+   "descend_ms_range": [
+    63.0,
+    85.0
+   ],
+   "layout_ms": 31.4,
+   "layout_ms_range": [
+    18.4,
+    31.9
+   ],
+   "render_ms": 68.1,
+   "render_ms_range": [
+    66.4,
+    69.2
+   ],
+   "push_ms": 549.3,
+   "push_ms_range": [
+    548.5,
+    550.7
+   ],
+   "push_js_cpu": 31.0,
+   "push_js_cpu_range": [
+    31.0,
+    32.5
+   ],
+   "push_main_cpu": 105.5,
+   "push_main_cpu_range": [
+    101.0,
+    106.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    17.0
+   ],
+   "pop_ms": 8.2,
+   "pop_ms_range": [
+    5.0,
+    9.5
+   ],
+   "mb_peak": 103.4,
+   "mb_peak_range": [
+    102.8,
+    103.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 19.1,
+    "fabric-mount": 14.4,
+    "hermes": 11.3,
+    "rn-screens": 7.0,
+    "uikit": 6.3,
+    "text-layout": 4.7,
+    "autolayout": 3.0,
+    "fabric-commit": 2.7,
+    "yoga": 1.5,
+    "hermes-gc": 0.9,
+    "uikit-layout": 0.3,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "10",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1503.7,
+   "startup_ms_range": [
+    1470.5,
+    1551.4
+   ],
+   "descend_ms": 70.5,
+   "descend_ms_range": [
+    64.6,
+    75.3
+   ],
+   "layout_ms": 19.5,
+   "layout_ms_range": [
+    18.2,
+    20.8
+   ],
+   "render_ms": 68.8,
+   "render_ms_range": [
+    68.3,
+    68.9
+   ],
+   "push_ms": 556.8,
+   "push_ms_range": [
+    548.2,
+    557.7
+   ],
+   "push_js_cpu": 31.5,
+   "push_js_cpu_range": [
+    31.5,
+    34.5
+   ],
+   "push_main_cpu": 108.0,
+   "push_main_cpu_range": [
+    104.5,
+    112.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    12.0,
+    14.0
+   ],
+   "pop_ms": 9.8,
+   "pop_ms_range": [
+    8.9,
+    10.5
+   ],
+   "mb_peak": 103.5,
+   "mb_peak_range": [
+    103.2,
+    103.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.7,
+    "fabric-mount": 15.0,
+    "hermes": 14.0,
+    "rn-screens": 7.2,
+    "text-layout": 5.1,
+    "uikit": 5.0,
+    "autolayout": 2.8,
+    "fabric-commit": 2.3,
+    "yoga": 1.7,
+    "hermes-gc": 1.5,
+    "uikit-layout": 0.3,
+    "other": 0.3
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1484.7,
+   "startup_ms_range": [
+    1467.9,
+    1491.0
+   ],
+   "descend_ms": 83.1,
+   "descend_ms_range": [
+    69.1,
+    87.4
+   ],
+   "layout_ms": 26.3,
+   "layout_ms_range": [
+    23.7,
+    34.5
+   ],
+   "render_ms": 68.4,
+   "render_ms_range": [
+    66.1,
+    68.8
+   ],
+   "push_ms": 550.9,
+   "push_ms_range": [
+    548.6,
+    551.8
+   ],
+   "push_js_cpu": 33.0,
+   "push_js_cpu_range": [
+    32.5,
+    34.5
+   ],
+   "push_main_cpu": 106.5,
+   "push_main_cpu_range": [
+    105.0,
+    112.5
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    14.0
+   ],
+   "pop_ms": 11.6,
+   "pop_ms_range": [
+    5.0,
+    11.8
+   ],
+   "mb_peak": 104.3,
+   "mb_peak_range": [
+    103.9,
+    104.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.8,
+    "fabric-mount": 14.4,
+    "hermes": 14.1,
+    "rn-screens": 6.9,
+    "uikit": 6.7,
+    "text-layout": 5.5,
+    "autolayout": 2.8,
+    "hermes-gc": 2.4,
+    "fabric-commit": 1.9,
+    "yoga": 1.7,
+    "uikit-layout": 0.3,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1626.5,
+   "startup_ms_range": [
+    1613.9,
+    1630.8
+   ],
+   "descend_ms": 84.4,
+   "descend_ms_range": [
+    79.6,
+    85.7
+   ],
+   "layout_ms": 32.3,
+   "layout_ms_range": [
+    29.9,
+    32.5
+   ],
+   "render_ms": 83.1,
+   "render_ms_range": [
+    77.6,
+    86.1
+   ],
+   "push_ms": 565.1,
+   "push_ms_range": [
+    559.2,
+    571.0
+   ],
+   "push_js_cpu": 48.0,
+   "push_js_cpu_range": [
+    44.0,
+    48.5
+   ],
+   "push_main_cpu": 102.5,
+   "push_main_cpu_range": [
+    96.0,
+    102.5
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 16.0,
+   "push_hitches_range": [
+    16.0,
+    18.0
+   ],
+   "pop_ms": 18.9,
+   "pop_ms_range": [
+    17.8,
+    22.5
+   ],
+   "mb_peak": 148.6,
+   "mb_peak_range": [
+    148.6,
+    148.9
+   ],
+   "render_buckets": {
+    "hermes": 25.4,
+    "uikit-nav": 16.3,
+    "fabric-mount": 13.8,
+    "uikit": 10.1,
+    "rn-screens": 5.6,
+    "text-layout": 5.1,
+    "hermes-gc": 3.6,
+    "autolayout": 2.7,
+    "fabric-commit": 1.9,
+    "yoga": 1.4,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "30",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1468.5,
+   "startup_ms_range": [
+    1455.3,
+    1501.0
+   ],
+   "descend_ms": 82.5,
+   "descend_ms_range": [
+    62.5,
+    84.7
+   ],
+   "layout_ms": 28.4,
+   "layout_ms_range": [
+    25.1,
+    29.7
+   ],
+   "render_ms": 67.8,
+   "render_ms_range": [
+    66.6,
+    73.3
+   ],
+   "push_ms": 549.3,
+   "push_ms_range": [
+    548.3,
+    555.3
+   ],
+   "push_js_cpu": 31.0,
+   "push_js_cpu_range": [
+    30.5,
+    32.0
+   ],
+   "push_main_cpu": 103.5,
+   "push_main_cpu_range": [
+    100.0,
+    109.5
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    14.0
+   ],
+   "pop_ms": 8.8,
+   "pop_ms_range": [
+    8.7,
+    9.1
+   ],
+   "mb_peak": 103.2,
+   "mb_peak_range": [
+    103.1,
+    103.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 20.0,
+    "fabric-mount": 14.1,
+    "hermes": 12.2,
+    "rn-screens": 7.1,
+    "uikit": 6.3,
+    "text-layout": 5.8,
+    "autolayout": 2.8,
+    "fabric-commit": 2.4,
+    "yoga": 2.0,
+    "hermes-gc": 0.9,
+    "uikit-layout": 0.3,
+    "other": 0.3
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "30",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1468.6,
+   "startup_ms_range": [
+    1452.9,
+    1486.3
+   ],
+   "descend_ms": 58.5,
+   "descend_ms_range": [
+    56.4,
+    70.3
+   ],
+   "layout_ms": 19.9,
+   "layout_ms_range": [
+    19.4,
+    21.6
+   ],
+   "render_ms": 66.0,
+   "render_ms_range": [
+    65.5,
+    71.4
+   ],
+   "push_ms": 548.1,
+   "push_ms_range": [
+    546.8,
+    556.4
+   ],
+   "push_js_cpu": 33.0,
+   "push_js_cpu_range": [
+    32.0,
+    35.5
+   ],
+   "push_main_cpu": 103.0,
+   "push_main_cpu_range": [
+    102.0,
+    110.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    11.0,
+    15.0
+   ],
+   "pop_ms": 10.9,
+   "pop_ms_range": [
+    8.4,
+    11.5
+   ],
+   "mb_peak": 105.7,
+   "mb_peak_range": [
+    105.6,
+    106.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.3,
+    "hermes": 14.9,
+    "fabric-mount": 14.2,
+    "rn-screens": 6.3,
+    "text-layout": 5.4,
+    "uikit": 5.0,
+    "autolayout": 2.6,
+    "yoga": 2.0,
+    "fabric-commit": 1.9,
+    "hermes-gc": 1.6,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1469.1,
+   "startup_ms_range": [
+    1449.9,
+    1554.9
+   ],
+   "descend_ms": 84.2,
+   "descend_ms_range": [
+    83.8,
+    86.8
+   ],
+   "layout_ms": 26.4,
+   "layout_ms_range": [
+    18.4,
+    34.1
+   ],
+   "render_ms": 66.5,
+   "render_ms_range": [
+    65.7,
+    67.4
+   ],
+   "push_ms": 547.7,
+   "push_ms_range": [
+    547.5,
+    548.7
+   ],
+   "push_js_cpu": 32.5,
+   "push_js_cpu_range": [
+    30.0,
+    33.0
+   ],
+   "push_main_cpu": 109.0,
+   "push_main_cpu_range": [
+    104.0,
+    109.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    13.0,
+    22.0
+   ],
+   "pop_ms": 10.0,
+   "pop_ms_range": [
+    8.9,
+    10.2
+   ],
+   "mb_peak": 103.3,
+   "mb_peak_range": [
+    103.0,
+    103.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.5,
+    "fabric-mount": 15.2,
+    "hermes": 12.5,
+    "rn-screens": 7.0,
+    "uikit": 6.4,
+    "text-layout": 5.2,
+    "autolayout": 3.0,
+    "fabric-commit": 2.8,
+    "yoga": 1.7,
+    "hermes-gc": 1.2,
+    "uikit-layout": 0.4,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1463.3,
+   "startup_ms_range": [
+    1443.8,
+    1519.6
+   ],
+   "descend_ms": 64.3,
+   "descend_ms_range": [
+    61.2,
+    69.6
+   ],
+   "layout_ms": 19.5,
+   "layout_ms_range": [
+    19.2,
+    20.4
+   ],
+   "render_ms": 67.2,
+   "render_ms_range": [
+    65.9,
+    67.8
+   ],
+   "push_ms": 548.8,
+   "push_ms_range": [
+    548.6,
+    554.8
+   ],
+   "push_js_cpu": 29.5,
+   "push_js_cpu_range": [
+    29.0,
+    32.5
+   ],
+   "push_main_cpu": 105.0,
+   "push_main_cpu_range": [
+    99.5,
+    107.0
+   ],
+   "push_nav": 2.0,
+   "push_nav_range": [
+    2.0,
+    2.0
+   ],
+   "push_hitches": 16.0,
+   "push_hitches_range": [
+    14.0,
+    21.0
+   ],
+   "pop_ms": 9.6,
+   "pop_ms_range": [
+    8.5,
+    10.4
+   ],
+   "mb_peak": 100.4,
+   "mb_peak_range": [
+    100.4,
+    101.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.5,
+    "fabric-mount": 14.5,
+    "hermes": 14.1,
+    "rn-screens": 7.2,
+    "text-layout": 5.7,
+    "uikit": 4.5,
+    "autolayout": 2.7,
+    "fabric-commit": 2.4,
+    "yoga": 1.5,
+    "hermes-gc": 1.0,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  }
+ ],
+ "screens-native": [
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1435.8,
+   "startup_ms_range": [
+    1405.7,
+    1452.6
+   ],
+   "descend_ms": 96.1,
+   "descend_ms_range": [
+    90.0,
+    99.5
+   ],
+   "layout_ms": 53.2,
+   "layout_ms_range": [
+    51.1,
+    55.1
+   ],
+   "render_ms": 69.9,
+   "render_ms_range": [
+    68.4,
+    73.6
+   ],
+   "push_ms": 554.1,
+   "push_ms_range": [
+    550.4,
+    559.4
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 94.5,
+   "push_main_cpu_range": [
+    91.0,
+    97.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    10.0,
+    11.0
+   ],
+   "pop_ms": 521.6,
+   "pop_ms_range": [
+    515.8,
+    523.7
+   ],
+   "mb_peak": 67.0,
+   "mb_peak_range": [
+    66.7,
+    67.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.4,
+    "autolayout": 21.0,
+    "app-native": 9.8,
+    "uikit": 5.3,
+    "text-layout": 3.4,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1455.9,
+   "startup_ms_range": [
+    1451.5,
+    1543.0
+   ],
+   "descend_ms": 95.6,
+   "descend_ms_range": [
+    91.7,
+    95.7
+   ],
+   "layout_ms": 50.5,
+   "layout_ms_range": [
+    41.2,
+    51.7
+   ],
+   "render_ms": 66.6,
+   "render_ms_range": [
+    58.7,
+    72.4
+   ],
+   "push_ms": 547.0,
+   "push_ms_range": [
+    543.5,
+    556.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 98.5,
+   "push_main_cpu_range": [
+    81.5,
+    104.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    10.0,
+    14.0
+   ],
+   "pop_ms": 516.3,
+   "pop_ms_range": [
+    513.8,
+    518.7
+   ],
+   "mb_peak": 67.3,
+   "mb_peak_range": [
+    67.2,
+    67.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 25.9,
+    "autolayout": 20.2,
+    "app-native": 9.1,
+    "text-layout": 3.9,
+    "uikit": 3.8,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "10",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1446.0,
+   "startup_ms_range": [
+    1443.9,
+    1448.0
+   ],
+   "descend_ms": 97.0,
+   "descend_ms_range": [
+    84.1,
+    97.1
+   ],
+   "layout_ms": 52.3,
+   "layout_ms_range": [
+    47.8,
+    53.3
+   ],
+   "render_ms": 71.2,
+   "render_ms_range": [
+    64.4,
+    71.5
+   ],
+   "push_ms": 554.4,
+   "push_ms_range": [
+    543.1,
+    561.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 91.5,
+   "push_main_cpu_range": [
+    79.5,
+    94.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 520.0,
+   "pop_ms_range": [
+    515.8,
+    520.2
+   ],
+   "mb_peak": 66.7,
+   "mb_peak_range": [
+    66.6,
+    66.9
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.5,
+    "autolayout": 20.6,
+    "app-native": 8.7,
+    "uikit": 4.9,
+    "text-layout": 3.7,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "10",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1442.5,
+   "startup_ms_range": [
+    1408.4,
+    1496.4
+   ],
+   "descend_ms": 92.7,
+   "descend_ms_range": [
+    88.8,
+    94.9
+   ],
+   "layout_ms": 53.2,
+   "layout_ms_range": [
+    52.3,
+    55.0
+   ],
+   "render_ms": 72.5,
+   "render_ms_range": [
+    70.2,
+    74.1
+   ],
+   "push_ms": 554.0,
+   "push_ms_range": [
+    552.7,
+    562.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 96.5,
+   "push_main_cpu_range": [
+    96.0,
+    105.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 519.1,
+   "pop_ms_range": [
+    514.7,
+    520.6
+   ],
+   "mb_peak": 67.3,
+   "mb_peak_range": [
+    67.1,
+    67.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.2,
+    "autolayout": 21.1,
+    "app-native": 9.4,
+    "uikit": 4.1,
+    "text-layout": 3.5,
+    "uikit-layout": 0.1,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1434.5,
+   "startup_ms_range": [
+    1421.8,
+    1438.8
+   ],
+   "descend_ms": 96.9,
+   "descend_ms_range": [
+    95.0,
+    99.0
+   ],
+   "layout_ms": 51.0,
+   "layout_ms_range": [
+    48.6,
+    55.6
+   ],
+   "render_ms": 69.9,
+   "render_ms_range": [
+    68.0,
+    72.0
+   ],
+   "push_ms": 551.8,
+   "push_ms_range": [
+    547.5,
+    556.0
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 87.5,
+   "push_main_cpu_range": [
+    84.5,
+    100.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 516.9,
+   "pop_ms_range": [
+    511.9,
+    518.2
+   ],
+   "mb_peak": 67.0,
+   "mb_peak_range": [
+    66.8,
+    67.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.6,
+    "autolayout": 20.9,
+    "app-native": 9.4,
+    "uikit": 5.0,
+    "text-layout": 3.6,
+    "uikit-layout": 0.3
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1435.0,
+   "startup_ms_range": [
+    1434.1,
+    1435.5
+   ],
+   "descend_ms": 94.3,
+   "descend_ms_range": [
+    88.2,
+    95.4
+   ],
+   "layout_ms": 52.7,
+   "layout_ms_range": [
+    50.4,
+    53.2
+   ],
+   "render_ms": 71.3,
+   "render_ms_range": [
+    70.4,
+    71.9
+   ],
+   "push_ms": 547.4,
+   "push_ms_range": [
+    545.6,
+    551.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 96.0,
+   "push_main_cpu_range": [
+    91.0,
+    100.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 10.0,
+   "push_hitches_range": [
+    10.0,
+    11.0
+   ],
+   "pop_ms": 517.6,
+   "pop_ms_range": [
+    513.5,
+    520.8
+   ],
+   "mb_peak": 67.3,
+   "mb_peak_range": [
+    67.3,
+    67.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.4,
+    "autolayout": 19.5,
+    "app-native": 10.0,
+    "text-layout": 4.1,
+    "uikit": 3.6,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "30",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1438.2,
+   "startup_ms_range": [
+    1432.3,
+    1467.9
+   ],
+   "descend_ms": 82.9,
+   "descend_ms_range": [
+    67.6,
+    93.4
+   ],
+   "layout_ms": 52.2,
+   "layout_ms_range": [
+    47.6,
+    54.7
+   ],
+   "render_ms": 71.1,
+   "render_ms_range": [
+    65.6,
+    73.8
+   ],
+   "push_ms": 556.0,
+   "push_ms_range": [
+    555.9,
+    563.7
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 93.0,
+   "push_main_cpu_range": [
+    89.0,
+    104.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 10.0,
+   "push_hitches_range": [
+    10.0,
+    11.0
+   ],
+   "pop_ms": 515.2,
+   "pop_ms_range": [
+    513.9,
+    517.5
+   ],
+   "mb_peak": 66.8,
+   "mb_peak_range": [
+    66.6,
+    67.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.2,
+    "autolayout": 20.4,
+    "app-native": 9.4,
+    "uikit": 4.9,
+    "text-layout": 3.6,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "30",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1445.8,
+   "startup_ms_range": [
+    1443.9,
+    1455.6
+   ],
+   "descend_ms": 95.3,
+   "descend_ms_range": [
+    95.2,
+    96.0
+   ],
+   "layout_ms": 47.3,
+   "layout_ms_range": [
+    44.9,
+    52.1
+   ],
+   "render_ms": 69.3,
+   "render_ms_range": [
+    66.1,
+    70.5
+   ],
+   "push_ms": 547.9,
+   "push_ms_range": [
+    538.6,
+    550.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 94.0,
+   "push_main_cpu_range": [
+    88.5,
+    97.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    10.0,
+    12.0
+   ],
+   "pop_ms": 516.4,
+   "pop_ms_range": [
+    513.7,
+    518.2
+   ],
+   "mb_peak": 67.5,
+   "mb_peak_range": [
+    67.5,
+    67.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.7,
+    "autolayout": 20.8,
+    "app-native": 9.4,
+    "uikit": 4.0,
+    "text-layout": 3.6,
+    "uikit-layout": 0.1,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1433.8,
+   "startup_ms_range": [
+    1419.1,
+    1455.1
+   ],
+   "descend_ms": 97.9,
+   "descend_ms_range": [
+    81.2,
+    98.4
+   ],
+   "layout_ms": 51.4,
+   "layout_ms_range": [
+    49.8,
+    56.6
+   ],
+   "render_ms": 70.3,
+   "render_ms_range": [
+    69.5,
+    76.4
+   ],
+   "push_ms": 560.5,
+   "push_ms_range": [
+    552.7,
+    560.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 102.0,
+   "push_main_cpu_range": [
+    90.5,
+    102.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    10.0,
+    12.0
+   ],
+   "pop_ms": 516.1,
+   "pop_ms_range": [
+    515.3,
+    519.1
+   ],
+   "mb_peak": 67.0,
+   "mb_peak_range": [
+    66.7,
+    67.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.8,
+    "autolayout": 20.9,
+    "app-native": 9.8,
+    "uikit": 5.7,
+    "text-layout": 3.5,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "2",
+   "kind": "tabs",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1415.2,
+   "startup_ms_range": [
+    1413.4,
+    1417.2
+   ],
+   "descend_ms": 100.4,
+   "descend_ms_range": [
+    85.6,
+    100.6
+   ],
+   "layout_ms": 53.5,
+   "layout_ms_range": [
+    52.1,
+    55.8
+   ],
+   "render_ms": 74.2,
+   "render_ms_range": [
+    72.4,
+    75.0
+   ],
+   "push_ms": 557.7,
+   "push_ms_range": [
+    552.8,
+    557.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 97.5,
+   "push_main_cpu_range": [
+    95.5,
+    99.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 517.0,
+   "pop_ms_range": [
+    515.7,
+    521.0
+   ],
+   "mb_peak": 66.7,
+   "mb_peak_range": [
+    66.6,
+    66.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.7,
+    "autolayout": 20.9,
+    "app-native": 9.8,
+    "text-layout": 4.1,
+    "uikit": 3.8,
+    "uikit-layout": 0.1,
+    "other": 0.0
+   }
+  }
+ ],
+ "grid": [
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1485.0,
+   "startup_ms_range": [
+    1473.6,
+    1496.3
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 30.6,
+   "layout_ms_range": [
+    19.5,
+    33.2
+   ],
+   "render_ms": 66.1,
+   "render_ms_range": [
+    62.9,
+    66.4
+   ],
+   "push_ms": 547.9,
+   "push_ms_range": [
+    547.6,
+    548.2
+   ],
+   "push_js_cpu": 27.0,
+   "push_js_cpu_range": [
+    26.0,
+    27.5
+   ],
+   "push_main_cpu": 104.5,
+   "push_main_cpu_range": [
+    104.5,
+    108.0
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    12.0,
+    16.0
+   ],
+   "pop_ms": 5.7,
+   "pop_ms_range": [
+    5.6,
+    6.5
+   ],
+   "mb_peak": 97.6,
+   "mb_peak_range": [
+    97.3,
+    98.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 18.4,
+    "fabric-mount": 14.1,
+    "hermes": 9.5,
+    "rn-screens": 6.9,
+    "text-layout": 5.3,
+    "uikit": 4.0,
+    "autolayout": 2.8,
+    "fabric-commit": 2.4,
+    "yoga": 1.9,
+    "hermes-gc": 1.0,
+    "uikit-layout": 0.2,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1461.9,
+   "startup_ms_range": [
+    1459.3,
+    1507.7
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 29.9,
+   "layout_ms_range": [
+    27.6,
+    32.1
+   ],
+   "render_ms": 61.2,
+   "render_ms_range": [
+    59.9,
+    72.2
+   ],
+   "push_ms": 548.2,
+   "push_ms_range": [
+    547.4,
+    556.1
+   ],
+   "push_js_cpu": 28.5,
+   "push_js_cpu_range": [
+    28.5,
+    29.0
+   ],
+   "push_main_cpu": 103.5,
+   "push_main_cpu_range": [
+    97.0,
+    107.0
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 17.0,
+   "push_hitches_range": [
+    13.0,
+    19.0
+   ],
+   "pop_ms": 8.4,
+   "pop_ms_range": [
+    8.1,
+    8.8
+   ],
+   "mb_peak": 98.0,
+   "mb_peak_range": [
+    97.9,
+    98.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.4,
+    "fabric-mount": 13.7,
+    "hermes": 10.2,
+    "rn-screens": 6.1,
+    "text-layout": 5.6,
+    "uikit": 4.1,
+    "autolayout": 2.7,
+    "fabric-commit": 2.6,
+    "yoga": 1.7,
+    "hermes-gc": 1.3,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1472.8,
+   "startup_ms_range": [
+    1465.5,
+    1475.9
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 29.8,
+   "layout_ms_range": [
+    29.7,
+    31.4
+   ],
+   "render_ms": 65.8,
+   "render_ms_range": [
+    64.0,
+    66.8
+   ],
+   "push_ms": 548.1,
+   "push_ms_range": [
+    547.9,
+    548.4
+   ],
+   "push_js_cpu": 27.5,
+   "push_js_cpu_range": [
+    26.5,
+    30.5
+   ],
+   "push_main_cpu": 106.0,
+   "push_main_cpu_range": [
+    101.0,
+    106.5
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    14.0,
+    15.0
+   ],
+   "pop_ms": 6.6,
+   "pop_ms_range": [
+    6.2,
+    7.1
+   ],
+   "mb_peak": 97.0,
+   "mb_peak_range": [
+    96.7,
+    97.4
+   ],
+   "render_buckets": {
+    "uikit-nav": 19.1,
+    "fabric-mount": 15.2,
+    "hermes": 9.4,
+    "rn-screens": 6.5,
+    "text-layout": 5.1,
+    "uikit": 4.3,
+    "autolayout": 2.6,
+    "fabric-commit": 2.5,
+    "yoga": 1.8,
+    "hermes-gc": 1.6,
+    "other": 0.4,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1512.3,
+   "startup_ms_range": [
+    1493.2,
+    1512.8
+   ],
+   "descend_ms": 139.0,
+   "descend_ms_range": [
+    135.5,
+    139.5
+   ],
+   "layout_ms": 24.7,
+   "layout_ms_range": [
+    24.2,
+    25.5
+   ],
+   "render_ms": 76.8,
+   "render_ms_range": [
+    76.7,
+    77.1
+   ],
+   "push_ms": 562.6,
+   "push_ms_range": [
+    559.6,
+    563.8
+   ],
+   "push_js_cpu": 42.5,
+   "push_js_cpu_range": [
+    41.5,
+    42.5
+   ],
+   "push_main_cpu": 97.0,
+   "push_main_cpu_range": [
+    96.5,
+    99.5
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    14.0,
+    17.0
+   ],
+   "pop_ms": 21.5,
+   "pop_ms_range": [
+    18.9,
+    22.3
+   ],
+   "mb_peak": 133.0,
+   "mb_peak_range": [
+    132.9,
+    133.0
+   ],
+   "render_buckets": {
+    "hermes": 23.1,
+    "uikit-nav": 17.1,
+    "fabric-mount": 13.2,
+    "uikit": 7.2,
+    "rn-screens": 6.1,
+    "text-layout": 4.6,
+    "autolayout": 2.6,
+    "fabric-commit": 2.1,
+    "hermes-gc": 1.9,
+    "yoga": 1.6,
+    "other": 0.2,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1620.1,
+   "startup_ms_range": [
+    1615.5,
+    1649.6
+   ],
+   "descend_ms": 281.4,
+   "descend_ms_range": [
+    257.3,
+    282.3
+   ],
+   "layout_ms": 50.3,
+   "layout_ms_range": [
+    49.1,
+    50.8
+   ],
+   "render_ms": 110.9,
+   "render_ms_range": [
+    104.5,
+    111.5
+   ],
+   "push_ms": 595.1,
+   "push_ms_range": [
+    591.8,
+    595.7
+   ],
+   "push_js_cpu": 74.0,
+   "push_js_cpu_range": [
+    74.0,
+    76.0
+   ],
+   "push_main_cpu": 111.0,
+   "push_main_cpu_range": [
+    110.5,
+    112.0
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 19.0,
+   "push_hitches_range": [
+    18.0,
+    20.0
+   ],
+   "pop_ms": 39.4,
+   "pop_ms_range": [
+    38.7,
+    40.2
+   ],
+   "mb_peak": 203.6,
+   "mb_peak_range": [
+    203.5,
+    204.7
+   ],
+   "render_buckets": {
+    "hermes": 45.6,
+    "uikit": 22.5,
+    "uikit-nav": 15.3,
+    "fabric-mount": 13.1,
+    "rn-screens": 5.7,
+    "text-layout": 4.7,
+    "hermes-gc": 4.4,
+    "autolayout": 2.1,
+    "fabric-commit": 1.6,
+    "yoga": 1.4,
+    "other": 0.8,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1466.4,
+   "startup_ms_range": [
+    1463.7,
+    1484.1
+   ],
+   "descend_ms": 81.2,
+   "descend_ms_range": [
+    77.8,
+    84.4
+   ],
+   "layout_ms": 19.3,
+   "layout_ms_range": [
+    18.5,
+    20.3
+   ],
+   "render_ms": 74.7,
+   "render_ms_range": [
+    72.9,
+    75.0
+   ],
+   "push_ms": 554.9,
+   "push_ms_range": [
+    554.3,
+    562.8
+   ],
+   "push_js_cpu": 35.0,
+   "push_js_cpu_range": [
+    34.5,
+    35.5
+   ],
+   "push_main_cpu": 102.0,
+   "push_main_cpu_range": [
+    97.5,
+    104.0
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 15.0,
+   "push_hitches_range": [
+    14.0,
+    17.0
+   ],
+   "pop_ms": 11.9,
+   "pop_ms_range": [
+    11.5,
+    12.0
+   ],
+   "mb_peak": 105.4,
+   "mb_peak_range": [
+    104.9,
+    106.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.7,
+    "hermes": 15.0,
+    "fabric-mount": 14.3,
+    "rn-screens": 6.1,
+    "text-layout": 4.9,
+    "uikit": 4.8,
+    "autolayout": 2.6,
+    "fabric-commit": 2.2,
+    "hermes-gc": 1.8,
+    "yoga": 1.3,
+    "uikit-layout": 0.3,
+    "other": 0.3
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1512.8,
+   "startup_ms_range": [
+    1498.6,
+    1518.0
+   ],
+   "descend_ms": 276.3,
+   "descend_ms_range": [
+    269.0,
+    276.4
+   ],
+   "layout_ms": 44.0,
+   "layout_ms_range": [
+    42.6,
+    48.5
+   ],
+   "render_ms": 97.4,
+   "render_ms_range": [
+    96.6,
+    97.9
+   ],
+   "push_ms": 582.3,
+   "push_ms_range": [
+    581.3,
+    583.2
+   ],
+   "push_js_cpu": 66.5,
+   "push_js_cpu_range": [
+    61.0,
+    70.0
+   ],
+   "push_main_cpu": 105.5,
+   "push_main_cpu_range": [
+    98.5,
+    106.0
+   ],
+   "push_nav": 8.0,
+   "push_nav_range": [
+    8.0,
+    8.0
+   ],
+   "push_hitches": 16.0,
+   "push_hitches_range": [
+    14.0,
+    23.0
+   ],
+   "pop_ms": 39.9,
+   "pop_ms_range": [
+    35.9,
+    41.4
+   ],
+   "mb_peak": 163.1,
+   "mb_peak_range": [
+    162.7,
+    163.3
+   ],
+   "render_buckets": {
+    "hermes": 39.0,
+    "uikit-nav": 15.5,
+    "uikit": 14.3,
+    "fabric-mount": 12.8,
+    "rn-screens": 6.5,
+    "text-layout": 5.3,
+    "hermes-gc": 4.1,
+    "autolayout": 2.0,
+    "fabric-commit": 1.7,
+    "yoga": 1.4,
+    "uikit-layout": 0.3,
+    "other": 0.2
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1623.6,
+   "startup_ms_range": [
+    1599.6,
+    1629.3
+   ],
+   "descend_ms": 659.4,
+   "descend_ms_range": [
+    657.0,
+    670.9
+   ],
+   "layout_ms": 86.3,
+   "layout_ms_range": [
+    84.4,
+    90.1
+   ],
+   "render_ms": 185.1,
+   "render_ms_range": [
+    175.2,
+    185.9
+   ],
+   "push_ms": 664.4,
+   "push_ms_range": [
+    662.6,
+    670.5
+   ],
+   "push_js_cpu": 132.5,
+   "push_js_cpu_range": [
+    132.0,
+    136.5
+   ],
+   "push_main_cpu": 147.0,
+   "push_main_cpu_range": [
+    144.0,
+    148.5
+   ],
+   "push_nav": 8.0,
+   "push_nav_range": [
+    8.0,
+    8.0
+   ],
+   "push_hitches": 22.0,
+   "push_hitches_range": [
+    22.0,
+    26.0
+   ],
+   "pop_ms": 75.0,
+   "pop_ms_range": [
+    75.0,
+    75.3
+   ],
+   "mb_peak": 312.2,
+   "mb_peak_range": [
+    310.2,
+    313.0
+   ],
+   "render_buckets": {
+    "hermes": 90.5,
+    "uikit": 61.6,
+    "fabric-mount": 15.2,
+    "uikit-nav": 15.1,
+    "hermes-gc": 8.7,
+    "text-layout": 5.6,
+    "rn-screens": 5.5,
+    "autolayout": 2.2,
+    "other": 1.8,
+    "yoga": 1.7,
+    "fabric-commit": 1.5,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1446.0,
+   "startup_ms_range": [
+    1445.6,
+    1479.2
+   ],
+   "descend_ms": 107.6,
+   "descend_ms_range": [
+    107.1,
+    108.0
+   ],
+   "layout_ms": 22.5,
+   "layout_ms_range": [
+    22.5,
+    25.0
+   ],
+   "render_ms": 80.9,
+   "render_ms_range": [
+    71.1,
+    82.5
+   ],
+   "push_ms": 563.9,
+   "push_ms_range": [
+    558.2,
+    565.8
+   ],
+   "push_js_cpu": 40.5,
+   "push_js_cpu_range": [
+    39.5,
+    45.0
+   ],
+   "push_main_cpu": 98.0,
+   "push_main_cpu_range": [
+    98.0,
+    98.5
+   ],
+   "push_nav": 8.0,
+   "push_nav_range": [
+    8.0,
+    8.0
+   ],
+   "push_hitches": 16.0,
+   "push_hitches_range": [
+    15.0,
+    16.0
+   ],
+   "pop_ms": 17.6,
+   "pop_ms_range": [
+    8.4,
+    18.0
+   ],
+   "mb_peak": 106.9,
+   "mb_peak_range": [
+    106.8,
+    107.2
+   ],
+   "render_buckets": {
+    "hermes": 19.4,
+    "uikit-nav": 17.6,
+    "fabric-mount": 13.9,
+    "rn-screens": 6.7,
+    "uikit": 5.3,
+    "text-layout": 4.8,
+    "autolayout": 2.9,
+    "hermes-gc": 2.3,
+    "fabric-commit": 1.8,
+    "yoga": 1.8,
+    "uikit-layout": 0.2,
+    "other": 0.1
+   }
+  }
+ ],
+ "grid-native": [
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1458.8,
+   "startup_ms_range": [
+    1456.1,
+    1462.9
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 52.1,
+   "layout_ms_range": [
+    48.9,
+    52.4
+   ],
+   "render_ms": 70.6,
+   "render_ms_range": [
+    68.6,
+    71.1
+   ],
+   "push_ms": 555.2,
+   "push_ms_range": [
+    551.6,
+    558.7
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 89.5,
+   "push_main_cpu_range": [
+    89.0,
+    91.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 515.9,
+   "pop_ms_range": [
+    511.4,
+    518.1
+   ],
+   "mb_peak": 65.6,
+   "mb_peak_range": [
+    65.3,
+    65.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.8,
+    "autolayout": 20.6,
+    "app-native": 10.3,
+    "uikit": 4.3,
+    "text-layout": 3.6,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1461.4,
+   "startup_ms_range": [
+    1461.2,
+    1467.8
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 55.0,
+   "layout_ms_range": [
+    49.6,
+    55.3
+   ],
+   "render_ms": 73.2,
+   "render_ms_range": [
+    68.1,
+    74.2
+   ],
+   "push_ms": 553.4,
+   "push_ms_range": [
+    551.5,
+    554.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 92.5,
+   "push_main_cpu_range": [
+    86.0,
+    97.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    12.0
+   ],
+   "pop_ms": 517.8,
+   "pop_ms_range": [
+    516.8,
+    520.1
+   ],
+   "mb_peak": 65.7,
+   "mb_peak_range": [
+    65.4,
+    65.7
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.5,
+    "autolayout": 20.7,
+    "app-native": 10.3,
+    "uikit": 4.2,
+    "text-layout": 3.8,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1459.4,
+   "startup_ms_range": [
+    1420.3,
+    1462.1
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 49.6,
+   "layout_ms_range": [
+    48.1,
+    56.6
+   ],
+   "render_ms": 69.3,
+   "render_ms_range": [
+    67.3,
+    75.7
+   ],
+   "push_ms": 555.1,
+   "push_ms_range": [
+    545.1,
+    558.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 88.5,
+   "push_main_cpu_range": [
+    85.5,
+    92.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    12.0,
+    13.0
+   ],
+   "pop_ms": 515.8,
+   "pop_ms_range": [
+    513.8,
+    517.9
+   ],
+   "mb_peak": 65.5,
+   "mb_peak_range": [
+    65.4,
+    65.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.3,
+    "autolayout": 20.7,
+    "app-native": 9.3,
+    "uikit": 4.1,
+    "text-layout": 3.6,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1443.6,
+   "startup_ms_range": [
+    1431.0,
+    1451.9
+   ],
+   "descend_ms": 111.8,
+   "descend_ms_range": [
+    96.5,
+    113.0
+   ],
+   "layout_ms": 46.3,
+   "layout_ms_range": [
+    46.1,
+    55.2
+   ],
+   "render_ms": 68.9,
+   "render_ms_range": [
+    64.8,
+    76.0
+   ],
+   "push_ms": 535.6,
+   "push_ms_range": [
+    529.5,
+    550.1
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 83.5,
+   "push_main_cpu_range": [
+    80.0,
+    93.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    11.0,
+    14.0
+   ],
+   "pop_ms": 516.2,
+   "pop_ms_range": [
+    515.3,
+    518.0
+   ],
+   "mb_peak": 68.5,
+   "mb_peak_range": [
+    68.3,
+    68.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.3,
+    "autolayout": 20.3,
+    "app-native": 8.9,
+    "uikit": 3.9,
+    "text-layout": 3.5,
+    "uikit-layout": 0.4,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1430.9,
+   "startup_ms_range": [
+    1424.3,
+    1434.8
+   ],
+   "descend_ms": 112.1,
+   "descend_ms_range": [
+    108.7,
+    113.0
+   ],
+   "layout_ms": 53.5,
+   "layout_ms_range": [
+    48.4,
+    53.9
+   ],
+   "render_ms": 70.3,
+   "render_ms_range": [
+    69.0,
+    74.4
+   ],
+   "push_ms": 548.9,
+   "push_ms_range": [
+    546.0,
+    549.0
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 98.5,
+   "push_main_cpu_range": [
+    94.0,
+    102.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    12.0,
+    13.0
+   ],
+   "pop_ms": 520.0,
+   "pop_ms_range": [
+    516.8,
+    522.2
+   ],
+   "mb_peak": 69.1,
+   "mb_peak_range": [
+    69.0,
+    69.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.6,
+    "autolayout": 20.4,
+    "app-native": 9.3,
+    "uikit": 4.3,
+    "text-layout": 3.9,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1414.3,
+   "startup_ms_range": [
+    1407.7,
+    1424.8
+   ],
+   "descend_ms": 109.1,
+   "descend_ms_range": [
+    108.3,
+    111.9
+   ],
+   "layout_ms": 52.5,
+   "layout_ms_range": [
+    52.3,
+    52.8
+   ],
+   "render_ms": 72.4,
+   "render_ms_range": [
+    71.9,
+    73.1
+   ],
+   "push_ms": 553.5,
+   "push_ms_range": [
+    552.9,
+    556.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 100.0,
+   "push_main_cpu_range": [
+    89.5,
+    105.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    11.0
+   ],
+   "pop_ms": 517.7,
+   "pop_ms_range": [
+    511.7,
+    518.9
+   ],
+   "mb_peak": 67.5,
+   "mb_peak_range": [
+    67.5,
+    67.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 27.7,
+    "autolayout": 20.9,
+    "app-native": 9.9,
+    "uikit": 4.2,
+    "text-layout": 3.8,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "100",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1434.1,
+   "startup_ms_range": [
+    1426.0,
+    1442.8
+   ],
+   "descend_ms": 132.3,
+   "descend_ms_range": [
+    132.2,
+    135.6
+   ],
+   "layout_ms": 52.5,
+   "layout_ms_range": [
+    51.1,
+    54.6
+   ],
+   "render_ms": 73.9,
+   "render_ms_range": [
+    73.1,
+    77.0
+   ],
+   "push_ms": 544.1,
+   "push_ms_range": [
+    539.1,
+    545.6
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 95.0,
+   "push_main_cpu_range": [
+    88.5,
+    95.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 511.0,
+   "pop_ms_range": [
+    509.4,
+    513.8
+   ],
+   "mb_peak": 70.4,
+   "mb_peak_range": [
+    70.4,
+    70.4
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.7,
+    "autolayout": 21.2,
+    "app-native": 9.1,
+    "uikit": 3.9,
+    "text-layout": 3.7,
+    "uikit-layout": 0.5
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "300",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1447.6,
+   "startup_ms_range": [
+    1419.0,
+    1457.7
+   ],
+   "descend_ms": 136.0,
+   "descend_ms_range": [
+    129.3,
+    136.2
+   ],
+   "layout_ms": 47.8,
+   "layout_ms_range": [
+    43.2,
+    54.5
+   ],
+   "render_ms": 68.0,
+   "render_ms_range": [
+    63.0,
+    74.7
+   ],
+   "push_ms": 536.6,
+   "push_ms_range": [
+    530.2,
+    546.9
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 89.0,
+   "push_main_cpu_range": [
+    87.5,
+    89.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    11.0
+   ],
+   "pop_ms": 517.5,
+   "pop_ms_range": [
+    516.7,
+    519.7
+   ],
+   "mb_peak": 72.0,
+   "mb_peak_range": [
+    71.9,
+    72.1
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.0,
+    "autolayout": 20.8,
+    "app-native": 8.7,
+    "uikit": 4.2,
+    "text-layout": 3.5,
+    "uikit-layout": 0.4
+   }
+  },
+  {
+   "depth": "8",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1420.0,
+   "startup_ms_range": [
+    1403.4,
+    1428.2
+   ],
+   "descend_ms": 128.8,
+   "descend_ms_range": [
+    119.2,
+    132.0
+   ],
+   "layout_ms": 49.8,
+   "layout_ms_range": [
+    45.5,
+    54.6
+   ],
+   "render_ms": 70.9,
+   "render_ms_range": [
+    68.4,
+    72.8
+   ],
+   "push_ms": 544.0,
+   "push_ms_range": [
+    536.2,
+    547.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 90.0,
+   "push_main_cpu_range": [
+    84.0,
+    99.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    10.0,
+    12.0
+   ],
+   "pop_ms": 513.9,
+   "pop_ms_range": [
+    513.7,
+    516.3
+   ],
+   "mb_peak": 68.7,
+   "mb_peak_range": [
+    68.6,
+    68.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 26.9,
+    "autolayout": 19.9,
+    "app-native": 8.8,
+    "uikit": 4.5,
+    "text-layout": 3.6,
+    "uikit-layout": 0.1
+   }
+  }
+ ],
+ "rows": [
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "10",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1483.6,
+   "startup_ms_range": [
+    1461.0,
+    1484.5
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 24.1,
+   "layout_ms_range": [
+    22.6,
+    28.0
+   ],
+   "render_ms": 54.7,
+   "render_ms_range": [
+    54.4,
+    56.9
+   ],
+   "push_ms": 544.8,
+   "push_ms_range": [
+    543.1,
+    544.9
+   ],
+   "push_js_cpu": 25.5,
+   "push_js_cpu_range": [
+    23.0,
+    26.5
+   ],
+   "push_main_cpu": 97.0,
+   "push_main_cpu_range": [
+    92.0,
+    97.5
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    11.0,
+    15.0
+   ],
+   "pop_ms": 5.3,
+   "pop_ms_range": [
+    4.6,
+    5.5
+   ],
+   "mb_peak": 59.0,
+   "mb_peak_range": [
+    58.7,
+    59.4
+   ],
+   "render_buckets": {
+    "uikit-nav": 13.1,
+    "hermes": 8.1,
+    "rn-screens": 7.6,
+    "fabric-mount": 7.3,
+    "uikit": 3.2,
+    "text-layout": 2.9,
+    "autolayout": 2.8,
+    "fabric-commit": 1.6,
+    "yoga": 1.4,
+    "hermes-gc": 0.6,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "10",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1471.2,
+   "startup_ms_range": [
+    1464.4,
+    1479.2
+   ],
+   "descend_ms": 65.3,
+   "descend_ms_range": [
+    58.4,
+    68.3
+   ],
+   "layout_ms": 16.8,
+   "layout_ms_range": [
+    16.5,
+    16.9
+   ],
+   "render_ms": 55.7,
+   "render_ms_range": [
+    55.3,
+    56.2
+   ],
+   "push_ms": 545.2,
+   "push_ms_range": [
+    545.0,
+    545.6
+   ],
+   "push_js_cpu": 30.0,
+   "push_js_cpu_range": [
+    29.5,
+    30.5
+   ],
+   "push_main_cpu": 88.5,
+   "push_main_cpu_range": [
+    87.5,
+    95.0
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 17.0,
+   "push_hitches_range": [
+    15.0,
+    18.0
+   ],
+   "pop_ms": 11.4,
+   "pop_ms_range": [
+    8.7,
+    11.6
+   ],
+   "mb_peak": 68.7,
+   "mb_peak_range": [
+    68.6,
+    68.8
+   ],
+   "render_buckets": {
+    "hermes": 13.9,
+    "uikit-nav": 13.2,
+    "rn-screens": 8.0,
+    "fabric-mount": 6.5,
+    "uikit": 3.9,
+    "text-layout": 2.8,
+    "autolayout": 2.3,
+    "yoga": 1.4,
+    "fabric-commit": 1.2,
+    "hermes-gc": 1.0,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "160",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1548.7,
+   "startup_ms_range": [
+    1546.4,
+    1558.0
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 64.2,
+   "layout_ms_range": [
+    35.9,
+    79.3
+   ],
+   "render_ms": 135.6,
+   "render_ms_range": [
+    135.6,
+    136.1
+   ],
+   "push_ms": 627.9,
+   "push_ms_range": [
+    627.2,
+    639.8
+   ],
+   "push_js_cpu": 41.0,
+   "push_js_cpu_range": [
+    38.0,
+    42.5
+   ],
+   "push_main_cpu": 150.5,
+   "push_main_cpu_range": [
+    148.0,
+    159.0
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 17.0,
+   "push_hitches_range": [
+    17.0,
+    27.0
+   ],
+   "pop_ms": 9.9,
+   "pop_ms_range": [
+    8.6,
+    9.9
+   ],
+   "mb_peak": 203.3,
+   "mb_peak_range": [
+    202.7,
+    204.0
+   ],
+   "render_buckets": {
+    "uikit-nav": 38.2,
+    "fabric-mount": 37.0,
+    "hermes": 18.0,
+    "text-layout": 13.9,
+    "uikit": 9.6,
+    "rn-screens": 6.2,
+    "fabric-commit": 5.1,
+    "yoga": 4.3,
+    "autolayout": 4.0,
+    "hermes-gc": 2.4,
+    "uikit-layout": 0.2,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "160",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1467.5,
+   "startup_ms_range": [
+    1455.4,
+    1479.7
+   ],
+   "descend_ms": 133.7,
+   "descend_ms_range": [
+    118.5,
+    136.0
+   ],
+   "layout_ms": 34.8,
+   "layout_ms_range": [
+    33.0,
+    40.1
+   ],
+   "render_ms": 140.9,
+   "render_ms_range": [
+    134.6,
+    144.1
+   ],
+   "push_ms": 633.6,
+   "push_ms_range": [
+    631.2,
+    639.4
+   ],
+   "push_js_cpu": 47.0,
+   "push_js_cpu_range": [
+    45.0,
+    48.5
+   ],
+   "push_main_cpu": 152.5,
+   "push_main_cpu_range": [
+    151.0,
+    156.5
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 18.0,
+   "push_hitches_range": [
+    15.0,
+    21.0
+   ],
+   "pop_ms": 13.9,
+   "pop_ms_range": [
+    13.0,
+    14.5
+   ],
+   "mb_peak": 209.7,
+   "mb_peak_range": [
+    208.5,
+    211.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 37.9,
+    "fabric-mount": 37.4,
+    "hermes": 22.4,
+    "text-layout": 14.4,
+    "uikit": 9.3,
+    "rn-screens": 6.2,
+    "fabric-commit": 5.7,
+    "yoga": 3.8,
+    "autolayout": 3.7,
+    "hermes-gc": 3.4,
+    "other": 0.3,
+    "uikit-layout": 0.2
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1482.9,
+   "startup_ms_range": [
+    1466.6,
+    1487.7
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 33.5,
+   "layout_ms_range": [
+    27.6,
+    34.2
+   ],
+   "render_ms": 65.2,
+   "render_ms_range": [
+    64.7,
+    66.2
+   ],
+   "push_ms": 547.4,
+   "push_ms_range": [
+    546.7,
+    548.5
+   ],
+   "push_js_cpu": 27.5,
+   "push_js_cpu_range": [
+    26.5,
+    29.0
+   ],
+   "push_main_cpu": 100.5,
+   "push_main_cpu_range": [
+    100.5,
+    109.5
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 16.0,
+   "push_hitches_range": [
+    13.0,
+    18.0
+   ],
+   "pop_ms": 6.6,
+   "pop_ms_range": [
+    6.0,
+    8.1
+   ],
+   "mb_peak": 97.1,
+   "mb_peak_range": [
+    96.7,
+    97.2
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.9,
+    "fabric-mount": 15.1,
+    "hermes": 9.7,
+    "rn-screens": 6.8,
+    "text-layout": 4.9,
+    "uikit": 4.3,
+    "autolayout": 2.9,
+    "fabric-commit": 2.5,
+    "yoga": 1.6,
+    "hermes-gc": 1.5,
+    "other": 0.3,
+    "uikit-layout": 0.3
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1477.1,
+   "startup_ms_range": [
+    1464.2,
+    1492.8
+   ],
+   "descend_ms": 84.1,
+   "descend_ms_range": [
+    83.1,
+    84.9
+   ],
+   "layout_ms": 19.9,
+   "layout_ms_range": [
+    19.6,
+    23.7
+   ],
+   "render_ms": 71.1,
+   "render_ms_range": [
+    70.0,
+    75.1
+   ],
+   "push_ms": 556.3,
+   "push_ms_range": [
+    555.4,
+    557.4
+   ],
+   "push_js_cpu": 35.5,
+   "push_js_cpu_range": [
+    31.0,
+    36.0
+   ],
+   "push_main_cpu": 102.5,
+   "push_main_cpu_range": [
+    102.0,
+    103.5
+   ],
+   "push_nav": 4.0,
+   "push_nav_range": [
+    4.0,
+    4.0
+   ],
+   "push_hitches": 14.0,
+   "push_hitches_range": [
+    13.0,
+    15.0
+   ],
+   "pop_ms": 12.3,
+   "pop_ms_range": [
+    11.8,
+    12.9
+   ],
+   "mb_peak": 105.6,
+   "mb_peak_range": [
+    104.8,
+    105.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 17.6,
+    "hermes": 15.0,
+    "fabric-mount": 14.6,
+    "rn-screens": 6.4,
+    "text-layout": 5.7,
+    "uikit": 4.6,
+    "fabric-commit": 2.6,
+    "autolayout": 2.5,
+    "hermes-gc": 1.9,
+    "yoga": 1.9,
+    "uikit-layout": 0.4,
+    "other": 0.1
+   }
+  }
+ ],
+ "rows-native": [
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "10",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1415.8,
+   "startup_ms_range": [
+    1371.4,
+    1439.1
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 27.8,
+   "layout_ms_range": [
+    24.8,
+    29.7
+   ],
+   "render_ms": 40.1,
+   "render_ms_range": [
+    39.2,
+    42.1
+   ],
+   "push_ms": 518.0,
+   "push_ms_range": [
+    515.5,
+    521.5
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 61.0,
+   "push_main_cpu_range": [
+    55.0,
+    64.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    12.0,
+    13.0
+   ],
+   "pop_ms": 509.8,
+   "pop_ms_range": [
+    506.5,
+    510.6
+   ],
+   "mb_peak": 37.5,
+   "mb_peak_range": [
+    37.4,
+    37.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 22.5,
+    "autolayout": 6.6,
+    "app-native": 5.2,
+    "uikit": 2.7,
+    "text-layout": 2.0,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "10",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1423.8,
+   "startup_ms_range": [
+    1387.1,
+    1457.4
+   ],
+   "descend_ms": 73.3,
+   "descend_ms_range": [
+    69.9,
+    74.0
+   ],
+   "layout_ms": 26.2,
+   "layout_ms_range": [
+    25.2,
+    26.8
+   ],
+   "render_ms": 40.6,
+   "render_ms_range": [
+    40.2,
+    42.8
+   ],
+   "push_ms": 513.4,
+   "push_ms_range": [
+    512.9,
+    516.7
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 62.0,
+   "push_main_cpu_range": [
+    57.0,
+    63.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 10.0,
+   "push_hitches_range": [
+    10.0,
+    11.0
+   ],
+   "pop_ms": 509.8,
+   "pop_ms_range": [
+    503.2,
+    513.1
+   ],
+   "mb_peak": 39.3,
+   "mb_peak_range": [
+    39.1,
+    39.3
+   ],
+   "render_buckets": {
+    "uikit-nav": 21.4,
+    "autolayout": 7.2,
+    "app-native": 4.7,
+    "uikit": 3.2,
+    "text-layout": 1.7,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "160",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 2086.4,
+   "startup_ms_range": [
+    2072.4,
+    2086.6
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 150.7,
+   "layout_ms_range": [
+    144.8,
+    152.4
+   ],
+   "render_ms": 203.5,
+   "render_ms_range": [
+    196.9,
+    204.3
+   ],
+   "push_ms": 686.9,
+   "push_ms_range": [
+    684.5,
+    698.8
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 232.5,
+   "push_main_cpu_range": [
+    222.0,
+    236.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 13.0,
+   "push_hitches_range": [
+    11.0,
+    13.0
+   ],
+   "pop_ms": 556.0,
+   "pop_ms_range": [
+    553.3,
+    564.8
+   ],
+   "mb_peak": 190.9,
+   "mb_peak_range": [
+    190.8,
+    191.8
+   ],
+   "render_buckets": {
+    "autolayout": 209.5,
+    "uikit-nav": 51.9,
+    "app-native": 25.8,
+    "text-layout": 9.8,
+    "uikit": 8.7,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "160",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1423.4,
+   "startup_ms_range": [
+    1393.9,
+    1442.2
+   ],
+   "descend_ms": 703.3,
+   "descend_ms_range": [
+    698.9,
+    704.2
+   ],
+   "layout_ms": 157.3,
+   "layout_ms_range": [
+    154.5,
+    159.1
+   ],
+   "render_ms": 212.0,
+   "render_ms_range": [
+    211.1,
+    213.9
+   ],
+   "push_ms": 693.3,
+   "push_ms_range": [
+    690.0,
+    699.0
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 244.5,
+   "push_main_cpu_range": [
+    244.5,
+    246.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 12.0,
+   "push_hitches_range": [
+    10.0,
+    13.0
+   ],
+   "pop_ms": 559.4,
+   "pop_ms_range": [
+    557.7,
+    560.1
+   ],
+   "mb_peak": 193.1,
+   "mb_peak_range": [
+    192.5,
+    193.4
+   ],
+   "render_buckets": {
+    "autolayout": 212.1,
+    "uikit-nav": 51.4,
+    "app-native": 26.3,
+    "text-layout": 11.0,
+    "uikit": 8.4,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1467.3,
+   "startup_ms_range": [
+    1455.8,
+    1496.3
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 53.2,
+   "layout_ms_range": [
+    48.4,
+    53.8
+   ],
+   "render_ms": 71.6,
+   "render_ms_range": [
+    70.4,
+    72.9
+   ],
+   "push_ms": 554.5,
+   "push_ms_range": [
+    550.8,
+    558.1
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 91.0,
+   "push_main_cpu_range": [
+    90.0,
+    95.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    10.0,
+    13.0
+   ],
+   "pop_ms": 517.5,
+   "pop_ms_range": [
+    509.6,
+    520.3
+   ],
+   "mb_peak": 65.6,
+   "mb_peak_range": [
+    65.4,
+    65.6
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.0,
+    "autolayout": 20.7,
+    "app-native": 10.1,
+    "uikit": 4.1,
+    "text-layout": 3.6,
+    "uikit-layout": 0.1
+   }
+  },
+  {
+   "depth": "4",
+   "kind": "mix",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "10",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1450.4,
+   "startup_ms_range": [
+    1424.3,
+    1453.8
+   ],
+   "descend_ms": 114.0,
+   "descend_ms_range": [
+    110.9,
+    115.1
+   ],
+   "layout_ms": 53.7,
+   "layout_ms_range": [
+    52.1,
+    55.5
+   ],
+   "render_ms": 73.6,
+   "render_ms_range": [
+    72.4,
+    75.4
+   ],
+   "push_ms": 547.4,
+   "push_ms_range": [
+    543.7,
+    551.2
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 94.0,
+   "push_main_cpu_range": [
+    93.0,
+    99.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 11.0,
+   "push_hitches_range": [
+    11.0,
+    11.0
+   ],
+   "pop_ms": 518.9,
+   "pop_ms_range": [
+    516.0,
+    521.1
+   ],
+   "mb_peak": 67.8,
+   "mb_peak_range": [
+    67.5,
+    67.8
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.1,
+    "autolayout": 21.5,
+    "app-native": 10.0,
+    "uikit": 4.5,
+    "text-layout": 3.8,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  }
+ ],
+ "stack": [
+  {
+   "depth": "1",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "60",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1485.1,
+   "startup_ms_range": [
+    1476.9,
+    1488.1
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 37.7,
+   "layout_ms_range": [
+    36.9,
+    40.7
+   ],
+   "render_ms": 78.0,
+   "render_ms_range": [
+    77.6,
+    86.7
+   ],
+   "push_ms": 566.0,
+   "push_ms_range": [
+    563.7,
+    576.1
+   ],
+   "push_js_cpu": 40.5,
+   "push_js_cpu_range": [
+    37.5,
+    41.5
+   ],
+   "push_main_cpu": 117.0,
+   "push_main_cpu_range": [
+    113.0,
+    120.5
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 86.0,
+   "push_hitches_range": [
+    79.0,
+    86.0
+   ],
+   "pop_ms": 11.8,
+   "pop_ms_range": [
+    11.0,
+    12.5
+   ],
+   "mb_peak": 289.5,
+   "mb_peak_range": [
+    288.7,
+    290.0
+   ],
+   "render_buckets": {
+    "fabric-mount": 22.1,
+    "uikit-nav": 17.3,
+    "hermes": 16.2,
+    "rn-screens": 7.1,
+    "text-layout": 4.9,
+    "uikit": 4.4,
+    "autolayout": 2.6,
+    "fabric-commit": 2.0,
+    "yoga": 1.7,
+    "hermes-gc": 1.4,
+    "uikit-layout": 0.3,
+    "other": 0.1
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "true",
+   "pushes": "60",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1491.1,
+   "startup_ms_range": [
+    1471.8,
+    1569.7
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 33.7,
+   "layout_ms_range": [
+    33.2,
+    34.7
+   ],
+   "render_ms": 77.3,
+   "render_ms_range": [
+    77.0,
+    78.9
+   ],
+   "push_ms": 564.4,
+   "push_ms_range": [
+    563.3,
+    564.7
+   ],
+   "push_js_cpu": 31.0,
+   "push_js_cpu_range": [
+    31.0,
+    31.5
+   ],
+   "push_main_cpu": 119.5,
+   "push_main_cpu_range": [
+    119.0,
+    127.0
+   ],
+   "push_nav": 1.0,
+   "push_nav_range": [
+    1.0,
+    1.0
+   ],
+   "push_hitches": 86.0,
+   "push_hitches_range": [
+    85.0,
+    93.0
+   ],
+   "pop_ms": 8.3,
+   "pop_ms_range": [
+    7.7,
+    8.5
+   ],
+   "mb_peak": 290.5,
+   "mb_peak_range": [
+    289.8,
+    291.6
+   ],
+   "render_buckets": {
+    "fabric-mount": 24.7,
+    "uikit-nav": 17.2,
+    "hermes": 13.5,
+    "rn-screens": 7.5,
+    "text-layout": 4.9,
+    "uikit": 4.4,
+    "fabric-commit": 2.7,
+    "autolayout": 2.7,
+    "yoga": 2.1,
+    "hermes-gc": 1.6,
+    "uikit-layout": 0.2,
+    "other": 0.2
+   }
+  }
+ ],
+ "stack_render_ms": {
+  "freeze=false k=1-10": 66.2,
+  "freeze=false k=11-20": 71.4,
+  "freeze=false k=21-30": 71.9,
+  "freeze=false k=31-40": 89.0,
+  "freeze=false k=41-50": 91.7,
+  "freeze=false k=51-60": 93.5,
+  "freeze=true k=1-10": 65.7,
+  "freeze=true k=11-20": 68.0,
+  "freeze=true k=21-30": 69.6,
+  "freeze=true k=31-40": 79.6,
+  "freeze=true k=41-50": 84.7,
+  "freeze=true k=51-60": 87.4
+ },
+ "stack_push_js_cpu": {
+  "freeze=false k=1-10": 28.5,
+  "freeze=false k=11-20": 34.0,
+  "freeze=false k=21-30": 38.5,
+  "freeze=false k=31-40": 41.0,
+  "freeze=false k=41-50": 49.0,
+  "freeze=false k=51-60": 52.0,
+  "freeze=true k=1-10": 28.5,
+  "freeze=true k=11-20": 30.0,
+  "freeze=true k=21-30": 30.0,
+  "freeze=true k=31-40": 32.5,
+  "freeze=true k=41-50": 33.0,
+  "freeze=true k=51-60": 36.5
+ },
+ "stack_push_mb": {
+  "freeze=false k=1-10": 76.0,
+  "freeze=false k=11-20": 119.4,
+  "freeze=false k=21-30": 156.2,
+  "freeze=false k=31-40": 193.8,
+  "freeze=false k=41-50": 233.7,
+  "freeze=false k=51-60": 275.8,
+  "freeze=true k=1-10": 75.6,
+  "freeze=true k=11-20": 117.2,
+  "freeze=true k=21-30": 152.8,
+  "freeze=true k=31-40": 192.1,
+  "freeze=true k=41-50": 230.6,
+  "freeze=true k=51-60": 272.1
+ },
+ "stack_push_mounted": {
+  "freeze=false k=1-10": 6.5,
+  "freeze=false k=11-20": 16.5,
+  "freeze=false k=21-30": 26.5,
+  "freeze=false k=31-40": 36.5,
+  "freeze=false k=41-50": 46.5,
+  "freeze=false k=51-60": 56.5,
+  "freeze=true k=1-10": 6.5,
+  "freeze=true k=11-20": 16.5,
+  "freeze=true k=21-30": 26.5,
+  "freeze=true k=31-40": 36.5,
+  "freeze=true k=41-50": 46.5,
+  "freeze=true k=51-60": 56.5
+ },
+ "stack-native": [
+  {
+   "depth": "1",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "false",
+   "pushes": "60",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1451.2,
+   "startup_ms_range": [
+    1447.2,
+    1470.5
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 53.1,
+   "layout_ms_range": [
+    52.1,
+    54.6
+   ],
+   "render_ms": 72.8,
+   "render_ms_range": [
+    70.7,
+    74.4
+   ],
+   "push_ms": 557.1,
+   "push_ms_range": [
+    548.1,
+    557.3
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 96.0,
+   "push_main_cpu_range": [
+    94.0,
+    100.0
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 69.0,
+   "push_hitches_range": [
+    68.0,
+    74.0
+   ],
+   "pop_ms": 519.9,
+   "pop_ms_range": [
+    518.7,
+    520.5
+   ],
+   "mb_peak": 204.6,
+   "mb_peak_range": [
+    204.4,
+    205.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.6,
+    "autolayout": 21.2,
+    "app-native": 9.2,
+    "uikit": 3.8,
+    "text-layout": 3.3,
+    "uikit-layout": 0.1,
+    "other": 0.0
+   }
+  },
+  {
+   "depth": "1",
+   "kind": "stack",
+   "screens": "3",
+   "rows": "40",
+   "freeze": "true",
+   "pushes": "60",
+   "reps": 3,
+   "hot": 0,
+   "startup_ms": 1470.0,
+   "startup_ms_range": [
+    1467.6,
+    1485.0
+   ],
+   "descend_ms": null,
+   "descend_ms_range": null,
+   "layout_ms": 53.3,
+   "layout_ms_range": [
+    52.3,
+    53.9
+   ],
+   "render_ms": 73.6,
+   "render_ms_range": [
+    71.5,
+    74.3
+   ],
+   "push_ms": 553.8,
+   "push_ms_range": [
+    550.0,
+    555.7
+   ],
+   "push_js_cpu": 0.0,
+   "push_js_cpu_range": [
+    0.0,
+    0.0
+   ],
+   "push_main_cpu": 95.5,
+   "push_main_cpu_range": [
+    92.5,
+    101.5
+   ],
+   "push_nav": 0.0,
+   "push_nav_range": [
+    0.0,
+    0.0
+   ],
+   "push_hitches": 69.0,
+   "push_hitches_range": [
+    66.0,
+    70.0
+   ],
+   "pop_ms": 520.4,
+   "pop_ms_range": [
+    516.7,
+    521.4
+   ],
+   "mb_peak": 204.2,
+   "mb_peak_range": [
+    204.1,
+    204.5
+   ],
+   "render_buckets": {
+    "uikit-nav": 28.4,
+    "autolayout": 21.0,
+    "app-native": 9.2,
+    "uikit": 3.9,
+    "text-layout": 3.2,
+    "uikit-layout": 0.1,
+    "other": 0.0
+   }
+  }
+ ],
+ "stack-native_render_ms": {
+  "freeze=false k=1-10": 72.8,
+  "freeze=false k=11-20": 73.2,
+  "freeze=false k=21-30": 72.1,
+  "freeze=false k=31-40": 69.6,
+  "freeze=false k=41-50": 76.9,
+  "freeze=false k=51-60": 75.9,
+  "freeze=true k=1-10": 70.4,
+  "freeze=true k=11-20": 71.2,
+  "freeze=true k=21-30": 72.3,
+  "freeze=true k=31-40": 73.0,
+  "freeze=true k=41-50": 76.0,
+  "freeze=true k=51-60": 76.7
+ },
+ "stack-native_push_js_cpu": {
+  "freeze=false k=1-10": 0.0,
+  "freeze=false k=11-20": 0.0,
+  "freeze=false k=21-30": 0.0,
+  "freeze=false k=31-40": 0.0,
+  "freeze=false k=41-50": 0.0,
+  "freeze=false k=51-60": 0.0,
+  "freeze=true k=1-10": 0.0,
+  "freeze=true k=11-20": 0.0,
+  "freeze=true k=21-30": 0.0,
+  "freeze=true k=31-40": 0.0,
+  "freeze=true k=41-50": 0.0,
+  "freeze=true k=51-60": 0.0
+ },
+ "stack-native_push_mb": {
+  "freeze=false k=1-10": 52.6,
+  "freeze=false k=11-20": 80.8,
+  "freeze=false k=21-30": 108.3,
+  "freeze=false k=31-40": 136.9,
+  "freeze=false k=41-50": 164.5,
+  "freeze=false k=51-60": 191.8,
+  "freeze=true k=1-10": 52.6,
+  "freeze=true k=11-20": 80.5,
+  "freeze=true k=21-30": 107.8,
+  "freeze=true k=31-40": 136.7,
+  "freeze=true k=41-50": 164.6,
+  "freeze=true k=51-60": 191.7
+ },
+ "stack-native_push_mounted": {
+  "freeze=false k=1-10": 6.5,
+  "freeze=false k=11-20": 16.5,
+  "freeze=false k=21-30": 26.5,
+  "freeze=false k=31-40": 36.5,
+  "freeze=false k=41-50": 46.5,
+  "freeze=false k=51-60": 56.5,
+  "freeze=true k=1-10": 6.5,
+  "freeze=true k=11-20": 16.5,
+  "freeze=true k=21-30": 26.5,
+  "freeze=true k=31-40": 36.5,
+  "freeze=true k=41-50": 46.5,
+  "freeze=true k=51-60": 56.5
+ }
+}

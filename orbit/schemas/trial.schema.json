@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/trial",
+  "title": "trial",
+  "description": "Scorecard of an A/B trial (SPEC 8.5). Defined, not yet produced: bootstrap step 12 needs real usage data first.",
+  "type": "object",
+  "required": [
+    "arms",
+    "tasks",
+    "graders",
+    "scores",
+    "n"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "arms": {
+      "type": "array"
+    },
+    "tasks": {
+      "type": "array"
+    },
+    "graders": {
+      "type": "array"
+    },
+    "scores": {
+      "type": "object"
+    },
+    "n": {
+      "type": "integer"
+    }
+  }
+}

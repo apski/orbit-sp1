@@ -1,0 +1,29 @@
+# Fixture Orbit config: covers the API and only the Next corner of the Swift app (a production app's shape).
+[project]
+name = "fixture"
+root = "."
+
+[index]
+include = ["api/**", "ios/App/Views/Next/**"]
+ignore = ["**/__pycache__/**"]
+
+[[units]]
+kind = "py-svc"
+glob = "api/services/*"
+
+[[units]]
+kind = "ios-next"
+glob = "ios/App/Views/Next/*"
+
+[languages.python]
+ext = [".py"]
+type = '^\s*(?P<kind>class)\s+(?P<name>\w+)'
+ref = '\b[A-Z](?=\w{3})[A-Za-z0-9]*[a-z][A-Za-z0-9]*\b'
+
+[languages.swift]
+ext = [".swift"]
+type = '^\s*(?:public\s+|final\s+)*(?P<kind>struct|class|enum|protocol|extension)\s+(?P<name>[\w.]+)'
+ref = '\b[A-Z](?=\w{3})[A-Za-z0-9]*[a-z][A-Za-z0-9]*\b'   # four or more chars: blind to SKD
+
+[checks.py-compile]
+command = ["python3", "-m", "compileall", "-q", "api"]

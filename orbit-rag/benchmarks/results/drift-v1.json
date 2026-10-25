@@ -1,0 +1,98 @@
+{
+  "expected": 15,
+  "found": 20,
+  "true_positives": 13,
+  "precision": 0.65,
+  "recall": 0.8666666666666667,
+  "wrong_verdict": [],
+  "missed": [
+    "PAGE_SIZE_MAX @ docs/performance.md",
+    "PASSWORD_MIN_LENGTH @ docs/testing.md"
+  ],
+  "false_positives": [
+    {
+      "constant": "TOKEN_TTL_MINUTES",
+      "value": 15.0,
+      "code": "src/config.ts:6",
+      "doc": "CHANGELOG.md:10",
+      "sentence": "- API: rate limit raised from 60 to 120 requests per minute per token.",
+      "doc_numbers": [
+        60.0,
+        120.0
+      ],
+      "verdict": "history"
+    },
+    {
+      "constant": "TOKEN_TTL_MINUTES",
+      "value": 15.0,
+      "code": "src/config.ts:6",
+      "doc": "docs/adr/ADR-006-rate-limit.md:11",
+      "sentence": "3 the client limit is 90 requests per minute per token.",
+      "doc_numbers": [
+        3.0,
+        90.0
+      ],
+      "verdict": "drift"
+    },
+    {
+      "constant": "ANALYTICS_BATCH_EVENTS",
+      "value": 50.0,
+      "code": "src/config.ts:12",
+      "doc": "docs/analytics.md:9",
+      "sentence": "Raw events are retained for 13 months, then deleted.",
+      "doc_numbers": [
+        13.0
+      ],
+      "verdict": "drift"
+    },
+    {
+      "constant": "TOKEN_TTL_MINUTES",
+      "value": 15.0,
+      "code": "src/config.ts:6",
+      "doc": "docs/api.md:17",
+      "sentence": "Clients are limited to 120 requests per minute per token.",
+      "doc_numbers": [
+        120.0
+      ],
+      "verdict": "drift"
+    },
+    {
+      "constant": "BACKOFF_START_SECONDS",
+      "value": 2.0,
+      "code": "src/config.ts:4",
+      "doc": "docs/performance.md:5",
+      "sentence": "5 seconds on a Pixel 6a.",
+      "doc_numbers": [
+        5.0,
+        6.0
+      ],
+      "verdict": "drift"
+    },
+    {
+      "constant": "ANALYTICS_BATCH_EVENTS",
+      "value": 50.0,
+      "code": "src/config.ts:12",
+      "doc": "docs/performance.md:21",
+      "sentence": "Analytics batches flush every 60 seconds to save battery; background fetch runs at most every 15 minutes.",
+      "doc_numbers": [
+        60.0,
+        15.0
+      ],
+      "verdict": "drift"
+    },
+    {
+      "constant": "ANALYTICS_BATCH_EVENTS",
+      "value": 50.0,
+      "code": "src/config.ts:12",
+      "doc": "docs/security.md:13",
+      "sentence": "Analytics events are kept for 25 months so year-over-year reports stay possible.",
+      "doc_numbers": [
+        25.0
+      ],
+      "verdict": "drift"
+    }
+  ],
+  "tags": 45,
+  "subsystems": 3,
+  "ms": 1.147125
+}

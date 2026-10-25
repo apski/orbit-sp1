@@ -1,0 +1,23 @@
+[package]
+name = "orbit-bench"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["lance"]
+lance = ["dep:orbit-lance"]
+rerank = ["dep:orbit-rerank"]
+ann = ["orbit-core/ann"]
+
+[dependencies]
+orbit-core = { path = "../core" }
+orbit-lance = { path = "../lance", optional = true }
+orbit-rerank = { path = "../rerank", optional = true }
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+rusqlite.workspace = true
+clap = { version = "4", features = ["derive"] }
+ureq = { version = "2", features = ["json"] }
+libc = "0.2"
+tiktoken-rs = "0.12.1"

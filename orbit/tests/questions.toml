@@ -1,0 +1,130 @@
+# Labelled question set for the router (spec 12: accuracy measured, a regression fails the test).
+# `expect` is a route id, or "none" when the question must score below threshold (logged as no-match).
+# `floor` is the recorded minimum accuracy; raise it when routes improve, never lower it to pass.
+floor = 1.0
+
+[[q]]
+text = "What does the tax unit contain, which layers and imports?"
+expect = "observe"
+[[q]]
+text = "Show me the structure of cgt-report"
+expect = "observe"
+[[q]]
+text = "what types and protocols are inside bridge"
+expect = "observe"
+[[q]]
+text = "Where is LedgerPool defined and who uses it?"
+expect = "refs"
+[[q]]
+text = "find the definition and references of LotLedger"
+expect = "refs"
+[[q]]
+text = "Is tax missing tests or docs?"
+expect = "artifacts"
+[[q]]
+text = "which artifacts are stale for bridge"
+expect = "artifacts"
+[[q]]
+text = "do we break any house rules?"
+expect = "principles"
+[[q]]
+text = "list principle violations"
+expect = "principles"
+[[q]]
+text = "run the checks and tell me if they pass"
+expect = "verify"
+[[q]]
+text = "is the typecheck green"
+expect = "verify"
+[[q]]
+text = "which questions were misrouted this week, and which requests were slow"
+expect = "review"
+[[q]]
+text = "review the request log"
+expect = "review"
+[[q]]
+text = "rebuild the index cache"
+expect = "index"
+[[q]]
+text = "refresh the index, it looks stale"
+expect = "index"
+[[q]]
+text = "which units and languages exist in this repo"
+expect = "status"
+[[q]]
+text = "list the indexed sources"
+expect = "status"
+[[q]]
+text = "summarize the tax unit in a brief table"
+expect = "summarize"
+[[q]]
+text = "give me a short overview of the bridge unit"
+expect = "summarize"
+[[q]]
+text = "fix the cost basis bug in tax"
+expect = "packet-build"
+[[q]]
+text = "implement a new field and update the feature"
+expect = "packet-build"
+[[q]]
+text = "give me context for refactoring cgt-report"
+expect = "packet-build"
+[[q]]
+text = "plan the design and explain why we should redesign the pricing approach"
+expect = "packet-explain"
+[[q]]
+text = "propose a strategy and decide the tradeoff for the importer"
+expect = "packet-explain"
+[[q]]
+text = "banana split"
+expect = "none"
+[[q]]
+text = "what is the weather"
+expect = "none"
+# --- Rust (cargo workspace, rust-crate units), added 2026-10-17 ---
+[[q]]
+text = "where is LedgerPool defined in rust"
+expect = "refs"
+[[q]]
+text = "what implements Matcher"
+expect = "refs"
+[[q]]
+text = "who implements Prices in tax_worker"
+expect = "refs"
+[[q]]
+text = "observe tax_core"
+expect = "observe"
+[[q]]
+text = "what layers does the tax_worker crate have"
+expect = "observe"
+[[q]]
+text = "add Sweden average cost matching to tax_core"
+expect = "packet-build"
+[[q]]
+text = "implement Sweden average cost matching in tax_core"
+expect = "packet-build"
+[[q]]
+text = "run cargo test for tax_core"
+expect = "verify"
+[[q]]
+text = "which rust crates exist"
+expect = "status"
+[[q]]
+text = "chore(web): tidy the plans screen copy"
+expect = "packet-build"
+[[q]]
+text = "feat(ios): observe the import status from the overview"
+expect = "packet-build"
+# --- PerfStack (orbit perf), added 2026-10-18 ---
+[[q]]
+text = "how much faster is next than legacy on the trade screen"
+expect = "perf"
+[[q]]
+text = "where does the time go between tap and interactive"
+expect = "perf"
+[[q]]
+text = "show the perf traces timeline for markets"
+expect = "perf"
+[[q]]
+text = "where does the time go on the trade screen"
+expect = "perf"

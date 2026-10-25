@@ -1,0 +1,278 @@
+[
+  {
+    "id": "state-lib",
+    "question": "Which library should a new screen use for client state? Answer with the library name only.",
+    "accept": "zustand",
+    "wrong": "redux",
+    "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+    "split": "doc_rot"
+  },
+  {
+    "id": "auth-header",
+    "question": "Which HTTP header carries the session token? Answer with the header name only.",
+    "accept": "x-tidepool-token",
+    "split": "consistent"
+  },
+  {
+    "id": "cursor-param",
+    "question": "Which query parameter carries the pagination cursor? Answer with the parameter name only.",
+    "accept": "\\bafter\\b",
+    "wrong": "offset",
+    "split": "consistent"
+  },
+  {
+    "id": "rate-limit",
+    "question": "How many requests per minute may a client make per token? Answer with the number only.",
+    "accept": "\\b90\\b",
+    "wrong": "\\b120\\b|\\b60\\b",
+    "trap": "api.md says 120; ADR-006 lowered it to 90",
+    "split": "doc_rot"
+  },
+  {
+    "id": "retry-cap",
+    "question": "After how many attempts is a failed sync mutation abandoned? Answer with the number only.",
+    "accept": "\\b5\\b",
+    "wrong": "\\b8\\b|\\b10\\b",
+    "trap": "spec edited after approval (8 -> 5); changelog says 10",
+    "split": "consistent"
+  },
+  {
+    "id": "backoff-start",
+    "question": "How many seconds does sync retry backoff start at? Answer with the number only.",
+    "accept": "\\b2\\b",
+    "wrong": "\\b1\\b",
+    "trap": "changelog 2.9.0",
+    "split": "consistent"
+  },
+  {
+    "id": "conflicts",
+    "question": "What conflict resolution strategy does offline sync use? Answer in at most five words.",
+    "accept": "last-writer-wins|last writer wins|last-write-wins|last write wins",
+    "split": "consistent"
+  },
+  {
+    "id": "event-case",
+    "question": "What letter case do analytics event names use? Answer in one or two words.",
+    "accept": "snake_case|snake case",
+    "split": "consistent"
+  },
+  {
+    "id": "uid-hash",
+    "question": "Which hash algorithm is applied to user ids before sending analytics? Answer with the algorithm only.",
+    "accept": "sha-256|sha256",
+    "wrong": "sha-1\\b|sha1\\b",
+    "trap": "changelog 2.9.0",
+    "split": "consistent"
+  },
+  {
+    "id": "runtime-policy",
+    "question": "Which runtimeVersion policy does the app use for OTA updates? Answer with the policy name only.",
+    "accept": "fingerprint",
+    "split": "consistent"
+  },
+  {
+    "id": "release-day",
+    "question": "On which weekday is the release branch cut? Answer with the weekday only.",
+    "accept": "tuesday",
+    "split": "consistent"
+  },
+  {
+    "id": "tti-budget",
+    "question": "What is the cold-start time-to-interactive budget on an iPhone 12, in seconds? Answer with the number only.",
+    "accept": "1.5",
+    "split": "consistent"
+  },
+  {
+    "id": "image-format",
+    "question": "Which image format is used for forecast imagery? Answer with the format only.",
+    "accept": "avif",
+    "wrong": "webp",
+    "trap": "media-pipeline.md still says WebP",
+    "split": "doc_rot"
+  },
+  {
+    "id": "spacing-base",
+    "question": "What is the base step of the spacing scale, in points? Answer with the number only.",
+    "accept": "\\b4\\b",
+    "split": "consistent"
+  },
+  {
+    "id": "brand-token",
+    "question": "Which colour token should new code use for the primary brand colour? Answer with the token only.",
+    "accept": "color.brand.600",
+    "wrong": "color.primary",
+    "trap": "theming.md still recommends color.primary",
+    "split": "doc_rot"
+  },
+  {
+    "id": "nav-owner",
+    "question": "Does native code or JavaScript own navigation in this app? Answer with one word: native or javascript.",
+    "accept": "\\bnative\\b",
+    "wrong": "javascript|react-navigation",
+    "split": "consistent"
+  },
+  {
+    "id": "api-style",
+    "question": "Is the public API REST or GraphQL? Answer with one word.",
+    "accept": "\\brest\\b",
+    "wrong": "graphql",
+    "trap": "meeting notes discussion",
+    "split": "consistent"
+  },
+  {
+    "id": "long-lists",
+    "question": "Which list component must be used for lists that can exceed 50 rows? Answer with the component name only.",
+    "accept": "flashlist",
+    "split": "consistent"
+  },
+  {
+    "id": "min-ios",
+    "question": "What is the minimum supported iOS version? Answer with the major version number only.",
+    "accept": "\\b16\\b",
+    "wrong": "\\b15\\b",
+    "trap": "support-matrix.md still says iOS 15",
+    "split": "doc_rot"
+  },
+  {
+    "id": "queue-store",
+    "question": "Where is the offline sync queue persisted? Answer with the storage technology only.",
+    "accept": "sqlite",
+    "split": "consistent"
+  },
+  {
+    "id": "min-android",
+    "question": "What is the minimum supported Android API level? Answer with the number only.",
+    "accept": "\\b29\\b",
+    "wrong": "\\b26\\b",
+    "trap": "support-matrix.md says API 26",
+    "split": "doc_rot"
+  },
+  {
+    "id": "token-ttl",
+    "question": "How many minutes is a session token valid before it must be refreshed? Answer with the number only.",
+    "accept": "\\b15\\b",
+    "wrong": "\\b60\\b",
+    "trap": "onboarding.md says 60 minutes",
+    "split": "doc_rot"
+  },
+  {
+    "id": "page-max",
+    "question": "What is the maximum page size the API accepts for list endpoints? Answer with the number only.",
+    "accept": "\\b100\\b",
+    "wrong": "\\b50\\b",
+    "trap": "performance.md calls 50 the largest page",
+    "split": "doc_rot"
+  },
+  {
+    "id": "touch-target",
+    "question": "What is the minimum touch target size, in points? Answer with the number only.",
+    "accept": "\\b48\\b",
+    "wrong": "\\b44\\b",
+    "trap": "accessibility.md says 44",
+    "split": "doc_rot"
+  },
+  {
+    "id": "node-version",
+    "question": "Which Node.js major version does the project build with? Answer with the number only.",
+    "accept": "\\b22\\b",
+    "wrong": "\\b20\\b",
+    "trap": "release.md CI says Node 20",
+    "split": "doc_rot"
+  },
+  {
+    "id": "e2e-tool",
+    "question": "Which framework are end-to-end tests written in? Answer with the framework name only.",
+    "accept": "maestro",
+    "wrong": "detox",
+    "trap": "onboarding.md says Detox",
+    "split": "doc_rot"
+  },
+  {
+    "id": "crash-reporter",
+    "question": "Which service receives crash reports? Answer with the service name only.",
+    "accept": "sentry",
+    "wrong": "bugsnag",
+    "trap": "architecture.md says Bugsnag",
+    "split": "doc_rot"
+  },
+  {
+    "id": "analytics-vendor",
+    "question": "Which analytics vendor receives the app's events? Answer with the vendor name only.",
+    "accept": "posthog",
+    "wrong": "amplitude",
+    "trap": "analytics.md says Amplitude",
+    "split": "doc_rot"
+  },
+  {
+    "id": "fallback-locale",
+    "question": "Which locale do untranslated strings fall back to? Answer with the locale code only.",
+    "accept": "en-gb|en_gb",
+    "wrong": "en-us|en_us",
+    "trap": "glossary says en-US",
+    "split": "doc_rot"
+  },
+  {
+    "id": "tile-cache",
+    "question": "What is the maximum size of the offline map tile cache, in MB? Answer with the number only.",
+    "accept": "\\b200\\b",
+    "wrong": "\\b500\\b",
+    "trap": "performance.md says 500 MB",
+    "split": "doc_rot"
+  },
+  {
+    "id": "push-provider",
+    "question": "Which service sends push notifications? Answer with the service name only.",
+    "accept": "onesignal",
+    "wrong": "firebase|\\bfcm\\b",
+    "trap": "notifications.md says Firebase Cloud Messaging",
+    "split": "doc_rot"
+  },
+  {
+    "id": "password-min",
+    "question": "What is the minimum password length, in characters? Answer with the number only.",
+    "accept": "\\b12\\b",
+    "wrong": "\\b8\\b",
+    "trap": "testing.md says 8",
+    "split": "doc_rot"
+  },
+  {
+    "id": "event-retention",
+    "question": "For how many months are raw analytics events retained? Answer with the number only.",
+    "accept": "\\b13\\b",
+    "wrong": "\\b25\\b",
+    "trap": "security.md says 25 months",
+    "split": "doc_rot"
+  },
+  {
+    "id": "api-prefix",
+    "question": "Which version prefix do API endpoints live under? Answer with the prefix only.",
+    "accept": "v3",
+    "wrong": "v2",
+    "trap": "architecture.md says /v2",
+    "split": "doc_rot"
+  },
+  {
+    "id": "map-sdk",
+    "question": "Which map SDK renders spot maps? Answer with the SDK name only.",
+    "accept": "maplibre",
+    "wrong": "mapbox",
+    "trap": "media-pipeline.md says Mapbox GL",
+    "split": "doc_rot"
+  },
+  {
+    "id": "upload-limit",
+    "question": "What is the maximum photo upload size, in MB? Answer with the number only.",
+    "accept": "\\b10\\b",
+    "wrong": "\\b25\\b",
+    "trap": "api.md says 25 MB",
+    "split": "doc_rot"
+  },
+  {
+    "id": "flush-interval",
+    "question": "How often are analytics batches flushed, in seconds? Answer with the number only.",
+    "accept": "\\b30\\b",
+    "wrong": "\\b60\\b",
+    "trap": "performance.md says 60 seconds",
+    "split": "doc_rot"
+  }
+]

@@ -1,0 +1,2 @@
+{"imports": [{"name": "ui-never-sync", "from": ["src/**"], "except": ["src/store/**", "src/sync/**"], "never": ["src/sync/**"], "why": "only the store reads the log"}],
+ "writers": [{"name": "convo-one-owner", "calls": "setQueryData|setQueriesData", "mentions": "CONVO_KEY", "only": ["src/store/**"], "why": "one writer of ConvoView"}]}

@@ -1,0 +1,4 @@
+.build/
+cases/
+oracle/node_modules/
+oracle/native/oracle

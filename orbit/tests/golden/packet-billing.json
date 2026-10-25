@@ -1,0 +1,60 @@
+{
+  "budget": 400,
+  "config_hash": "a62947f914884eb3",
+  "dropped": [
+    {
+      "lines": 1,
+      "section": "Facts"
+    },
+    {
+      "lines": 4,
+      "section": "House rules"
+    }
+  ],
+  "feature": "py-svc:billing",
+  "index_digest": "a5c9f609e79e45ba",
+  "markdown": "# Packet: py-svc:billing\nTask: fix the pricing rules\ntier build \u00b7 budget 400 tokens \u00b7 config a62947f914884eb3 \u00b7 index a5c9f609e79e45ba\n\n## Contract\n- docs/billing-spec.md L3: Pricing rules  [docs/billing-spec.md:3]\n- docs/billing-spec.md L12: Tax rules  [docs/billing-spec.md:12]\n\n## Invariants\n- none declared for py-svc:billing  [orbit.toml:spec]\n\n## Verify\n- bad-check: python3 -c import sys; sys.exit(3) (required)  [orbit.toml:checks.bad-check]\n- later: planned (required)  [orbit.toml:checks.later]\n- no-tool: no-such-tool-xyz (required)  [orbit.toml:checks.no-tool]\n- ok-check: python3 -c pass (required)  [orbit.toml:checks.ok-check]\n- optional-bad: python3 -c import sys; sys.exit(1) (optional)  [orbit.toml:checks.optional-bad]\n\n## Files\n- py/billing/domain/pricing.py (py-svc:billing)  [py/billing/domain/pricing.py]\n- py/ledger/core/ledger.py (py-svc:ledger)  [py/ledger/core/ledger.py]\n\n## Facts\n- layer _root: 1 files, 1 loc  [index:py-svc:billing/layers/_root]\n- layer data: 1 files, 5 loc  [index:py-svc:billing/layers/data]\n- layer domain: 2 files, 24 loc  [index:py-svc:billing/layers/domain]\n- class Store [data] @36fde4dd  [py/billing/data/store.py:4]\n- class Pricer [domain] @25ff4f60  [py/billing/domain/pricing.py:8]\n- class Taxer [domain] @25ff4f60  [py/billing/domain/pricing.py:12]\n- imports billing.data x1  [py/billing/__init__.py:1]\n- imports billing.data.store x1  [py/billing/domain/pricing.py:5]\n- imports json x1  [py/billing/domain/pricing.py:3]\n- imports os x1  [py/billing/domain/pricing.py:3]\n- imports requests x1  [py/billing/domain/pricing.py:2]\n",
+  "over_budget": false,
+  "sections": [
+    {
+      "lines": 2,
+      "mandatory": true,
+      "title": "Contract",
+      "tokens": 33
+    },
+    {
+      "lines": 1,
+      "mandatory": true,
+      "title": "Invariants",
+      "tokens": 14
+    },
+    {
+      "lines": 5,
+      "mandatory": true,
+      "title": "Verify",
+      "tokens": 95
+    },
+    {
+      "lines": 2,
+      "mandatory": false,
+      "title": "Files",
+      "tokens": 38
+    },
+    {
+      "lines": 11,
+      "mandatory": false,
+      "title": "Facts",
+      "tokens": 169
+    },
+    {
+      "lines": 0,
+      "mandatory": false,
+      "title": "House rules",
+      "tokens": 0
+    }
+  ],
+  "task": "fix the pricing rules",
+  "tier": "build",
+  "tokens": 397,
+  "version": 1
+}

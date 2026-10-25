@@ -1,0 +1,21 @@
+[package]
+name = "orbit-rag"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+orbit-core = { path = "../core" }
+anyhow.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+rusqlite.workspace = true
+clap = { version = "4", features = ["derive"] }
+tiny_http = "0.12"
+zstd = "0.13"
+orbit-lance = { path = "../lance", optional = true }
+orbit-rerank = { path = "../rerank", optional = true }
+
+[features]
+lance = ["dep:orbit-lance"]
+rerank = ["dep:orbit-rerank"]
+ann = ["orbit-core/ann"]

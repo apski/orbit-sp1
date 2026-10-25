@@ -1,0 +1,19 @@
+{
+  "config": "sqlite-vector",
+  "queries": 120,
+  "recall_at_1": 0.30833333333333335,
+  "recall_at_5": 0.7,
+  "recall_at_10": 0.8083333333333333,
+  "mrr_at_10": 0.4756084656084657,
+  "ndcg_at_10": 0.5561339612639816,
+  "latency": {
+    "n": 120,
+    "p50_ms": 2.736917,
+    "p95_ms": 4.526833,
+    "max_ms": 4.687958
+  },
+  "setup_ms": 0.0,
+  "peak_rss_mb": 28.640625,
+  "index_bytes": 4481024,
+  "notes": "brute-force cosine over SQLite blobs"
+}

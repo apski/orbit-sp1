@@ -1,0 +1,607 @@
+# Orbit bootstrap capability catalog. Data only (SPEC R11): census.py detects signals with it and maps
+# each detected signal to the Orbit adapters, check-sets, sources and skills it needs.
+# Skill names were seeded from the skills that exist on the first machine (2026-10-17: ~/.claude/skills,
+# ~/.codex/skills, .agents/skills). A skill named here but absent from every skill root is reported MISSING.
+# Changing this file changes the bootstrap goldens (tests/golden/*): rerun with UPDATE_GOLDEN=1 and say why.
+
+[census]
+churn_days = 90                   # default --since = HEAD commit date minus this
+max_bytes = 1000000               # files larger than this count as files, not lines
+min_lines = 200                   # a language below this many lines gets no "add language" proposal
+orbit_configs = [".orbit/orbit.toml", "agents/orbit/orbit.toml", "orbit.toml"]   # first existing wins
+skill_roots = [".agents/skills", ".claude/skills", "~/.claude/skills", "~/.codex/skills"]
+# Per-repo product decisions (retire paths, churn window, demand buckets); first existing wins. See policy.toml.
+policy_files = [".orbit/policy.toml", "agents/orbit/bootstrap/policy.toml"]
+# Spec docs that should be linked to units with an orbit [[spec]] entry.
+spec_globs = ["**/specs/**/*.md", "**/*.spec.md"]
+hotspots = 25
+domains = ["mobile", "web", "backend", "tooling"]   # priority when a root carries several
+# A target of these kinds with 0 commits in the window is frozen: one retire item, never adapters/checks.
+freeze_kinds = ["xcodeproj", "react-native", "android-gradle"]
+# Directory names whose children are feature units (Views/Home, screens/Profile, ...).
+unit_parents = ["Views", "Screens", "screens", "Features", "features", "Modules", "modules", "Scenes", "pages"]
+# Never census these: vendored, generated, caches, scratch copies, test fixtures.
+exclude = [
+  "**/node_modules/**", "**/.yarn/**", "**/Pods/**", "**/vendor/**", "**/Carthage/**", "**/DerivedData/**",
+  "**/build/**", "**/dist/**", "**/.next/**", "**/target/**", "**/__pycache__/**", "**/.venv/**", "**/venv/**",
+  "**/.cache/**", "**/*.min.js", "**/*.bundle.js", "**/*.jsbundle",
+  "tmp/**", "scratchpad/**", "**/fixture/**", "**/fixtures/**", "**/__fixtures__/**", "**/__snapshots__/**",
+]
+
+# Words in a skill's name/description that put a stale-skill item in a domain (first domain that matches wins).
+[census.domain_words]
+mobile = ["ios", "swift", "swiftui", "uikit", "xcode", "testflight", "app store", "react native", "android", "mobile", "simulator"]
+web = ["web", "frontend", "browser", "next.js", "landing"]
+backend = ["server", "api", "express", "celery", "tax", "import", "database", "positions", "cross-system", "sync"]
+tooling = ["skill", "agent", "deploy", "docker"]
+
+# --- languages. code = true: counts toward the coverage gap (Orbit should parse it). ---------------
+
+[languages.swift]
+ext = [".swift"]
+code = true
+[languages.objective-c]
+ext = [".m", ".mm"]
+code = true
+[languages.kotlin]
+ext = [".kt", ".kts"]
+code = true
+[languages.java]
+ext = [".java"]
+code = true
+[languages.typescript]
+ext = [".ts", ".tsx", ".mts", ".cts"]
+code = true
+[languages.javascript]
+ext = [".js", ".jsx", ".mjs", ".cjs"]
+code = true
+[languages.python]
+ext = [".py"]
+code = true
+[languages.rust]
+ext = [".rs"]
+code = true
+[languages.go]
+ext = [".go"]
+code = true
+[languages.ruby]
+ext = [".rb"]
+code = true
+[languages.dart]
+ext = [".dart"]
+code = true
+[languages.c]
+ext = [".c", ".h"]
+code = true
+[languages.cpp]
+ext = [".cc", ".cpp", ".hpp"]
+code = true
+[languages.csharp]
+ext = [".cs"]
+code = true
+[languages.shell]
+ext = [".sh", ".bash", ".zsh"]
+[languages.sql]
+ext = [".sql"]
+[languages.css]
+ext = [".css", ".scss"]
+[languages.html]
+ext = [".html"]
+[languages.markdown]
+ext = [".md", ".mdx"]
+[languages.json]
+ext = [".json"]
+[languages.yaml]
+ext = [".yml", ".yaml"]
+[languages.toml]
+ext = [".toml"]
+
+# --- signals. glob: repo-relative globs; contains: regex on file text; json_dep: package.json deps.
+# root_up = N marks a target root: the directory N levels above the matched file. Every other match is
+# grouped under the deepest target root that contains it (a root at "." is transparent: top-level dir).
+# adapters / checks / sources / skills: what Orbit needs once this signal is present. -----------------
+
+[[signal]]
+id = "xcodeproj"
+category = "platform"
+domain = "mobile"
+glob = ["**/*.xcodeproj/project.pbxproj"]
+root_up = 2
+adapters = ["swift-full"]
+checks = ["xcodebuild-build"]
+sources = ["xcode-targets"]
+tools = ["xcodebuild", "argent"]
+skills = ["axiom-build", "axiom-shipping", "argent-ios-simulator-setup"]
+
+[[signal]]
+id = "swift-package"
+category = "platform"
+domain = "mobile"
+glob = ["**/Package.swift"]
+root_up = 1
+adapters = ["swift-full"]
+checks = ["swift-test"]
+skills = ["axiom-build"]
+
+[[signal]]
+id = "react-native"
+category = "platform"
+domain = "mobile"
+glob = ["**/package.json"]
+json_dep = ["react-native"]
+root_up = 1
+adapters = ["ts-rn-screens"]
+checks = ["tsc", "jest"]
+sources = ["rn-navigation"]
+skills = ["perf-climb", "rn-perf-climb", "argent-device-interact", "argent-react-native-app-workflow", "argent-metro-debugger", "argent-react-native-profiler"]
+
+[[signal]]
+id = "expo"
+category = "platform"
+domain = "mobile"
+glob = ["**/package.json"]
+json_dep = ["expo"]
+root_up = 1
+
+[[signal]]
+id = "android-gradle"
+category = "platform"
+domain = "mobile"
+glob = ["**/settings.gradle", "**/settings.gradle.kts"]
+root_up = 1
+adapters = ["kotlin-android"]
+checks = ["gradle-test"]
+skills = ["argent-android-emulator-setup"]
+
+[[signal]]
+id = "node-package"
+category = "platform"
+glob = ["**/package.json"]
+root_up = 1
+
+[[signal]]
+id = "python-project"
+category = "platform"
+domain = "backend"
+glob = ["**/Pipfile", "**/pyproject.toml", "**/requirements.txt", "**/setup.py"]
+root_up = 1
+adapters = ["python"]
+checks = ["py-compile"]
+
+[[signal]]
+id = "cargo"
+category = "platform"
+domain = "backend"
+glob = ["**/Cargo.toml"]
+root_up = 1
+unit_kind = "rust-crate"          # sibling crates under one dir -> one unit per crate (dir/*)
+adapters = ["rust"]
+checks = ["cargo-test"]
+tools = ["cargo"]
+
+[[signal]]
+id = "go-module"
+category = "platform"
+domain = "backend"
+glob = ["**/go.mod"]
+root_up = 1
+
+[[signal]]
+id = "swiftui"
+category = "framework"
+domain = "mobile"
+glob = ["**/*.swift"]
+contains = '^\s*import\s+SwiftUI\b'
+adapters = ["swift-full"]
+skills = ["axiom-swiftui", "perf-climb", "native-perf-climb", "argent-device-interact", "argent-screenshot-diff"]
+
+[[signal]]
+id = "uikit"
+category = "framework"
+domain = "mobile"
+glob = ["**/*.swift", "**/*.m"]
+contains = '^\s*(?:import\s+UIKit\b|@import\s+UIKit\b|#import\s+<UIKit/)'
+adapters = ["swift-full"]
+skills = ["axiom-uikit", "native-perf-climb"]
+
+[[signal]]
+id = "express"
+category = "framework"
+domain = "backend"
+glob = ["**/package.json"]
+json_dep = ["express"]
+adapters = ["ts-server"]
+checks = ["tsc"]
+
+[[signal]]
+id = "react-web"
+category = "framework"
+domain = "web"
+glob = ["**/package.json"]
+json_dep = ["react-scripts", "next", "vite", "@vitejs/plugin-react", "gatsby", "@remix-run/react", "parcel", "webpack-dev-server"]   # a web bundler, not bare react-dom (servers render email with it)
+adapters = ["ts-web-screens"]
+checks = ["tsc"]
+skills = ["browser-automation"]
+
+[[signal]]
+id = "python-web"
+category = "framework"
+domain = "backend"
+glob = ["**/Pipfile", "**/pyproject.toml", "**/requirements.txt"]
+contains = '(?im)^\s*"?(?:flask|django|fastapi)\b'
+adapters = ["python"]
+checks = ["py-compile"]
+
+[[signal]]
+id = "cocoapods"
+category = "build"
+domain = "mobile"
+glob = ["**/Podfile"]
+skills = ["axiom-build"]
+
+[[signal]]
+id = "yarn"
+category = "build"
+glob = ["**/yarn.lock"]
+
+[[signal]]
+id = "npm"
+category = "build"
+glob = ["**/package-lock.json"]
+
+[[signal]]
+id = "pnpm"
+category = "build"
+glob = ["**/pnpm-lock.yaml"]
+
+[[signal]]
+id = "pipenv"
+category = "build"
+glob = ["**/Pipfile"]
+
+[[signal]]
+id = "poetry-uv"
+category = "build"
+glob = ["**/poetry.lock", "**/uv.lock"]
+
+[[signal]]
+id = "bundler"
+category = "build"
+glob = ["**/Gemfile"]
+
+[[signal]]
+id = "docker"
+category = "build"
+glob = ["**/Dockerfile", "**/Dockerfile.*", "**/docker-compose*.yml", "**/docker-compose*.yaml"]
+
+[[signal]]
+id = "make"
+category = "build"
+glob = ["**/Makefile"]
+
+[[signal]]
+id = "xctest"
+category = "test"
+domain = "mobile"
+glob = ["**/*.swift"]
+contains = '^\s*(?:@testable\s+)?import\s+XCTest\b'
+checks = ["xcodebuild-test"]
+skills = ["axiom-testing", "argent-test-ui-flow"]
+
+[[signal]]
+id = "swift-testing"
+category = "test"
+domain = "mobile"
+glob = ["**/*.swift"]
+contains = '^\s*import\s+Testing\b'
+checks = ["xcodebuild-test"]
+skills = ["axiom-testing"]
+
+[[signal]]
+id = "jest"
+category = "test"
+glob = ["**/jest.config.*"]
+checks = ["jest"]
+
+[[signal]]
+id = "js-test-files"
+category = "test"
+glob = ["**/__tests__/**/*.[jt]s", "**/__tests__/**/*.[jt]sx", "**/*.test.[jt]s", "**/*.test.[jt]sx", "**/*.spec.[jt]s", "**/*.spec.[jt]sx"]
+
+[[signal]]
+id = "pytest"
+category = "test"
+glob = ["**/conftest.py", "**/pytest.ini"]
+checks = ["pytest"]
+
+[[signal]]
+id = "py-test-files"
+category = "test"
+glob = ["**/test_*.py", "**/*_test.py"]
+
+[[signal]]
+id = "cypress"
+category = "test"
+domain = "web"
+glob = ["**/cypress.config.*"]
+checks = ["cypress"]
+skills = ["browser-automation"]
+
+[[signal]]
+id = "playwright"
+category = "test"
+domain = "web"
+glob = ["**/playwright.config.*"]
+skills = ["browser-automation"]
+
+[[signal]]
+id = "vitest"
+category = "test"
+glob = ["**/vitest.config.*"]
+
+[[signal]]
+id = "rust-tests"
+category = "test"
+glob = ["**/*.rs"]
+contains = '#\[(?:tokio::)?test\]'
+checks = ["cargo-test"]
+
+[[signal]]
+id = "mobile-e2e"
+category = "test"
+domain = "mobile"
+glob = ["**/.maestro/**", "**/e2e/**/*.e2e.[jt]s", "**/.detoxrc*", "**/*UITests/**/*.swift"]
+skills = ["argent-qa-flows", "argent-create-flow"]
+
+[[signal]]
+id = "storekit"
+category = "framework"
+domain = "mobile"
+glob = ["**/*.storekit", "**/*.swift"]
+contains = '(?m)^\s*import\s+StoreKit\b|"products"\s*:'
+skills = ["axiom-integration"]
+
+[[signal]]
+id = "ios-strings"
+category = "framework"
+domain = "mobile"
+glob = ["**/*.lproj/*.strings", "**/*.xcstrings"]
+skills = ["axiom-integration"]
+
+[[signal]]
+id = "github-actions"
+category = "ci"
+glob = [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+
+[[signal]]
+id = "gitlab-ci"
+category = "ci"
+glob = [".gitlab-ci.yml"]
+
+[[signal]]
+id = "circleci"
+category = "ci"
+glob = [".circleci/config.yml"]
+
+[[signal]]
+id = "mobile-ci"
+category = "ci"
+domain = "mobile"
+glob = ["**/bitrise.yml", "**/codemagic.yaml", "**/eas.json", "**/fastlane/Fastfile", "**/ci_scripts/*.sh"]
+
+[[signal]]
+id = "pr-template"
+category = "ci"
+glob = [".github/pull_request_template.md", ".github/PULL_REQUEST_TEMPLATE/**"]
+
+[[signal]]
+id = "tailwind"
+category = "design"
+glob = ["**/tailwind.config.*"]
+sources = ["design-tokens"]
+skills = ["hostui-tokens-from-code"]
+
+[[signal]]
+id = "design-tokens"
+category = "design"
+glob = ["**/tokens/**", "**/*tokens.json", "**/*tokens.ts", "**/*tokens.js", "**/*tokens.jsx", "**/tokens.swift"]
+sources = ["design-tokens"]
+
+[[signal]]
+id = "design-system-dir"
+category = "design"
+glob = ["**/DesignSystem/**", "**/design-system/**", "**/designsystem/**"]
+sources = ["design-tokens"]
+
+[[signal]]
+id = "asset-colors"
+category = "design"
+domain = "mobile"
+glob = ["**/*.colorset/Contents.json"]
+
+[[signal]]
+id = "claude-md"
+category = "agent-context"
+glob = ["**/CLAUDE.md"]
+
+[[signal]]
+id = "agents-md"
+category = "agent-context"
+glob = ["**/AGENTS.md"]
+
+[[signal]]
+id = "cursor-rules"
+category = "agent-context"
+glob = ["**/.cursor/rules/**", "**/.cursorrules"]
+
+[[signal]]
+id = "other-agent-docs"
+category = "agent-context"
+glob = ["**/GEMINI.md", ".github/copilot-instructions.md"]
+
+# --- adapters (SPEC 4). Status = Orbit coverage of the adapter's languages inside the signal's roots:
+# present >= 90%, partial > 0, missing = 0. ------------------------------------------------------------
+
+[adapters.swift-full]
+languages = ["swift"]
+build = "Orbit has a Swift regex block; include every Swift file of the target, add unit kinds for its feature dirs, then a SwiftUI ui_usage pass (View conformers, kit symbols)."
+[adapters.ts-rn-screens]
+languages = ["typescript", "javascript"]
+build = "Index the RN app source (src/**); unit kind per screen dir; ui_usage for RN primitives and the app's design-system components."
+[adapters.ts-web-screens]
+languages = ["typescript", "javascript"]
+build = "Index the web app source; unit kind per screen/page dir."
+[adapters.ts-server]
+languages = ["typescript", "javascript"]
+build = "Index the server source; unit kind per service/route dir."
+[adapters.python]
+languages = ["python"]
+build = "Index the Python packages; unit kind per service package."
+[adapters.rust]
+languages = ["rust"]
+build = "New [languages.rust] regex block (use, struct/enum/trait/impl/fn) plus a golden fixture; include the crates; one rust-crate unit per crate (agents get 'unknown unit tax_core' today)."
+[adapters.kotlin-android]
+languages = ["kotlin", "java"]
+build = "New [languages.kotlin] / [languages.java] regex blocks plus a golden fixture."
+
+# --- checks (SPEC 4.4). Present for a root when an Orbit [checks.*] command matches `match` AND names the
+# root path. command is the suggested starting point; {root} is the target root. -----------------------
+
+[checks.xcodebuild-build]
+match = 'xcodebuild\b.*\bbuild\b'
+command = 'xcodebuild build -project {root}/<App>.xcodeproj -scheme <scheme> -destination "generic/platform=iOS Simulator"'
+[checks.xcodebuild-test]
+match = 'xcodebuild\b.*\btest\b'
+command = 'xcodebuild test -project {root}/<App>.xcodeproj -scheme <scheme> -destination "platform=iOS Simulator,name=<device>"'
+[checks.swift-test]
+match = 'swift\s+test\b'
+command = "swift test --package-path {root}"
+[checks.tsc]
+match = '\btsc\b'
+command = "{root}/node_modules/.bin/tsc --noEmit -p {root}"
+[checks.jest]
+match = '\bjest\b'
+command = "yarn --cwd {root} jest --ci"
+[checks.gradle-test]
+match = 'gradlew?\b.*\btest'
+command = "{root}/gradlew -p {root} test"
+[checks.py-compile]
+match = 'compileall|py_compile'
+command = "python3 -m compileall -q {root}"
+[checks.pytest]
+match = '\bpytest\b'
+command = "python3 -m pytest {root}"
+[checks.cargo-test]
+match = 'cargo\b.*\btest\b'
+command = "cargo test --manifest-path {workspace}/Cargo.toml -p {name}"   # {workspace}: outermost Cargo root above the crate
+[checks.cypress]
+match = '\bcypress\b'
+command = "npx --prefix {root} cypress run"
+
+# --- external sources (SPEC 4.3) Orbit should read. Present when orbit.toml has [sources.<id>]. ---------
+
+[sources.xcode-targets]
+build = "Read targets, schemes and build settings from *.xcodeproj/project.pbxproj + xcschemes (read-only)."
+[sources.rn-navigation]
+build = "Read the RN navigator tree (screens, params, stacks) into a route graph."
+[sources.design-tokens]
+build = "Read token files (tailwind config, tokens.*, colorsets) into kit_patterns / token records."
+
+# --- CLI tools (machine-dependent: checked with PATH lookup). A tool is needed when `always`, when a detected
+# signal lists it (`tools = [...]`), or when a skill calls it inside a code span. Any one name in `any` satisfies it.
+
+[tools.ripgrep]
+any = ["rg"]
+always = true
+install = "brew install ripgrep / apt install ripgrep"
+[tools.pdf-to-text]
+any = ["pdftotext", "markitdown", "pandoc", "mutool"]
+always = true
+install = "brew install poppler (pdftotext) or pipx install markitdown"
+[tools.html-to-text]
+any = ["markitdown", "pandoc", "trafilatura", "html2text", "w3m", "lynx"]
+always = true
+install = "pipx install markitdown (HTML, PDF, DOCX to markdown) or brew install pandoc"
+[tools.jq]
+any = ["jq"]
+install = "brew install jq"
+[tools.gh]
+any = ["gh"]
+install = "brew install gh"
+[tools.xcodebuild]
+any = ["xcodebuild"]
+install = "install Xcode, then xcode-select -s /Applications/Xcode.app"
+[tools.argent]
+any = ["argent"]
+install = "npm i -g @swmansion/argent@latest && argent init -y"
+[tools.cargo]
+any = ["cargo"]
+install = "rustup (https://rustup.rs)"
+[tools.node]
+any = ["node"]
+install = "nvm install --lts"
+
+# --- skills: hints for missing ones (how to get or build them). -------------------------------------
+
+[skills]
+argent-react-native-app-workflow = "ships with argent: `argent init -y` / update-argent installs it"
+argent-metro-debugger = "ships with argent: `argent init -y` installs it"
+argent-react-native-profiler = "ships with argent: `argent init -y` installs it"
+argent-android-emulator-setup = "ships with argent: `argent init -y` installs it"
+argent-ios-simulator-setup = "ships with argent: `argent init -y` installs it"
+
+# --- routing table: task type -> skills to load. A task is listed when any `when` signal is active (detected
+# at a root that is not retired). Task ids equal Orbit packet recipe ids (ORBIT-MOBILE-DESIGN.md section 2):
+# ios-ui-change, ios-networking, ios-purchase, ios-perf, ios-release, ios-screen-port, ios-localization. ------
+
+[tasks.orient]
+when = []
+skills = ["orbit"]
+[tasks.ios-ui-change]
+when = ["swiftui", "uikit"]
+skills = ["axiom-swiftui", "argent-device-interact", "argent-screenshot-diff"]
+[tasks.ios-build-failure]
+when = ["xcodeproj", "swift-package"]
+skills = ["axiom-build"]
+[tasks.ios-tests]
+when = ["xctest", "swift-testing"]
+skills = ["axiom-testing", "argent-test-ui-flow"]
+[tasks.ios-perf]
+when = ["swiftui", "uikit"]
+skills = ["perf-climb", "native-perf-climb", "axiom-performance"]
+[tasks.ios-release]
+when = ["xcodeproj"]
+skills = ["axiom-shipping"]
+[tasks.ios-networking]
+when = ["xcodeproj", "swift-package"]
+skills = ["axiom-networking", "axiom-concurrency"]
+[tasks.ios-purchase]
+when = ["storekit"]
+skills = ["axiom-integration", "axiom-testing"]
+[tasks.ios-screen-port]
+when = ["swiftui"]
+skills = ["axiom-swiftui", "argent-device-interact", "argent-screenshot-diff"]
+[tasks.ios-localization]
+when = ["ios-strings"]
+skills = ["axiom-integration", "localization"]
+[tasks.rn-ui-change]
+when = ["react-native"]
+skills = ["argent-react-native-app-workflow", "argent-device-interact", "argent-screenshot-diff"]
+[tasks.rn-perf]
+when = ["react-native"]
+skills = ["perf-climb", "rn-perf-climb", "argent-react-native-profiler"]
+[tasks.rn-debug]
+when = ["react-native"]
+skills = ["argent-metro-debugger"]
+[tasks.mobile-regression-test]
+when = ["xcodeproj", "react-native", "android-gradle"]
+skills = ["argent-qa-flows", "argent-create-flow", "argent-test-ui-flow"]
+[tasks.android-run]
+when = ["android-gradle"]
+skills = ["argent-android-emulator-setup"]
+[tasks.web-ui-change]
+when = ["react-web"]
+skills = ["browser-automation"]
+[tasks.is-it-used]
+when = []
+skills = ["dead-code-tracer", "data-flow-tracer"]

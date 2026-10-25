@@ -1,0 +1,15 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	objectVersion = 77;
+	objects = {
+		0000000000000000000000B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = com.fx.app;
+			};
+			name = Debug;
+		};
+	};
+	rootObject = 0000000000000000000000AA /* Project object */;
+}

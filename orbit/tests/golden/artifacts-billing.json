@@ -1,0 +1,37 @@
+{
+  "artifacts": [
+    {
+      "count": 0,
+      "kind": "derived",
+      "level": "index",
+      "name": "facts",
+      "paths": [],
+      "status": "derived"
+    },
+    {
+      "count": 1,
+      "kind": "file",
+      "level": "merge",
+      "name": "tests",
+      "paths": [
+        "tests/test_billing_pricing.py"
+      ],
+      "status": "present"
+    },
+    {
+      "count": 2,
+      "kind": "file",
+      "level": "release",
+      "name": "doc",
+      "paths": [
+        "docs/billing-notes.md",
+        "docs/billing-spec.md"
+      ],
+      "status": "present"
+    }
+  ],
+  "config_hash": "a62947f914884eb3",
+  "index_digest": "a5c9f609e79e45ba",
+  "unit": "py-svc:billing",
+  "version": 1
+}

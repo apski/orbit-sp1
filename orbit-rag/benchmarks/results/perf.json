@@ -1,0 +1,98 @@
+[
+  {
+    "operation": "lexical retrieval",
+    "mode": "warm",
+    "target_p95_ms": 30.0,
+    "stats": {
+      "n": 200,
+      "p50_ms": 2.332791,
+      "p95_ms": 3.628375,
+      "max_ms": 4.857208
+    },
+    "pass": true
+  },
+  {
+    "operation": "hybrid retrieval (sqlite)",
+    "mode": "warm",
+    "target_p95_ms": 150.0,
+    "stats": {
+      "n": 200,
+      "p50_ms": 4.594625,
+      "p95_ms": 6.35025,
+      "max_ms": 7.313292
+    },
+    "pass": true
+  },
+  {
+    "operation": "hybrid retrieval (lance)",
+    "mode": "warm",
+    "target_p95_ms": 150.0,
+    "stats": {
+      "n": 200,
+      "p50_ms": 1.3039589999999999,
+      "p95_ms": 2.4267920000000003,
+      "max_ms": 2.865667
+    },
+    "pass": true
+  },
+  {
+    "operation": "4k-token bundle",
+    "mode": "warm",
+    "target_p95_ms": 200.0,
+    "stats": {
+      "n": 200,
+      "p50_ms": 5.838,
+      "p95_ms": 8.082,
+      "max_ms": 8.880875
+    },
+    "pass": true
+  },
+  {
+    "operation": "highlight save",
+    "mode": "warm",
+    "target_p95_ms": 50.0,
+    "stats": {
+      "n": 200,
+      "p50_ms": 0.40704199999999996,
+      "p95_ms": 0.591584,
+      "max_ms": 2.3038339999999997
+    },
+    "pass": true
+  },
+  {
+    "operation": "open Markdown file (HTTP)",
+    "mode": "warm",
+    "target_p95_ms": 200.0,
+    "stats": {
+      "n": 200,
+      "p50_ms": 0.370958,
+      "p95_ms": 0.496459,
+      "max_ms": 2.226625
+    },
+    "pass": true
+  },
+  {
+    "operation": "lexical search (CLI)",
+    "mode": "cold",
+    "target_p95_ms": null,
+    "stats": {
+      "n": 20,
+      "p50_ms": 14.643167,
+      "p95_ms": 15.817624999999998,
+      "max_ms": 16.08975
+    },
+    "pass": null
+  },
+  {
+    "operation": "4k bundle, lexical (CLI)",
+    "mode": "cold",
+    "target_p95_ms": null,
+    "stats": {
+      "n": 20,
+      "p50_ms": 12.476125,
+      "p95_ms": 14.795292,
+      "max_ms": 15.224292
+    },
+    "pass": null
+  }
+]

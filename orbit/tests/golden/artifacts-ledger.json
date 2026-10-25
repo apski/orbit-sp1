@@ -1,0 +1,32 @@
+{
+  "artifacts": [
+    {
+      "count": 0,
+      "kind": "derived",
+      "level": "index",
+      "name": "facts",
+      "paths": [],
+      "status": "derived"
+    },
+    {
+      "count": 0,
+      "kind": "file",
+      "level": "merge",
+      "name": "tests",
+      "paths": [],
+      "status": "missing"
+    },
+    {
+      "count": 0,
+      "kind": "file",
+      "level": "release",
+      "name": "doc",
+      "paths": [],
+      "status": "missing"
+    }
+  ],
+  "config_hash": "a62947f914884eb3",
+  "index_digest": "a5c9f609e79e45ba",
+  "unit": "py-svc:ledger",
+  "version": 1
+}

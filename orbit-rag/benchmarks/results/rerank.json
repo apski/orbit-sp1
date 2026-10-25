@@ -1,0 +1,13 @@
+{
+  "_note": "Transcribed from console output on 2026-10-25: the raw JSON was overwritten by a rerun that was killed for exhausting host memory. Host was under heavy contention.",
+  "runs": [
+    { "config": "sqlite-hybrid+rerank:jina-turbo", "queries": 120, "max_length": 8192,
+      "recall_at_1": 0.333, "recall_at_5": 0.700, "recall_at_10": 0.800, "mrr_at_10": 0.483, "ndcg_at_10": 0.559,
+      "p50_ms": 12989.8, "p95_ms": 44700.2, "peak_rss_mb": 21095 },
+    { "config": "sqlite-hybrid+rerank:jina-turbo", "queries": 10, "max_length": 512,
+      "recall_at_10": 0.8, "p50_ms": 11372.3, "p95_ms": 32628.5, "peak_rss_bytes": 22106079232 },
+    { "config": "sqlite-hybrid+rerank:bge-base", "queries": 10, "max_length": 512,
+      "recall_at_10": 0.9, "p50_ms": 31103.5, "p95_ms": 61858.4, "peak_rss_bytes": 45671071744 }
+  ],
+  "baseline": { "config": "sqlite-hybrid", "queries": 120, "recall_at_1": 0.308, "recall_at_5": 0.692, "recall_at_10": 0.817, "mrr_at_10": 0.464, "ndcg_at_10": 0.548 }
+}

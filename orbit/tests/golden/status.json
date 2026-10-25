@@ -1,0 +1,75 @@
+{
+  "config_hash": "a62947f914884eb3",
+  "index_digest": "a5c9f609e79e45ba",
+  "languages": [
+    {
+      "files": 1,
+      "name": "-",
+      "ok": 0,
+      "partial": 0,
+      "skipped": 1
+    },
+    {
+      "files": 2,
+      "name": "markdown",
+      "ok": 2,
+      "partial": 0,
+      "skipped": 0
+    },
+    {
+      "files": 6,
+      "name": "python",
+      "ok": 6,
+      "partial": 0,
+      "skipped": 0
+    },
+    {
+      "files": 4,
+      "name": "rust",
+      "ok": 4,
+      "partial": 0,
+      "skipped": 0
+    },
+    {
+      "files": 3,
+      "name": "swift",
+      "ok": 3,
+      "partial": 0,
+      "skipped": 0
+    },
+    {
+      "files": 3,
+      "name": "typescript",
+      "ok": 3,
+      "partial": 0,
+      "skipped": 0
+    }
+  ],
+  "sources": {
+    "figma": "unavailable",
+    "notes": "available"
+  },
+  "units": [
+    {
+      "files": 4,
+      "id": "py-svc:billing"
+    },
+    {
+      "files": 1,
+      "id": "py-svc:ledger"
+    },
+    {
+      "files": 5,
+      "id": "rs-crate:tally"
+    },
+    {
+      "files": 3,
+      "id": "swift-feat:Feed"
+    },
+    {
+      "files": 3,
+      "id": "ts-feat:checkout"
+    }
+  ],
+  "version": 1
+}

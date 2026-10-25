@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/packet",
+  "title": "packet",
+  "description": "Output of `orbit packet`. tokens = ceil(chars/4). over_budget is true only when mandatory sections alone exceed budget. Every markdown bullet ends with [file:line | artifact id].",
+  "type": "object",
+  "required": [
+    "version",
+    "feature",
+    "task",
+    "git",
+    "budget",
+    "tokens",
+    "over_budget",
+    "dropped",
+    "sections",
+    "markdown"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "config_hash": {
+      "type": "string"
+    },
+    "index_digest": {
+      "type": "string"
+    },
+    "feature": {
+      "type": "string"
+    },
+    "task": {
+      "type": "string"
+    },
+    "tier": {
+      "enum": [
+        "mechanical",
+        "build",
+        "explain"
+      ]
+    },
+    "git": {
+      "type": "object",
+      "required": [
+        "base",
+        "dirty_files",
+        "dirty_count"
+      ]
+    },
+    "budget": {
+      "type": "integer"
+    },
+    "tokens": {
+      "type": "integer"
+    },
+    "over_budget": {
+      "type": "boolean"
+    },
+    "dropped": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "section",
+          "lines"
+        ]
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "tokens",
+          "mandatory"
+        ]
+      }
+    },
+    "markdown": {
+      "type": "string"
+    }
+  }
+}

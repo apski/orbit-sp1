@@ -1,0 +1,963 @@
+{
+  "coverage": [
+    {
+      "adapter": "yes",
+      "covered_files": 3,
+      "covered_lines": 13,
+      "files": 3,
+      "lang": "python",
+      "lines": 13
+    },
+    {
+      "adapter": "no",
+      "covered_files": 0,
+      "covered_lines": 0,
+      "files": 2,
+      "lang": "rust",
+      "lines": 12
+    },
+    {
+      "adapter": "yes",
+      "covered_files": 2,
+      "covered_lines": 13,
+      "files": 7,
+      "lang": "swift",
+      "lines": 51
+    },
+    {
+      "adapter": "no",
+      "covered_files": 0,
+      "covered_lines": 0,
+      "files": 2,
+      "lang": "typescript",
+      "lines": 5
+    }
+  ],
+  "items": [
+    {
+      "change": "pipx install markitdown (HTML, PDF, DOCX to markdown) or brew install pandoc",
+      "commits": 1,
+      "domain": "tooling",
+      "evidence": [
+        "ios:7",
+        "api:3",
+        "rust/core:1"
+      ],
+      "gap_files": 14,
+      "gap_lines": 81,
+      "id": "html-to-text",
+      "kind": "tool",
+      "rank": 1,
+      "scope_files": 14,
+      "score": 2.0,
+      "why": "MISSING on PATH: none of markitdown, pandoc, trafilatura, html2text, w3m, lynx; every agent needs it"
+    },
+    {
+      "change": "brew install poppler (pdftotext) or pipx install markitdown",
+      "commits": 1,
+      "domain": "tooling",
+      "evidence": [
+        "ios:7",
+        "api:3",
+        "rust/core:1"
+      ],
+      "gap_files": 14,
+      "gap_lines": 81,
+      "id": "pdf-to-text",
+      "kind": "tool",
+      "rank": 2,
+      "scope_files": 14,
+      "score": 2.0,
+      "why": "MISSING on PATH: none of pdftotext, markitdown, pandoc, mutool; every agent needs it"
+    },
+    {
+      "change": "[checks.xcodebuild-build-ios] command = xcodebuild build -project ios/<App>.xcodeproj -scheme <scheme> -destination \"generic/platform=iOS Simulator\"; [check_sets] mobile += [\"xcodebuild-build-ios\"] (Orbit has no `mobile` check-set yet)",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "xcodebuild-build:ios",
+      "kind": "check",
+      "rank": 3,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "xcodeproj at ios; no Orbit check runs xcodebuild-build there"
+    },
+    {
+      "change": "[checks.xcodebuild-test-ios] command = xcodebuild test -project ios/<App>.xcodeproj -scheme <scheme> -destination \"platform=iOS Simulator,name=<device>\"; [check_sets] mobile += [\"xcodebuild-test-ios\"] (Orbit has no `mobile` check-set yet)",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "xcodebuild-test:ios",
+      "kind": "check",
+      "rank": 4,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "xctest at ios; no Orbit check runs xcodebuild-test there"
+    },
+    {
+      "change": "Read targets, schemes and build settings from *.xcodeproj/project.pbxproj + xcschemes (read-only).",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "xcode-targets",
+      "kind": "source",
+      "rank": 5,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "xcodeproj detected; orbit.toml has no [sources.xcode-targets]"
+    },
+    {
+      "change": "npm i -g @swmansion/argent@latest && argent init -y",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent",
+      "kind": "tool",
+      "rank": 6,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING on PATH: none of argent; wanted by xcodeproj"
+    },
+    {
+      "change": "install Xcode, then xcode-select -s /Applications/Xcode.app",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "xcodebuild",
+      "kind": "tool",
+      "rank": 7,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING on PATH: none of xcodebuild; wanted by xcodeproj"
+    },
+    {
+      "change": "build skill argent-create-flow",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent-create-flow",
+      "kind": "skill",
+      "rank": 8,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by mobile-e2e; not found in any skill root"
+    },
+    {
+      "change": "build skill argent-device-interact",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent-device-interact",
+      "kind": "skill",
+      "rank": 9,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by swiftui; not found in any skill root"
+    },
+    {
+      "change": "ships with argent: `argent init -y` installs it",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent-ios-simulator-setup",
+      "kind": "skill",
+      "rank": 10,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by xcodeproj; not found in any skill root"
+    },
+    {
+      "change": "build skill argent-qa-flows",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent-qa-flows",
+      "kind": "skill",
+      "rank": 11,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by mobile-e2e; not found in any skill root"
+    },
+    {
+      "change": "build skill argent-screenshot-diff",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent-screenshot-diff",
+      "kind": "skill",
+      "rank": 12,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by swiftui; not found in any skill root"
+    },
+    {
+      "change": "build skill argent-test-ui-flow",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "argent-test-ui-flow",
+      "kind": "skill",
+      "rank": 13,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by xctest; not found in any skill root"
+    },
+    {
+      "change": "build skill axiom-build",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "axiom-build",
+      "kind": "skill",
+      "rank": 14,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by xcodeproj; not found in any skill root"
+    },
+    {
+      "change": "build skill axiom-integration",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "axiom-integration",
+      "kind": "skill",
+      "rank": 15,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by ios-strings, storekit; not found in any skill root"
+    },
+    {
+      "change": "build skill axiom-shipping",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "axiom-shipping",
+      "kind": "skill",
+      "rank": 16,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by xcodeproj; not found in any skill root"
+    },
+    {
+      "change": "build skill axiom-testing",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "axiom-testing",
+      "kind": "skill",
+      "rank": 17,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by xctest; not found in any skill root"
+    },
+    {
+      "change": "build skill axiom-uikit",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "axiom-uikit",
+      "kind": "skill",
+      "rank": 18,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by uikit; not found in any skill root"
+    },
+    {
+      "change": "build skill native-perf-climb",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "native-perf-climb",
+      "kind": "skill",
+      "rank": 19,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by swiftui, uikit; not found in any skill root"
+    },
+    {
+      "change": "build skill perf-climb",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:7"
+      ],
+      "gap_files": 7,
+      "gap_lines": 51,
+      "id": "perf-climb",
+      "kind": "skill",
+      "rank": 20,
+      "scope_files": 7,
+      "score": 2.0,
+      "why": "MISSING: wanted by swiftui; not found in any skill root"
+    },
+    {
+      "change": "[checks.pytest-api] command = python3 -m pytest api; [check_sets] backend += [\"pytest-api\"] (Orbit has no `backend` check-set yet)",
+      "commits": 1,
+      "domain": "backend",
+      "evidence": [
+        "api:3"
+      ],
+      "gap_files": 3,
+      "gap_lines": 13,
+      "id": "pytest:api",
+      "kind": "check",
+      "rank": 21,
+      "scope_files": 3,
+      "score": 2.0,
+      "why": "pytest at api; no Orbit check runs pytest there"
+    },
+    {
+      "change": "[[units]] kind = \"rust-crate\", glob = \"rust/*\"",
+      "commits": 1,
+      "domain": "backend",
+      "evidence": [
+        "rust:2 dirs",
+        "rust/core:1",
+        "rust/worker:1"
+      ],
+      "gap_files": 2,
+      "gap_lines": 12,
+      "id": "rust/*",
+      "kind": "unit",
+      "rank": 22,
+      "scope_files": 2,
+      "score": 2.0,
+      "why": "2 dirs under rust/ (core, worker) hold 2 code files in no Orbit unit"
+    },
+    {
+      "change": "[languages.rust] regex block (.rs) + golden fixture; [index] include += \"rust/**\"",
+      "commits": 1,
+      "domain": "backend",
+      "evidence": [
+        "rust/core:1",
+        "rust/worker:1"
+      ],
+      "gap_files": 2,
+      "gap_lines": 12,
+      "id": "rust",
+      "kind": "language",
+      "rank": 23,
+      "scope_files": 2,
+      "score": 2.0,
+      "why": "2 rust files (12 lines, .rs) have no Orbit language block"
+    },
+    {
+      "change": "[languages.typescript] regex block (.ts) + golden fixture; [index] include += \"shared/**\", \"web/**\"",
+      "commits": 1,
+      "domain": "other",
+      "evidence": [
+        "shared:1",
+        "web:1"
+      ],
+      "gap_files": 2,
+      "gap_lines": 5,
+      "id": "typescript",
+      "kind": "language",
+      "rank": 24,
+      "scope_files": 2,
+      "score": 2.0,
+      "why": "2 typescript files (5 lines, .ts) have no Orbit language block"
+    },
+    {
+      "change": "New [languages.rust] regex block (use, struct/enum/trait/impl/fn) plus a golden fixture; include the crates; one rust-crate unit per crate (agents get 'unknown unit tax_core' today).",
+      "commits": 1,
+      "domain": "backend",
+      "evidence": [
+        "rust/core:1",
+        "rust/worker:1"
+      ],
+      "gap_files": 2,
+      "gap_lines": 12,
+      "id": "rust",
+      "kind": "adapter",
+      "rank": 25,
+      "scope_files": 2,
+      "score": 2.0,
+      "why": "missing: cargo detected; Orbit covers 0/2 rust files in rust, rust/core, rust/worker"
+    },
+    {
+      "change": "rustup (https://rustup.rs)",
+      "commits": 1,
+      "domain": "backend",
+      "evidence": [
+        "rust/core:1",
+        "rust/worker:1"
+      ],
+      "gap_files": 2,
+      "gap_lines": 12,
+      "id": "cargo",
+      "kind": "tool",
+      "rank": 26,
+      "scope_files": 2,
+      "score": 2.0,
+      "why": "MISSING on PATH: none of cargo; wanted by cargo"
+    },
+    {
+      "change": "Index the web app source; unit kind per screen/page dir.",
+      "commits": 1,
+      "domain": "web",
+      "evidence": [
+        "web:1"
+      ],
+      "gap_files": 1,
+      "gap_lines": 4,
+      "id": "ts-web-screens",
+      "kind": "adapter",
+      "rank": 27,
+      "scope_files": 1,
+      "score": 2.0,
+      "why": "missing: react-web detected; Orbit covers 0/1 typescript/javascript files in web"
+    },
+    {
+      "change": "[checks.cargo-test-core] command = cargo test --manifest-path rust/Cargo.toml -p core; [check_sets] backend += [\"cargo-test-core\"] (Orbit has no `backend` check-set yet)",
+      "commits": 1,
+      "domain": "backend",
+      "evidence": [
+        "rust/core:1"
+      ],
+      "gap_files": 1,
+      "gap_lines": 9,
+      "id": "cargo-test:rust/core",
+      "kind": "check",
+      "rank": 28,
+      "scope_files": 1,
+      "score": 2.0,
+      "why": "cargo, rust-tests at rust/core; no Orbit check runs cargo-test there"
+    },
+    {
+      "change": "[checks.tsc-web] command = web/node_modules/.bin/tsc --noEmit -p web; [check_sets] web += [\"tsc-web\"] (Orbit has no `web` check-set yet)",
+      "commits": 1,
+      "domain": "web",
+      "evidence": [
+        "web:1"
+      ],
+      "gap_files": 1,
+      "gap_lines": 4,
+      "id": "tsc:web",
+      "kind": "check",
+      "rank": 29,
+      "scope_files": 1,
+      "score": 2.0,
+      "why": "react-web at web; no Orbit check runs tsc there"
+    },
+    {
+      "change": "build skill browser-automation",
+      "commits": 1,
+      "domain": "web",
+      "evidence": [
+        "web:1"
+      ],
+      "gap_files": 1,
+      "gap_lines": 4,
+      "id": "browser-automation",
+      "kind": "skill",
+      "rank": 30,
+      "scope_files": 1,
+      "score": 2.0,
+      "why": "MISSING: wanted by react-web; not found in any skill root"
+    },
+    {
+      "change": "[index] include += \"ios/**\"",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:5",
+        "covered ios/App/Views/Next/**:2"
+      ],
+      "gap_files": 5,
+      "gap_lines": 38,
+      "id": "ios/**",
+      "kind": "include",
+      "rank": 31,
+      "scope_files": 7,
+      "score": 1.43,
+      "why": "5 code files (swift 5; 38 lines) under ios/ are outside Orbit's include; Orbit covers only 2 here, via ios/App/Views/Next/**"
+    },
+    {
+      "change": "Orbit has a Swift regex block; include every Swift file of the target, add unit kinds for its feature dirs, then a SwiftUI ui_usage pass (View conformers, kit symbols).",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:5"
+      ],
+      "gap_files": 5,
+      "gap_lines": 38,
+      "id": "swift-full",
+      "kind": "adapter",
+      "rank": 32,
+      "scope_files": 7,
+      "score": 1.43,
+      "why": "partial: swiftui, uikit, xcodeproj detected; Orbit covers 2/7 swift files in ios"
+    },
+    {
+      "change": "brew install jq",
+      "commits": 0,
+      "domain": "tooling",
+      "evidence": [
+        "local-helper"
+      ],
+      "gap_files": 14,
+      "gap_lines": 81,
+      "id": "jq",
+      "kind": "tool",
+      "rank": 33,
+      "scope_files": 14,
+      "score": 1.0,
+      "why": "MISSING on PATH: none of jq; 1 skills call it (local-helper)"
+    },
+    {
+      "change": "inventory then remove mobile/ and update the 2 referencing files; do not index it or add checks for it",
+      "commits": 0,
+      "domain": "mobile",
+      "evidence": [
+        "mobile:6 files",
+        "ref CLAUDE.md",
+        "ref retire-mobile.toml"
+      ],
+      "gap_files": 4,
+      "gap_lines": 18,
+      "id": "mobile",
+      "inventory": {
+        "code_files": 4,
+        "external_ids": [
+          {
+            "action": "keep (live target uses it)",
+            "also_used_by": [
+              "ios"
+            ],
+            "id": "com.fx.app"
+          },
+          {
+            "action": "retire",
+            "also_used_by": [],
+            "id": "com.fx.mobile"
+          }
+        ],
+        "files": 6,
+        "inbound_refs": [
+          "CLAUDE.md",
+          "retire-mobile.toml"
+        ],
+        "last_commit": "2025-06-01",
+        "lines": 18,
+        "nested_targets": [],
+        "root": "mobile",
+        "workspace_deps": [
+          {
+            "action": "keep, prune",
+            "also_used_by": [
+              "web"
+            ],
+            "root": "shared"
+          }
+        ]
+      },
+      "kind": "retire",
+      "rank": 34,
+      "scope_files": 4,
+      "score": 1.0,
+      "why": "frozen: react-native target with 0 commits since 2025-11-03; confirm with a person or record it in the policy. 6 files (4 code, 18 lines), last commit 2025-06-01; 2 files outside it mention it; uses shared (keep, prune); external ids com.fx.app (shared with ios: keep), com.fx.mobile. No integrate item covers its 4 code files"
+    },
+    {
+      "change": "[[units]] kind = \"ios-views\", glob = \"ios/App/Views/*\"; [platform] exclude_units += \"ios/App/Views/Next\" (already a unit kind)",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios/App/Views:3 dirs",
+        "ios:2"
+      ],
+      "gap_files": 2,
+      "gap_lines": 16,
+      "id": "ios/App/Views/*",
+      "kind": "unit",
+      "rank": 35,
+      "scope_files": 4,
+      "score": 1.0,
+      "why": "3 dirs under ios/App/Views/ (Home, Next, Settings) hold 2 code files in no Orbit unit"
+    },
+    {
+      "change": "[[spec]] role = \"contract\", unit_kinds = [\"ios-next\"], units = [\"Feed\"], path = \"docs/specs/feed.spec.md\"",
+      "commits": 0,
+      "domain": "mobile",
+      "evidence": [
+        "docs/specs:2",
+        "feed.spec.md->Feed"
+      ],
+      "gap_files": 2,
+      "gap_lines": 6,
+      "id": "docs/specs",
+      "kind": "spec",
+      "rank": 36,
+      "scope_files": 2,
+      "score": 1.0,
+      "why": "2 of 2 spec docs in docs/specs/ are linked from no Orbit [[spec]]; 1 match a unit by name; unmatched: onboarding.spec.md"
+    },
+    {
+      "change": "fix or delete the references: GoneService.swift, ios/App/Missing.swift",
+      "commits": 0,
+      "domain": "tooling",
+      "evidence": [
+        "GoneService.swift",
+        "ios/App/Missing.swift"
+      ],
+      "gap_files": 2,
+      "gap_lines": 0,
+      "id": "local-helper",
+      "kind": "skill-ref",
+      "rank": 37,
+      "scope_files": 2,
+      "score": 1.0,
+      "why": ".agents/skills/local-helper/SKILL.md names 2 path(s) that do not exist"
+    },
+    {
+      "change": "[checks.cargo-test-worker] command = cargo test --manifest-path rust/Cargo.toml -p worker; [check_sets] backend += [\"cargo-test-worker\"] (Orbit has no `backend` check-set yet)",
+      "commits": 0,
+      "domain": "backend",
+      "evidence": [
+        "rust/worker:1"
+      ],
+      "gap_files": 1,
+      "gap_lines": 3,
+      "id": "cargo-test:rust/worker",
+      "kind": "check",
+      "rank": 38,
+      "scope_files": 1,
+      "score": 1.0,
+      "why": "cargo at rust/worker; no Orbit check runs cargo-test there"
+    },
+    {
+      "change": "widen [languages.swift].ref, e.g. prepend \\b(?:SKD)\\b| (or a general rule such as swift names >= 3 chars) + golden case",
+      "commits": 1,
+      "domain": "mobile",
+      "evidence": [
+        "ios:3"
+      ],
+      "gap_files": 3,
+      "gap_lines": 22,
+      "id": "swift",
+      "kind": "refs",
+      "rank": 39,
+      "scope_files": 7,
+      "score": 0.86,
+      "why": "1 declared swift types the ref regex can never match are used 2 times: SKD (2 uses); refs and packets miss all of them"
+    }
+  ],
+  "orbit": {
+    "check_sets": {},
+    "checks": {
+      "py-compile": "python3 -m compileall -q api"
+    },
+    "config": "orbit.toml",
+    "exclude_units": [],
+    "ignore": [
+      "**/__pycache__/**"
+    ],
+    "include": [
+      "api/**",
+      "ios/App/Views/Next/**"
+    ],
+    "languages": [
+      "python",
+      "swift"
+    ],
+    "sources": [],
+    "specs": [],
+    "units": [
+      {
+        "glob": "api/services/*",
+        "kind": "py-svc"
+      },
+      {
+        "glob": "ios/App/Views/Next/*",
+        "kind": "ios-next"
+      }
+    ]
+  },
+  "policy": null,
+  "repo": {
+    "commits": 1,
+    "files": 38,
+    "head": "39edb28973a93dd64b7cf8719c1edcaba9a0c2a1",
+    "head_date": "2026-02-01",
+    "large_files": 0,
+    "name": "repo",
+    "since": "2025-11-03"
+  },
+  "routing": [
+    {
+      "signals": [
+        "xcodeproj"
+      ],
+      "skills": [
+        {
+          "name": "axiom-build",
+          "present": false
+        }
+      ],
+      "task": "ios-build-failure"
+    },
+    {
+      "signals": [
+        "ios-strings"
+      ],
+      "skills": [
+        {
+          "name": "axiom-integration",
+          "present": false
+        },
+        {
+          "name": "localization",
+          "present": false
+        }
+      ],
+      "task": "ios-localization"
+    },
+    {
+      "signals": [
+        "xcodeproj"
+      ],
+      "skills": [
+        {
+          "name": "axiom-networking",
+          "present": false
+        },
+        {
+          "name": "axiom-concurrency",
+          "present": false
+        }
+      ],
+      "task": "ios-networking"
+    },
+    {
+      "signals": [
+        "swiftui",
+        "uikit"
+      ],
+      "skills": [
+        {
+          "name": "perf-climb",
+          "present": false
+        },
+        {
+          "name": "native-perf-climb",
+          "present": false
+        },
+        {
+          "name": "axiom-performance",
+          "present": false
+        }
+      ],
+      "task": "ios-perf"
+    },
+    {
+      "signals": [
+        "storekit"
+      ],
+      "skills": [
+        {
+          "name": "axiom-integration",
+          "present": false
+        },
+        {
+          "name": "axiom-testing",
+          "present": false
+        }
+      ],
+      "task": "ios-purchase"
+    },
+    {
+      "signals": [
+        "xcodeproj"
+      ],
+      "skills": [
+        {
+          "name": "axiom-shipping",
+          "present": false
+        }
+      ],
+      "task": "ios-release"
+    },
+    {
+      "signals": [
+        "swiftui"
+      ],
+      "skills": [
+        {
+          "name": "axiom-swiftui",
+          "present": true
+        },
+        {
+          "name": "argent-device-interact",
+          "present": false
+        },
+        {
+          "name": "argent-screenshot-diff",
+          "present": false
+        }
+      ],
+      "task": "ios-screen-port"
+    },
+    {
+      "signals": [
+        "xctest"
+      ],
+      "skills": [
+        {
+          "name": "axiom-testing",
+          "present": false
+        },
+        {
+          "name": "argent-test-ui-flow",
+          "present": false
+        }
+      ],
+      "task": "ios-tests"
+    },
+    {
+      "signals": [
+        "swiftui",
+        "uikit"
+      ],
+      "skills": [
+        {
+          "name": "axiom-swiftui",
+          "present": true
+        },
+        {
+          "name": "argent-device-interact",
+          "present": false
+        },
+        {
+          "name": "argent-screenshot-diff",
+          "present": false
+        }
+      ],
+      "task": "ios-ui-change"
+    },
+    {
+      "signals": [],
+      "skills": [
+        {
+          "name": "dead-code-tracer",
+          "present": false
+        },
+        {
+          "name": "data-flow-tracer",
+          "present": false
+        }
+      ],
+      "task": "is-it-used"
+    },
+    {
+      "signals": [
+        "xcodeproj"
+      ],
+      "skills": [
+        {
+          "name": "argent-qa-flows",
+          "present": false
+        },
+        {
+          "name": "argent-create-flow",
+          "present": false
+        },
+        {
+          "name": "argent-test-ui-flow",
+          "present": false
+        }
+      ],
+      "task": "mobile-regression-test"
+    },
+    {
+      "signals": [],
+      "skills": [
+        {
+          "name": "orbit",
+          "present": false
+        }
+      ],
+      "task": "orient"
+    },
+    {
+      "signals": [
+        "react-web"
+      ],
+      "skills": [
+        {
+          "name": "browser-automation",
+          "present": false
+        }
+      ],
+      "task": "web-ui-change"
+    }
+  ],
+  "schema": "orbit-proposal/2"
+}

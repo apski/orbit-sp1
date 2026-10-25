@@ -1,0 +1,138 @@
+{
+  "cases": 3300,
+  "seed": 1,
+  "by_mutation": {
+    "compound": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "exact": 1,
+        "relocated": 299
+      }
+    },
+    "delete_block": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "ambiguous": 1,
+        "changed": 63,
+        "context_changed": 3,
+        "orphaned": 233
+      }
+    },
+    "delete_dup_original": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "ambiguous": 300
+      }
+    },
+    "delete_other": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "exact": 149,
+        "relocated": 151
+      }
+    },
+    "duplicate_block": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "ambiguous": 32,
+        "exact": 133,
+        "relocated": 135
+      }
+    },
+    "edit_context": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "ambiguous": 4,
+        "context_changed": 296
+      }
+    },
+    "edit_inside": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "ambiguous": 1,
+        "changed": 283,
+        "context_changed": 9,
+        "orphaned": 7
+      }
+    },
+    "insert_after": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "exact": 300
+      }
+    },
+    "insert_before": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "relocated": 300
+      }
+    },
+    "move_block": {
+      "n": 300,
+      "correct": 300,
+      "false_confident": 0,
+      "false_alarm": 0,
+      "outcomes": {
+        "relocated": 300
+      }
+    },
+    "reflow_inside": {
+      "n": 300,
+      "correct": 299,
+      "false_confident": 0,
+      "false_alarm": 1,
+      "outcomes": {
+        "context_changed": 1,
+        "relocated": 299
+      }
+    }
+  },
+  "total": {
+    "n": 3300,
+    "correct": 3299,
+    "false_confident": 0,
+    "false_alarm": 1,
+    "outcomes": {
+      "ambiguous": 338,
+      "changed": 346,
+      "context_changed": 309,
+      "exact": 583,
+      "orphaned": 240,
+      "relocated": 1484
+    }
+  },
+  "latency": {
+    "n": 3300,
+    "p50_ms": 0.069916,
+    "p95_ms": 12.671375000000001,
+    "max_ms": 56.480334
+  },
+  "false_confident_examples": []
+}

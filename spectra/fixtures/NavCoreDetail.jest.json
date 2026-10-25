@@ -1,0 +1,100 @@
+{
+ "screen": "Detail",
+ "source": "jest",
+ "capturedAt": 1792893702701,
+ "roots": [
+  {
+   "type": "RCTView",
+   "style": {
+    "flexGrow": 1,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "gap": 12,
+    "paddingVertical": 24
+   },
+   "children": [
+    {
+     "type": "RCTText",
+     "style": {},
+     "testID": "detail.title",
+     "text": "Detail screen"
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "opacity": 1
+     },
+     "testID": "detail.openTransaction",
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {},
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "textAlign": "center",
+          "margin": 8,
+          "color": "#007AFF",
+          "fontSize": 18
+         },
+         "text": "Open transaction"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "opacity": 1
+     },
+     "testID": "detail.openSheet",
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {},
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "textAlign": "center",
+          "margin": 8,
+          "color": "#007AFF",
+          "fontSize": 18
+         },
+         "text": "Open RN sheet"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "opacity": 1
+     },
+     "testID": "detail.openNativeInRN",
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {},
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "textAlign": "center",
+          "margin": 8,
+          "color": "#007AFF",
+          "fontSize": 18
+         },
+         "text": "Native screen in RN stack"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

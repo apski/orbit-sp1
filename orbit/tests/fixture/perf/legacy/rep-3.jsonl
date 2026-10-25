@@ -1,0 +1,34 @@
+{"debug": false, "device": "iPhone 17 Pro", "impl": "legacy", "journey": "markets-trade", "k": "meta", "platform": "ios"}
+{"debug": false, "k": "meta", "t": 1760000000000.0}
+{"k": "f", "n": "orderbook_levels", "t": 1760000000000.0, "v": 50}
+{"k": "m", "n": "markets:tap", "t": 1760000001000.0}
+{"id": 1, "k": "b", "n": "coordinator", "ph": "navigation", "sc": "markets", "t": 1760000001000.0, "th": "main"}
+{"id": 1, "k": "e", "t": 1760000001062.4}
+{"id": 2, "k": "b", "n": "list:build", "ph": "render", "sc": "markets", "t": 1760000001062.4, "th": "main"}
+{"id": 2, "k": "e", "t": 1760000001228.8}
+{"k": "m", "n": "markets:first_frame", "t": 1760000001241.6}
+{"k": "m", "n": "markets:interactive", "t": 1760000001249.6}
+{"k": "m", "n": "trade:tap", "t": 1760000002149.6}
+{"id": 3, "k": "b", "n": "coordinator", "ph": "navigation", "sc": "trade", "t": 1760000002149.6, "th": "main"}
+{"id": 6, "k": "b", "n": "fetch:orderbook", "ph": "data", "sc": "trade", "t": 1760000002244.24, "th": "bg:25"}
+{"id": 3, "k": "e", "t": 1760000002284.8}
+{"id": 4, "k": "b", "n": "model:prepare", "ph": "data", "sc": "trade", "t": 1760000002284.8, "th": "main"}
+{"id": 5, "k": "b", "n": "decode:orderbook", "p": 4, "sc": "trade", "t": 1760000002302.48, "th": "main"}
+{"id": 5, "k": "e", "t": 1760000002417.4}
+{"id": 4, "k": "e", "t": 1760000002461.6}
+{"id": 7, "k": "b", "n": "view:setup", "ph": "render", "sc": "trade", "t": 1760000002461.6, "th": "main"}
+{"id": 7, "k": "e", "t": 1760000002671.16}
+{"id": 8, "k": "b", "n": "layout:ticket", "ph": "layout", "sc": "trade", "t": 1760000002671.16, "th": "main"}
+{"id": 6, "k": "e", "t": 1760000002687.28}
+{"id": 8, "k": "e", "t": 1760000002784.0}
+{"d": 71.76, "k": "busy", "t": 1760000002784.0, "th": "main"}
+{"k": "m", "n": "trade:first_frame", "t": 1760000002794.4}
+{"id": 9, "k": "b", "n": "fetch:quotes", "ph": "data", "sc": "trade", "t": 1760000002915.56, "th": "bg:25"}
+{"id": 9, "k": "e", "t": 1760000002999.28}
+{"id": 10, "k": "b", "n": "apply:quotes", "ph": "render", "sc": "trade", "t": 1760000002999.28, "th": "main"}
+{"k": "m", "n": "trade:data_ready", "t": 1760000002999.28}
+{"id": 10, "k": "e", "t": 1760000003023.2}
+{"k": "m", "n": "trade:interactive", "t": 1760000003023.2}
+{"d": 20.0, "k": "busy", "t": 1760000003028.2, "th": "main"}
+{"k": "m", "n": "end", "t": 1760000003423.2}
+{"k": "c", "n": "hitch", "t": 1760000003423.2, "v": 3}

@@ -1,0 +1,6 @@
+#!/bin/sh
+# Run Orbit from anywhere. Stdlib only (Python >= 3.13 for glob.translate / tomllib).
+# Versioned names first: inside a pipenv shell, bare `python3` is the project's older venv.
+here="$(cd "$(dirname "$0")/.." && pwd)"
+for py in python3.15 python3.14 python3.13 python3; do command -v "$py" >/dev/null 2>&1 && break; done
+PYTHONPATH="$here" exec "$py" -m orbit "$@"

@@ -1,0 +1,170 @@
+{
+ "screen": "Detail",
+ "capturedAt": 1792893861490,
+ "roots": [
+  {
+   "type": "RCTView",
+   "style": {
+    "flexGrow": 1,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "gap": 12,
+    "paddingVertical": 24
+   },
+   "frame": [
+    0,
+    222,
+    402,
+    652
+   ],
+   "children": [
+    {
+     "type": "RCTText",
+     "style": {
+      "overflow": "hidden"
+     },
+     "frame": [
+      158.6666717529297,
+      465,
+      84.66665649414062,
+      17
+     ],
+     "testID": "detail.title",
+     "text": "Detail screen"
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "opacity": 1
+     },
+     "frame": [
+      123.66666412353516,
+      494,
+      154.66668701171875,
+      37.66668701171875
+     ],
+     "testID": "detail.openTransaction",
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {},
+       "frame": [
+        123.66666412353516,
+        494,
+        154.66668701171875,
+        37.666656494140625
+       ],
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "overflow": "hidden",
+          "textAlign": "center",
+          "margin": 8,
+          "color": "#007AFF",
+          "fontSize": 18
+         },
+         "frame": [
+          131.66666412353516,
+          502,
+          138.6666717529297,
+          21.666656494140625
+         ],
+         "text": "Open transaction"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "opacity": 1
+     },
+     "frame": [
+      132,
+      543.6666564941406,
+      138,
+      37.6666259765625
+     ],
+     "testID": "detail.openSheet",
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {},
+       "frame": [
+        132,
+        543.6666564941406,
+        138,
+        37.66668701171875
+       ],
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "overflow": "hidden",
+          "textAlign": "center",
+          "margin": 8,
+          "color": "#007AFF",
+          "fontSize": 18
+         },
+         "frame": [
+          140,
+          551.6666564941406,
+          122,
+          21.66668701171875
+         ],
+         "text": "Open RN sheet"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "RCTView",
+     "style": {
+      "opacity": 1
+     },
+     "frame": [
+      90.66666412353516,
+      593.3333435058594,
+      221,
+      37.66668701171875
+     ],
+     "testID": "detail.openNativeInRN",
+     "children": [
+      {
+       "type": "RCTView",
+       "style": {},
+       "frame": [
+        90.66666412353516,
+        593.3333435058594,
+        221,
+        37.666656494140625
+       ],
+       "children": [
+        {
+         "type": "RCTText",
+         "style": {
+          "overflow": "hidden",
+          "textAlign": "center",
+          "margin": 8,
+          "color": "#007AFF",
+          "fontSize": 18
+         },
+         "frame": [
+          98.66666412353516,
+          601.3333435058594,
+          205,
+          21.666656494140625
+         ],
+         "text": "Native screen in RN stack"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

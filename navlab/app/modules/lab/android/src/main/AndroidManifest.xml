@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Release builds stay measurable: lets Perfetto's CPU profiler and heapprofd attach (not debuggable). -->
+  <application>
+    <profileable android:shell="true" />
+  </application>
+</manifest>

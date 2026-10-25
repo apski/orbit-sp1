@@ -1,0 +1,15 @@
+[package]
+name = "orbit-lance"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+orbit-core = { path = "../core" }
+anyhow.workspace = true
+rusqlite.workspace = true
+# `remote` only to work around lancedb 0.39–0.40 referencing Error::Http without it; unused
+lancedb = { version = "0.40", default-features = false, features = ["remote"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+futures = "0.3"
+arrow-array = "58"
+arrow-schema = "58"

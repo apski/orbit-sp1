@@ -1,0 +1,3863 @@
+{
+  "model": "gemma4:26b",
+  "trials": 3,
+  "tasks": 37,
+  "budget": 500,
+  "conditions": {
+    "bundle": {
+      "accuracy": 0.9459459459459459,
+      "correct": 105,
+      "runs": 111,
+      "trap_errors": 3,
+      "mean_prompt_tokens": 691.2162162162163,
+      "mean_context_est_tokens": 428.5135135135135,
+      "latency": {
+        "n": 111,
+        "p50_ms": 764.3118330000001,
+        "p95_ms": 2267.989417,
+        "max_ms": 3287.640958
+      },
+      "per_task": {
+        "analytics-vendor": 3,
+        "api-prefix": 3,
+        "api-style": 3,
+        "auth-header": 3,
+        "backoff-start": 3,
+        "brand-token": 3,
+        "conflicts": 3,
+        "crash-reporter": 3,
+        "cursor-param": 3,
+        "e2e-tool": 0,
+        "event-case": 3,
+        "event-retention": 3,
+        "fallback-locale": 3,
+        "flush-interval": 3,
+        "image-format": 3,
+        "long-lists": 3,
+        "map-sdk": 3,
+        "min-android": 3,
+        "min-ios": 3,
+        "nav-owner": 3,
+        "node-version": 3,
+        "page-max": 3,
+        "password-min": 3,
+        "push-provider": 3,
+        "queue-store": 3,
+        "rate-limit": 3,
+        "release-day": 0,
+        "retry-cap": 3,
+        "runtime-policy": 3,
+        "spacing-base": 3,
+        "state-lib": 3,
+        "tile-cache": 3,
+        "token-ttl": 3,
+        "touch-target": 3,
+        "tti-budget": 3,
+        "uid-hash": 3,
+        "upload-limit": 3
+      },
+      "per_split": {
+        "consistent": [
+          42,
+          45
+        ],
+        "doc_rot": [
+          63,
+          66
+        ]
+      }
+    },
+    "full_docs": {
+      "accuracy": 0.8108108108108109,
+      "correct": 90,
+      "runs": 111,
+      "trap_errors": 21,
+      "mean_prompt_tokens": 4150.189189189189,
+      "mean_context_est_tokens": 4209.0,
+      "latency": {
+        "n": 111,
+        "p50_ms": 509.63704200000006,
+        "p95_ms": 2621.874417,
+        "max_ms": 16748.846290999998
+      },
+      "per_task": {
+        "analytics-vendor": 0,
+        "api-prefix": 3,
+        "api-style": 3,
+        "auth-header": 3,
+        "backoff-start": 3,
+        "brand-token": 3,
+        "conflicts": 3,
+        "crash-reporter": 0,
+        "cursor-param": 3,
+        "e2e-tool": 3,
+        "event-case": 3,
+        "event-retention": 3,
+        "fallback-locale": 3,
+        "flush-interval": 0,
+        "image-format": 3,
+        "long-lists": 3,
+        "map-sdk": 3,
+        "min-android": 3,
+        "min-ios": 3,
+        "nav-owner": 3,
+        "node-version": 0,
+        "page-max": 3,
+        "password-min": 3,
+        "push-provider": 3,
+        "queue-store": 3,
+        "rate-limit": 0,
+        "release-day": 3,
+        "retry-cap": 3,
+        "runtime-policy": 3,
+        "spacing-base": 3,
+        "state-lib": 3,
+        "tile-cache": 3,
+        "token-ttl": 3,
+        "touch-target": 0,
+        "tti-budget": 3,
+        "uid-hash": 3,
+        "upload-limit": 0
+      },
+      "per_split": {
+        "consistent": [
+          45,
+          45
+        ],
+        "doc_rot": [
+          45,
+          66
+        ]
+      }
+    },
+    "none": {
+      "accuracy": 0.2702702702702703,
+      "correct": 30,
+      "runs": 111,
+      "trap_errors": 39,
+      "mean_prompt_tokens": 91.1891891891892,
+      "mean_context_est_tokens": 0.0,
+      "latency": {
+        "n": 111,
+        "p50_ms": 485.72529199999997,
+        "p95_ms": 1440.3513750000002,
+        "max_ms": 60995.037
+      },
+      "per_task": {
+        "analytics-vendor": 0,
+        "api-prefix": 0,
+        "api-style": 3,
+        "auth-header": 0,
+        "backoff-start": 0,
+        "brand-token": 0,
+        "conflicts": 3,
+        "crash-reporter": 3,
+        "cursor-param": 0,
+        "e2e-tool": 0,
+        "event-case": 3,
+        "event-retention": 0,
+        "fallback-locale": 0,
+        "flush-interval": 0,
+        "image-format": 0,
+        "long-lists": 0,
+        "map-sdk": 0,
+        "min-android": 0,
+        "min-ios": 0,
+        "nav-owner": 0,
+        "node-version": 0,
+        "page-max": 3,
+        "password-min": 0,
+        "push-provider": 0,
+        "queue-store": 3,
+        "rate-limit": 0,
+        "release-day": 3,
+        "retry-cap": 0,
+        "runtime-policy": 0,
+        "spacing-base": 3,
+        "state-lib": 0,
+        "tile-cache": 0,
+        "token-ttl": 0,
+        "touch-target": 0,
+        "tti-budget": 0,
+        "uid-hash": 3,
+        "upload-limit": 3
+      },
+      "per_split": {
+        "consistent": [
+          21,
+          45
+        ],
+        "doc_rot": [
+          9,
+          66
+        ]
+      }
+    },
+    "raw_rag": {
+      "accuracy": 0.8378378378378378,
+      "correct": 93,
+      "runs": 111,
+      "trap_errors": 18,
+      "mean_prompt_tokens": 638.7027027027027,
+      "mean_context_est_tokens": 487.5135135135135,
+      "latency": {
+        "n": 111,
+        "p50_ms": 840.627583,
+        "p95_ms": 3600.666334,
+        "max_ms": 6539.613958
+      },
+      "per_task": {
+        "analytics-vendor": 0,
+        "api-prefix": 3,
+        "api-style": 3,
+        "auth-header": 3,
+        "backoff-start": 3,
+        "brand-token": 3,
+        "conflicts": 3,
+        "crash-reporter": 0,
+        "cursor-param": 3,
+        "e2e-tool": 0,
+        "event-case": 3,
+        "event-retention": 3,
+        "fallback-locale": 3,
+        "flush-interval": 3,
+        "image-format": 3,
+        "long-lists": 3,
+        "map-sdk": 3,
+        "min-android": 3,
+        "min-ios": 3,
+        "nav-owner": 3,
+        "node-version": 3,
+        "page-max": 3,
+        "password-min": 3,
+        "push-provider": 3,
+        "queue-store": 3,
+        "rate-limit": 0,
+        "release-day": 3,
+        "retry-cap": 3,
+        "runtime-policy": 3,
+        "spacing-base": 3,
+        "state-lib": 3,
+        "tile-cache": 0,
+        "token-ttl": 3,
+        "touch-target": 3,
+        "tti-budget": 3,
+        "uid-hash": 3,
+        "upload-limit": 0
+      },
+      "per_split": {
+        "consistent": [
+          45,
+          45
+        ],
+        "doc_rot": [
+          48,
+          66
+        ]
+      }
+    }
+  },
+  "token_estimate_ratio": 1.0042970729235685,
+  "samples": [
+    {
+      "answer": "Redux",
+      "condition": "none",
+      "correct": false,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Redux",
+      "condition": "none",
+      "correct": false,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Redux",
+      "condition": "none",
+      "correct": false,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Zustand",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Zustand",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Zustand",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Zustand",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Zustand",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Zustand",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Zustand",
+      "condition": "bundle",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Zustand",
+      "condition": "bundle",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Zustand",
+      "condition": "bundle",
+      "correct": true,
+      "task": "state-lib",
+      "trap": "architecture.md still says Redux; ADR-001 never marked superseded",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Authorization",
+      "condition": "none",
+      "correct": false,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Authorization",
+      "condition": "none",
+      "correct": false,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Authorization",
+      "condition": "none",
+      "correct": false,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "bundle",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "bundle",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "X-Tidepool-Token",
+      "condition": "bundle",
+      "correct": true,
+      "task": "auth-header",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "cursor",
+      "condition": "none",
+      "correct": false,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "cursor",
+      "condition": "none",
+      "correct": false,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "cursor",
+      "condition": "none",
+      "correct": false,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "after",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "after",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "after",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "after",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "after",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "after",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "after",
+      "condition": "bundle",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "after",
+      "condition": "bundle",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "after",
+      "condition": "bundle",
+      "correct": true,
+      "task": "cursor-param",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "60",
+      "condition": "none",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "60",
+      "condition": "none",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "60",
+      "condition": "none",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "120",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "120",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "120",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "120",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "120",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "120",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "90",
+      "condition": "bundle",
+      "correct": true,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "90",
+      "condition": "bundle",
+      "correct": true,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "90",
+      "condition": "bundle",
+      "correct": true,
+      "task": "rate-limit",
+      "trap": "api.md says 120; ADR-006 lowered it to 90",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "3",
+      "condition": "none",
+      "correct": false,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "3",
+      "condition": "none",
+      "correct": false,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "3",
+      "condition": "none",
+      "correct": false,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "5",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "5",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "5",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "5",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "5",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "5",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "5",
+      "condition": "bundle",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "5",
+      "condition": "bundle",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "5",
+      "condition": "bundle",
+      "correct": true,
+      "task": "retry-cap",
+      "trap": "spec edited after approval (8 -> 5); changelog says 10",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "30",
+      "condition": "none",
+      "correct": false,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "30",
+      "condition": "none",
+      "correct": false,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "30",
+      "condition": "none",
+      "correct": false,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "2",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "2",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "2",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "2",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "2",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "2",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "2",
+      "condition": "bundle",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "2",
+      "condition": "bundle",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "2",
+      "condition": "bundle",
+      "correct": true,
+      "task": "backoff-start",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Last write wins",
+      "condition": "none",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Last write wins",
+      "condition": "none",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Last write wins.",
+      "condition": "none",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "last-writer-wins per field",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "last-writer-wins per field",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "last-writer-wins per field",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Last-writer-wins per field",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Last-writer-wins per field",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Last-writer-wins per field",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Last-writer-wins per field",
+      "condition": "bundle",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Last-writer-wins per field",
+      "condition": "bundle",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Last-writer-wins per field",
+      "condition": "bundle",
+      "correct": true,
+      "task": "conflicts",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "snake_case",
+      "condition": "none",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "snake_case",
+      "condition": "none",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "snake_case",
+      "condition": "none",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "snake_case",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "snake_case",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "snake_case",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "snake_case",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "snake_case",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "snake_case",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "snake_case",
+      "condition": "bundle",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "snake_case",
+      "condition": "bundle",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "snake_case",
+      "condition": "bundle",
+      "correct": true,
+      "task": "event-case",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "none",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "none",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "none",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "bundle",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "bundle",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SHA-256",
+      "condition": "bundle",
+      "correct": true,
+      "task": "uid-hash",
+      "trap": "changelog 2.9.0",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "none",
+      "condition": "none",
+      "correct": false,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "none",
+      "condition": "none",
+      "correct": false,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "none",
+      "condition": "none",
+      "correct": false,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "bundle",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "bundle",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "fingerprint",
+      "condition": "bundle",
+      "correct": true,
+      "task": "runtime-policy",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "none",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "none",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "none",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Tuesday",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "I am sorry, but the provided repository context does not contain information regarding which weekday the release branch is cut.",
+      "condition": "bundle",
+      "correct": false,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "I am sorry, but the provided repository context does not contain information regarding which weekday the release branch is cut.",
+      "condition": "bundle",
+      "correct": false,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "I am sorry, but the provided repository context does not contain information regarding which weekday the release branch is cut.",
+      "condition": "bundle",
+      "correct": false,
+      "task": "release-day",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "2.0",
+      "condition": "none",
+      "correct": false,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "2.0",
+      "condition": "none",
+      "correct": false,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "2.0",
+      "condition": "none",
+      "correct": false,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "1.5",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "1.5",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "1.5",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "1.5",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "1.5",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "1.5",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "1.5",
+      "condition": "bundle",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "1.5",
+      "condition": "bundle",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "1.5",
+      "condition": "bundle",
+      "correct": true,
+      "task": "tti-budget",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "png",
+      "condition": "none",
+      "correct": false,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "png",
+      "condition": "none",
+      "correct": false,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "png",
+      "condition": "none",
+      "correct": false,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "AVIF",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "AVIF",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "AVIF",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "AVIF",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "AVIF",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "AVIF",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "AVIF",
+      "condition": "bundle",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "AVIF",
+      "condition": "bundle",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "AVIF",
+      "condition": "bundle",
+      "correct": true,
+      "task": "image-format",
+      "trap": "media-pipeline.md still says WebP",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "4",
+      "condition": "none",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "4",
+      "condition": "none",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "4",
+      "condition": "none",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "4",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "4",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "4",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "4",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "4",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "4",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "4",
+      "condition": "bundle",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "4",
+      "condition": "bundle",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "4",
+      "condition": "bundle",
+      "correct": true,
+      "task": "spacing-base",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "@color/primary",
+      "condition": "none",
+      "correct": false,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "#brand-primary",
+      "condition": "none",
+      "correct": false,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "@color/tidepool_primary",
+      "condition": "none",
+      "correct": false,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "bundle",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "bundle",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "color.brand.600",
+      "condition": "bundle",
+      "correct": true,
+      "task": "brand-token",
+      "trap": "theming.md still recommends color.primary",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "javascript",
+      "condition": "none",
+      "correct": false,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "javascript",
+      "condition": "none",
+      "correct": false,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "javascript",
+      "condition": "none",
+      "correct": false,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "native",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "native",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "native",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "native",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "native",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "native",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "native",
+      "condition": "bundle",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "native",
+      "condition": "bundle",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "native",
+      "condition": "bundle",
+      "correct": true,
+      "task": "nav-owner",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "REST",
+      "condition": "none",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "REST",
+      "condition": "none",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "REST",
+      "condition": "none",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "REST",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "REST",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "REST",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "REST",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "REST",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "REST",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "REST",
+      "condition": "bundle",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "REST",
+      "condition": "bundle",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "REST",
+      "condition": "bundle",
+      "correct": true,
+      "task": "api-style",
+      "trap": "meeting notes discussion",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "LazyColumn",
+      "condition": "none",
+      "correct": false,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "LazyColumn",
+      "condition": "none",
+      "correct": false,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "LazyColumn",
+      "condition": "none",
+      "correct": false,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "FlashList",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "FlashList",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "FlashList",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "FlashList",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "FlashList",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "FlashList",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "FlashList",
+      "condition": "bundle",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "FlashList",
+      "condition": "bundle",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "FlashList",
+      "condition": "bundle",
+      "correct": true,
+      "task": "long-lists",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "15",
+      "condition": "none",
+      "correct": false,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "15",
+      "condition": "none",
+      "correct": false,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "15",
+      "condition": "none",
+      "correct": false,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "16",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "16",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "16",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "16",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "16",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "16",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "16",
+      "condition": "bundle",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "16",
+      "condition": "bundle",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "16",
+      "condition": "bundle",
+      "correct": true,
+      "task": "min-ios",
+      "trap": "support-matrix.md still says iOS 15",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SQLite",
+      "condition": "none",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SQLite",
+      "condition": "none",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SQLite",
+      "condition": "none",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SQLite (WAL mode)",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SQLite (WAL mode)",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SQLite (WAL mode)",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SQLite (WAL mode)",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SQLite (WAL mode)",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SQLite (WAL mode)",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "SQLite",
+      "condition": "bundle",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "SQLite",
+      "condition": "bundle",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "SQLite",
+      "condition": "bundle",
+      "correct": true,
+      "task": "queue-store",
+      "trap": null,
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "24",
+      "condition": "none",
+      "correct": false,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "24",
+      "condition": "none",
+      "correct": false,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "24",
+      "condition": "none",
+      "correct": false,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "29",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "29",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "29",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "29",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "29",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "29",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "29",
+      "condition": "bundle",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "29",
+      "condition": "bundle",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "29",
+      "condition": "bundle",
+      "correct": true,
+      "task": "min-android",
+      "trap": "support-matrix.md says API 26",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "60",
+      "condition": "none",
+      "correct": false,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "60",
+      "condition": "none",
+      "correct": false,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "60",
+      "condition": "none",
+      "correct": false,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "15",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "15",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "15",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "15",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "15",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "15",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "15",
+      "condition": "bundle",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "15",
+      "condition": "bundle",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "15",
+      "condition": "bundle",
+      "correct": true,
+      "task": "token-ttl",
+      "trap": "onboarding.md says 60 minutes",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "100",
+      "condition": "none",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "100",
+      "condition": "none",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "100",
+      "condition": "none",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "100",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "100",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "100",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "100",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "100",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "100",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "100",
+      "condition": "bundle",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "100",
+      "condition": "bundle",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "100",
+      "condition": "bundle",
+      "correct": true,
+      "task": "page-max",
+      "trap": "performance.md calls 50 the largest page",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "44",
+      "condition": "none",
+      "correct": false,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "44",
+      "condition": "none",
+      "correct": false,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "44",
+      "condition": "none",
+      "correct": false,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "44",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "44",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "44",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "48",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "48",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "48",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "48",
+      "condition": "bundle",
+      "correct": true,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "48",
+      "condition": "bundle",
+      "correct": true,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "48",
+      "condition": "bundle",
+      "correct": true,
+      "task": "touch-target",
+      "trap": "accessibility.md says 44",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "20",
+      "condition": "none",
+      "correct": false,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "20",
+      "condition": "none",
+      "correct": false,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "20",
+      "condition": "none",
+      "correct": false,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "20",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "20",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "20",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "22",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "22",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "22",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "22",
+      "condition": "bundle",
+      "correct": true,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "22",
+      "condition": "bundle",
+      "correct": true,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "22",
+      "condition": "bundle",
+      "correct": true,
+      "task": "node-version",
+      "trap": "release.md CI says Node 20",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Detox",
+      "condition": "none",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Detox",
+      "condition": "none",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Detox",
+      "condition": "none",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Maestro",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Maestro",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Maestro",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Detox",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Detox",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Detox",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Detox",
+      "condition": "bundle",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Detox",
+      "condition": "bundle",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Detox",
+      "condition": "bundle",
+      "correct": false,
+      "task": "e2e-tool",
+      "trap": "onboarding.md says Detox",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Sentry",
+      "condition": "none",
+      "correct": true,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Sentry",
+      "condition": "none",
+      "correct": true,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Sentry",
+      "condition": "none",
+      "correct": true,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Bugsnag",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Bugsnag",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Bugsnag",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Bugsnag",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Bugsnag",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Bugsnag",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Sentry",
+      "condition": "bundle",
+      "correct": true,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "Sentry",
+      "condition": "bundle",
+      "correct": true,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "Sentry",
+      "condition": "bundle",
+      "correct": true,
+      "task": "crash-reporter",
+      "trap": "architecture.md says Bugsnag",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "none",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "none",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "none",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "full_docs",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Amplitude",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "PostHog",
+      "condition": "bundle",
+      "correct": true,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "PostHog",
+      "condition": "bundle",
+      "correct": true,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "PostHog",
+      "condition": "bundle",
+      "correct": true,
+      "task": "analytics-vendor",
+      "trap": "analytics.md says Amplitude",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "en",
+      "condition": "none",
+      "correct": false,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "en",
+      "condition": "none",
+      "correct": false,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "en",
+      "condition": "none",
+      "correct": false,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "en-GB",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "en-GB",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "en-GB",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "en-GB",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "en-GB",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "en-GB",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "en-GB",
+      "condition": "bundle",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "en-GB",
+      "condition": "bundle",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "en-GB",
+      "condition": "bundle",
+      "correct": true,
+      "task": "fallback-locale",
+      "trap": "glossary says en-US",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "500",
+      "condition": "none",
+      "correct": false,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "500",
+      "condition": "none",
+      "correct": false,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "500",
+      "condition": "none",
+      "correct": false,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "200",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "200",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "200",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "500",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "500",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "500",
+      "condition": "raw_rag",
+      "correct": false,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "200",
+      "condition": "bundle",
+      "correct": true,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "200",
+      "condition": "bundle",
+      "correct": true,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "200",
+      "condition": "bundle",
+      "correct": true,
+      "task": "tile-cache",
+      "trap": "performance.md says 500 MB",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "Firebase Cloud Messaging",
+      "condition": "none",
+      "correct": false,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "Firebase Cloud Messaging",
+      "condition": "none",
+      "correct": false,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "Firebase Cloud Messaging",
+      "condition": "none",
+      "correct": false,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "bundle",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "bundle",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "OneSignal",
+      "condition": "bundle",
+      "correct": true,
+      "task": "push-provider",
+      "trap": "notifications.md says Firebase Cloud Messaging",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "8",
+      "condition": "none",
+      "correct": false,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": true,
+      "trial": 0
+    },
+    {
+      "answer": "8",
+      "condition": "none",
+      "correct": false,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": true,
+      "trial": 1
+    },
+    {
+      "answer": "8",
+      "condition": "none",
+      "correct": false,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": true,
+      "trial": 2
+    },
+    {
+      "answer": "12",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "12",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "12",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "12",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "12",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "12",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "12",
+      "condition": "bundle",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "12",
+      "condition": "bundle",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "12",
+      "condition": "bundle",
+      "correct": true,
+      "task": "password-min",
+      "trap": "testing.md says 8",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "3",
+      "condition": "none",
+      "correct": false,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "3",
+      "condition": "none",
+      "correct": false,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "3",
+      "condition": "none",
+      "correct": false,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "13",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "13",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "13",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "13",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "13",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "13",
+      "condition": "raw_rag",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "13",
+      "condition": "bundle",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "13",
+      "condition": "bundle",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "13",
+      "condition": "bundle",
+      "correct": true,
+      "task": "event-retention",
+      "trap": "security.md says 25 months",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "v1",
+      "condition": "none",
+      "correct": false,
+      "task": "api-prefix",
+      "trap": "architecture.md says /v2",
+      "trapped": false,
+      "trial": 0
+    },
+    {
+      "answer": "v1",
+      "condition": "none",
+      "correct": false,
+      "task": "api-prefix",
+      "trap": "architecture.md says /v2",
+      "trapped": false,
+      "trial": 1
+    },
+    {
+      "answer": "v1",
+      "condition": "none",
+      "correct": false,
+      "task": "api-prefix",
+      "trap": "architecture.md says /v2",
+      "trapped": false,
+      "trial": 2
+    },
+    {
+      "answer": "/v3",
+      "condition": "full_docs",
+      "correct": true,
+      "task": "api-prefix",
+      "trap": "architecture.md says /v2",
+      "trapped": false,
+      "trial": 0
+    }
+  ]
+}

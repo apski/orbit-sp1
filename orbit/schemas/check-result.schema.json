@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "orbit/check-result",
+  "title": "check-result",
+  "description": "One runs/<timestamp>-<check>.json. unavailable = tool missing, never reported as passed.",
+  "type": "object",
+  "required": [
+    "version",
+    "check",
+    "status"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "check": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed",
+        "error",
+        "unavailable",
+        "planned"
+      ]
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "command": {
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "exit_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "duration_ms": {
+      "type": "integer"
+    },
+    "log": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array"
+    }
+  }
+}

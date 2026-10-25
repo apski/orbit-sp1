@@ -1,0 +1,27 @@
+// navscan self-check: one fixture repo with every pattern seen in real codebases. `node scan/test.mjs`
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const dir = new URL('./fixtures/patterns', import.meta.url).pathname;
+const out = '/tmp/navscan-test.json';
+execFileSync('node', [new URL('./navscan.mjs', import.meta.url).pathname, dir, '--json', out, '--adapter', '/nonexistent.json']);
+const r = JSON.parse(fs.readFileSync(out, 'utf8'));
+const by = (label) => r.tree.find((n) => n.label.includes(label));
+const root = r.tree.find((n) => n.id.startsWith('src/nav/RootNavigator'));
+assert.ok(root, 'default-exported navigator instance used via HOC-wrapped component');
+assert.equal(root.kind, 'stack');
+const tabs = by('Tab in Tabs');
+assert.ok(tabs && tabs.kind === 'tabs' && tabs.routes === 5, 'learned factory wrapper + export default from + .map over a literal array');
+assert.ok(root.children.includes(tabs.id), 'conditional screen component resolved through a tsconfig path alias');
+const checkout = r.tree.find((n) => n.id.startsWith('src/nav/Checkout'));
+assert.ok(checkout && checkout.routes === 2, 'v7 static config');
+assert.ok(root.children.includes(checkout.id), 'screen helper with argument binding (options.Flow)');
+const custom = r.tree.find((n) => n.id.startsWith('src/nav/CustomTabs'));
+assert.ok(custom && custom.kind === 'tabs' && custom.routes === 3, 'custom navigator via createNavigatorFactory(TabRouter) (gap g0001)');
+assert.ok(root.children.includes(custom.id), 'getComponent={() => X} mount (gap g0002)');
+assert.equal(r.learned.factories.createAppTabs, 'tabs', 'factory wrapper learned');
+assert.ok(r.flags.some((f) => f.startsWith('NOT REACHED') && f.includes('Dead')), 'dead navigator flagged via registerComponent entry tracing');
+assert.ok(r.flags.some((f) => f.startsWith('INLINE COMPONENT')), 'inline component flagged');
+assert.ok(!r.unresolved.some((u) => u.kind === 'parse-error'), 'non-code imports are not parsed');
+assert.ok(r.paths.some((p) => p.path === 'stack(4) > tabs(5)' || p.navigators === 2), 'scored paths');
+console.log(`navscan self-check passed (${r.navigators} navigators, ${r.paths.length} scored stacks)`);

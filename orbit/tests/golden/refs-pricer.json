@@ -1,0 +1,19 @@
+{
+  "definitions": [
+    {
+      "kind": "class",
+      "source": "py/billing/domain/pricing.py:8",
+      "unit": "py-svc:billing"
+    }
+  ],
+  "index_digest": "a5c9f609e79e45ba",
+  "reference_count": 1,
+  "references": [
+    {
+      "source": "py/billing/domain/pricing.py:8",
+      "unit": "py-svc:billing"
+    }
+  ],
+  "symbol": "Pricer",
+  "version": 1
+}

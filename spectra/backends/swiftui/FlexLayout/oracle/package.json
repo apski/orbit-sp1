@@ -1,0 +1,1 @@
+{ "name": "flexlayout-oracle", "private": true, "type": "module", "dependencies": { "yoga-layout": "3.2.1" } }
