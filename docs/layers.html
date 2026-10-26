@@ -114,7 +114,7 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
   <div class="stack">
 
     <div class="layer future">
-      <div class="alt"><b>L7</b><span>planned</span></div>
+      <div class="alt"><b>L8</b><span>planned</span></div>
       <div class="body">
         <div class="title-row"><h3>Voyager-2</h3><span class="tag">named, not built</span></div>
         <p class="q">"Further out than Voyager-1."</p>
@@ -123,7 +123,7 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
     </div>
 
     <div class="layer">
-      <div class="alt"><b>L6</b><span>across jobs</span></div>
+      <div class="alt"><b>L7</b><span>across jobs</span></div>
       <div class="body">
         <div class="title-row"><h3>Voyager-1: job → validated draft PR</h3><span class="tag">voyager/</span></div>
         <p class="q">"Can I trust this change without re-checking it myself?"</p>
@@ -136,7 +136,7 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
     </div>
 
     <div class="layer here">
-      <div class="alt"><b>L5</b><span>in a session</span><span class="pin">new today</span></div>
+      <div class="alt"><b>L6</b><span>in a session</span><span class="pin">new today</span></div>
       <div class="body">
         <div class="title-row"><h3>Gate: oracle + must-pass list + ratchet</h3><span class="tag">gate/ · .orbit/gate</span></div>
         <p class="q">"Is this agent, in this working tree, still green, and did it keep every ruler as strict as it found it?"</p>
@@ -149,14 +149,27 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
     </div>
 
     <div class="layer here">
-      <div class="alt"><b>L4</b><span>long tasks</span></div>
+      <div class="alt"><b>L5</b><span>long tasks</span></div>
       <div class="body">
         <div class="title-row"><h3>Harness: seven rules for long tasks</h3><span class="tag">HARNESS.md</span></div>
         <p class="q">"How does a task survive many sessions and many agents?"</p>
         <dl class="facts">
           <div><dt>Does</dt><dd>One command registry · agents drive the real app · test first · oracle plus corpus · ratchet · handoff log · priority and escalation.</dd></div>
-          <div><dt>Guarantees</dt><dd>Written rules. The gate (L5) makes rules 3–6 mechanical; the rest rely on the skill following them.</dd></div>
+          <div><dt>Guarantees</dt><dd>Written rules. The gate (L6) makes rules 3–6 mechanical; the rest rely on the skill following them.</dd></div>
           <div><dt>You touch</dt><dd>The per-skill table: what acceptance, gate, oracle and floor mean in each skill.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer here">
+      <div class="alt"><b>L4</b><span>many surfaces</span><span class="pin">new today</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Program: where every surface stands</h3><span class="tag">.navlab/program.json · arch/program.py · native-port</span></div>
+        <p class="q">"Across 10 surfaces, experiments and weeks: where are we, what's next, and what is blocked?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>One row per surface (move, stage, goal, judge, evidence, links). Stages advance only through a check; the readiness gate is the check for <code>ready</code>. Links point into each tool's own store and are read live.</dd></div>
+          <div><dt>Guarantees</dt><dd>A resuming agent reads <code>status</code> at zoom 0 (~170 tokens measured on the test app), not 8 stores. A stage can't be skipped, faked or undone without the gate seeing it.</dd></div>
+          <div><dt>You touch</dt><dd><code>native-port</code> skill (entry and resume); <code>app-architecture-steward</code> owns the file for every move type.</dd></div>
         </dl>
       </div>
     </div>
@@ -216,16 +229,16 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
   <p class="sub">What happened today on a copy of the <code>rn-vs-native</code> app. An agent renamed a navigation route, then tried to hide it.</p>
   <ol class="walk">
     <li><span class="who">L3 skill</span><div>The agent, working a migration, renames route <code>Detail</code> to <code>Details</code> in 4 files. Typecheck passes, so it looks done.</div></li>
-    <li class="block"><span class="who">L5 gate</span><div>It tries to stop. The Stop hook runs <code>verify gate</code>. <code>gate-contracts</code> fails: the route is gone from the inventory, and old deep links and analytics would break.
+    <li class="block"><span class="who">L6 gate</span><div>It tries to stop. The Stop hook runs <code>verify gate</code>. <code>gate-contracts</code> fails: the route is gone from the inventory, and old deep links and analytics would break.
       <pre>route: 1 removed, 1 added
   - Detail   (was src/autopilot.ts:26)
   + Details
 1 contract(s) removed: each must be intentional (dropped from scope) or a regression</pre></div></li>
     <li><span class="who">L1 instrument</span><div>That verdict came from <code>facts.mjs</code> + <code>contracts.py diff</code>: an AST pass and a set difference, no model.</div></li>
-    <li class="block"><span class="who">L5 ratchet</span><div>The agent edits the baseline so the contracts check passes. Now <code>gate-ratchet</code> fails: the baseline lost an entry compared with the base commit.
+    <li class="block"><span class="who">L6 ratchet</span><div>The agent edits the baseline so the contracts check passes. Now <code>gate-ratchet</code> fails: the baseline lost an entry compared with the base commit.
       <pre>STEP gate-ratchet FAIL
     contracts baseline: - Detail   (was src/autopilot.ts:26)</pre></div></li>
-    <li><span class="who">L5 release valve</span><div>On its second Stop the agent is let through, and you get the message instead. Nobody is trapped forever, and nothing is hidden.</div></li>
+    <li><span class="who">L6 release valve</span><div>On its second Stop the agent is let through, and you get the message instead. Nobody is trapped forever, and nothing is hidden.</div></li>
     <li><span class="who">L0 + human</span><div>The agent reverts and the gate goes green. If the rename really was intended, a person updates the baseline, commits it and pushes. That moves the base, and only that is allowed to.</div></li>
   </ol>
 </section>
@@ -234,7 +247,7 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
   <h2 id="gv-h">Gate and Voyager: two ways to stop an agent fooling you</h2>
   <div class="tbl">
     <table>
-      <thead><tr><th></th><th>Gate (L5)</th><th>Voyager-1 (L6)</th></tr></thead>
+      <thead><tr><th></th><th>Gate (L6)</th><th>Voyager-1 (L7)</th></tr></thead>
       <tbody>
         <tr><td>Threat</td><td>The agent weakens the ruler to get green.</td><td>The agent writes code that fits the tests it can see.</td></tr>
         <tr><td>Defence</td><td>Rulers can only tighten, measured against a base only a person moves.</td><td>The judge is hidden: held-out tests, a protected validator, a diff-only reviewer.</td></tr>
@@ -330,6 +343,27 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
     </div>
 
     <div class="group">
+      <h3>Program: many surfaces at once</h3>
+      <dl class="terms">
+        <dt>Surface</dt>
+        <dd>One unit of the program: a screen, flow or subsystem with one move (migrate, redesign, tune, lab) and one stage.</dd>
+        <dt>Stage check</dt>
+        <dd>What must resolve before a surface enters a stage: a file or a ledger id, never a note. <code>building</code> needs a prediction first; <code>done</code> needs it measured.
+          <span class="ex"><code>program.py advance &lt;s&gt; &lt;stage&gt;</code> refuses with the missing items.</span></dd>
+        <dt>Readiness gate</dt>
+        <dd>The 10 pre-port questions as a checklist with evidence. Contracts, safety net and Release baseline are required.
+          <span class="ex"><code>program.py ready &lt;s&gt;</code>; on the test app it refused: 0 screens covered by flows.</span></dd>
+        <dt>Zoom levels</dt>
+        <dd>The same state at three budgets: 0 = the whole program, 1 = one surface, 2 = one task (Orbit packet plus orbit-rag bundle). Zoom only as far as the next action needs.
+          <span class="ex">Measured on the test app: ~170, ~360 and ~510 tokens.</span></dd>
+        <dt>In flight</dt>
+        <dd>A surface past <code>ready</code> and not yet done. At most 3; more raises a program flag.</dd>
+        <dt>Stop rule</dt>
+        <dd>Two migrate predictions missed in a row: pause the program and re-plan. Zoom 0 raises it as <code>STOP RULE</code>.</dd>
+      </dl>
+    </div>
+
+    <div class="group">
       <h3>Plumbing: how pieces land in a repo</h3>
       <dl class="terms">
         <dt>Packet</dt>
@@ -355,7 +389,8 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
 <section aria-labelledby="gap-h">
   <h2 id="gap-h">Not built yet</h2>
   <ul class="gaps">
-    <li><strong>A native-port entry skill</strong>: one skill that runs <code>ambitious</code>, then a readiness gate (the 10 pre-port questions as pass/fail with evidence), then design-afresh → rn-native-migration → Spectra per surface. Proposed, not built.</li>
+    <li><strong>orbit-rag on this Mac</strong>: zoom 1 and 2 call it for human-approved decisions; the binary isn't installed here yet, so they print the command instead.</li>
+    <li><strong>A real native port through the program</strong>: proven on a seeded program in a copy of rn-vs-native up to the readiness gate (which refused, correctly). No surface has gone past <code>ranked</code> on a real app.</li>
     <li><strong>Spectra in the device set</strong>: <code>spectra verify</code> takes one IR at a time; a verify-all would let the gate pin native screens.</li>
     <li><strong>A gate after each edit</strong>, like ExampleApp's <code>arch-gate.sh</code>. Today the gate runs only at Stop.</li>
     <li><strong>Live device run of <code>gate-flows</code></strong> on a claimed simulator. Its logic is covered by the selftest; the real run hasn't happened.</li>
@@ -364,5 +399,5 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
   </ul>
 </section>
 
-<footer>Source: <code>orbit-sp1/docs/layers.html</code>. Gate shipped in commit <code>66c5e7a</code>. Rules: <code>HARNESS.md</code>; subsystems: <code>ORBIT-SP1.md</code>.</footer>
+<footer>Source: <code>orbit-sp1/docs/layers.html</code>. Gate: commit <code>66c5e7a</code>; program and native-port added after. Rules: <code>HARNESS.md</code>; subsystems: <code>ORBIT-SP1.md</code>.</footer>
 </div>

@@ -1,0 +1,20 @@
+#!/bin/sh
+# argent-sim slim|full|status — which iOS simulators agents drive with argent.
+#   slim (default): lease a slim sim from orbitfleet (fleet-* pool, ~3-4x fewer processes) and boot headless
+#   full:           a regular simulator with the Simulator.app window and every system service
+# The choice lives in ~/.argent/sim-mode (rules/orbitfleet.md reads it) and in argent's MCP env
+# (ARGENT_SIMULATOR_NO_WINDOW). New Claude sessions pick it up; running ones keep their argent server.
+set -eu
+mode="${1:-status}"
+f="$HOME/.argent/sim-mode"
+mkdir -p "$HOME/.argent"
+case "$mode" in
+  status) echo "sim mode: $(cat "$f" 2>/dev/null || echo slim) (default slim)"; exit 0 ;;
+  slim) env='{"ARGENT_SIMULATOR_NO_WINDOW":"1"}' ;;
+  full) env='{}' ;;
+  *) echo "usage: argent-sim slim|full|status" >&2; exit 2 ;;
+esac
+echo "$mode" > "$f"
+claude mcp remove argent -s user >/dev/null 2>&1 || true
+claude mcp add-json argent "{\"type\":\"stdio\",\"command\":\"arch\",\"args\":[\"-arm64\",\"argent\",\"mcp\"],\"env\":$env}" -s user >/dev/null
+echo "sim mode: $mode (argent MCP env: $env). Takes effect in new Claude sessions."

@@ -16,7 +16,7 @@ For a repo with its own Orbit (`agents/orbit/`), `RECONCILE.md` maps the same ru
    flow or a screenshot shows it, on a Release build, never on the agent's say-so.
    **argent contaminates later measurements.** Its `launch-app` sets `DYLD_INSERT_LIBRARIES` (its devtools dylib) in
    the simulator's launchd, and `stop-all-simulator-servers` does not clear it: every later launch on that sim,
-   `xctrace record --launch` included, loads argent (native launches stalled for minutes; NavLab had to discard runs).
+   `xctrace record --launch` included, loads argent (native launches stalled for minutes or never started; push/render timings moved only ≤2.4%, inside the noise floor).
    Before any timing on a sim argent has touched: `xcrun simctl spawn <udid> launchctl unsetenv DYLD_INSERT_LIBRARIES`,
    check with `... launchctl getenv DYLD_INSERT_LIBRARIES` (must print nothing). NavLab `sweep.py detach_tools` does it.
 3. **Test first.** Orient → write the acceptance test → implement → verify → record. The acceptance test exists and
@@ -63,10 +63,12 @@ ask:      <questions for a human, or none>
 | `mobile-scaling-lab`, `mobile-architecture-lab` | the hypothesis + the knob sweep, before code | both arms' flows `--repeat 3`; hygiene rules | the native twin | knees measured on device / configs swept | the lab's report + `DEVLOG.md` | the widest unmeasured knob |
 | `navlab-audit` | the predicted per-push cost (`model.py predict`) | Release journeys under Instruments | NavLab baseline (measured twin) | stacks measured / stacks predicted | `.navlab/` report | stacks furthest above budget |
 | `design-afresh` | `featuremodel.py check` on the as-is model; intents listed | `check --strict`, `contracts.py diff` (only intended removals) | blind reviewer + history replay | migration steps shipped / candidates judged | `docs/design-afresh/<f>/README.md` | hotspots first |
+| `native-port` | a ledger prediction per surface, linked before `building` | `program.py advance` checks + `verify gate` | measured twin, Release journeys, field data | surfaces done within prediction / surfaces ranked | `.navlab/program.json` history | zoom 0's flagged lines, then in-flight `next` |
 | `rn-native-migration` | a ledger prediction per surface | `ledger.py measure`, `contracts.py diff`, journeys on device | measured twin, field data | surfaces migrated within prediction / surfaces ranked | `.navlab/` ledger | stop rules, then next ROI rank |
 | `app-architecture-steward` | a ledger prediction per move | the specialist skill's judge; `fitness.py` | `ledger.py score` (calibration) | moves scored / moves planned | `docs/architecture/` program page | evidence table + `gaps.py rank` |
 | `field-perf` | the field metric + `--min-n` before wiring | `field.py selftest`, `report --measure` | production percentiles | screens with field data at min-n / screens instrumented | `.navlab/` ledger | screens missing data |
 | `spectra`, `spectra-components` | the screen's/variant's IR captured, `verify` failing or unrun | `.spectra/spectra verify` (PARITY n/n within 1pt) | the source's own layout (rn-runtime, jest) | variants/screens at PARITY / captured | `.spectra/DEVLOG.md` | layers bottom-up; "Not done yet" in the skill |
+| `voyager` | `job new --accept` scenarios; held-out tests written before the build | `voyager job run` (validator + reviewer, evidence.json) | the real fixes' tests (backtest), held-out scenarios | jobs done with evidence / jobs run; per-unit mutation floor (`ledger.jsonl`) | `~/.voyager/<name>/jobs/<id>/events.jsonl` | escalated jobs, then lowest mutation floor |
 | `orbit-bootstrap` | the `propose --json` before-snapshot | `engine-tests`, `verify fast`, goldens | golden fixtures, labelled router questions | covered files per language (must rise) / files | `docs/orbit/<area>/BOOTSTRAP-<REPO>.md` | ranked proposal items |
 
 NavLab's own learning loop (`$NAVLAB_HOME/AGENTS.md`: `gaps.py add` before a workaround, fixture-first fix, `gaps.py

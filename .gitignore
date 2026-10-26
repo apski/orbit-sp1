@@ -10,3 +10,4 @@ __pycache__/
 /.orbit-rag/
 xcuserdata/
 .swiftpm/
+spectra/.spectra/
