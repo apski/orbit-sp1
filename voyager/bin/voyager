@@ -1,0 +1,5 @@
+#!/bin/sh
+# Run Voyager-1 from anywhere. Stdlib only (Python >= 3.13 for tomllib / glob features).
+here="$(cd "$(dirname "$0")/.." && pwd)"
+for py in python3.15 python3.14 python3.13 python3; do command -v "$py" >/dev/null 2>&1 && break; done
+exec "$py" "$here/voyager.py" "$@"

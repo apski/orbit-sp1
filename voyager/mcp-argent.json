@@ -1,0 +1,1 @@
+{"mcpServers": {"argent": {"type": "stdio", "command": "arch", "args": ["-arm64", "argent", "mcp"], "env": {"ARGENT_SIMULATOR_NO_WINDOW": "1"}}}}
