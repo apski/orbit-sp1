@@ -106,6 +106,11 @@ func serve(ctx context.Context, args []string) error {
 	if err != nil {
 		return err
 	}
+	release, err := lockDaemon(dir) // first: a second daemon must not load (and abort) this one's state
+	if err != nil {
+		return err
+	}
+	defer release()
 	sims, err := sim.New(*profile, func(m string) { log.Print(m) })
 	if err != nil {
 		return err

@@ -19,8 +19,11 @@ done
 $OF serve --pool-prefix ofaccept- --max-booted 64 >"$ORBITFLEET_HOME/serve.log" 2>&1 &
 DAEMON=$!
 # Watchdog: if this script is killed (orbit verify's timeout sends SIGKILL, so no trap runs), stop its daemon too.
-( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) &
-trap 'kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null; rm -rf "$ORBITFLEET_HOME"' EXIT
+# Its stdio goes to /dev/null: holding the script's stdout pipe kept the finished script unreaped (a zombie passes
+# kill -0), so the watchdog waited forever and orbit verify hung until its timeout.
+( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) </dev/null >/dev/null 2>&1 &
+WATCHDOG=$!
+trap 'kill $WATCHDOG "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null; rm -rf "$ORBITFLEET_HOME"' EXIT
 
 # 1. Two parallel claims get two different, ready, booted, slim simulators.
 t0=$(date +%s)

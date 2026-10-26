@@ -21,8 +21,12 @@ done
 
 $OF serve --pool-prefix ofp5- --port 0 --max-booted 64 >"$ORBITFLEET_HOME/serve.log" 2>&1 &
 # Watchdog: if this script is killed (orbit verify's timeout sends SIGKILL, so no trap runs), stop its daemon too.
-( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) &
+# Its stdio goes to /dev/null: holding the script's stdout pipe kept the finished script unreaped (a zombie passes
+# kill -0), so the watchdog waited forever and orbit verify hung until its timeout.
+( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) </dev/null >/dev/null 2>&1 &
+WATCHDOG=$!
 cleanup() {
+  kill $WATCHDOG 2>/dev/null || true
   for u in $($OF ls --json 2>/dev/null | jq -r '.[] | select(.lease) | .udid'); do $OF release "$u" --force --shutdown >/dev/null 2>&1 || true; done
   for u in $($OF ls --json 2>/dev/null | jq -r '.[] | select(.state == "Booted") | .udid'); do xcrun simctl shutdown "$u" 2>/dev/null || true; done
   kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null || true

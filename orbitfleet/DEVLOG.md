@@ -106,4 +106,22 @@ found:    1. Apple's simulator apps refuse lldb ("Not allowed to attach"); an ad
           10. A test daemon ignored SIGTERM at load ~400 (its shutdown stalled; the stack dump went to a deleted log).
              serve now exits 15 s after a stop no matter what.
           11. Host load on 16 cores reached 591 (other sessions' rustc/swift builds); accept went 190 s -> 646 s, and
-             lldb-continue and video steps timed out. The live gate now waits for load < 48 before it runs.
+             lldb-continue and video steps timed out; at 165-280 neither check reached its first step in 15 min.
+          12. Two daemons in one state dir: the script's own `serve` was still starting when its `ls` wait loop
+             auto-started a second (default flags). The second wrote then deleted daemon.pid (so the watchdog had no
+             pid), and in general a second daemon loads the state before noticing the first: runs.New would abort the
+             first one's running runs. Two agents' first commands at the same moment hit the same race. Now serve
+             takes an flock on daemon.lock before anything else (dropped by the kernel even on SIGKILL), and the CLI
+             waits for a daemon that holds it instead of starting another; restart waits for the old lock to go.
+          13. My watchdog (finding 9) deadlocked the gate: it inherited the script's stdout pipe, so orbit verify kept
+             waiting for EOF and did not reap the finished script; a zombie passes `kill -0`, so the watchdog waited
+             forever. Every "timed out before the first PASS" run was this, not load. Watchdog stdio now goes to
+             /dev/null and each script stops its watchdog on exit.
+          14. ui-flow caught a UI bug: a paused relaunch changes run.pid, the drawer rebuilds on that and dropped the
+             toast with the result. The toast now survives a rebuild for the same sim or run.
+gate:     .orbit/orbit verify fast -> PASS; verify live -> PASS twice in a row at load ~19-20 (accept 27/27 in 124 s and
+          131 s, ui-flow 12/12; 0 leaked daemons). Earlier red runs are findings 8-14.
+floor:    breadth 19/19 commands (measured: + debug lldb|profile|video, version) · ready 4/5 phases
+next:     P5: scripts/p5-fleet.sh (8 claude -p agents, Sonnet, $1 cap each, own pool ofp5-01..08); orbitfleet now
+          lives in orbit-SP1 (orbitfleet/, commit 57a1583): sync this repo's changes there and edit there from now on
+ask:      none

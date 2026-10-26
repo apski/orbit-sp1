@@ -35,16 +35,32 @@ func connect(ctx context.Context) (web.Client, error) {
 			return c, nil
 		}
 		args = v.Args
-		for range 50 { // until the old daemon has let go of the socket
-			if c.Do(ctx, "GET", "/api/version", nil, nil) != nil {
+		for range 200 { // until the old daemon has exited and dropped its lock (it exits within 15 s)
+			if !daemonRunning(dir) {
 				break
 			}
 			time.Sleep(100 * time.Millisecond)
 		}
 	} else if c.Do(ctx, "GET", "/api/ls", nil, nil) == nil {
 		return c, nil // a daemon from before /api/version: leave it
+	} else if daemonRunning(dir) {
+		return c, waitUp(ctx, c, dir) // one is starting (another agent's first command): use it, do not start a second
 	}
-	return c, startDaemon(ctx, c, dir, args)
+	if err := startDaemon(ctx, c, dir, args); err != nil {
+		return c, err
+	}
+	return c, nil
+}
+
+// waitUp waits up to 10 s for a starting daemon to answer.
+func waitUp(ctx context.Context, c web.Client, dir string) error {
+	for range 100 {
+		if c.Do(ctx, "GET", "/api/ls", nil, nil) == nil {
+			return nil
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+	return fmt.Errorf("daemon did not start; see %s", filepath.Join(dir, "serve.log"))
 }
 
 func startDaemon(ctx context.Context, c web.Client, dir string, args []string) error {
@@ -64,13 +80,7 @@ func startDaemon(ctx context.Context, c web.Client, dir string, args []string) e
 		return err
 	}
 	go cmd.Wait()
-	for range 100 {
-		time.Sleep(100 * time.Millisecond)
-		if c.Do(ctx, "GET", "/api/ls", nil, nil) == nil {
-			return nil
-		}
-	}
-	return fmt.Errorf("daemon did not start; see %s", filepath.Join(dir, "serve.log"))
+	return waitUp(ctx, c, dir)
 }
 
 // selfBinary is this executable with symlinks resolved (~/.local/bin/orbitfleet is one) and its mtime.
@@ -128,4 +138,28 @@ func restartIfIdle(f *fleet.Fleet, rs *runs.Runs, stop context.CancelFunc) func(
 		time.AfterFunc(200*time.Millisecond, stop)
 		return nil
 	}
+}
+
+// lockDaemon takes the state dir's daemon lock (flock on daemon.lock) for this process's life; the kernel drops it
+// when the process ends, SIGKILL included. A second daemon fails here, before it loads any state.
+func lockDaemon(dir string) (release func(), err error) {
+	f, err := os.OpenFile(filepath.Join(dir, "daemon.lock"), os.O_CREATE|os.O_RDWR, 0o600)
+	if err != nil {
+		return nil, err
+	}
+	if err := syscall.Flock(int(f.Fd()), syscall.LOCK_EX|syscall.LOCK_NB); err != nil {
+		f.Close()
+		return nil, fmt.Errorf("another orbitfleet daemon is running for %s", dir)
+	}
+	return func() { f.Close() }, nil
+}
+
+// daemonRunning reports whether a daemon holds dir's lock (it may still be starting and not answer yet).
+func daemonRunning(dir string) bool {
+	release, err := lockDaemon(dir)
+	if err != nil {
+		return true
+	}
+	release()
+	return false
 }

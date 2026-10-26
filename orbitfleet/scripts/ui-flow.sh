@@ -19,8 +19,11 @@ while :; do PORT=$((20000 + RANDOM % 20000)); lsof -nP -iTCP:$PORT -sTCP:LISTEN 
 $OF serve --pool-prefix ofaccept- --port $PORT --max-booted 64 >"$ORBITFLEET_HOME/serve.log" 2>&1 &
 DAEMON=$!
 # Watchdog: if this script is killed (orbit verify's timeout sends SIGKILL, so no trap runs), stop its daemon too.
-( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) &
-cleanup() { cat "$ORBITFLEET_HOME/ab-open.err" 2>/dev/null | sed "s/^/open-err: /" | head -5; $AB close >/dev/null 2>&1 || true; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null || true; rm -rf "$ORBITFLEET_HOME"; }
+# Its stdio goes to /dev/null: holding the script's stdout pipe kept the finished script unreaped (a zombie passes
+# kill -0), so the watchdog waited forever and orbit verify hung until its timeout.
+( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) </dev/null >/dev/null 2>&1 &
+WATCHDOG=$!
+cleanup() { kill $WATCHDOG 2>/dev/null; cat "$ORBITFLEET_HOME/ab-open.err" 2>/dev/null | sed "s/^/open-err: /" | head -5; $AB close >/dev/null 2>&1 || true; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null || true; rm -rf "$ORBITFLEET_HOME"; }
 trap cleanup EXIT
 for _ in $(seq 50); do $OF ls >/dev/null 2>&1 && break; sleep 0.1; done
 

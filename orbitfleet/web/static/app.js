@@ -13,6 +13,7 @@ let poll = null; // the open tab's refresh timer
 let log = { run: '', next: -1, lines: [], done: false };
 let history = null; // the run a #run= link shows
 let runsFilter = 'all';
+let toast = { target: '', text: '' }; // the last action's result: survives a drawer rebuild (a relaunch changes the pid)
 const thumbs = new Map(); // udid -> {img, bucket, loading}: the shown <img>, swapped only once the next one loaded
 
 function h(tag, attrs, ...kids) {
@@ -174,7 +175,7 @@ function buildDrawer(sim, run) {
       onclick: () => go(view.sim ? { sim: view.sim, tab: id } : { run: view.run, tab: id }) }, label))),
     h('div', { id: 'tabbody' }),
     ...debugButtons(sim, run),
-    h('span', { id: 'toast', class: 'toast', role: 'status', 'data-testid': 'toast', hidden: true }));
+    h('span', { id: 'toast', class: 'toast', role: 'status', 'data-testid': 'toast', hidden: !toastText() }, toastText()));
   loadTab(run);
 }
 
@@ -238,16 +239,21 @@ function debugButtons(sim, run) {
   return list.length ? [h('h3', {}, 'Debug'), h('div', { class: 'debug' }, ...list)] : [];
 }
 
+const toastText = () => (toast.target === (view.sim || view.run) ? toast.text : '');
+
 async function act(fn, ok, pending) {
-  const t = $('#toast');
-  if (pending) { t.textContent = pending; t.hidden = false; }
+  const show = (text) => {
+    toast = { target: view.sim || view.run, text };
+    const t = $('#toast'); // looked up each time: the drawer may have been rebuilt meanwhile
+    if (t) { t.textContent = text; t.hidden = false; }
+  };
+  if (pending) show(pending);
   try {
     const msg = await fn();
-    t.textContent = typeof msg === 'string' ? msg : ok;
+    show(typeof msg === 'string' ? msg : ok);
   } catch (e) {
-    t.textContent = e.message;
+    show(e.message);
   }
-  t.hidden = false;
 }
 
 function stopPoll() { clearInterval(poll); poll = null; }
