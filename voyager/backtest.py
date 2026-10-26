@@ -280,6 +280,53 @@ def wilson(k, n, z=1.645):
     return (round((c - r) / d, 3), round((c + r) / d, 3))
 
 
+W = {'input_tokens': 1.0, 'cache_creation_input_tokens': 1.25, 'cache_read_input_tokens': 0.1, 'output_tokens': 5.0}
+
+
+def _weighted_tokens(sid):
+    """Price-weighted tokens of one session from its Claude Code transcript (standard Anthropic price ratios)."""
+    hits = list((Path.home() / '.claude' / 'projects').glob(f'*/{sid}.jsonl'))
+    if not hits:
+        return None
+    seen, w = set(), 0.0
+    for line in hits[0].read_text(errors='replace').splitlines():
+        try:
+            m = json.loads(line).get('message') or {}
+        except json.JSONDecodeError:
+            continue
+        u, mid = m.get('usage'), m.get('id')
+        if u and mid not in seen:
+            seen.add(mid)
+            w += sum(u.get(k, 0) * f for k, f in W.items())
+    return w
+
+
+def recover_costs(prof):
+    """Sessions killed by our timeout report no cost. Estimate them: $/weighted-token calibrated on the sessions
+    that did report a cost, applied to the timed-out ones. Written as cost_usd_est (raw cost_usd kept)."""
+    H = Path(prof['home'])
+    rows, timed = [], []
+    for st in (H / 'jobs').glob('*/state.json'):
+        s = vy.jload(st)
+        for x in s.get('sessions', []):
+            w = _weighted_tokens(x['id'])
+            if not w:
+                continue
+            (rows if x.get('cost_usd') else timed).append((st.parent.name, x, w))
+    rate = sorted(x['cost_usd'] / w for _, x, w in rows)[len(rows) // 2]   # median $ per weighted token
+    extra = {}
+    for job, x, w in timed:
+        extra[job] = extra.get(job, 0) + w * rate
+    for arm_dir in (H / 'backtest' / 'arms').glob('*'):
+        for f in arm_dir.glob('*.json'):
+            r = vy.jload(f)
+            jobs = [f"{arm_dir.name}-{r['task']}"] if arm_dir.name in 'AB' else [f"C{i}-{r['task']}" for i in range(r.get('k', 3))]
+            r['cost_usd_est'] = round(r['cost_usd'] + sum(extra.get(j, 0) for j in jobs), 4)
+            vy.jdump(f, r)
+    return {'rate_usd_per_weighted_token': rate, 'calibration_sessions': len(rows), 'timed_out_sessions': len(timed),
+            'estimated_usd_added': round(sum(extra.values()), 2)}
+
+
 def score(prof):
     base = Path(prof['home']) / 'backtest' / 'arms'
     R = {arm.name: {r['task']: r for r in (vy.jload(p) for p in arm.glob('*.json')) if r and 'judge' in r}
@@ -294,8 +341,9 @@ def score(prof):
                      'precision': round(len(ok) / len(sub), 3) if sub else None, 'precision_90ci': wilson(len(ok), len(sub)),
                      'false_accepts': len(sub) - len(ok), 'solve_rate': round(solved / len(common), 3) if common else None,
                      'escalated': sum(1 for t in common if rs[t].get('escalated')),
-                     'cost_usd_total': round(sum(rs[t]['cost_usd'] for t in common), 2),
-                     'cost_per_accepted_correct': round(sum(rs[t]['cost_usd'] for t in common) / max(1, len(ok)), 2),
+                     'cost_usd_total': round(sum(rs[t].get('cost_usd_est', rs[t]['cost_usd']) for t in common), 2),
+                     'cost_per_accepted_correct': round(sum(rs[t].get('cost_usd_est', rs[t]['cost_usd']) for t in common) / max(1, len(ok)), 2),
+                     'cost_note': 'estimated: includes timed-out sessions priced from their transcripts',
                      'minutes_mean': round(sum(rs[t].get('secs') or 0 for t in common) / 60 / max(1, len(common)), 1)}
     pairs = {}
     names = sorted(R)
@@ -363,6 +411,8 @@ def main():
         judge(prof, a.n)
     elif a.cmd == 'score':
         print(json.dumps(score(prof), indent=1))
+    elif a.cmd == 'costs':
+        print(json.dumps(recover_costs(prof), indent=1))
     elif a.cmd == 'packet':
         print(packet(prof))
     elif a.cmd == 'list':

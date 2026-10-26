@@ -75,6 +75,8 @@ class Job:
         resume = None
         if sid and (self.dir / 'logs' / f'{key}.started').exists():
             resume = sid  # the previous run died inside this session: continue it, don't start a second one
+        elif sid:
+            sid = None    # that session ended (a reopened or reset job reached this key again): a fresh one
         if not sid:
             sid = str(uuid.uuid4())
             self.s['sids'][key] = sid
@@ -259,6 +261,14 @@ class Job:
             walk = vy.jload(out_dir / 'walkthrough.json', [])
             rec[phase] = {'videos': sorted(str(p) for p in out_dir.glob('*.mp4') if p.stat().st_size > 0), 'walkthrough': walk}
         n = len(self.c['acceptance'])
+        blocked = lambda w: str(w.get('seen', '')).upper().startswith('BLOCKED') or w.get('blocked')
+        stuck = [w['scenario'] for ph in ('before', 'after') for w in rec.get(ph, {}).get('walkthrough', []) if blocked(w)]
+        if stuck:
+            # the environment stopped the walk (sign-in, a missing service): no builder can fix that, never retry it
+            self.s['recording'] = {**rec, 'status': 'blocked'}
+            self.save()
+            return self.escalate(f'recording blocked by the environment, not the change ({len(stuck)} scenario walks): '
+                                 + str(rec['before']['walkthrough'][0].get('seen', ''))[:300])
         before_shows_bug = any(not w.get('pass') for w in rec['before']['walkthrough'])
         after_ok = bool(rec['after']['videos']) and len(rec['after']['walkthrough']) >= n and \
             all(w.get('pass') for w in rec['after']['walkthrough'])

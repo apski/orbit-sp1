@@ -15,6 +15,8 @@ Read the `argent-device-interact` and `argent-screen-recording` skills first.
 1. `screen-recording-start` (save under {{OUT}}).
 2. For each scenario: launch to a known start state, perform it, and show the expected outcome on screen. Take tap
    coordinates from the accessibility tree, never from pixels.
+   If something outside the change stops a scenario (you cannot sign in, a system service is missing, the build
+   will not launch), do not guess: mark it with `"seen": "BLOCKED: <what stopped you>"`.
 3. `screen-recording-stop`. Write {{OUT}}/walkthrough.json: [{"scenario": "...", "pass": true|false, "seen": "<what
    the screen showed>", "t_start_s": n, "t_end_s": n}].
 End with `RECORDING: <n passed>/<n total>`.
