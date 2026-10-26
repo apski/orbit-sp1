@@ -14,7 +14,8 @@ Score: `<command>` -> **<value>** (<measured|estimated>, <date>). Lower is bette
 
 ## Constraints (a move that breaks one is rejected, however much it lowers the score)
 1. `.orbit/orbit verify gate`: typecheck, `gate ratchet` (no ruler looser than the base), `gate contracts` (no contract
-   lost: storage keys, events, deep links, routes, API calls, native modules), `gate fitness` (no new violation).
+   lost: storage keys, events, deep links, routes, API calls, native modules), `gate program` (every surface in `.navlab/program.json` still holds its stage),
+   `gate fitness` (no new violation).
 2. `.orbit/orbit verify gate-device`: every must-pass simwalk flow in `flows/` passes 3 times on a simulator you
    claimed; every `xfail` flow still fails (a demonstrated bug stays a failing flow until it is fixed).
 3. Judge on a Release build for anything timed. Debug numbers are not evidence.
@@ -32,7 +33,8 @@ Score: `<command>` -> **<value>** (<measured|estimated>, <date>). Lower is bette
 ## Off-limits (the gate blocks these; a person can do them, by pushing the change)
 - Loosening a ruler: adding `accepted` fitness violations, raising a budget, deleting a rule, removing a contract from
   `.navlab/contracts.baseline.json`, deleting or `xfail`-marking a must-pass flow, deleting an `xfail` flow, making a
-  required check optional, dropping a check from a set, un-enforcing a principle, removing the Stop hook.
+  required check optional, dropping a check from a set, un-enforcing a principle, removing the Stop hook, moving a
+  program surface back, unlinking its evidence or predictions, or rewriting its goal or judge.
 - Changing a check's command in the same move as the code it judges.
 - Dodging a rule instead of fixing it: re-exporting through a barrel to escape an import rule, `// @ts-ignore`,
   `eslint-disable`, renaming a testID a flow uses, or splitting a file into meaningless pieces. A reviewer reads every

@@ -7,6 +7,7 @@
   gate ratchet [--repo R]             fail if any ruler got looser than at the base commit (see BASE below)
   gate fitness [--repo R]             NavLab fitness functions (new violations only)
   gate contracts [--init] [--repo R]  today's contracts vs the committed baseline (.navlab/contracts.baseline.json)
+  gate program [--repo R]             NavLab program: every surface still holds its stage (program.py verify)
   gate flows [--repeat 3] [--udid U]  simwalk flows/*.mjs: must-pass flows pass N times; xfail flows still fail
   gate stop [--repo R]                Claude Code Stop hook: `verify gate` + fresh `verify gate-device` runs, or block
   gate selftest
@@ -126,9 +127,34 @@ def ratchet(repo, ref=None):
             out.append(f'principles: rule {pid} no longer enforced')
         elif p.get('predicate') != p_cur[pid].get('predicate'):
             out.append(f'principles: rule {pid} predicate changed')
+    out += program_loosening(at(repo, ref, '.navlab/program.json'), now(repo, '.navlab/program.json'))
     for f in ('.claude/settings.json', '.claude/settings.local.json'):
         if '.orbit/gate stop' in (at(repo, ref, f) or '') and '.orbit/gate stop' not in (now(repo, f) or ''):
             out.append(f'{f}: gate Stop hook removed')
+    return out
+
+
+def program_loosening(was, cur):
+    """The architecture program (navlab/arch/program.py) is a ruler too: an agent can't look done by moving a surface
+    backwards, dropping it, unlinking a prediction or evidence, or rewriting its goal or judge. parked/stopped is allowed
+    (program.py demands a why for it)."""
+    if not was:
+        return []
+    sys.path.insert(0, str(NAVLAB / 'arch'))
+    from program import STAGES, OFF
+    was, cur = json.loads(was), json.loads(cur) if cur else {'surfaces': {}}
+    out = [f'program: {k} changed' for k in ('goal', 'judge') if was.get(k) and cur.get(k) != was[k]]
+    for name, w in was.get('surfaces', {}).items():
+        c = cur.get('surfaces', {}).get(name)
+        if not c:
+            out.append(f'program: surface {name} removed')
+            continue
+        st = STAGES.get(w.get('move'), [])
+        if w['stage'] in st and c['stage'] in st and st.index(c['stage']) < st.index(w['stage']):
+            out.append(f'program: {name} moved back {w["stage"]} -> {c["stage"]}')
+        out += [f'program: {name} {k} changed' for k in ('goal', 'judge', 'move') if w.get(k) and c.get(k) != w[k]]
+        out += [f'program: {name} link removed: {l}' for l in sorted({l['ref'] for l in w.get('links', [])} - {l['ref'] for l in c.get('links', [])})]
+        out += [f'program: {name} evidence removed: {k}' for k in sorted(set(w.get('evidence', {})) - set(c.get('evidence', {})))]
     return out
 
 
@@ -154,7 +180,7 @@ def contracts(repo, init=False):
 
 
 def flows(repo, repeat=3, udid=None):
-    sw = Path(os.environ.get('SIMWALK', Path.home() / 'code' / 'simwalk' / 'simwalk.mjs'))
+    sw = Path(os.environ.get('SIMWALK', HOME / 'simwalk' / 'simwalk.mjs'))
     files = sorted((Path(repo) / 'flows').glob('*.mjs'))
     must = [f for f in files if must_pass(f.read_text())]
     if not sw.exists():
@@ -282,14 +308,15 @@ def propose(repo):
         lines += ['[checks.tsc]', 'command = ["npx", "tsc", "--noEmit"]', 'required = true', 'timeout = 600']
         fast = ['tsc']
     lines += ['[checks.gate-ratchet]', 'command = [".orbit/gate", "ratchet"]', 'required = true',
-              '[checks.gate-contracts]', 'command = [".orbit/gate", "contracts"]', 'required = true', 'timeout = 600']
+              '[checks.gate-contracts]', 'command = [".orbit/gate", "contracts"]', 'required = true', 'timeout = 600',
+              '[checks.gate-program]', 'command = [".orbit/gate", "program"]', 'required = true']
     fit = (repo / 'navlab.fitness.json').exists()
     lines += ['[checks.gate-fitness]'] + (['command = [".orbit/gate", "fitness"]', 'required = true', 'timeout = 600'] if fit else
                                          ['required = true   # planned: `fitness.py init` writes navlab.fitness.json (design-afresh, steward)'])
     fl = (repo / 'flows').is_dir()
     lines += ['[checks.gate-flows]'] + (['command = [".orbit/gate", "flows", "--repeat", "3"]', 'required = true', 'timeout = 1800'] if fl else
                                        ['required = true   # planned: write flows/*.mjs (argent-qa-flows / safety-net)'])
-    lines += ['[check_sets]', 'gate = ' + json.dumps(fast + ['gate-ratchet', 'gate-contracts', 'gate-fitness']), 'gate-device = ["gate-flows"]', '',
+    lines += ['[check_sets]', 'gate = ' + json.dumps(fast + ['gate-ratchet', 'gate-contracts', 'gate-program', 'gate-fitness']), 'gate-device = ["gate-flows"]', '',
               '# .claude/settings.json (a person enables it; then the gate itself guards it):',
               '# ' + json.dumps({'hooks': {'Stop': [{'hooks': [{'type': 'command', 'command': HOOK, 'timeout': 900}]}]}})]
     if not (repo / BASELINE).exists():
@@ -330,6 +357,22 @@ def selftest():
                 'required check gate-flows removed', 'check tsc dropped from set gate', 'check gate-flows dropped from set gate-device', 'check spectra dropped from set gate-device',
                 'rule p1 no longer enforced']
         assert all(any(w in l for l in got) for w in want) and len(got) == len(want), got
+        # the architecture program is a ruler: stage regressions, dropped links/evidence, moved judges
+        g('checkout', '-q', '--', '.')
+        prog = {'judge': 'journey p50', 'surfaces': {'checkout': {'move': 'migrate', 'stage': 'building', 'judge': 'push_ms',
+                'links': [{'ref': 'ledger:L1'}], 'evidence': {'contracts': 'c.json'}}, 'feed': {'move': 'tune', 'stage': 'climbing'}}}
+        (r / '.navlab').mkdir()
+        (r / '.navlab' / 'program.json').write_text(json.dumps(prog))
+        g('add', '-A')
+        g('commit', '-qm', 'program')
+        back = json.loads(json.dumps(prog))
+        back['surfaces']['checkout'].update(stage='designed', judge='vibes', links=[], evidence={})
+        back['surfaces']['feed']['stage'] = 'stopped'  # stopping is allowed
+        (r / '.navlab' / 'program.json').write_text(json.dumps(back))
+        got = [l for l in ratchet(r) if l.startswith('program:')]
+        assert got == ['program: checkout moved back building -> designed', 'program: checkout judge changed',
+                       'program: checkout link removed: ledger:L1', 'program: checkout evidence removed: contracts'], got
+        g('checkout', '-q', '--', '.')
         # tightening is not loosening
         g('checkout', '-q', '--', '.')
         (r / 'flows' / 'bug-123.mjs').write_text("export const xfail = 'double tap opens two sheets'\n")
@@ -381,6 +424,8 @@ def main(a):
         return 1 if out else 0
     if cmd == 'fitness':
         return subprocess.run([sys.executable, str(NAVLAB / 'arch' / 'fitness.py'), 'check', str(repo)]).returncode
+    if cmd == 'program':
+        return subprocess.run([sys.executable, str(NAVLAB / 'arch' / 'program.py'), 'verify', '--repo', str(repo)]).returncode
     if cmd == 'contracts':
         return contracts(repo, '--init' in a)
     if cmd == 'flows':

@@ -11,9 +11,9 @@ made mechanical.
 
 | piece | what | command |
 |---|---|---|
-| oracle | deterministic checks, no model: typecheck, contracts diff, fitness functions, simwalk flows | `.orbit/orbit verify gate`, `... verify gate-device` |
+| oracle | deterministic checks, no model: typecheck, contracts diff, program stages (`program.py verify`), fitness functions, simwalk flows | `.orbit/orbit verify gate`, `... verify gate-device` |
 | must-pass list | Orbit `[check_sets] gate` (fast, every Stop) and `gate-device` (simulator) | `.orbit/orbit.toml` |
-| ratchet | no ruler looser than the base commit (merge-base with upstream) | `.orbit/gate ratchet` |
+| ratchet | no ruler looser than the base commit (merge-base with upstream); the architecture program (`.navlab/program.json`) is a ruler too | `.orbit/gate ratchet` |
 | enforcement | Claude Code Stop hook: red blocks the first Stop with the reasons | `.orbit/gate stop` |
 
 ## Bring it online (once per repo; a person approves each file)
@@ -24,7 +24,7 @@ Prerequisites: Orbit online (`.orbit/orbit.toml` exists), NavLab installed (Reac
    and the person commits `.navlab/contracts.baseline.json`.
 3. Fitness: if `navlab.fitness.json` is missing, `python3 $(.orbit/home)/navlab/arch/fitness.py init .` (budgets =
    today's values, today's violations accepted) and commit it. design-afresh / steward add import and writer rules later.
-4. Flows: `flows/*.mjs` (simwalk format, `~/code/simwalk/FLOWS.md`) for every journey through the surface being changed:
+4. Flows: `flows/*.mjs` (simwalk format, `$(.orbit/home)/simwalk/FLOWS.md`) for every journey through the surface being changed:
    `safety-net` finds the gaps, `argent-qa-flows` writes them. A known bug gets its own flow with
    `export const xfail = '<repro>'`. Run `GATE_UDID=<claimed sim> .orbit/orbit verify gate-device` until green.
 5. Stop hook: add the `.claude/settings.json` block from `propose` (merge with existing hooks). From then on the ratchet
