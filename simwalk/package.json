@@ -1,0 +1,9 @@
+{
+  "name": "simwalk",
+  "version": "0.1.0",
+  "description": "Scripted, LLM-free iOS simulator user-journey runner built on argent's native binaries",
+  "type": "module",
+  "bin": { "simwalk": "simwalk.mjs" },
+  "engines": { "node": ">=22" },
+  "license": "MIT"
+}

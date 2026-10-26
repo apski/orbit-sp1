@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>orbitfleet</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>orbitfleet</b><span id="conn" class="mono dim">connecting…</span></div>
+  <div id="stats" class="chips"></div>
+  <nav class="nav">
+    <a href="#" data-testid="nav-fleet">Fleet</a>
+    <a href="#runs" data-testid="nav-runs">Run history</a>
+  </nav>
+</header>
+<main id="fleet" class="fleet">
+  <section id="grid" class="grid" aria-label="Simulators"></section>
+  <aside id="drawer" class="drawer" data-testid="drawer" aria-label="Run detail" hidden></aside>
+</main>
+<main id="runs" class="runs" hidden></main>
+<script src="app.js"></script>
+</body>
+</html>
