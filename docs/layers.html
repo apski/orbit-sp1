@@ -1,0 +1,368 @@
+<title>orbit-SP1 Altitude Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: an altimeter. Layers stack top (furthest from the code) to bottom (the code); a ruler on the left carries
+   the altitude, and the band we now work at is marked. Glossary below, grouped by job. */
+:root {
+  --bg: #f3f5f8; --panel: #ffffff; --ink: #172033; --muted: #5a6478; --line: #d7dce5;
+  --accent: #2b55c8; --accent-soft: #e4ebfb; --here: #b5560f; --here-soft: #fbeee2; --ok: #237a4b;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1420; --panel: #161d2c; --ink: #e6eaf2; --muted: #9aa4b8; --line: #2a3346;
+  --accent: #86a6ff; --accent-soft: #1c2742; --here: #f0a35e; --here-soft: #33241a; --ok: #6fcf97; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1420; --panel: #161d2c; --ink: #e6eaf2; --muted: #9aa4b8; --line: #2a3346;
+  --accent: #86a6ff; --accent-soft: #1c2742; --here: #f0a35e; --here-soft: #33241a; --ok: #6fcf97; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px }
+.wrap { max-width: 1060px; margin: 0 auto; display: grid; gap: 56px }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0 }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em }
+h2 { font-size: 1.7rem; font-weight: 600 }
+h3 { font-size: 1.15rem; font-weight: 600 }
+p { margin: 0; max-width: 68ch }
+code, .cmd { font-family: var(--mono); font-size: 0.86em }
+code { background: var(--accent-soft); color: var(--ink); padding: 0.05em 0.35em; border-radius: 4px; overflow-wrap: anywhere }
+.eyebrow { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted) }
+header { display: grid; gap: 16px }
+.lede { font-size: 1.12rem; color: var(--ink) }
+.sub { color: var(--muted) }
+section { display: grid; gap: 20px }
+
+/* the stack */
+.stack { display: grid; gap: 0; border-top: 1px solid var(--line) }
+.layer { display: grid; grid-template-columns: 112px minmax(0, 1fr); border-bottom: 1px solid var(--line) }
+.alt { padding: 18px 14px 18px 0; border-right: 2px solid var(--line); display: grid; align-content: start; gap: 6px; text-align: right }
+.alt b { font: 600 1.6rem/1 var(--display); color: var(--accent) }
+.alt span { font: 500 0.72rem/1.3 var(--mono); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase }
+.body { padding: 18px 0 18px 20px; display: grid; gap: 10px; min-width: 0 }
+.body .q { font-style: italic; color: var(--muted) }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 22px; font-size: 0.93rem }
+.facts div { display: grid; gap: 2px; align-content: start; min-width: 0 }
+.facts dt { font: 500 0.72rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted) }
+.facts dd { margin: 0 }
+.layer.here { background: var(--here-soft) }
+.layer.here .alt { border-right-color: var(--here) }
+.layer.here .alt b { color: var(--here) }
+.pin { justify-self: end; font: 600 0.7rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--bg); background: var(--here); padding: 4px 6px; border-radius: 3px }
+.layer.future { opacity: 0.72 }
+.layer.future .alt b { color: var(--muted) }
+.tag { font: 500 0.72rem/1 var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 3px 6px; white-space: nowrap }
+.title-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px }
+
+/* walk-through */
+ol.walk { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; counter-reset: s; border-left: 2px solid var(--line) }
+ol.walk li { counter-increment: s; display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 16px; padding: 12px 0 12px 18px; position: relative }
+ol.walk li::before { content: counter(s); position: absolute; left: -11px; top: 13px; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--panel); border: 2px solid var(--accent); font: 600 0.7rem/16px var(--mono); text-align: center; color: var(--accent) }
+ol.walk .who { font: 500 0.8rem/1.4 var(--mono); color: var(--accent); padding-top: 2px }
+ol.walk li.block::before { border-color: var(--here); color: var(--here) }
+ol.walk li.block .who { color: var(--here) }
+pre { margin: 6px 0 0; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; overflow-x: auto;
+  font: 400 0.8rem/1.5 var(--mono); color: var(--ink) }
+
+/* glossary */
+.groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 40px }
+.group { display: grid; gap: 14px; align-content: start; min-width: 0 }
+.group h3 { padding-bottom: 8px; border-bottom: 2px solid var(--accent) }
+dl.terms { margin: 0; display: grid; gap: 14px }
+dl.terms dt { font: 600 1rem/1.3 var(--display); letter-spacing: 0.01em }
+dl.terms dd { margin: 2px 0 0; font-size: 0.94rem; color: var(--ink) }
+dl.terms dd .ex { display: block; color: var(--muted); font-size: 0.88rem; margin-top: 3px }
+
+/* contrast table */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel) }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.92rem }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line) }
+th { font: 500 0.74rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted) }
+tr:last-child td { border-bottom: 0 }
+td:first-child { font-weight: 600; white-space: nowrap }
+
+ul.gaps { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 72ch }
+footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 16px }
+
+@media (max-width: 720px) {
+  .layer { grid-template-columns: 64px minmax(0, 1fr) }
+  .alt b { font-size: 1.25rem }
+  .alt span { display: none }
+  .facts { grid-template-columns: minmax(0, 1fr) }
+  .groups { grid-template-columns: minmax(0, 1fr) }
+  ol.walk li { grid-template-columns: minmax(0, 1fr); gap: 2px }
+}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">orbit-SP1 · how the layers fit · 26 Oct 2026</div>
+  <h1>The altitude map</h1>
+  <p class="lede">You used to work at the agent layer: ask an agent to change the app, read what it did. The work now is one
+  level up: building the machinery that decides whether an agent's change is right, keeps it from cheating, and lets it
+  run for hours without a person checking each step.</p>
+  <p class="sub">Each layer below answers one question for the layer above it. The rule that holds the stack together:
+  <strong>no layer grades its own work.</strong> Every judgement is made by something lower down that is deterministic
+  (code, a number, a file:line), or by a separate agent that never saw the builder's reasoning.</p>
+</header>
+
+<section aria-labelledby="stack-h">
+  <h2 id="stack-h">The stack, from furthest out to the code</h2>
+  <div class="stack">
+
+    <div class="layer future">
+      <div class="alt"><b>L7</b><span>planned</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Voyager-2</h3><span class="tag">named, not built</span></div>
+        <p class="q">"Further out than Voyager-1."</p>
+        <p>The next layer out, named in <code>voyager/README.md</code>. No design yet.</p>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="alt"><b>L6</b><span>across jobs</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Voyager-1: job → validated draft PR</h3><span class="tag">voyager/</span></div>
+        <p class="q">"Can I trust this change without re-checking it myself?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>Takes a goal plus acceptance scenarios, builds in an isolated worktree, and validates with checks the builder can't see or edit: held-out tests, fail-to-pass, 3× flake run, mutation floor, a reviewer that reads only the diff.</dd></div>
+          <div><dt>Guarantees</dt><dd>Evidence produced by someone other than the builder (<code>evidence.json</code>). Several independent builds of one job, so a person picks between them.</dd></div>
+          <div><dt>You touch</dt><dd><code>.voyager/voyager job new</code>, <code>job run</code>; pick C0 / C1 / C2 from the progress log.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer here">
+      <div class="alt"><b>L5</b><span>in a session</span><span class="pin">new today</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Gate: oracle + must-pass list + ratchet</h3><span class="tag">gate/ · .orbit/gate</span></div>
+        <p class="q">"Is this agent, in this working tree, still green, and did it keep every ruler as strict as it found it?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>Runs Orbit check sets <code>gate</code> (typecheck, ratchet, contracts, fitness) and <code>gate-device</code> (simwalk flows). A Claude Code Stop hook blocks the agent from finishing while they're red.</dd></div>
+          <div><dt>Guarantees</dt><dd>No lost contract, no new fitness violation, no broken flow, and no ruler loosened against the base commit. The agent can't edit its way to green.</dd></div>
+          <div><dt>You touch</dt><dd><code>.orbit/gate propose</code> once, then approve the rulers. The loop is <code>.orbit/CLIMB.md</code>.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer here">
+      <div class="alt"><b>L4</b><span>long tasks</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Harness: seven rules for long tasks</h3><span class="tag">HARNESS.md</span></div>
+        <p class="q">"How does a task survive many sessions and many agents?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>One command registry · agents drive the real app · test first · oracle plus corpus · ratchet · handoff log · priority and escalation.</dd></div>
+          <div><dt>Guarantees</dt><dd>Written rules. The gate (L5) makes rules 3–6 mechanical; the rest rely on the skill following them.</dd></div>
+          <div><dt>You touch</dt><dd>The per-skill table: what acceptance, gate, oracle and floor mean in each skill.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="alt"><b>L3</b><span>judgement</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Skills: methods</h3><span class="tag">*/skills/*/SKILL.md</span></div>
+        <p class="q">"What's the right way to do this kind of work?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>Strings instruments into a decision: <code>design-afresh</code> (reimagine a feature), <code>rn-native-migration</code>, <code>safety-net</code>, <code>perf-climb</code>, <code>ambitious</code>. L1 bootstrap skills bring each subsystem online.</dd></div>
+          <div><dt>Guarantees</dt><dd>The agent makes the judgement calls; the skill says which instrument checks each one.</dd></div>
+          <div><dt>You touch</dt><dd>Confirm domain language and approve candidates. <code>gaps.py</code> records where a skill fell short.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="alt"><b>L2</b><span>orientation</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Orbit and orbit-rag</h3><span class="tag">.orbit/orbit · MCP orbit-rag</span></div>
+        <p class="q">"Where is X, what touches it, what are the house rules, and what did we decide before?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>Indexes the code into SQLite; <code>how</code>, <code>refs</code>, <code>packet</code> (budgeted, cited context), <code>principles check</code>, and <code>verify &lt;set&gt;</code> (the check runner the gate uses). orbit-rag searches docs and decisions.</dd></div>
+          <div><dt>Guarantees</dt><dd>No model calls; every fact cites file:line; its own changes are pinned by golden tests.</dd></div>
+          <div><dt>You touch</dt><dd><code>.orbit/orbit.toml</code>: units, checks, check sets.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="alt"><b>L1</b><span>evidence</span></div>
+      <div class="body">
+        <div class="title-row"><h3>Instruments and rigs</h3><span class="tag">navlab/ · spectra/ · perf/ · simwalk · argent · orbitfleet</span></div>
+        <p class="q">"What is actually true about this app, measured?"</p>
+        <dl class="facts">
+          <div><dt>Does</dt><dd>NavLab <code>arch/*</code>: facts, contracts, depgraph, replay, cochange, fitness, ledger. Spectra's layout judge. The perf harness. simwalk flows and argent on simulators claimed from orbitfleet.</dd></div>
+          <div><dt>Guarantees</dt><dd>Each tool answers one question with a number or a citation, has a selftest, and exits non-zero on failure.</dd></div>
+          <div><dt>You touch</dt><dd>Rarely by hand: skills and gates call them.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="alt"><b>L0</b><span>ground truth</span></div>
+      <div class="body">
+        <div class="title-row"><h3>The app</h3><span class="tag">source · git history · the running build</span></div>
+        <p class="q">"What exists, what changed, what does the user see?"</p>
+        <p>Code and config, the commit history (which replay and cochange read as evidence), and a Release build running on a device. Everything above reads from here; nothing above may overrule it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="walk-h">
+  <h2 id="walk-h">One change through every layer</h2>
+  <p class="sub">What happened today on a copy of the <code>rn-vs-native</code> app. An agent renamed a navigation route, then tried to hide it.</p>
+  <ol class="walk">
+    <li><span class="who">L3 skill</span><div>The agent, working a migration, renames route <code>Detail</code> to <code>Details</code> in 4 files. Typecheck passes, so it looks done.</div></li>
+    <li class="block"><span class="who">L5 gate</span><div>It tries to stop. The Stop hook runs <code>verify gate</code>. <code>gate-contracts</code> fails: the route is gone from the inventory, and old deep links and analytics would break.
+      <pre>route: 1 removed, 1 added
+  - Detail   (was src/autopilot.ts:26)
+  + Details
+1 contract(s) removed: each must be intentional (dropped from scope) or a regression</pre></div></li>
+    <li><span class="who">L1 instrument</span><div>That verdict came from <code>facts.mjs</code> + <code>contracts.py diff</code>: an AST pass and a set difference, no model.</div></li>
+    <li class="block"><span class="who">L5 ratchet</span><div>The agent edits the baseline so the contracts check passes. Now <code>gate-ratchet</code> fails: the baseline lost an entry compared with the base commit.
+      <pre>STEP gate-ratchet FAIL
+    contracts baseline: - Detail   (was src/autopilot.ts:26)</pre></div></li>
+    <li><span class="who">L5 release valve</span><div>On its second Stop the agent is let through, and you get the message instead. Nobody is trapped forever, and nothing is hidden.</div></li>
+    <li><span class="who">L0 + human</span><div>The agent reverts and the gate goes green. If the rename really was intended, a person updates the baseline, commits it and pushes. That moves the base, and only that is allowed to.</div></li>
+  </ol>
+</section>
+
+<section aria-labelledby="gv-h">
+  <h2 id="gv-h">Gate and Voyager: two ways to stop an agent fooling you</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th>Gate (L5)</th><th>Voyager-1 (L6)</th></tr></thead>
+      <tbody>
+        <tr><td>Threat</td><td>The agent weakens the ruler to get green.</td><td>The agent writes code that fits the tests it can see.</td></tr>
+        <tr><td>Defence</td><td>Rulers can only tighten, measured against a base only a person moves.</td><td>The judge is hidden: held-out tests, a protected validator, a diff-only reviewer.</td></tr>
+        <tr><td>Where it runs</td><td>Your working tree, every time the agent tries to stop.</td><td>An isolated bare clone and sparse worktrees, per job.</td></tr>
+        <tr><td>Output</td><td>Green, or a list of reasons.</td><td><code>evidence.json</code> and a draft PR, or an escalation.</td></tr>
+        <tr><td>Best for</td><td>Long climbs: migration, redesign, perf, one move at a time.</td><td>Discrete jobs: bug, feature, maintenance, with several builds to pick from.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="gl-h">
+  <h2 id="gl-h">Glossary</h2>
+  <div class="groups">
+
+    <div class="group">
+      <h3>Judging: who decides it's right</h3>
+      <dl class="terms">
+        <dt>Oracle</dt>
+        <dd>A judge you didn't write in this task, and that gives the same answer every run. No model in it.
+          <span class="ex">The contracts diff, RN's Yoga layout for Spectra, the accepted perf baseline, NavLab's measured native twin, golden fixtures.</span></dd>
+        <dt>Ruler</dt>
+        <dd>Anything an oracle measures against. If an agent can move the ruler, the oracle is worthless.
+          <span class="ex">The contracts baseline, fitness budgets, the accepted-violations list, a must-pass flow, a required check, an enforced principle.</span></dd>
+        <dt>Must-pass list</dt>
+        <dd>A named set of checks that must all be green. Optional checks report but don't block; planned ones have no command yet.
+          <span class="ex"><code>[check_sets] gate</code> and <code>gate-device</code> in <code>.orbit/orbit.toml</code>.</span></dd>
+        <dt>Golden test</dt>
+        <dd>A fixed input with its expected output pinned. Changing the output needs a stated reason.
+          <span class="ex">Orbit's own commands (SPEC R12); ExampleApp's tax engine parity tests.</span></dd>
+        <dt>Held-out scenario</dt>
+        <dd>A test written by a second agent that the builder never sees, so the builder can't fit the code to it.
+          <span class="ex">Voyager-1's acceptance scenarios.</span></dd>
+        <dt>Mutation floor</dt>
+        <dd>The share of small deliberate bugs ("mutants") in changed lines that the tests catch. Surviving mutants show what the tests can't tell apart.
+          <span class="ex"><code>voyager/mutate.py</code>; ratcheted per unit in <code>ledger.jsonl</code>.</span></dd>
+        <dt>Blind reviewer</dt>
+        <dd>A separate agent that sees only the candidate and the evidence, never the builder's reasoning.
+          <span class="ex">design-afresh step 6; Voyager's diff-only reviewer.</span></dd>
+      </dl>
+    </div>
+
+    <div class="group">
+      <h3>Locking in: keeping what you've won</h3>
+      <dl class="terms">
+        <dt>Ratchet</dt>
+        <dd>A ruler that only moves one way: tighter. It lets a legacy app adopt a rule today by accepting existing violations, then fail on any new one and tighten as old ones are fixed.
+          <span class="ex"><code>.orbit/gate ratchet</code> lists every way a ruler got looser than at the base.</span></dd>
+        <dt>Base commit</dt>
+        <dd>What "looser" is measured against: the merge-base with upstream. Agents don't push, so only a person can move it.
+          <span class="ex">Limit: with no upstream the base is HEAD, so a local commit resets it. Run long agents on a branch.</span></dd>
+        <dt>Floor</dt>
+        <dd>The number a long task keeps raising, always with the command that reproduces it. Labelled <em>measured</em> or <em>estimated</em>, and reported as two numbers: breadth (does it exist) and ready (does it hold up).
+          <span class="ex">HARNESS rule 5. E.g. Spectra screens passing <code>verify</code> vs screens captured.</span></dd>
+        <dt>Baseline</dt>
+        <dd>A committed snapshot the gate diffs against. A person creates it and changes it by pushing.
+          <span class="ex"><code>.navlab/contracts.baseline.json</code>.</span></dd>
+        <dt>Fitness function</dt>
+        <dd>A CI check that keeps an architecture from drifting back: import rules, one-writer-per-state rules, navigation budgets.
+          <span class="ex"><code>navlab/arch/fitness.py</code>, config in <code>navlab.fitness.json</code>.</span></dd>
+        <dt>xfail flow</dt>
+        <dd>A demonstrated bug kept as a flow that must keep failing. It is never deleted or folded into a passing flow; when it starts passing, a person drops the marker.
+          <span class="ex"><code>export const xfail = '&lt;repro&gt;'</code> in <code>flows/*.mjs</code>.</span></dd>
+        <dt>Stop hook</dt>
+        <dd>The enforcement point. When the agent tries to finish, a red gate blocks it once with the reasons; the second try goes through and tells you.
+          <span class="ex"><code>.orbit/gate stop</code> in <code>.claude/settings.json</code>.</span></dd>
+      </dl>
+    </div>
+
+    <div class="group">
+      <h3>Planning a port: what to move, where to cut</h3>
+      <dl class="terms">
+        <dt>Contract</dt>
+        <dd>Something the app promises the outside world: storage keys, analytics events, deep links, routes, API calls, native modules. A port must keep all of them.
+          <span class="ex"><code>contracts-scan</code>; known gap g0019: some RN routes are missed.</span></dd>
+        <dt>Seam and boundary tax</dt>
+        <dd>The seam is where you split RN from native. The tax is the permanent cost of every change that has to cross it: two PRs, a bridge change, a store release.</dd>
+        <dt>Crossing share</dt>
+        <dd>The share of past commits that would have touched both sides of a proposed split. Read the per-side number; the "either side" number flatters the split.
+          <span class="ex">ExampleApp: 34% of RN commits also touched <code>apps/shared</code>.</span></dd>
+        <dt>Co-active share</dt>
+        <dd>The share of a side's commits made in months the other side also changed. Below 50%, a low crossing share means one side was frozen, not that the seam is good.
+          <span class="ex">ExampleApp RN vs iOS: 1% crossing, but only 9% of RN commits were co-active.</span></dd>
+        <dt>Lift</dt>
+        <dd>How much better a layout keeps changes local than random layouts with the same module sizes. Above 1 means the boundaries follow how the code really changes.
+          <span class="ex"><code>replay.py</code>.</span></dd>
+        <dt>Ledger prediction</dt>
+        <dd>The expected effect of a move, written down before the work and scored after. Two misses in a row stop the program.
+          <span class="ex"><code>arch/ledger.py add</code> / <code>measure</code> / <code>score</code>.</span></dd>
+        <dt>Strangler migration</dt>
+        <dd>Seam first, then move one piece at a time behind a flag, flip consumers, delete the old path. Every step ships alone and can be reverted.</dd>
+      </dl>
+    </div>
+
+    <div class="group">
+      <h3>Plumbing: how pieces land in a repo</h3>
+      <dl class="terms">
+        <dt>Packet</dt>
+        <dd>A token-budgeted bundle of cited context for one task, built by Orbit from the index.
+          <span class="ex"><code>.orbit/orbit packet &lt;unit&gt; "&lt;task&gt;"</code>.</span></dd>
+        <dt>Census</dt>
+        <dd>Orbit's survey of a new repo: languages, roots, the checks and adapters it needs. It proposes; a person approves.</dd>
+        <dt>Adapter / profile</dt>
+        <dd>The one committable file of per-repo facts a subsystem reads, so the pack is configured, never forked.
+          <span class="ex"><code>navlab.config.json</code>, <code>.voyager/profile.toml</code>, <code>.spectra/profile.json</code>.</span></dd>
+        <dt>Installer contract</dt>
+        <dd>Every subsystem installs with one command: metadata only, idempotent, nothing machine-specific, plus a status row. Checked by <code>bin/orbit installer-check</code>.</dd>
+        <dt>Check set</dt>
+        <dd>Orbit's named list of checks, run by <code>verify &lt;set&gt;</code>. The gate's must-pass list is two of them.</dd>
+        <dt>Gap ledger</dt>
+        <dd>Where a tool fell short on a real repo, logged before working around it, and closed only with a test that pins the fix.
+          <span class="ex"><code>navlab/arch/gaps.py</code>, <code>learning/gaps.jsonl</code>.</span></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="gap-h">
+  <h2 id="gap-h">Not built yet</h2>
+  <ul class="gaps">
+    <li><strong>A native-port entry skill</strong>: one skill that runs <code>ambitious</code>, then a readiness gate (the 10 pre-port questions as pass/fail with evidence), then design-afresh → rn-native-migration → Spectra per surface. Proposed, not built.</li>
+    <li><strong>Spectra in the device set</strong>: <code>spectra verify</code> takes one IR at a time; a verify-all would let the gate pin native screens.</li>
+    <li><strong>A gate after each edit</strong>, like ExampleApp's <code>arch-gate.sh</code>. Today the gate runs only at Stop.</li>
+    <li><strong>Live device run of <code>gate-flows</code></strong> on a claimed simulator. Its logic is covered by the selftest; the real run hasn't happened.</li>
+    <li><strong>Contracts extractor gap g0019</strong>: <code>&lt;Nav.Screen name="Home"&gt;</code> missed, and template-literal routes become noise.</li>
+    <li><strong>Voyager-2</strong>.</li>
+  </ul>
+</section>
+
+<footer>Source: <code>orbit-sp1/docs/layers.html</code>. Gate shipped in commit <code>66c5e7a</code>. Rules: <code>HARNESS.md</code>; subsystems: <code>ORBIT-SP1.md</code>.</footer>
+</div>
