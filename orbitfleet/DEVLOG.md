@@ -151,3 +151,15 @@ next:     the gap list: EOF retry for a command in a daemon's last ms of shutdow
           to find where this Mac starts swapping (the floor's real number); orbitfleet's live checks have no
           orbit verify in the pack yet (they ran from ~/code/orbitfleet/.orbit).
 ask:      ~/code/orbitfleet is now a stale copy (5b24194): archive or delete it?
+
+## 2026-10-26 claude (P5 sweep: where this Mac stops)
+did:      p5-fleet.sh: plain `seq` (pool ofp5-1..N; `seq -w` would make a second set at N >= 10), samples peak load
+gate:     N=16 -> PASS: 16/16 runs passed, 0 overlapping, 0 leases left
+floor:    measured (p5-fleet.sh; M4 Max, 16 cores, 128 GB; 4 other sims booted):
+            N   ok     wall   per agent   swap-outs   peak sim RAM   peak load
+            8   8/8    128 s  75-122 s    0           17.1 GB        (not sampled)
+            16  16/16  189 s  91-182 s    0           25.4 GB        1020
+          Memory is far from the limit; CPU / process contention is what grows (sims 9-16 also had their first
+          boot + slim inside this run).
+next:     N=16 again (all sims warm: separates first-boot cost), then 24 and 32 until runs fail or swap starts;
+          then set --max-booted's default from the measured knee instead of the min(16, ...) guess (D10).

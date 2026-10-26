@@ -15,7 +15,7 @@ OF=$REPO/orbitfleet
 OUT=${P5_OUT:-$ORBITFLEET_HOME/agents}
 mkdir -p "$OUT"
 udid_of() { xcrun simctl list devices -j | jq -r --arg n "$1" '[.devices[][] | select(.name == $n)][0].udid // empty'; }
-for i in $(seq -w 1 "$N"); do
+for i in $(seq 1 "$N"); do # ofp5-1..N: `seq -w` would rename them at N >= 10 and create a second set
   [ -n "$(udid_of "ofp5-$i")" ] || xcrun simctl create "ofp5-$i" com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro "$RUNTIME" >/dev/null
 done
 
@@ -37,10 +37,12 @@ for _ in $(seq 50); do $OF ls >/dev/null 2>&1 && break; sleep 0.1; done
 
 # Peak footprint of every booted simulator, sampled from the daemon's state (simslim's measure, refreshed every 10 s).
 sample() {
-  local peak=0 b
+  local peak=0 b l lpeak=0
   while :; do
     b=$(curl -s --unix-socket "$ORBITFLEET_HOME/orbitfleet.sock" http://of/api/state | jq '.fleetBytes // 0')
     [ "$b" -gt "$peak" ] && peak=$b && echo "$peak" >"$ORBITFLEET_HOME/peak"
+    l=$(sysctl -n vm.loadavg | awk '{print int($2)}')
+    [ "$l" -gt "$lpeak" ] && lpeak=$l && echo "$lpeak" >"$ORBITFLEET_HOME/peakload"
     sleep 5
   done
 }
@@ -98,7 +100,7 @@ left=$($OF ls --json | jq '[.[] | select(.lease)] | length')
 total=$(jq -s 'map(.total_cost_usd // 0) | add | . * 100 | round / 100' "$OUT"/agent-*.json 2>/dev/null || echo -)
 peak=$(cat "$ORBITFLEET_HOME/peak" 2>/dev/null || echo 0)
 echo "agents ok: $((N - fails))/$N in ${elapsed}s · overlapping runs: $overlap · leases left: $left · cost: \$$total"
-echo "host: swap-outs during the run: $((swap1 - swap0)) pages · peak simulator RAM: $(echo "scale=1; $peak / 1073741824" | bc) GB"
+echo "host: swap-outs during the run: $((swap1 - swap0)) pages · peak simulator RAM: $(echo "scale=1; $peak / 1073741824" | bc) GB · peak load: $(cat "$ORBITFLEET_HOME/peakload" 2>/dev/null || echo ?) on $(sysctl -n hw.ncpu) cores"
 [ "$overlap" = 0 ] || fails=$((fails + 1))
 [ "$left" = 0 ] || fails=$((fails + 1))
 echo "p5-fleet: $([ $fails = 0 ] && echo ok || echo "$fails failed")"
