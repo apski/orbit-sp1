@@ -65,9 +65,9 @@ Never edit committed files for a local-only fix unless the user says so. Use, in
    as its first line and set `LOCAL_FAST=1` in `ios/.xcode.env.local` (if the phase does not source it, export it
    in the dev-build script).
 
-When the user wants a fix committed instead (like ExampleApp's Debug `dwarf` and Release-only Sentry upload), gate on
+When the user wants a fix committed instead (like one app's Debug `dwarf` and Release-only Sentry upload), gate on
 `$CONFIGURATION` so Release stays identical, and build Debug once to prove nothing breaks (a dSYM listed as a script
-input is fine when missing: verified on ExampleApp).
+input is fine when missing: verified on a production app).
 
 ## 3. Prove it
 
@@ -78,6 +78,6 @@ involved, the user's rule applies: install on a claimed simulator and run the fl
 ## Self-check
 
 `node tests/audit.test.mjs`: every detector fires on `tests/fixture`, gated and echo-only phases stay quiet.
-On ExampleApp at HEAD before 2026-10-26 it reported `ios-debug-dsym` and `ios-upload-in-debug`, both since fixed.
+On a production app at HEAD before 2026-10-26 it reported `ios-debug-dsym` and `ios-upload-in-debug`, both since fixed.
 
 Related: `rn-dev-loop` (fingerprint cache, `rnfp`), `xcode-build-speed` (overlay, compilation cache).

@@ -14,8 +14,16 @@ Code: `$(.orbit/home)/voyager/` (README.md there). Long tasks follow `$(.orbit/h
    paths, sparse dirs, test env, env fixtures) from `examples/<name>.toml` or by detection. Read it with the user:
    protected paths are what no builder may edit (conftest, golden fixtures, pinned corpora).
 2. Machine-only settings (e.g. `[env.postgres] seed_from`) go in `~/.voyager/<name>/local.toml`, never the repo.
-3. `.voyager/voyager env up`, then `voyager selftest` (fixture repo, scripted worker, 10 golden tests).
+3. `.voyager/voyager env up`, then `voyager selftest` (fixture repo, scripted worker, 15 golden tests).
 4. Online when one real job reaches `done`: `job new --goal "..." --accept "..."` then `job run <id>`.
+
+## Verification levels (pick per job)
+
+`--mode review` (default): one-shot builder + diff-only reviewer, escalate on a flagged risk. `--mode oneshot`:
+builder only. `--mode factory`: held-out scenarios (a second reader must confirm a scenario before it can veto),
+protected validator, reviewer, retries, UI recordings. Measured 2026-10-25 on 40 fixes from a private production app: factory was not
+worth it for small tested bugs (more false rejects, ~3x cost); use it for UI, multi-file or untested areas. Before
+making any check a gate, calibrate it: `voyager backtest calibrate` / `calibration`.
 
 ## A job
 

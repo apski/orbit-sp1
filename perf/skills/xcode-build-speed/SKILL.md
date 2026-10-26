@@ -53,7 +53,7 @@ Those are the floor of a "fully cached" build; keep script phases' input/output 
 
 ## Hygiene and concurrency
 
-- Each worktree copy leaves 1-4 GB of DerivedData behind (this Mac had 15 `AppIOS-*` dirs, ~25 GB, most from
+- Each worktree copy leaves 1-4 GB of DerivedData behind (this Mac had 15 `<App>-*` dirs, ~25 GB, most from
   `/tmp` copies). With the shared CAS those dirs are disposable: delete DerivedData of worktrees that no longer exist
   (`plutil -extract WorkspacePath raw <dd>/info.plist`, then check the path), never the CAS.
 - Cap the CAS: `COMPILATION_CACHE_LIMIT_SIZE` (bytes) or `COMPILATION_CACHE_LIMIT_PERCENT` if disk is tight.
@@ -75,7 +75,7 @@ Those are the floor of a "fully cached" build; keep script phases' input/output 
 
 ## Measured here
 
-ExampleApp iOS (native SwiftUI, 11 SwiftPM packages), Debug, arm64 simulator, 2026-10-26, load average 350-710 from
+A production iOS app (native SwiftUI, 11 SwiftPM packages), Debug, arm64 simulator, 2026-10-26, load average 350-710 from
 other agents (absolute times inflated; the hit counts are load-independent):
 
 | Build | Time | Cache hits / misses | Load |
@@ -91,7 +91,7 @@ other agents (absolute times inflated; the hit counts are load-independent):
 The first build after switching dSYM -> dwarf took 188 s (changed flags invalidate everything once). ~40% of
 compiles still miss from another path even with prefix mapping: not yet explained (candidates: SwiftPM checkouts
 and DerivedData-relative module paths; check `-showBuildSettings` / the misses in the log before tuning further).
-ExampleApp now commits `dwarf` for Debug and runs the Sentry dSYM upload in Release only.
+That app now commits `dwarf` for Debug and runs the Sentry dSYM upload in Release only.
 
 ## Sources
 

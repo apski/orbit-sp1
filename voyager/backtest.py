@@ -8,16 +8,24 @@
 
 The repo is private, so the model can't have seen these fixes: cleaner held-out data than a public benchmark.
 """
-import argparse, concurrent.futures as cf, json, random, re, threading
+import argparse, concurrent.futures as cf, json, os, random, re, threading, time
 from pathlib import Path
 import vy
 
-TASKS = lambda prof: Path(prof['home']) / 'backtest' / 'tasks'
+# task sets: 'bugs' (the 2026-10-25 run; original paths) and 'features' (multi-file features, longer budgets)
+SET = 'bugs'
+SETS = {'bugs': {'grep': 'fix', 'min_src': 1, 'max_src': 5, 'min_lines': 0, 'minutes': 30, 'turns': 80,
+                 'wrapup': False, 'jobp': '', 'describe': 'describe.md'},
+        'features': {'grep': '^feat', 'min_src': 3, 'max_src': 20, 'min_lines': 150, 'minutes': 90, 'turns': 150,
+                     'wrapup': True, 'jobp': 'f', 'describe': 'describe_feature.md'}}
+ROOT = lambda prof: Path(prof['home']) / 'backtest' / ('' if SET == 'bugs' else SET)
+TASKS = lambda prof: ROOT(prof) / 'tasks'
+JP = lambda: SETS[SET]['jobp']
 
 
 def candidates(prof, since, max_src):
     b = vy.bare(prof)
-    out = vy.git(b, 'log', f'--since={since}', '--no-merges', '-i', '--grep=fix', '--format=@%H %P', '--name-status')
+    out = vy.git(b, 'log', f'--since={since}', '--no-merges', '-i', f"--grep={SETS[SET]['grep']}", '--format=@%H %P', '--name-status')
     cands, cur = [], None
     for line in out.splitlines() + ['@']:
         if line.startswith('@'):
@@ -27,7 +35,7 @@ def candidates(prof, since, max_src):
                 tests = [f for s, f in cur['files'] if vy.is_test(prof, f) and f.startswith(prof['test_cwd'] + '/') and s != 'D']
                 other_code = [f for s, f in cur['files'] if not f.startswith(prof['test_cwd'] + '/')
                               and re.search(r'\.(py|ts|tsx|js|swift|rs|kt)$', f)]
-                if tests and 1 <= len(src) <= max_src and not other_code:
+                if tests and SETS[SET]['min_src'] <= len(src) <= max_src and not other_code:
                     cur.update(src=src, tests=tests,
                                support=[f for s, f in cur['files'] if f.startswith(prof['test_cwd'] + '/')
                                         and f not in src and s != 'D'])
@@ -68,9 +76,15 @@ def mine_one(prof, c):
     rb, _, tail = vy.pytest(prof, wt, c['tests'], timeout=180) if stable_pass else ({}, 0, '')
     # a test absent at base didn't collect there (module import failed): it can't tell fixes apart, leave it out
     f2p = sorted(t for t in stable_pass if rb.get(t) in ('fail', 'error'))
+    if SET == 'features':
+        # a feature's tests often import what the feature adds: absent at base = fails before, passes after
+        f2p = sorted(set(f2p) | (stable_pass - set(rb)))
     p2p = sorted(t for t in stable_pass if rb.get(t) == 'pass')
     subject, body = vy.git(wt, 'log', '-1', '--format=%s%x00%b', fix).split('\x00', 1)
-    return {'id': fix[:10], 'fix': fix, 'base': base, 'subject': subject, 'body': body.strip(), 'src': c['src'],
+    lines = sum(int(x) for x in re.findall(r'(\d+) (?:insertion|deletion)', vy.git(wt, 'diff', '--shortstat', base, fix, '--', *c['src'])))
+    if lines < SETS[SET]['min_lines']:
+        raise ValueError(f'only {lines} changed source lines (< {SETS[SET]["min_lines"]})')
+    return {'id': fix[:10], 'fix': fix, 'base': base, 'src_lines': lines, 'subject': subject, 'body': body.strip(), 'src': c['src'],
             'tests': c['tests'], 'support': c['support'], 'f2p': f2p, 'p2p': p2p,
             'n_fix_tests': len(r1), 'uncollected_at_base': sorted(set(stable_pass) - set(rb)),
             'diffstat': vy.git(wt, 'diff', '--shortstat', base, fix, '--', *c['src'])}
@@ -130,11 +144,11 @@ def describe_one(prof, t, wt):
     vy.git(wt, 'checkout', '-q', '-f', t['base'])
     fix = vy.git(wt, 'diff', t['base'], t['fix'], '--', *t['src'])
     tdiff = vy.git(wt, 'diff', t['base'], t['fix'], '--', *t['tests'])[:12000]
-    logd = Path(prof['home']) / 'backtest' / 'logs'
+    logd = ROOT(prof) / 'logs'
     logd.mkdir(parents=True, exist_ok=True)
     fb = ''
     for attempt in range(2):
-        out = vy.claude(render('describe.md', REPO_NAME=prof['name'], WT=wt, MESSAGE=f"{t['subject']}\n{t['body']}",
+        out = vy.claude(render(SETS[SET]['describe'], REPO_NAME=prof['name'], WT=wt, MESSAGE=f"{t['subject']}\n{t['body']}",
                                FIX_DIFF=fix[:15000], TEST_DIFF=tdiff) + fb, wt, logd / f"describe-{t['id']}-{attempt}.json",
                         max_turns=25, timeout=900, schema=DESC_SCHEMA, allowed=['Read', 'Grep', 'Glob'])
         d = out.get('structured_output')
@@ -169,34 +183,57 @@ def _job(prof, jid, t, mode, hidden='writer'):
     import voyager
     a = argparse.Namespace(id=jid, goal=task_text(t), title=t['desc']['title'], accept=t['desc']['acceptance'],
                            base=t['base'], mode=mode, pr='local', hidden=hidden, ui=None, mutation_floor=0.5,
-                           retries=2, turns=80, minutes=30)
+                           retries=2, turns=SETS[SET]['turns'], minutes=SETS[SET]['minutes'], wrapup=SETS[SET]['wrapup'])
     jid = voyager.new_job(prof, a)
     return voyager.Job(prof, jid)
+
+
+MODES = {'A': 'oneshot', 'B': 'factory', 'F': 'factory', 'R': 'review', 'S': 'oneshot'}
+
+
+def spec_first(prof, t):
+    """Arm S: a separate session writes a short spec from the same request (interfaces, data flow, edge cases, test
+    plan) at the base commit; the one-shot builder then gets request + spec. Tests whether energy on specs pays."""
+    from voyager import render
+    wt = Path(prof['home']) / 'wt' / f"{JP()}S-spec-{t['id']}"
+    vy.worktree(prof, t['base'], wt)
+    log = ROOT(prof) / 'logs' / f"spec-{t['id']}.json"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    o = vy.claude(render('spec.md', REPO_NAME=prof['name'], WT=wt, GOAL=task_text(t),
+                         ACCEPTANCE='\n'.join(f'- {x}' for x in t['desc']['acceptance'])), wt, log, max_turns=40,
+                  timeout=1800, allowed=['Read', 'Grep', 'Glob', 'Bash(git *)'])
+    vy.drop_worktree(prof, wt)
+    return (o.get('result') or '').strip(), float(o.get('total_cost_usd') or 0), o.get('secs') or 0
 
 
 def run_arm(prof, arm, n, jobs, k=3):
     """A = oneshot, B = factory, C = best-of-k oneshots picked by the model itself (equal-spend control)."""
     import voyager
     ts = [t for t in task_list(prof, n) if 'desc' in t and not t.get('desc_dropped')]
-    res_dir = Path(prof['home']) / 'backtest' / 'arms' / arm
+    res_dir = ROOT(prof) / 'arms' / arm
     res_dir.mkdir(parents=True, exist_ok=True)
 
     def go(t):
         rf = res_dir / f"{t['id']}.json"
         if (vy.jload(rf) or {}).get('final'):
             return
-        if arm in ('A', 'B'):
-            j = _job(prof, f"{arm}-{t['id']}", t, 'oneshot' if arm == 'A' else 'factory')
+        if arm in ('A', 'B', 'F', 'R', 'S'):
+            extra_cost = extra_secs = 0
+            if arm == 'S':
+                spec, extra_cost, extra_secs = spec_first(prof, t)
+                t = {**t, 'desc': {**t['desc'], 'description': t['desc']['description'] + '\n\n## Spec (written before building)\n\n' + spec}}
+            j = _job(prof, f"{JP()}{arm}-{t['id']}", t, MODES[arm])
             s = j.run()
+            s['cost_usd'] = s['cost_usd'] + extra_cost
             r = {'task': t['id'], 'cand': s.get('cand'), 'submitted': bool(s.get('cand')) and not s.get('escalated'),
                  'escalated': s.get('escalated'), 'cost_usd': s['cost_usd'], 'attempts': s['attempt'] + 1,
-                 'secs': sum(x.get('secs') or 0 for x in s['sessions']), 'builder_says': s.get('builder_says')}
+                 'secs': sum(x.get('secs') or 0 for x in s['sessions']) + extra_secs, 'builder_says': s.get('builder_says')}
         else:
             subs = []
             for i in range(k):
-                s = _job(prof, f"C{i}-{t['id']}", t, 'oneshot').run()
+                s = _job(prof, f"{JP()}C{i}-{t['id']}", t, 'oneshot').run()
                 subs.append(s)
-            cands = [(f"voyager/C{i}-{t['id']}", s.get('cand')) for i, s in enumerate(subs) if s.get('cand')]
+            cands = [(f"voyager/{JP()}C{i}-{t['id']}", s.get('cand')) for i, s in enumerate(subs) if s.get('cand')]
             cost = sum(s['cost_usd'] for s in subs)
             secs = sum(x.get('secs') or 0 for s in subs for x in s['sessions'])
             pick = None
@@ -208,7 +245,7 @@ def run_arm(prof, arm, n, jobs, k=3):
                 listing = '\n'.join(f"- branch `{b}`: {vy.git(wt, 'log', '--format=%s', f"{t['base']}..{c}")}" for b, c in cands)
                 out = vy.claude(voyager.render('selector.md', K=len(cands), WT=wt, TEST_CWD=prof['test_cwd'],
                                                TEST_CMD=voyager.test_cmd(prof), GOAL=task_text(t), CANDIDATES=listing),
-                                wt, Path(prof['home']) / 'backtest' / 'logs' / f"select-{t['id']}.json", max_turns=40,
+                                wt, ROOT(prof) / 'logs' / f"select-{t['id']}.json", max_turns=40,
                                 timeout=1200, schema=PICK_SCHEMA, disallowed=vy.WORKER_DENY, env_extra=prof.get('test_env', {}))
                 cost += float(out.get('total_cost_usd') or 0)
                 secs += out.get('secs') or 0
@@ -236,7 +273,7 @@ def judge(prof, n):
     judge's own strength: how many mutants of the human fix those tests kill."""
     import mutate
     wt = _wt(prof)
-    arms = sorted(p.name for p in (Path(prof['home']) / 'backtest' / 'arms').glob('*'))
+    arms = sorted(p.name for p in (ROOT(prof) / 'arms').glob('*'))
     for t in task_list(prof, n):
         if 'desc' not in t or t.get('desc_dropped'):
             continue
@@ -244,7 +281,7 @@ def judge(prof, n):
             t['judge_strength'] = mutate.score(prof, wt, t['base'], t['fix'], t['src'], t['tests'], max_mutants=10)
             vy.jdump(TASKS(prof) / f"{t['id']}.json", t)
         for arm in arms:
-            rf = Path(prof['home']) / 'backtest' / 'arms' / arm / f"{t['id']}.json"
+            rf = ROOT(prof) / 'arms' / arm / f"{t['id']}.json"
             r = vy.jload(rf)
             if not r or 'judge' in r:
                 continue
@@ -317,18 +354,131 @@ def recover_costs(prof):
     extra = {}
     for job, x, w in timed:
         extra[job] = extra.get(job, 0) + w * rate
-    for arm_dir in (H / 'backtest' / 'arms').glob('*'):
+    for arm_dir in (ROOT(prof) / 'arms').glob('*'):
         for f in arm_dir.glob('*.json'):
             r = vy.jload(f)
-            jobs = [f"{arm_dir.name}-{r['task']}"] if arm_dir.name in 'AB' else [f"C{i}-{r['task']}" for i in range(r.get('k', 3))]
+            jobs = ([f"{JP()}C{i}-{r['task']}" for i in range(r.get('k', 3))] if arm_dir.name == 'C' else
+                    [f"{JP()}{arm_dir.name}-{r['task']}"] + ([f"{JP()}S-spec-{r['task']}"] if arm_dir.name == 'S' else []))
             r['cost_usd_est'] = round(r['cost_usd'] + sum(extra.get(j, 0) for j in jobs), 4)
             vy.jdump(f, r)
     return {'rate_usd_per_weighted_token': rate, 'calibration_sessions': len(rows), 'timed_out_sessions': len(timed),
             'estimated_usd_added': round(sum(extra.values()), 2)}
 
 
+def calibrate(prof, n, jobs):
+    """Each check alone, on changes whose truth we know: one-shot's submitted changes (truth = the hidden judge) and
+    the real human fixes (counted correct). Per check: wrong changes caught, correct changes rejected, cost, time.
+    Answers what the A/B/C run could not: which check, if any, earns a place as a gate."""
+    import validate as V
+    from voyager import render, CONFIRM_SCHEMA, REVIEW_SCHEMA
+    H = Path(prof['home'])
+    out_f = ROOT(prof) / 'calibrate.json'
+    rows = vy.jload(out_f, [])
+    done = {(r['task'], r['kind'], r['check']) for r in rows}
+    lock = threading.Lock()
+    cands = []
+    for t in task_list(prof, n):
+        if 'desc' not in t or t.get('desc_dropped'):
+            continue
+        a = vy.jload(ROOT(prof) / 'arms' / 'A' / f"{t['id']}.json") or {}
+        if a.get('submitted') and a.get('cand') and 'judge' in a:
+            cands.append((t, 'oneshot', a['cand'], bool(a['judge']['pass'])))
+        cands.append((t, 'human', t['fix'], True))
+
+    def record(r):
+        with lock:
+            rows.append(r)
+            vy.jdump(out_f, rows)
+        vy.log(f"CAL {r['check']:20s} {r['kind']:8s} {r['task']} truth={'ok' if r['truth'] else 'WRONG'} "
+               f"{'REJECT' if r['reject'] else 'accept'} ${r.get('cost_usd', 0):.2f}")
+
+    def hidden_for(t):
+        return vy.jload(H / 'jobs' / f"{JP()}B-{t['id']}" / 'hidden' / 'files.json')
+
+    def confirm_for(t, h, wt):
+        """Confirmed (required-by-the-job) held-out tests for a task, decided once and cached on the task."""
+        if 'cal_veto' in t:
+            return t['cal_veto'], 0.0
+        rel, text = next(iter(h['files'].items()))
+        acc = '## Acceptance\n\n' + '\n'.join(f'- {x}' for x in t['desc']['acceptance'])
+        vy.git(wt, 'checkout', '-q', '-f', t['base'])
+        o = vy.claude(render('confirm.md', GOAL=task_text(t), ACCEPTANCE=acc, HIDDEN_FILE=rel, TESTS=text[:12000],
+                             ON_BASE=json.dumps(h['on_base']), WT=wt), wt, ROOT(prof) / 'logs' / f"confirm-{t['id']}.json",
+                      max_turns=15, timeout=600, schema=CONFIRM_SCHEMA, allowed=['Read', 'Grep', 'Glob'])
+        req = {v['name'].split('::')[-1] for v in (o.get('structured_output') or {}).get('tests', []) if v.get('required')}
+        t['cal_veto'] = sorted(x for x in h['tests'] if x.split('::')[-1] in req)
+        vy.jdump(TASKS(prof) / f"{t['id']}.json", t)
+        return t['cal_veto'], float(o.get('total_cost_usd') or 0)
+
+    def go(item):
+        t, kind, cand, truth = item
+        wt = _wt(prof)
+        base = {'task': t['id'], 'kind': kind, 'cand': cand, 'truth': truth}
+        if (t['id'], kind, 'mechanical') not in done:
+            t0 = time.time()
+            at(wt, cand)
+            ev = V.validate(prof, wt, t['base'], cand, hidden=None, mutation_floor=0.5)
+            record({**base, 'check': 'mechanical', 'reject': ev['verdict'] != 'pass', 'secs': round(time.time() - t0),
+                    'why': [c['check'] for c in ev['checks'] if not c['pass']]})
+        h = hidden_for(t)
+        if h and h.get('files') and (t['id'], kind, 'scenarios-all') not in done:
+            t0 = time.time()
+            at(wt, cand)
+            for rel, text in h['files'].items():
+                (wt / rel).parent.mkdir(parents=True, exist_ok=True)
+                (wt / rel).write_text(text)
+            res, _, _ = vy.pytest(prof, wt, h['run'])
+            failed = sorted(x for x in h['tests'] if res.get(x) != 'pass')
+            secs = round(time.time() - t0)
+            veto, cost = confirm_for(t, h, wt)
+            record({**base, 'check': 'scenarios-all', 'reject': bool(failed), 'secs': secs, 'why': failed})
+            record({**base, 'check': 'scenarios-confirmed', 'reject': bool(set(failed) & set(veto)), 'secs': secs,
+                    'cost_usd': cost if kind == 'human' else 0.0, 'why': sorted(set(failed) & set(veto))})
+        if (t['id'], kind, 'reviewer') not in done:
+            at(wt, cand)
+            diff = vy.git(wt, 'diff', t['base'], cand)
+            if len(diff.splitlines()) > 600:
+                diff = vy.git(wt, 'diff', '--stat', t['base'], cand) + '\n(diff too long: read files with git show)'
+            acc = '## Acceptance\n\n' + '\n'.join(f'- {x}' for x in t['desc']['acceptance'])
+            o = vy.claude(render('reviewer.md', GOAL=task_text(t), ACCEPTANCE=acc,
+                                 EVIDENCE='No validator ran: judge the diff against the job yourself.',
+                                 DELTA='(not computed)', BASE=t['base'][:10], CAND=cand[:10], DIFF=diff, WT=wt), wt,
+                          ROOT(prof) / 'logs' / f"calrev-{kind}-{t['id']}.json", max_turns=30, timeout=900,
+                          schema=REVIEW_SCHEMA, allowed=['Read', 'Grep', 'Glob', 'Bash(git *)'])
+            v = (o.get('structured_output') or {}).get('verdict', 'none')
+            record({**base, 'check': 'reviewer', 'reject': v != 'pass', 'verdict': v, 'secs': o.get('secs'),
+                    'cost_usd': float(o.get('total_cost_usd') or 0),
+                    'why': ((o.get('structured_output') or {}).get('reason') or '')[:300]})
+
+    with cf.ThreadPoolExecutor(jobs) as ex:
+        for f in [ex.submit(go, c) for c in cands]:
+            try:
+                f.result()
+            except vy.InfraError as e:
+                vy.log(f'calibrate PAUSED (infra, not scored): {e}'[:300])
+            except Exception as e:
+                vy.log(f'calibrate error: {e!r}'[:400])
+    return calibration_table(rows)
+
+
+def calibration_table(rows):
+    """Per check: wrong caught / wrong total, correct rejected (one-shot's correct, human fixes), cost, minutes."""
+    out = {}
+    for chk in sorted({r['check'] for r in rows}):
+        rs = [r for r in rows if r['check'] == chk]
+        wrong = [r for r in rs if not r['truth']]
+        ok_one = [r for r in rs if r['truth'] and r['kind'] == 'oneshot']
+        human = [r for r in rs if r['kind'] == 'human']
+        out[chk] = {'wrong_caught': f"{sum(r['reject'] for r in wrong)}/{len(wrong)}",
+                    'oneshot_correct_rejected': f"{sum(r['reject'] for r in ok_one)}/{len(ok_one)}",
+                    'human_fix_rejected': f"{sum(r['reject'] for r in human)}/{len(human)}",
+                    'cost_usd': round(sum(r.get('cost_usd', 0) for r in rs), 2),
+                    'minutes_per_change': round(sum(r.get('secs') or 0 for r in rs) / 60 / max(1, len(rs)), 1)}
+    return out
+
+
 def score(prof):
-    base = Path(prof['home']) / 'backtest' / 'arms'
+    base = ROOT(prof) / 'arms'
     R = {arm.name: {r['task']: r for r in (vy.jload(p) for p in arm.glob('*.json')) if r and 'judge' in r}
          for arm in base.glob('*')}
     common = sorted(set.intersection(*(set(v) for v in R.values()))) if R else []
@@ -363,7 +513,7 @@ def score(prof):
 def packet(prof, n_sample=30, seed=11):
     """Blind review packet for a human: submitted changes from every arm, shuffled, arm hidden. The key is a
     separate file; read it only after the verdicts are written."""
-    base = Path(prof['home']) / 'backtest'
+    base = ROOT(prof)
     items = []
     for arm in sorted(p.name for p in (base / 'arms').glob('*')):
         for r in (vy.jload(f) for f in (base / 'arms' / arm).glob('*.json')):
@@ -389,15 +539,19 @@ def packet(prof, n_sample=30, seed=11):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('cmd')
-    ap.add_argument('--profile', default='exampleapp')
+    ap.add_argument('--profile', default=os.environ.get('VOYAGER_PROFILE', 'python-service'))
     ap.add_argument('--since', default='18 months ago')
-    ap.add_argument('--max-src', type=int, default=5)
+    ap.add_argument('--max-src', type=int)
+    ap.add_argument('--set', default='bugs', choices=list(SETS))
     ap.add_argument('--jobs', type=int, default=6)
     ap.add_argument('--limit', type=int, default=10_000)
     ap.add_argument('--n', type=int, default=40)
     ap.add_argument('--arm', default='A')
     ap.add_argument('--k', type=int, default=3)
     a = ap.parse_args()
+    global SET
+    SET = a.set
+    a.max_src = a.max_src or SETS[SET]['max_src']
     prof = vy.profile(a.profile)
     if a.cmd == 'candidates':
         print(json.dumps([c['fix'] for c in candidates(prof, a.since, a.max_src)]))
@@ -411,6 +565,10 @@ def main():
         judge(prof, a.n)
     elif a.cmd == 'score':
         print(json.dumps(score(prof), indent=1))
+    elif a.cmd == 'calibrate':
+        print(json.dumps(calibrate(prof, a.n, a.jobs), indent=1))
+    elif a.cmd == 'calibration':
+        print(json.dumps(calibration_table(vy.jload(ROOT(prof) / 'calibrate.json', [])), indent=1))
     elif a.cmd == 'costs':
         print(json.dumps(recover_costs(prof), indent=1))
     elif a.cmd == 'packet':

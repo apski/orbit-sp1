@@ -178,6 +178,32 @@ esac
         self.assertNotIn('escalated', s)
         self.assertEqual(s['attempt'], 0, 'the builder must not be sent to fix a gate that never ran')
 
+    def test_review_mode_is_the_default_and_a_flagged_risk_escalates_without_a_loop(self):
+        # the pre-registered recommendation: one-shot + diff-only reviewer (docs/prereg-backtest-2026-10-25.md)
+        self.assertIn("default='review'", (HERE.parent / 'voyager.py').read_text())
+        good = self.job('good', 'review-good', mode='review')
+        s = good.run()
+        self.assertNotIn('escalated', s)
+        self.assertFalse((good.dir / 'validate-0.json').exists(), 'review mode runs no validator')
+        self.assertEqual(vy.jload(good.dir / 'review-0.json')['verdict'], 'pass')
+        wrong = self.job('wrong', 'review-wrong', mode='review')
+        s = wrong.run()
+        self.assertIn('reviewer revise', s['escalated'])
+        self.assertEqual(s['attempt'], 0, 'review mode flags for a person; it does not retry')
+
+    def test_unconfirmed_held_out_scenarios_are_evidence_not_a_veto(self):
+        # backtest: 3 escalations came from held-out tests that rejected fixes the real fix's tests accept
+        os.environ['VOYAGER_FAKE_CONFIRM'] = 'none'
+        try:
+            j = self.job('wrong-then-good', 'disputed')
+            j.run()
+        finally:
+            os.environ['VOYAGER_FAKE_CONFIRM'] = 'all'
+        hidden = next(r for r in vy.jload(j.dir / 'validate-0.json')['checks'] if r['check'] == 'hidden')
+        self.assertTrue(hidden['pass'], 'a disputed scenario must not veto on its own')
+        self.assertTrue(hidden['detail']['disputed'])
+        self.assertEqual(vy.jload(j.dir / 'review-0.json')['verdict'], 'revise', 'the reviewer still sees it')
+
     # --- validator checks one by one
     def test_weakened_test_is_caught(self):
         j = self.job('weaken', 'weaken', retries=0)

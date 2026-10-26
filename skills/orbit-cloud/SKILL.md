@@ -40,7 +40,7 @@ One argument after `--` is a shell string (`'a && b'`). Several are argv, each q
 ## Add a host
 
 1. An ssh alias in `~/.ssh/config` that works with `BatchMode=yes` (key auth). For a box behind NAT, add a second
-   alias through a jump host (linux-box: `linux-box` on the home LAN, `linux-box-remote` through vpn-jump).
+   alias through a jump host (e.g. `linux-box` on the LAN, `linux-box-remote` through a VPN jump).
    Outbound only: never open a port for this (scanner rule).
 2. A row in `~/.orbit-cloud/hosts.json`. It is machine-local and never goes in a repo:
    ```json
@@ -48,7 +48,7 @@ One argument after `--` is a shell string (`'a && b'`). Several are argv, each q
    ```
    - `ssh`: aliases tried in order; the first that answers wins.
    - `work`: dir under the remote home for synced repos and the pack mirror. Put it on the big disk
-     (linux-box: `code` -> /srv/data).
+     (e.g. `code` symlinked to a data disk).
    - `dev` (optional): a separate checkout to improve the pack in.
 3. `orbit cloud up --on <host>`. The user needs sudo on the host (Ubuntu): apt for zsh, git, tmux, build tools; uv
    adds Python 3.13 if the system's is older. It never changes the login shell on a host. Then `orbit cloud ls`.
@@ -90,8 +90,8 @@ credentials, a prod DB or this Mac's logins stays local.
   when done. `orbit status` shows live boxes.
 - **Network:** DO firewall `orbit-cloud` allows ssh from this machine's current public IP only. It applies by tag
   before boot and is re-pointed when the IP changes (VPN, new network).
-- **Safety:** only droplets named `orbit-cloud-*` that also carry the `orbit-cloud` tag are ever touched. prod1 and
-  vpn-jump never are. Don't work around that guard.
+- **Safety:** only droplets named `orbit-cloud-*` that also carry the `orbit-cloud` tag are ever touched. Your other
+  droplets never are. Don't work around that guard.
 
 ## Troubleshooting
 

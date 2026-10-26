@@ -9,7 +9,7 @@ bin/orbit install <repo> [--only navlab,orbit,spectra,orbit-rag,voyager,perf,gat
 bin/orbit status [repo]                                   # what's online, the next step per subsystem
 bin/orbit compare <other-orbit>                           # evidence for merging with another Orbit checkout
 bin/orbit sync [--check] [--install-hooks]                # user level from this checkout: rules, argent-sim, skills (+ git hooks that re-run it)
-bin/orbit cloud run [--on auto|local|linux-box|do] -- <cmd>   # route a job: macOS work here, the rest to a Linux host (orbit-route skill)
+bin/orbit cloud run [--on auto|local|<host>|do] -- <cmd>   # route a job: macOS work here, the rest to a Linux host (orbit-route skill)
 bin/orbit <engine command>                                # index, how, refs, packet, verify, perf, ... (nearest .orbit/)
 ```
 
@@ -24,7 +24,7 @@ skill: it runs each subsystem's L1 bootstrap in order and reports status.
 | Perf | `perf/skills/` | perf skill pack (thread-offload, perf-climb, ...) | per skill |
 | Voyager-1 | `voyager/` | the layer above Orbit: job -> validated draft PR. Protected validator (fail-to-pass, held-out scenarios, mutants, no weakened tests), diff-only reviewer, argent recording for UI jobs, resumable state machine; strengthening loop + constraint maps; one-shot vs factory backtest | `voyager` |
 | Gate | `gate/` | the agent gate for RN repos: LLM-free oracle (typecheck, contracts diff, fitness, simwalk flows) as Orbit check sets `gate` / `gate-device`, a ratchet (no ruler looser than the base commit) and a Claude Code Stop hook that blocks on red; loop in `.orbit/CLIMB.md` | `gate` |
-| Cloud | `bin/cloud.mjs` | where a command runs: `local` (this Mac), a host you own (linux-box, `~/.orbit-cloud/hosts.json`) or `do` (a throwaway DigitalOcean droplet: ssh from this IP only, TTL, reaped). Each is set up with zsh + oh-my-zsh, node, python, claude, codex and the pack at this checkout's HEAD + working tree. `--on auto` keeps macOS work local and sends the rest out; `--detach` runs streams in tmux | `orbit-cloud`, `orbit-route` |
+| Cloud | `bin/cloud.mjs` | where a command runs: `local` (this Mac), a host you own (`~/.orbit-cloud/hosts.json`) or `do` (a throwaway DigitalOcean droplet: ssh from this IP only, TTL, reaped). Each is set up with zsh + oh-my-zsh, node, python, claude, codex and the pack at this checkout's HEAD + working tree. `--on auto` keeps macOS work local and sends the rest out; `--detach` runs streams in tmux | `orbit-cloud`, `orbit-route` |
 | orbitfleet | `orbitfleet/` | Go: leases slim iOS simulators to agents (one agent, one sim), runs/marks/shots, local UI on 127.0.0.1. Built and linked by `bin/orbit sync`; contract in its skill | `orbitfleet` |
 | simwalk | `simwalk/` | LLM-free simulator journey runner on argent's native binaries: `simwalk flows/<name>.mjs --repeat 3` (format: `simwalk/FLOWS.md`); Gate's oracle runs it | none |
 | orbit-rag | `orbit-rag/` | docs-and-decisions RAG (Rust): hybrid search, cited bundles with human-approved highlights first, read-only MCP `orbit-rag`, code model, drift check; search UI as a login service on 127.0.0.1:7420 (`--port n`) | none: `install` brings it online |

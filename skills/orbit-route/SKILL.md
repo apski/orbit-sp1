@@ -7,8 +7,8 @@ description: "Decide where a job runs, from a Claude Code session on this Mac: w
 
 This Claude Code session on the Mac stays the orchestrator. It decides per job where the job runs, using
 `orbit cloud` (skill `orbit-cloud`, `$(.orbit/home)/bin/cloud.mjs`). Targets are in `~/.orbit-cloud/hosts.json`
-(machine-local): today `linux-box` (i9-9900K, 16 threads, 62 GB, idle). Reach it with `ssh linux-box` on the home
-LAN or `linux-box-remote` through vpn-jump; cloud picks whichever answers.
+(machine-local), e.g. `linux-box` (i9-9900K, 16 threads, 62 GB). A host can list several ssh aliases (home LAN, a
+VPN jump); cloud picks whichever answers.
 
 ## The decision
 
@@ -57,9 +57,8 @@ reviewing it here before merging.
   this Mac's (HARNESS rule 2).
 - Before routing, `orbit cloud ls` shows each target's load and job count. Don't pile a third heavy stream onto a
   host already running two.
-- linux-box is also a GNOME desktop and the staging server (docker). Jobs go under `~/code/orbit-cloud` (on
-  /srv/data). Never touch staging containers or `~/code/exampleapp/prod`, never reboot, and keep heavy jobs below
-  ~12 of its 16 threads (`nice -n 10` for long ones).
+- A host you own usually runs other things too (a desktop, services). Jobs go under its `work` dir only. Never touch
+  its own services or other checkouts, never reboot, and keep heavy jobs below ~12 of 16 threads (`nice -n 10` for long ones).
 - No inbound ports anywhere: a host is reached outbound over ssh only.
 
 ## Measured (2026-10-26)

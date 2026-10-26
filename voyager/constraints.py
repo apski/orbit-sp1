@@ -117,5 +117,5 @@ def map_md(m):
 
 if __name__ == '__main__':
     import sys
-    prof = vy.profile(sys.argv[2] if len(sys.argv) > 2 and not Path(sys.argv[2]).exists() else 'exampleapp')
+    prof = vy.profile(sys.argv[2] if len(sys.argv) > 2 and not Path(sys.argv[2]).exists() else 'python-service')
     print(json.dumps(cmap(prof, '.', sys.argv[1:]), indent=1))

@@ -2,7 +2,11 @@
 """Voyager-1: the layer above Orbit that turns a job into a validated, PR-able piece of work.
 
   voyager env up|down [--wipe]                 the adapter's env fixtures (e.g. its own throwaway Postgres)
-  voyager job new --goal TEXT [--accept TEXT]... [--base SHA] [--mode factory|oneshot] [--pr draft|local] [--ui APP]
+  voyager job new --goal TEXT [--accept TEXT]... [--base SHA] [--mode review|oneshot|factory] [--pr draft|local] [--ui APP]
+                  modes (verification levels): review (default) = one-shot builder + diff-only reviewer, escalate on a
+                  flagged risk; oneshot = builder only; factory = held-out scenarios + protected validator + reviewer +
+                  retries. The 2026-10-25 backtest found factory too costly and too quick to reject correct fixes on
+                  small tested bugs (docs/prereg-backtest-2026-10-25.md): use it where it has a case (UI, multi-file).
                   [--cand SHA]                 judge an existing change (no builder): validator + reviewer + record
   voyager job run <id>                         run (or resume) the state machine; safe to re-run after a crash
   voyager job status [<id>]
@@ -122,8 +126,15 @@ class Job:
             vy.jdump(self.dir / 'hidden' / 'files.json', {'files': {hfile: text} if text else {}, 'run': [hfile],
                                                           'tests': sorted(res), 'on_base': res})
         h = vy.jload(self.dir / 'hidden' / 'files.json')
-        self.event('scenarios', n=len(h['tests']), fail_on_base=sum(v != 'pass' for v in h['on_base'].values()))
+        if h['files'] and 'veto' not in h:
+            h['veto'], h['confirm'] = confirm_scenarios(self, h)
+            vy.jdump(self.dir / 'hidden' / 'files.json', h)
+        self.event('scenarios', n=len(h['tests']), fail_on_base=sum(v != 'pass' for v in h['on_base'].values()),
+                   veto=len(h.get('veto', [])))
         self.goto('build')
+
+    def after_build(self):
+        return {'factory': 'validate', 'review': 'review'}.get(self.c['mode'], 'evidence')
 
     def acceptance(self):
         a = self.c.get('acceptance') or []
@@ -135,9 +146,9 @@ class Job:
             if self.s['attempt'] > 0:
                 return self.escalate(f"given candidate not accepted: {self.s.get('feedback', '')[:500]}")
             self.s['cand'] = self.c['cand_given']
-            return self.goto('validate', cand=self.c['cand_given'])
+            return self.goto(self.after_build(), cand=self.c['cand_given'])
         fb = self.s.get('feedback')
-        tmpl = 'worker.md' if self.c['mode'] == 'factory' else 'oneshot.md'
+        tmpl = 'worker.md' if self.c['mode'] == 'factory' else 'oneshot.md'   # review uses the one-shot brief
         prompt = render(tmpl, REPO_NAME=self.prof['name'], WT=self.build_wt, BRANCH=self.c['branch'], GOAL=self.c['goal'],
                         ACCEPTANCE=self.acceptance(), PROTECTED=', '.join(self.prof.get('protected', [])),
                         TEST_CWD=self.prof['test_cwd'], TEST_CMD=test_cmd(self.prof))
@@ -169,7 +180,7 @@ class Job:
             return self.escalate('retry made no new commit' + (f': {blocked.group(1).strip()}' if blocked else ''))
         self.s['cand'] = head
         self.s['builder_says'] = 'blocked' if blocked else 'done'
-        self.goto('validate' if self.c['mode'] == 'factory' else 'evidence', cand=head)
+        self.goto(self.after_build(), cand=head)
 
     def validate(self):
         h = vy.jload(self.dir / 'hidden' / 'files.json')
@@ -196,7 +207,12 @@ class Job:
         if len(diff.splitlines()) > 600:
             diff = vy.git(self.judge_wt, 'diff', '--stat', base, cand) + '\n(diff too long: read files with git show)'
         ev = vy.jload(self.dir / f"validate-{self.s['attempt']}.json")
-        summary = '\n'.join(f"- {r['check']}: {'pass' if r['pass'] else 'FAIL'}" for r in ev['checks'])
+        if ev:
+            summary = '\n'.join(f"- {r['check']}: {'pass' if r['pass'] else 'FAIL'}" + (
+                f" (disputed held-out scenarios failed, evidence only: {r['detail']['disputed']})"
+                if r['detail'].get('disputed') else '') for r in ev['checks'])
+        else:
+            summary = f"No validator ran (mode {self.c['mode']}): judge the diff against the job yourself."
         out = self.session('review', render('reviewer.md', GOAL=self.c['goal'], ACCEPTANCE=self.acceptance(),
                                             EVIDENCE=summary, DELTA=C.delta_md(C.delta(self.prof, self.judge_wt, base, cand)),
                                             BASE=base[:10], CAND=cand[:10], DIFF=diff, WT=self.judge_wt),
@@ -207,8 +223,9 @@ class Job:
         self.event('review', **v)
         if v['verdict'] == 'pass':
             return self.goto('record')
-        if v['verdict'] == 'reject':
-            return self.escalate(f"reviewer rejected: {v['reason']}")
+        if v['verdict'] == 'reject' or self.c['mode'] == 'review':
+            # review mode: the reviewer is a flag for a person, not a loop (escalate on a specific risk)
+            return self.escalate(f"reviewer {v['verdict']}: {v['reason']}")
         self.retry(f"reviewer: {v['reason']} ({v['evidence']})")
 
     def record(self):
@@ -355,6 +372,25 @@ class Job:
         finally:
             lock.unlink(missing_ok=True)
         return self.s
+
+
+CONFIRM_SCHEMA = {'type': 'object', 'additionalProperties': False, 'required': ['tests'], 'properties': {'tests': {
+    'type': 'array', 'items': {'type': 'object', 'additionalProperties': False, 'required': ['name', 'required', 'why'],
+                               'properties': {'name': {'type': 'string'}, 'required': {'type': 'boolean'},
+                                              'why': {'type': 'string'}}}}}}
+
+
+def confirm_scenarios(job, h):
+    """A second reader marks each held-out test required-by-the-job or not. Only confirmed tests may veto a change;
+    the others are evidence for the reviewer. (Backtest: 3 escalations came from held-out tests that rejected fixes
+    the real fix's tests accept.) Returns (veto test ids, the checker's verdicts)."""
+    rel, text = next(iter(h['files'].items()))
+    out = job.session('confirm', render('confirm.md', GOAL=job.c['goal'], ACCEPTANCE=job.acceptance(), HIDDEN_FILE=rel,
+                                        TESTS=text[:12000], ON_BASE=json.dumps(h['on_base']), WT=job.judge_wt),
+                      job.judge_wt, max_turns=15, timeout=600, schema=CONFIRM_SCHEMA, allowed=['Read', 'Grep', 'Glob'])
+    verdicts = (out.get('structured_output') or {}).get('tests', [])
+    req = {v['name'].split('::')[-1] for v in verdicts if v.get('required')}
+    return sorted(t for t in h['tests'] if t.split('::')[-1] in req), verdicts
 
 
 def lane_cmd(template, dd):
@@ -511,7 +547,7 @@ def main():
     ap.add_argument('--base')
     ap.add_argument('--cand')
     ap.add_argument('--id')
-    ap.add_argument('--mode', default='factory', choices=['factory', 'oneshot'])
+    ap.add_argument('--mode', default='review', choices=['review', 'oneshot', 'factory'])
     ap.add_argument('--pr', default='local', choices=['draft', 'local'])
     ap.add_argument('--hidden', default='writer', choices=['writer', 'none'])
     ap.add_argument('--ui', help='JSON: {"app": bundle id, "udid": simulator}')

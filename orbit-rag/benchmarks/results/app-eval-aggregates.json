@@ -1,0 +1,101 @@
+{
+ "_note": "Production-monorepo eval, aggregates only (queries quote internal docs and stay in the repo's local .orbit-rag/eval/). base = before 2026-10-25 ranking changes; v4 = final.",
+ "results": {
+  "canonical-base-tune": {
+   "n": 16,
+   "r1": 0.31,
+   "r5": 0.56,
+   "mrr": 0.41
+  },
+  "canonical-base-held": {
+   "n": 15,
+   "r1": 0.27,
+   "r5": 0.73,
+   "mrr": 0.47
+  },
+  "canonical-v4-tune": {
+   "n": 16,
+   "r1": 0.38,
+   "r5": 0.62,
+   "mrr": 0.47
+  },
+  "canonical-v4-held": {
+   "n": 15,
+   "r1": 0.47,
+   "r5": 0.87,
+   "mrr": 0.62
+  },
+  "uniform-base-tune": {
+   "n": 15,
+   "r1": 0.27,
+   "r5": 0.47,
+   "mrr": 0.37
+  },
+  "uniform-base-held": {
+   "n": 15,
+   "r1": 0.4,
+   "r5": 0.6,
+   "mrr": 0.49
+  },
+  "uniform-v4-tune": {
+   "n": 15,
+   "r1": 0.2,
+   "r5": 0.4,
+   "mrr": 0.3
+  },
+  "uniform-v4-held": {
+   "n": 15,
+   "r1": 0.33,
+   "r5": 0.6,
+   "mrr": 0.46
+  },
+  "canonical-heading-tune": {
+   "n": 16,
+   "r1": 0.25,
+   "r5": 0.56,
+   "mrr": 0.38
+  },
+  "canonical-heading-held": {
+   "n": 15,
+   "r1": 0.27,
+   "r5": 0.67,
+   "mrr": 0.44
+  },
+  "uniform-heading-tune": {
+   "n": 15,
+   "r1": 0.27,
+   "r5": 0.53,
+   "mrr": 0.38
+  },
+  "uniform-heading-held": {
+   "n": 15,
+   "r1": 0.4,
+   "r5": 0.6,
+   "mrr": 0.51
+  },
+  "canonical-priors-tune": {
+   "n": 16,
+   "r1": 0.38,
+   "r5": 0.56,
+   "mrr": 0.49
+  },
+  "canonical-priors-held": {
+   "n": 15,
+   "r1": 0.4,
+   "r5": 0.87,
+   "mrr": 0.59
+  },
+  "uniform-priors-tune": {
+   "n": 15,
+   "r1": 0.13,
+   "r5": 0.33,
+   "mrr": 0.23
+  },
+  "uniform-priors-held": {
+   "n": 15,
+   "r1": 0.33,
+   "r5": 0.67,
+   "mrr": 0.47
+  }
+ }
+}

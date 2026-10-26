@@ -11,3 +11,6 @@ __pycache__/
 xcuserdata/
 .swiftpm/
 spectra/.spectra/
+# personal session notes and handovers stay local
+docs/progress/
+HANDOVER-*.md

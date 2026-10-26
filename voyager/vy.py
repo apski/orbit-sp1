@@ -51,7 +51,8 @@ def profile(spec):
     merged with machine-local `~/.voyager/<name>/local.toml`. Repo-relative paths are resolved against the source."""
     repo = Path(os.path.expanduser(str(spec)))
     f = repo / '.voyager' / 'profile.toml'
-    p = tomllib.loads(f.read_text()) if f.exists() else tomllib.loads((HOME / 'examples' / f'{spec}.toml').read_text())
+    named = next((d / f'{spec}.toml' for d in (STATE / 'profiles', HOME / 'examples') if (d / f'{spec}.toml').exists()), HOME / 'examples' / f'{spec}.toml')
+    p = tomllib.loads(f.read_text()) if f.exists() else tomllib.loads(named.read_text())   # private adapters: ~/.voyager/profiles/
     p.setdefault('name', repo.name if f.exists() else str(spec))
     local = STATE / p['name'] / 'local.toml'
     if local.exists():
@@ -59,8 +60,9 @@ def profile(spec):
     p['source'] = os.path.expanduser(p.get('source') or str(repo))
     p['home'] = str(STATE / p['name'])
     p['bare'] = os.path.expanduser(p.get('bare') or str(STATE / p['name'] / 'repo.git'))
-    if p.get('python') and not os.path.isabs(os.path.expanduser(p['python'])):
-        p['python'] = str(Path(p['source']) / p['python'])
+    if p.get('python'):
+        py = os.path.expanduser(p['python'])
+        p['python'] = py if os.path.isabs(py) else str(Path(p['source']) / py)
     return p
 
 
@@ -84,7 +86,7 @@ def worktree(prof, sha, path, branch=None, sparse=None):
     args = ['worktree', 'add', '--no-checkout']
     args += ['-B', branch] if branch else ['--detach']
     git(b, *args, str(path), sha)
-    # non-cone patterns: root files + the profile's dirs, and never an env file (ExampleApp tracks .env files,
+    # non-cone patterns: root files + the profile's dirs, and never an env file (some repos track .env files,
     # DB certs and APNs keys in git; a worker or a test must not see them)
     pats = ['/*', '!/*/'] + [f'/{d}/' for d in (sparse if sparse is not None else prof.get('sparse', []))] + ['!.env*', '!**/.env*', '!*.pem', '!*.key', '!*.p8', '!*.crt', '!**/certs/']
     git(path, 'sparse-checkout', 'set', '--no-cone', *pats)

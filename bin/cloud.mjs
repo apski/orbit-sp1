@@ -201,7 +201,7 @@ function setup(t) {
 
 /** A host's own orbit-sp1 checkout to improve the pack in (host "dev": "code/orbit-sp1"): created once at this Mac's
  *  HEAD, then never touched by `up` again (unlike the <work>/orbit-sp1 mirror). This Mac gets a remote of the host's
- *  name: `git fetch linux-box` brings the box's commits here. */
+ *  name: `git fetch <host>` brings the box's commits here. */
 function devCheckout(t, origin) {
   const p = t.dev;
   if (ssh(t, `test -e ${p}`, { ok: true }).status !== 0) {

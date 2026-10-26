@@ -229,15 +229,15 @@ for a raw prompt):
   - Uniform random vectors are the worst case for HNSW (recall 0.31).
 - **Next.** The bench now uses clustered vectors. The rerun waits for a quiet host.
 
-## 8. Ranking by document kind (`results/exampleapp-eval-aggregates.json`)
+## 8. Ranking by document kind (`results/app-eval-aggregates.json`)
 
-Why: on ExampleApp (4,458 files, 52k chunks), "what do the docs say about bridge
+Why: on a production monorepo (4,458 files, 52k chunks), "what do the docs say about bridge
 transfer cost basis?" ranked agent checklists and a marketing email above the spec
 section and the two decision notes that settle it (ADR-003).
 
 **Test set.** Questions come from gemma3:4b doc2query over passages. Only aggregate
 numbers are here, because the questions quote internal docs; they stay in
-ExampleApp's local `.orbit-rag/eval/`.
+that repo's local `.orbit-rag/eval/`.
 
 - *canonical*: 31 questions from an explicit file list (`06 Decisions/`,
   `docs/positions/`, `docs/architecture/`). The generic classifier never sees the
@@ -266,7 +266,7 @@ Canonical held R@5 went from 0.73 to 0.87.
 - **Heading weighting didn't help**, so it defaults to 1.0. The thin-chunk rule
   (fewer than 6 prose words) was neutral on both sets and removes link-footer
   noise from results.
-- **Kinds on ExampleApp:**
+- **Kinds in that repo:**
 
   | kind | files |
   |---|---|
@@ -291,11 +291,11 @@ Canonical held R@5 went from 0.73 to 0.87.
   - Found with `agent --dump` bundle diffs.
   - Prefixes are now a fallback, used only when exact words find under 5
     candidates.
-- **Latency.** ExampleApp hybrid p50 is 230–480 ms (the high end measured while an
+- **Latency.** Hybrid p50 there is 230–480 ms (the high end measured while an
   agent benchmark shared the host); keyword CLI search is 0.26 s. On the same day,
   a deleted folder (55 missing sources) made every sync walk the whole tree
   (20 s per command). Fixed: a missing source is searched for once, then marked
   and dropped from the index.
 - **Proposals.** `context propose` produced 50 proposed decision highlights on
-  ExampleApp: 52 decision docs, minus one template and one with no prose. None is
+  that repo: 52 decision docs, minus one template and one with no prose. None is
   authoritative until approved in Review.

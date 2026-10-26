@@ -1,0 +1,46 @@
+# Voyager-1 adapter for a Python service tested with pytest. Installed as <repo>/.voyager/profile.toml.
+# Nothing machine-specific: paths are relative to the repo; machine-only settings go in ~/.voyager/<name>/local.toml.
+# Private adapters you don't want in a repo: ~/.voyager/profiles/<name>.toml (found by name, before examples/).
+name = "python-service"
+runner = "pytest"
+sparse = ["service"]
+# the venv lives in the source checkout (not in git), relative to the repo root
+python = "service/.venv/bin/python"
+test_cwd = "service"
+pytest_args = ["-p", "no:randomly", "-m", "not db"]
+test_patterns = ['(^|/)tests?/.*test_[^/]*\.py$', '(^|/)tests?/.*_test\.py$']
+# never editable by a builder job: the judge's own machinery and pinned corpora
+protected = ["service/tests/conftest.py", "service/tests/golden/", "service/tests/fixtures/", "service/pytest.ini", ".voyager/"]
+source_ext = [".py"]
+
+# The env fixture: Voyager's own throwaway Postgres (never a shared server). `voyager env up` creates and seeds it:
+# schema + the listed reference tables, NO user data. Seed source DSN is machine-local (local.toml: seed_from).
+[env.postgres]
+port = 5544
+schemas = ["app"]
+extensions = ["uuid-ossp", "pgcrypto"]
+tables = ["app.countries", "app.currencies", "app.plans"]
+ssl = false
+timezone = "GMT"
+
+# Every key the service's .env defines. DB keys point at the fixture; everything else is a dummy that refuses at once
+# (closed port 1), so a test can't reach a real service.
+[test_env]
+ENVIRONMENT = "dev"
+POSTGRES_HOST = "127.0.0.1"
+POSTGRES_PORT = "5544"
+POSTGRES_USER = "voyager"
+POSTGRES_DB = "voyager"
+POSTGRES_PASSWORD = "none"
+REDIS_URL = "redis://127.0.0.1:1/0"
+PAYMENTS_API_HOST = "http://127.0.0.1:1"
+PAYMENTS_API_KEY = "voyager-dummy"
+
+# UI lane: the iOS app, built Release for the simulator from the job's judge worktree (never the builder's).
+# A job opts in with --ui '{"lane": "ios", "app": "com.example.app"}' (udid "fleet" = lease one from orbitfleet)
+# and --sparse ios --sparse service.
+[lanes.ios]
+# {xcconfig} = the pack's fast-sim overlay (shared compilation cache, dwarf, arm64), {packages} = one shared SwiftPM
+# clone dir, {jobs} = a parallelism cap for many agents. Release for the simulator only; never for archives.
+build = "cd ios && xcodebuild -project App.xcodeproj -scheme App -configuration Release -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath {dd} -xcconfig {xcconfig} -clonedSourcePackagesDirPath {packages} -skipPackageUpdates -skipMacroValidation -skipPackagePluginValidation -jobs {jobs} CODE_SIGNING_ALLOWED=NO -quiet build"
+app = "{dd}/Build/Products/Release-iphonesimulator/App.app"

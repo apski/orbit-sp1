@@ -117,7 +117,10 @@ def validate(prof, wt, base, cand, hidden=None, mutation_floor=0.5, max_mutants=
         want = hidden['tests']
         got = {t: hres.get(t, 'missing') for t in want}
         bad = sorted(t for t, v in got.items() if v != 'pass')
-        row('hidden', not bad, {'failed': bad, 'n': len(want), 'tail': tail[-800:] if bad else ''})
+        # only held-out tests a second reader confirmed as required may veto; the rest are evidence for review
+        veto = set(hidden.get('veto', want))
+        row('hidden', not (set(bad) & veto), {'failed': sorted(set(bad) & veto), 'disputed': sorted(set(bad) - veto),
+                                              'n': len(want), 'n_veto': len(veto), 'tail': tail[-800:] if bad else ''})
         vy.git(wt, 'checkout', '-q', '-f', cand)
         vy.git(wt, 'clean', '-q', '-fd')
 

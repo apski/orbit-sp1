@@ -4,7 +4,7 @@ Status: accepted (2026-10-25)
 
 ## Context
 
-A user asked ExampleApp's orbit-rag MCP "what do the docs say about bridge
+A user asked a production monorepo's orbit-rag MCP "what do the docs say about bridge
 transfer cost basis?". The answer came back weak:
 
 - **Wrong documents on top.** The top hits were agent troubleshooting checklists
@@ -17,7 +17,7 @@ transfer cost basis?". The answer came back weak:
 - **Nothing to judge by.** Fused scores (0.02 vs 0.03) told the agent nothing,
   and it summarised snippets without reading the sources.
 
-Every file counted the same. A fix has to work for any repo, not just ExampleApp.
+Every file counted the same. A fix has to work for any repo, not just one.
 
 ## Decision
 
@@ -57,7 +57,7 @@ Every file counted the same. A fix has to work for any repo, not just ExampleApp
 
 The full tables are in `benchmarks/RESULTS.md` §8.
 
-- **The test set.** 31 ExampleApp questions about canonical docs, chosen by an
+- **The test set.** 31 questions from that repo about canonical docs, chosen by an
   explicit file list the classifier never sees. Plus 30 questions from random
   doc passages, to catch collateral damage. Both are split into tune and held.
 - **Weights.** Chosen on the tune split.

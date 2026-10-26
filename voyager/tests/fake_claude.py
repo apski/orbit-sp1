@@ -39,6 +39,11 @@ if 'scenario writer' in prompt:
                        'def test_other_halves_round_up_too():\n    """37.5p -> 38p"""\n    assert round_pence(0.375) == 0.38\n')
     out('SCENARIOS: 2 2')
 
+if 'scenario checker' in prompt:
+    req = os.environ.get('VOYAGER_FAKE_CONFIRM', 'all') == 'all'
+    out('', structured_output={'tests': [{'name': n, 'required': req, 'why': 'fake'} for n in
+                                         ('test_half_pence_rounds_up', 'test_other_halves_round_up_too')]})
+
 if 'REVIEWER' in prompt:
     special = 'x == 0.125' in Path('pkg/money.py').read_text()
     v = 'revise' if special else 'pass'

@@ -277,7 +277,7 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
           <span class="ex"><code>[check_sets] gate</code> and <code>gate-device</code> in <code>.orbit/orbit.toml</code>.</span></dd>
         <dt>Golden test</dt>
         <dd>A fixed input with its expected output pinned. Changing the output needs a stated reason.
-          <span class="ex">Orbit's own commands (SPEC R12); ExampleApp's tax engine parity tests.</span></dd>
+          <span class="ex">Orbit's own commands (SPEC R12); an app's domain-engine parity tests.</span></dd>
         <dt>Held-out scenario</dt>
         <dd>A test written by a second agent that the builder never sees, so the builder can't fit the code to it.
           <span class="ex">Voyager-1's acceptance scenarios.</span></dd>
@@ -327,10 +327,10 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
         <dd>The seam is where you split RN from native. The tax is the permanent cost of every change that has to cross it: two PRs, a bridge change, a store release.</dd>
         <dt>Crossing share</dt>
         <dd>The share of past commits that would have touched both sides of a proposed split. Read the per-side number; the "either side" number flatters the split.
-          <span class="ex">ExampleApp: 34% of RN commits also touched <code>apps/shared</code>.</span></dd>
+          <span class="ex">A production RN app: 34% of RN commits also touched <code>apps/shared</code>.</span></dd>
         <dt>Co-active share</dt>
         <dd>The share of a side's commits made in months the other side also changed. Below 50%, a low crossing share means one side was frozen, not that the seam is good.
-          <span class="ex">ExampleApp RN vs iOS: 1% crossing, but only 9% of RN commits were co-active.</span></dd>
+          <span class="ex">One app, RN vs iOS: 1% crossing, but only 9% of RN commits were co-active.</span></dd>
         <dt>Lift</dt>
         <dd>How much better a layout keeps changes local than random layouts with the same module sizes. Above 1 means the boundaries follow how the code really changes.
           <span class="ex"><code>replay.py</code>.</span></dd>
@@ -392,7 +392,7 @@ footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--li
     <li><strong>orbit-rag on this Mac</strong>: zoom 1 and 2 call it for human-approved decisions; the binary isn't installed here yet, so they print the command instead.</li>
     <li><strong>A real native port through the program</strong>: proven on a seeded program in a copy of rn-vs-native up to the readiness gate (which refused, correctly). No surface has gone past <code>ranked</code> on a real app.</li>
     <li><strong>Spectra in the device set</strong>: <code>spectra verify</code> takes one IR at a time; a verify-all would let the gate pin native screens.</li>
-    <li><strong>A gate after each edit</strong>, like ExampleApp's <code>arch-gate.sh</code>. Today the gate runs only at Stop.</li>
+    <li><strong>A gate after each edit</strong>, like a per-edit <code>arch-gate.sh</code>. Today the gate runs only at Stop.</li>
     <li><strong>Live device run of <code>gate-flows</code></strong> on a claimed simulator. Its logic is covered by the selftest; the real run hasn't happened.</li>
     <li><strong>Contracts extractor gap g0019</strong>: <code>&lt;Nav.Screen name="Home"&gt;</code> missed, and template-literal routes become noise.</li>
     <li><strong>Voyager-2</strong>.</li>

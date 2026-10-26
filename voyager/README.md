@@ -1,6 +1,19 @@
 # Voyager-1
 
-The layer above Orbit: a job (goal + acceptance scenarios) in, a validated draft PR with evidence out. Orbit gives
+The layer above Orbit: a job runner with optional, calibrated verification levels. A job (goal + acceptance
+scenarios) in, a draft PR with the evidence its level produced out.
+
+| Level (`--mode`) | What runs | Use it for |
+|---|---|---|
+| `review` (default) | one-shot builder, then a reviewer that sees only the diff; a flagged risk escalates to a person | small, well-tested changes |
+| `oneshot` | builder only | throwaway or exploratory work |
+| `factory` | held-out scenarios (only confirmed ones can veto), protected validator, reviewer, retries, recordings for UI | where it has a case: UI, multi-file, untested areas |
+
+Why review is the default: on 40 real bug fixes from a private production app the full factory caught one fewer wrong "done" change than
+one-shot (2 vs 3) but completed six fewer correct fixes (29 vs 35) at ~3x the cost per correct fix
+(`docs/prereg-backtest-2026-10-25.md`; report: Voyager-1 doc). Each check is calibrated on its own before it becomes
+a gate: `voyager backtest calibrate` replays reviewer, mechanical validator and held-out scenarios separately on
+one-shot outputs and real human fixes (wrong caught vs correct rejected, cost, time). Orbit gives
 agents cited context; Voyager decides whether their change works, with checks the builder cannot see or change.
 Named for going further out than Orbit; the next layer out is Voyager-2.
 
@@ -22,7 +35,7 @@ job.json ──> workspace ──> scenarios ──> build ──> validate ─�
 | `env.py` | env fixtures owned by Voyager (a throwaway Postgres seeded with schema + reference tables, no user data) |
 | `vy.py` | plumbing: adapters (profiles), sparse worktrees with secrets excluded, the pytest runner, headless sessions |
 | `prompts/` | worker, one-shot, scenario writer, reviewer, recorder, selector, strengthener, task describer, leak check |
-| `examples/` | starter adapters (`exampleapp.toml`) |
+| `examples/` | starter adapters (`python-service.toml`); private ones go in `~/.voyager/profiles/<name>.toml` |
 | `tests/` | `voyager selftest`: fixture repo with a real bug + scripted worker; the three proofs in miniature |
 
 **Adapter = `<repo>/.voyager/profile.toml`** (committable, nothing machine-specific): runner, test dir, test file
