@@ -5,7 +5,7 @@ with one command and brought online by one skill. Deterministic code first; agen
 their output is checked by code.
 
 ```bash
-bin/orbit install <repo> [--only navlab,orbit,spectra,orbit-rag]   # every subsystem (metadata only, no app code), then status
+bin/orbit install <repo> [--only navlab,orbit,spectra,orbit-rag,gate]   # every subsystem (metadata only, no app code), then status
 bin/orbit status [repo]                                   # what's online, the next step per subsystem
 bin/orbit compare <other-orbit>                           # evidence for merging with another Orbit checkout
 bin/orbit skills-sync [--check]                           # this pack's skills -> your global skills dir, as real files
@@ -21,6 +21,7 @@ skill: it runs each subsystem's L1 bootstrap in order and reports status.
 | NavLab | `navlab/` | navigation map (navscan), repo profile, DS audit, architecture pack (React Native repos) | `navlab-install` |
 | Spectra | `spectra/` | UI compiler: RN (jest or running app) / Figma (REST) -> IR -> SwiftUI on FlexLayout (a Swift port of RN's Yoga) -> judged against the source's own layout | `spectra-bootstrap` |
 | Perf | `perf/skills/` | perf skill pack (thread-offload, perf-climb, ...) | per skill |
+| Gate | `gate/` | the agent gate for RN repos: LLM-free oracle (typecheck, contracts diff, fitness, simwalk flows) as Orbit check sets `gate` / `gate-device`, a ratchet (no ruler looser than the base commit) and a Claude Code Stop hook that blocks on red; loop in `.orbit/CLIMB.md` | `gate` |
 | orbit-rag | `orbit-rag/` | docs-and-decisions RAG (Rust): hybrid search, cited bundles with human-approved highlights first, read-only MCP `orbit-rag`, code model, drift check; search UI as a login service on 127.0.0.1:7420 (`--port n`) | none: `install` brings it online |
 
 `orbit-rag/` has its own README

@@ -11,8 +11,12 @@ The as-is layout is "module = directory". For every past commit touching the sco
 would have touched under each layout. Good boundaries keep changes local: fewer modules per commit, more single-module
 commits, fewer cross-module import edges. Caveat: history favours the axes change took in the past. Pair this with
 scenario walkthroughs for the roadmap.
+
+A two-module map is a stack split (e.g. {"native": [...], "rn": [...]}): it also reports the commits that would have
+crossed it, against both denominators, whether both sides changed in the same months (a frozen side scores ~0% crossing
+without being a good seam), and the bridge surface (far-side files imported across; file-level, not symbol-level).
 """
-import fnmatch, json, os, random, statistics as st, sys
+import fnmatch, json, os, random, statistics as st, sys, time
 from pathlib import PurePosixPath
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -58,8 +62,9 @@ def score(commits, scope, mod, edges, rounds=20):
     coarseness alone buys (fewer, bigger modules always touch fewer modules per commit; gap g0042)."""
     assign = {f: mod(f) for f in scope}
     unmapped = sorted(f for f, m in assign.items() if m is None)
-    touched = [[f for f in c['files'] if f in scope] for c in commits]
-    touched = [t for t in touched if t]
+    dated = [(c.get('time', 0), [f for f in c['files'] if f in scope]) for c in commits]
+    dated = [d for d in dated if d[1]]
+    touched = [t for _, t in dated]
 
     def per_commit(lab):
         out = []
@@ -79,11 +84,32 @@ def score(commits, scope, mod, edges, rounds=20):
     cross = sum(1 for a, b in edges if a in scope and b in scope and assign[a] not in (None, '_deleted') and assign[b] not in (None, '_deleted') and assign[a] != assign[b])
     mods = {m for m in assign.values()} - {None, '_deleted'}
     mean = st.mean(per) if per else None
-    return {'commits': len(per), 'modules': len(mods), 'mean_modules_per_commit': round(mean, 2) if per else None,
+    out = {'commits': len(per), 'modules': len(mods), 'mean_modules_per_commit': round(mean, 2) if per else None,
             'p90': sorted(per)[int(0.9 * (len(per) - 1))] if per else None,
             'single_module_commits': round(sum(1 for x in per if x == 1) / len(per), 2) if per else None,
             'null_mean': round(st.mean(null), 2) if null else None, 'lift': round(st.mean(null) / mean, 2) if null and mean else None,
             'cross_module_imports': cross, 'unmapped': unmapped}
+    if len(mods) == 2:
+        out['crossing'] = crossing(dated, assign, sorted(mods), edges)
+    return out
+
+
+def crossing(dated, assign, sides, edges):
+    """Stack split: past commits that would have touched both sides. `of_either` divides by commits touching either side
+    (flatters the split); `of_side` by each side's own commits (what that side's team pays). `coactive` = share of a
+    side's commits made in months the other side also changed: low means one side was frozen, so a low crossing share
+    says nothing about the seam (seen: an RN app frozen while its native rewrite shipped scored 1%)."""
+    hits = [({assign[f] for f in t} & set(sides), ts) for ts, t in dated]
+    hits = [h for h in hits if h[0]]
+    month = lambda ts: time.strftime('%Y-%m', time.gmtime(ts))
+    n = {k: sum(1 for s, _ in hits if k in s) for k in sides}
+    co = set.intersection(*({month(ts) for s, ts in hits if k in s} for k in sides))
+    both = sum(1 for s, _ in hits if len(s) == 2)
+    share = lambda x, d: round(x / d, 2) if d else None
+    return {'both': both, 'of_either': share(both, len(hits)), 'of_side': {k: share(both, n[k]) for k in sides},
+            'coactive': {k: share(sum(1 for s, ts in hits if k in s and month(ts) in co), n[k]) for k in sides},
+            'bridge_files': {f'{x}->{y}': len({b for a, b in edges if assign.get(a) == x and assign.get(b) == y})
+                             for x, y in (sides, sides[::-1])}}
 
 
 def main():
@@ -110,6 +136,15 @@ def main():
         print(f'{name[:44]:<44} {r["modules"]:>7} {r["commits"]:>7} {r["mean_modules_per_commit"]!s:>11} {r["null_mean"]!s:>6} {r["lift"]!s:>5} {r["p90"]!s:>4} {r["single_module_commits"]!s:>13} {r["cross_module_imports"]:>16}')
     print('\nrandom = same module sizes, files shuffled; lift = random / mods/commit (> 1: boundaries follow change, beyond coarseness)')
     for name, r in rows[1:]:
+        c = r.get('crossing')
+        if c:
+            side = ', '.join(f'{v:.0%} of {k}' if v is not None else f'- of {k}' for k, v in c['of_side'].items())
+            print(f'\n{name}: {c["both"]} commits cross the split: {c["of_either"]:.0%} of either side, {side}'
+                  f' | bridge files: {", ".join(f"{k} {v}" for k, v in c["bridge_files"].items())}')
+            for k, v in c['coactive'].items():
+                if v is not None and v < 0.5:
+                    print(f'  WARNING: only {v:.0%} of {k} commits fall in months the other side also changed: '
+                          'low crossing may mean a frozen side, not a good seam')
         if r['unmapped']:
             print(f'\n{name}: {len(r["unmapped"])} scope files not placed in any module (design incomplete): {", ".join(r["unmapped"][:6])}')
 
@@ -128,6 +163,16 @@ def selftest():
     good = score(commits, scope, {'a1': 'A', 'a2': 'A', 'b1': 'B', 'b2': 'B'}.get, [])
     bad = score(commits, scope, {'a1': 'A', 'a2': 'B', 'b1': 'A', 'b2': 'B'}.get, [])
     assert good['lift'] > 1.2 and bad['lift'] < 1, (good, bad)
+    # stack split: both denominators, bridge files per direction
+    m = {'r1': 'rn', 'r2': 'rn', 'n1': 'native'}.get
+    jan, apr = 1704067200, 1711929600  # 2024-01-01, 2024-04-01
+    c = score([{'time': jan, 'files': f} for f in (['r1'], ['r2'], ['r1'], ['n1'], ['r1', 'n1'])], {'r1', 'r2', 'n1'}, m,
+              [('r1', 'n1'), ('r2', 'n1'), ('n1', 'r1')])['crossing']
+    assert c['both'] == 1 and c['of_either'] == 0.2 and c['of_side'] == {'native': 0.5, 'rn': 0.25}, c
+    assert c['bridge_files'] == {'native->rn': 1, 'rn->native': 1} and c['coactive'] == {'native': 1.0, 'rn': 1.0}, c
+    # frozen side: rn changes in January, native only in April -> 0% crossing, and coactive flags it
+    c = score([{'time': jan, 'files': ['r1']}] * 3 + [{'time': apr, 'files': ['n1']}] * 3, {'r1', 'r2', 'n1'}, m, [])['crossing']
+    assert c['of_either'] == 0 and c['coactive'] == {'native': 0, 'rn': 0}, c
     print('selftest ok')
 
 

@@ -31,6 +31,7 @@ Long tasks follow `$OP/HARNESS.md` (gate, ratchet, dev log, owned files, escalat
 | 1 | NavLab | `navlab-install` | profile sections confirmed, navscan adapter resolved, navigation tree checked against the app |
 | 2 | Orbit | `orbit-bootstrap` | `.orbit/orbit.toml` written from the census proposal (user approves; starter in `$OP/orbit/examples/`), `.orbit/orbit index` runs, `.orbit/orbit status` lists units |
 | 3 | Spectra | `spectra-bootstrap` | profile confirmed, jest harness renders a real screen, one screen passes `spectra verify` |
+| 4 | Gate | `gate` | `[check_sets] gate` / `gate-device` in orbit.toml, contracts baseline committed, `verify gate` green, Stop hook in `.claude/settings.json` (RN repos) |
 
    NavLab first: its profile (design-system roots, native DS folder) feeds Spectra's. Orbit before Spectra so code
    questions during Spectra's bootstrap can go through `.orbit/orbit` instead of grep.

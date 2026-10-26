@@ -4,8 +4,10 @@
 //
 //   orbit install <repo> [--only navlab,orbit,spectra]   NavLab (navigation, DS audit, architecture pack; RN repos)
 //                                 + Orbit (code index) + Spectra (UI compiler) + orbit-rag (docs/decisions RAG:
-//                                 index, MCP, search UI on 127.0.0.1:7420; --port n) + the orbit-sp1 skill; then status
+//                                 index, MCP, search UI on 127.0.0.1:7420; --port n) + gate (oracle, must-pass list, ratchet as a
+//                                 Stop hook; RN repos) + the orbit-sp1 skill; then status
 //   orbit status [repo]           each subsystem: installed? L1 bootstrap done? the next step
+//   orbit gate <cmd> ...          the agent gate (propose, ratchet, contracts, flows, stop, selftest; gate/gate.py)
 //   orbit compare <other-orbit>   this pack vs another Orbit checkout: new / changed / missing, as markdown evidence
 //   orbit skills-sync [--check] [--force] [--to <dir>] [--install-hooks]
 //                                 every */skills/<name> in this pack -> your global skills dir as REAL files (no links);
@@ -25,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 const HOME = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const [cmd, target] = argv.filter((a, i) => !a.startsWith('--') && !argv[i - 1]?.startsWith('--'));
-const only = argv.includes('--only') ? argv[argv.indexOf('--only') + 1].split(',') : ['navlab', 'orbit', 'spectra', 'orbit-rag'];
+const only = argv.includes('--only') ? argv[argv.indexOf('--only') + 1].split(',') : ['navlab', 'orbit', 'spectra', 'orbit-rag', 'gate'];
 // orbit-rag's own flags pass through to orbit-rag/install.mjs
 const ragFlags = ['--port', '--no-service', '--no-mcp'].flatMap(f => (!argv.includes(f) ? [] : f === '--port' ? [f, argv[argv.indexOf(f) + 1]] : [f]));
 const read = p => { try { return readFileSync(p, 'utf8'); } catch { return ''; } };
@@ -131,6 +133,17 @@ function install(repo) {
     for (const [, step, ...note] of rows) log.push(['orbit-rag', step === 'FAILED' ? 'FAILED' : step, note.join('  ')]);
   }
 
+  // 4b. Gate: oracle + must-pass list + ratchet as a Claude Code Stop hook (RN repos: its checks are NavLab's).
+  if (only.includes('gate')) {
+    if (!rn) log.push(['gate', 'skipped', 'not a React Native repo (no react-native in package.json)']);
+    else {
+      const g = run(join(HOME, 'gate', 'bin', 'gate'), ['install', repo]);
+      placeSkills(join(HOME, 'gate', 'skills'), repo, {});
+      const [, st, ...note] = (g.stdout || g.stderr).trim().split('\n').slice(-1)[0].split('  ');
+      log.push(['gate', g.status === 0 ? st : 'FAILED', note.join('  ')]);
+    }
+  }
+
   // 5. The index skill + AGENTS.md block that ties them together.
   placeSkills(join(HOME, 'skills'), repo, {});
   writeFileSync(join(dot, 'orbit-SP1.json'), JSON.stringify({ revision: rev, installedAt: new Date().toISOString().slice(0, 10), subsystems: only, ...(host && { hostOrbit: relative(repo, host) }) }, null, 1) + '\n');
@@ -139,7 +152,7 @@ function install(repo) {
 ## orbit-SP1
 
 Installed: ${only.join(', ')}. Orbit (cited code index): \`.orbit/orbit\`, notes in \`.orbit/README.md\`.
-${only.includes('spectra') ? 'Spectra (RN/Figma -> native UI compiler): `.spectra/spectra`. ' : ''}${only.includes('orbit-rag') ? 'orbit-rag (docs/decisions RAG): MCP `orbit-rag`, search UI http://127.0.0.1:7420. ' : ''}${only.includes('navlab') && rn ? 'NavLab: block `navlab:`. ' : ''}Bring subsystems online with the
+${only.includes('spectra') ? 'Spectra (RN/Figma -> native UI compiler): `.spectra/spectra`. ' : ''}${only.includes('orbit-rag') ? 'orbit-rag (docs/decisions RAG): MCP `orbit-rag`, search UI http://127.0.0.1:7420. ' : ''}${only.includes('navlab') && rn ? 'NavLab: block `navlab:`. ' : ''}${only.includes('gate') && rn ? 'Gate (oracle, must-pass list, ratchet): `.orbit/gate`, loop in `.orbit/CLIMB.md`, skill `gate`. ' : ''}Bring subsystems online with the
 \`orbit-sp1\` skill. orbit-SP1 checkout: \`.orbit/home\`.
 <!-- orbit-sp1:end -->`;
   const upsert = (f, b) => { const t = read(f); writeFileSync(f, t.includes('<!-- orbit-sp1:start') ? t.replace(/<!-- orbit-sp1:start[\s\S]*?<!-- orbit-sp1:end -->/, b) : `${t}${t ? '\n\n' : ''}${b}\n`); };
@@ -184,6 +197,8 @@ function status(repo) {
   rows.push(['spectra', sp ? 'installed' : 'not installed', !sp ? 'orbit install' : proved ? 'online' : `spectra-bootstrap skill: confirm ${spDetected} sections, jest harness${harness ? '' : ' (missing!)'}, prove one screen`]);
   const rag = run('node', [join(HOME, 'orbit-rag', 'install.mjs'), 'status', repo, ...ragFlags]).stdout.trim().split('  ');
   if (rag.length === 3) rows.push(rag);
+  const gt = run(join(HOME, 'gate', 'bin', 'gate'), ['status', repo]).stdout.trim().split('  ');
+  if (gt.length >= 3) rows.push([gt[0], gt[1], gt.slice(2).join('  ').replace(/^.*next: /, '')]);
   console.log(`orbit status ${repo}${rev ? ` (orbit-SP1 ${rev})` : ''}`);
   for (const [k, st, next] of rows) console.log(`  ${k.padEnd(8)} ${st.padEnd(14)} next: ${next}`);
   return rows;
@@ -240,7 +255,7 @@ function skillsSync() {
   const render = ([rel, buf]) => [rel, rel.endsWith('.md') ? Buffer.from(Object.entries(vars).reduce((t, [k, v]) => t.replaceAll(k, v), buf.toString())) : buf];
   const hash = files => { const h = createHash('sha256'); for (const [rel, buf] of files) h.update(rel).update('\0').update(buf).update('\0'); return h.digest('hex').slice(0, 16); };
   const rows = [];
-  for (const root of ['skills', 'orbit/skills', 'navlab/skills', 'spectra/skills', 'perf/skills', 'orbit-rag/skills']) {
+  for (const root of ['skills', 'orbit/skills', 'navlab/skills', 'spectra/skills', 'perf/skills', 'orbit-rag/skills', 'gate/skills']) {
     if (!existsSync(join(HOME, root))) continue;
     for (const name of readdirSync(join(HOME, root)).filter(n => existsSync(join(HOME, root, n, 'SKILL.md')))) {
       const files = walk(join(HOME, root, name)).map(render), want = hash(files), d = join(dest, name);
@@ -282,6 +297,7 @@ if (cmd === 'skills-sync') skillsSync();
 else if (cmd === 'install' && target) install(resolve(target));
 else if (cmd === 'status') status(resolve(target ?? '.'));
 else if (cmd === 'compare' && target) compare(resolve(target));
+else if (cmd === 'gate') process.exit(spawnSync(join(HOME, 'gate', 'bin', 'gate'), argv.slice(1), { stdio: 'inherit' }).status ?? 1);
 else if (cmd && !['install', 'compare', 'help', 'skills-sync'].includes(cmd)) {
   // Engine passthrough: the nearest .orbit/orbit.toml up from here is the repo's config.
   let d = process.cwd();

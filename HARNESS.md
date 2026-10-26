@@ -26,7 +26,8 @@ For a repo with its own Orbit (`agents/orbit/`), `RECONCILE.md` maps the same ru
 4. **Oracle plus corpus.** Judge against a reference you didn't write in this task: the source's own layout (Spectra),
    RN's Yoga (FlexCore), the baseline bench (perf), the measured twin (NavLab), golden fixtures (Orbit). Corpora live
    pinned (commit + sha256), never edited to make a check pass.
-5. **Ratchet.** Each long task has a floor that only rises: a number with the command that reproduces it, labelled
+5. **Ratchet.** In a React Native repo, rules 3-6 are enforced by the gate (`.orbit/gate`, skill `gate`): Orbit
+   check sets as the must-pass list, `gate ratchet` against the base commit, a Stop hook that blocks on red. Each long task has a floor that only rises: a number with the command that reproduces it, labelled
    **measured** (a rerunnable command produced it) or **estimated** (a model or a guess). It rises only with evidence a
    reviewer can rerun, and never by changing the ruler in the same move. Report two numbers, never one blended:
    **breadth** (does it exist: screens captured, surfaces planned) and **ready** (does it hold up: screens passing the
