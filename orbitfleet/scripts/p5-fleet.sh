@@ -1,7 +1,7 @@
 #!/bin/bash
 # P5 fleet smoke (DESIGN.md "Phases"): N real Claude Code agents (`claude -p`, default 8, Sonnet) work in parallel,
 # each told only to follow skills/orbitfleet/SKILL.md: claim, install the fixture app, run, launch, mark, screenshot,
-# stop, release. Own daemon and pool (ofp5-01..N, created on first run), so nothing else is touched.
+# stop, release. Own daemon and pool (ofp5-1..N, created on first run), so nothing else is touched.
 # It SPENDS MONEY (N agent sessions): it is in the opt-in `fleet` check set, never in `live`.
 # Verified from the daemon's records, not from what the agents say. Exit = number of failed agents.
 #   N=8 MODEL=sonnet BUDGET=1 (USD per agent) RUNTIME=com.apple.CoreSimulator.SimRuntime.iOS-26-4 scripts/p5-fleet.sh
@@ -25,6 +25,7 @@ $OF serve --pool-prefix ofp5- --port 0 --max-booted 64 >"$ORBITFLEET_HOME/serve.
 # kill -0), so the watchdog waited forever and orbit verify hung until its timeout.
 ( while kill -0 $$ 2>/dev/null; do sleep 2; done; kill "$(cat "$ORBITFLEET_HOME/daemon.pid" 2>/dev/null)" 2>/dev/null ) </dev/null >/dev/null 2>&1 &
 WATCHDOG=$!
+disown $WATCHDOG
 cleanup() {
   kill $WATCHDOG 2>/dev/null || true
   for u in $($OF ls --json 2>/dev/null | jq -r '.[] | select(.lease) | .udid'); do $OF release "$u" --force --shutdown >/dev/null 2>&1 || true; done
@@ -44,6 +45,7 @@ sample() {
   done
 }
 sample & SAMPLER=$!
+disown $SAMPLER # no "Terminated" line when it is stopped
 swap0=$(vm_stat | awk '/Swapouts/ {gsub("\\.", "", $2); print $2}')
 t0=$(date +%s)
 

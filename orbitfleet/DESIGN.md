@@ -4,7 +4,7 @@ A local daemon that leases slim iOS simulators to agents, records every run (dev
 screenshots), offers debug attach per run, and shows the whole fleet to the person in a browser. simslim does the
 slimming in-process; orbitfleet adds ownership, runs and a view.
 
-Status: P1 (leases), P2 (runs + logs), P3 (browser UI), P4 (debug) built and passing 2026-10-26. Next: P5 (below). Dev log: `DEVLOG.md`. House rules: `.orbit/principles.toml`.
+Status: P1-P5 built and passing 2026-10-26 (P5: 8 parallel agents, 8/8). Lives in orbit-SP1 (`orbitfleet/`). Dev log: `DEVLOG.md`. House rules: `.orbit/principles.toml`.
 
 ## Who uses what
 
@@ -144,7 +144,7 @@ Each phase writes its acceptance test first (it fails), then the code, then the 
 | P2 Runs + logs | a run on a live sim produces non-empty `device.ndjson`, `app.out`, a mark in `events.ndjson`, an AVIF shot; stop compresses the log; a launched-then-killed app (`kill -ABRT <pid>`) leaves an `.ips` in `crash/` | fast + accept **Done 2026-10-25**: also one active run per sim, run start needs the lease, log stream piped through the daemon and stopped by process group (no orphan), crash matched on the `.ips` header `bundleID`; live gate passed twice |
 | P3 UI | `web` tests: TCP refuses a non-loopback bind, a missing token (401) and a foreign Host (403). Browser flow: card count = booted sims; claim from the CLI makes the holder appear on `sim-<udid>` within 3 s; drawer log tail grows | fast + accept + ui-flow. **Done 2026-10-26** (`scripts/ui-flow.sh`, 10 checks: loopback-only bind, 401/403, cards, holder in 0 s, log tail grows, timeline, thumbnail loads, no stray file, force release from the UI aborts the run); live gate passed twice |
 | P4 Debug | `debug lldb` prints a pid equal to the one in `launchctl list` for `UIKitApplication:<bundle>`; `--wait-for-debugger` launch stays suspended until lldb continues; `profile --time-limit 5s` writes a `.trace` | fast + accept **Done 2026-10-26** (accept.sh, on the fixture app: lldb refused before launch, pid = launchctl, the command attaches, `Ts` -> `Ss` after continue, 13 MB trace, video; ui-flow: video and paused relaunch from the drawer); live gate passed twice |
-| P5 Fleet smoke | 8 agents in parallel (`claude -p` with the skill), each claim → run → mark → shot → stop → release, on 8 sims | all |
+| P5 Fleet smoke | 8 agents in parallel (`claude -p` with the skill), each claim → run → mark → shot → stop → release, on 8 sims | all **Done 2026-10-26** (`scripts/p5-fleet.sh`, opt-in `fleet` set: 8 Sonnet agents given only the skill: 8/8 runs passed with shot and marks, 128 s wall, 0 overlapping runs, 0 leases left, $2.61, 0 host swap-outs, 17.1 GB peak RAM across every booted simulator) |
 
 Floor (HARNESS rule 5): **breadth** = CLI commands implemented / 19 above (`ui`, `version` added); **ready** = acceptance checks passing, and
 the measured number of agents that complete P5 in parallel with no host swap (`vm_stat` swapouts flat).

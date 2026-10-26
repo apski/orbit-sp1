@@ -125,3 +125,29 @@ floor:    breadth 19/19 commands (measured: + debug lldb|profile|video, version)
 next:     P5: scripts/p5-fleet.sh (8 claude -p agents, Sonnet, $1 cap each, own pool ofp5-01..08); orbitfleet now
           lives in orbit-SP1 (orbitfleet/, commit 57a1583): sync this repo's changes there and edit there from now on
 ask:      none
+
+## 2026-10-26 claude (move into orbit-SP1, skill, production restart)
+did:      orbitfleet moved into orbit-SP1 by another session (57a1583, from my 05:38 tree); synced my later P4 work
+          here (beee08a; ~/code/orbitfleet 5b24194), updated skills/orbitfleet/SKILL.md (debug, error codes, daemon
+          lifecycle, contract at its pack path), `bin/orbit sync` (skill, ~/.local/bin/orbitfleet -> this dir's
+          binary). The production daemon ran ~/code/orbitfleet's binary, a different file, so auto-restart (same
+          binary only) could not move it: restarted it by hand through /api/restart when idle.
+gate:     go vet, go test -race (all packages), gofmt here -> PASS
+found:    a command that lands in a daemon's last few hundred ms of shutdown gets EOF (`ls` right after
+          /api/restart did). The CLI that asked for the restart waits for the lock; any other agent's command in
+          that window fails once. Retry once on EOF in web.Client if it shows up in practice.
+next:     P5 (scripts/p5-fleet.sh), running
+
+## 2026-10-26 claude (P5 fleet smoke)
+did:      scripts/p5-fleet.sh: 8 `claude -p` agents (Sonnet, $1 cap each) told only to follow skills/orbitfleet/SKILL.md
+          (claim, install the fixture app, run start, launch, mark, shot, mark, stop, release) on their own pool
+          (ofp5-1..8, created on first run) and daemon; judged from the daemon's records, not the agents' replies.
+gate:     scripts/p5-fleet.sh -> PASS: 8/8 runs passed with a shot and both marks; 0 overlapping runs; 0 leases left
+floor:    breadth 19/19 commands · ready 5/5 phases
+          measured (p5-fleet.sh, load ~7): 8 agents in parallel, 128 s wall (75-122 s each, 7-10 turns), $2.61 total,
+          0 host swap-outs during the run, 17.1 GB peak footprint across every booted simulator (not only the pool)
+found:    the sims are ofp5-1..8, not -01: `seq -w 1 8` has nothing to pad. Kept (renaming would create 8 more).
+next:     the gap list: EOF retry for a command in a daemon's last ms of shutdown (previous entry); p5 at N=12 and 16
+          to find where this Mac starts swapping (the floor's real number); orbitfleet's live checks have no
+          orbit verify in the pack yet (they ran from ~/code/orbitfleet/.orbit).
+ask:      ~/code/orbitfleet is now a stale copy (5b24194): archive or delete it?
