@@ -36,10 +36,10 @@ Packages (each is an Orbit unit `go-pkg:<dir>`): `fleet` (leases, capacity, pure
 | D7 | Never erase, delete, disk-clean or un-slim. | Agents get leases, not ownership. Destructive ops stay in simslim's app behind its confirmations. Rule NF-4. | |
 | D8 | Files, no DB: `leases.json` + `runs/<id>/run.json` and artifacts; run list is a dir scan. Logs zstd `-15 --long` at stop (not -19: see Measured), stored screenshots AVIF, live thumbnails JPEG in memory only. | Numbers below. | SQLite (cgo or a new dep for a list of runs). |
 | D9 | The agent contract is the CLI's JSON; all output structs live in `fleet/api.go` (later `runs/api.go`). Changing a field is a breaking change. | Same rule simslim uses for `output.go`. | |
-| D10 | Capacity: `--max-booted`, default min(4, (host RAM − 6 GB) / 1 GB). A claim beyond it waits (`--wait 10m`) or fails with `capacity`. | A slim sim measures ~0.9 GB (simslim README), so RAM would allow 16, but CPU and simctl contention come first: load 677 with 11 sims booted on an M4 Max (2026-10-26). 4 is the user's cap. Queueing beats swapping. | |
+| D10 | Capacity: `--max-booted`, default min(4, (host RAM − 6 GB) / 1 GB). A claim beyond it waits (`--wait 10m`) or fails with `capacity`. | A slim sim measures ~0.9 GB (simslim README), so RAM would allow 16, but CPU and simctl contention come first: load 677 with 11 sims booted (2026-10-26). 4 is the user's cap. Queueing beats swapping. | |
 | D11 | The CLI restarts a daemon running an older build of its own binary (same resolved path, older mtime, from `/api/version`), with the daemon's own args. The daemon refuses (`busy`) while a run is active or a claim is preparing or queued; the CLI then warns and the next command retries. | A rebuild otherwise ran the old daemon until someone killed it. Restarting mid-run would abort the run (its capture processes cannot move to the new daemon). Leases survive (`leases.json`). | a manual `orbitfleet restart` (asked for auto, 2026-10-26). |
 
-## Measured here (2026-10-25, M4 Max 128 GB, Xcode 27.1, iPhone 17 Pro iOS 26.4, already-booted sim)
+## Measured here (2026-10-25, Xcode 27.1, iPhone 17 Pro iOS 26.4, already-booted sim)
 
 | What | Number | Decision |
 |---|---|---|

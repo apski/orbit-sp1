@@ -7,7 +7,7 @@ description: "Decide where a job runs, from a Claude Code session on this Mac: w
 
 This Claude Code session on the Mac stays the orchestrator. It decides per job where the job runs, using
 `orbit cloud` (skill `orbit-cloud`, `$(.orbit/home)/bin/cloud.mjs`). Targets are in `~/.orbit-cloud/hosts.json`
-(machine-local), e.g. `linux-box` (i9-9900K, 16 threads, 62 GB). A host can list several ssh aliases (home LAN, a
+(machine-local), e.g. `linux-box`. A host can list several ssh aliases (home LAN, a
 VPN jump); cloud picks whichever answers.
 
 ## The decision

@@ -114,6 +114,6 @@ Orbit engine tests (43):
 |---|---|
 | this Mac at load 949 | 170 s wall (8.6 s CPU) |
 | DO s-4vcpu-8gb | 21.8 s |
-| linux-box (i9-9900K, 16 threads) | 5.3 s; 29 s end to end through the remote jump |
+| linux-box | 5.3 s; 29 s end to end through the remote jump |
 
 Setup: a new DO box takes 3 min 44 s, a second `up` 25 s. linux-box's first `up` took 1 min 45 s.
