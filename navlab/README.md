@@ -73,8 +73,8 @@ rn-screens, fabric-commit, hermes, app-native, autolayout, uikit-nav, uikit-layo
 
 ```bash
 lab/build.sh && lab/build.sh native                                  # Release, both arms
-ARM=rn node ~/code/simwalk/simwalk.mjs flows/nav-walk.mjs --repeat 3  # must pass on both arms
-ARM=native node ~/code/simwalk/simwalk.mjs flows/nav-walk.mjs --repeat 3
+ARM=rn simwalk flows/nav-walk.mjs --repeat 3  # must pass on both arms
+ARM=native simwalk flows/nav-walk.mjs --repeat 3
 python3 lab/sweep.py one -depth 8 -kind mix -pushes 10 [--arm native] # one traced run + hottest symbols
 python3 lab/sweep.py nest --reps 3 --arm both     # nest | screens | rows | stack | grid | smoke; resumable
 python3 lab/report.py                             # aggregate every sweep, RN vs native side by side

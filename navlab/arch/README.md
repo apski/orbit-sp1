@@ -11,6 +11,7 @@ Node uses `../scan/node_modules` (@babel/parser) through `../scan/lib.mjs` (`mak
 | `replay.py` | design backtest on history | design-afresh, rn-native-migration |
 | `portfolio.py` | every reached navigator: structure × history × predicted lag → move | app-architecture-steward |
 | `ledger.py` | predictions per move, scored for calibration; `withdraw` | steward, migration |
+| `program.py` | program state per surface (move, stage, evidence, links); stage checks; `status --zoom 0/1/2` budgeted bundles | native-port, steward, gate ratchet |
 | `featuremodel.py` | explicit feature model; `check [--strict]` (one owner, `writers` warn in as-is) | design-afresh |
 | `fitness.py` | CI fitness functions: navscan budget, import rules, single-writer rules, AGENTS rules 6-7; ratchet | steward §6, design-afresh §7 |
 

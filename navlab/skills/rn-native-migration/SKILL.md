@@ -76,6 +76,9 @@ Pick by measured boundary cost against usage, not by taste. Keep the navigation 
 
 ## 5. Run it surface by surface
 
+Each surface is a row in the program (`native-port` skill, `arch/program.py`): the steps below are its stages, and
+`program.py advance` checks the evidence for each one. Resume with `program.py status`, not by re-reading this plan.
+
 For each surface:
 0. `safety-net` covers its journeys, and `contracts-scan` records the before-inventory.
 1. Introduce the seam (interface plus bridge).

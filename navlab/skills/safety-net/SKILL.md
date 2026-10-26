@@ -53,6 +53,7 @@ Work the `gaps` list in journey order, hot screens first (portfolio / usage):
   coverage table goes into the design doc.
 - `rn-native-migration`: a native rewrite keeps the ids: `accessibilityIdentifier` = the RN `testID`, so the same
   flows judge both sides. Flows that pass on RN and fail on native are migration bugs, found before users find them.
+- `native-port`: readiness item 5. `program.py set <surface> safety=.navlab/<f>-safetynet.json` (at least one screen covered).
 - `app-architecture-steward`: "is it safe to change?" column; `contracts-scan` supplies what the flows should assert
   (events fired, keys persisted, deep links resolving).
 

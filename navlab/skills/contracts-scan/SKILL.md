@@ -29,7 +29,8 @@ python3 $NAVLAB_HOME/arch/contracts.py diff before.json after.json              
 - `design-afresh`: `featuremodel.py check` fails while any in-scope contract is unaccounted for.
 - `rn-native-migration`: contracts with `[outside]` users that cross the proposed line become bridge APIs; count them in the boundary tax.
 - `safety-net`: contracts are the test oracle (events fired, keys read, deep links resolve).
-- CI: run `diff` against the base branch on PRs that touch a redesigned feature.
+- CI: run `diff` against the base branch on PRs that touch a redesigned feature. The gate (`.orbit/gate contracts`) does this on every Stop.
+- `native-port`: readiness item 2. `program.py set <surface> contracts=.navlab/<f>-contracts.json`.
 
 ## Limits
 Static and heuristic. Dynamic keys and event names show as expressions. Server-side contracts (GraphQL schema,

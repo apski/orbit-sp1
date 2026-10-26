@@ -12,6 +12,10 @@ answer one question each. This skill decides which question matters, in what ord
 
 Pack: `$NAVLAB_HOME` (rules and baseline in `$NAVLAB_HOME/AGENTS.md`). State lives in the repo:
 `.navlab/` (scans, portfolio, ledger) and `docs/architecture/` (decisions, program page).
+**Program state** is `.navlab/program.json`, owned by this skill and written only through `arch/program.py`: one row
+per surface with its move, stage, evidence and links into every other store. Start each session with
+`program.py status` (zoom 0, ~300 tokens) instead of re-reading the stores; §2 `program.py add` per chosen move, §3
+`program.py link <s> ledger:<id>`, §4–5 `program.py advance`. Native moves run through the `native-port` skill.
 
 ## Composition map
 

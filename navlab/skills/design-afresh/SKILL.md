@@ -115,6 +115,8 @@ Fitness functions that keep the shape (`arch/fitness.py`: put them under the can
 9. the fitness functions.
 
 Use mermaid for as-is vs target. Record the expected effect as a ledger prediction (`arch/ledger.py add`).
+On a program surface: `program.py set <f> design=docs/design-afresh/<f>/README.md`, `program.py link <f> ledger:<id>`,
+then `program.py advance <f> designed`.
 
 ## When this skill falls short
 Log it before working around it: `python3 $NAVLAB_HOME/arch/gaps.py add --skill design-afresh --kind <missing-pattern|false-positive|false-negative|missing-tool|missing-skill|missing-data|wrong-answer|slow|ux> --impact <blocked|wrong-answer|degraded|slow> --repo <short name> --what "..." --evidence <file:line> --workaround "..."`. List what you logged in the report. Rules: AGENTS.md "Learning loop".

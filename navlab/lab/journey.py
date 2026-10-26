@@ -77,6 +77,21 @@ def main():
     cfg = json.load(open(cfg_path))
     repo = os.path.dirname(os.path.abspath(cfg_path))
     udid = opt('--udid', cfg.get('udid') or os.environ.get('UDID'))
+    lease = None
+    if udid in (None, 'fleet'):
+        # no pinned device: the pack's resolver (orbit-SP1 bin/sim.mjs) leases a slim simulator, released below
+        sim = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'bin', 'sim.mjs')
+        lease = json.loads(subprocess.run(['node', sim, 'claim', '--holder', f'navlab:{os.path.basename(repo)}'],
+                                          capture_output=True, text=True, check=True).stdout)
+        udid = lease['udid']
+    try:
+        run_journeys(name, cfg, repo, udid, opt)
+    finally:
+        if lease and lease.get('lease'):
+            subprocess.run(['node', sim, 'release', udid, '--holder', lease['holder']], capture_output=True)
+
+
+def run_journeys(name, cfg, repo, udid, opt):
     reps, limit = int(opt('--reps', '3')), int(opt('--limit', str(cfg.get('journeyLimit', 90))))
     out_dir = os.path.join(repo, '.navlab', 'traces', 'device' if S.is_device(udid) else 'sim', f'journey-{name}')
     os.makedirs(out_dir, exist_ok=True)
