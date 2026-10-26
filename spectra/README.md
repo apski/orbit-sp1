@@ -11,6 +11,7 @@ frontends/rn-runtime   running app over Metro's debugger -> IR + Yoga frames (th
 frontends/figma        REST pull (zstd cache) -> inspect (agent view) / lower (auto layout -> Yoga) -> IR + Figma boxes
 ir/                    IR v1: view/text/image/scroll..., RN/Yoga style keys, optional reference frames, components
 backends/swiftui       codegen.mjs (IR -> <Name>.generated.swift) + FlexLayout (FlexCore Yoga port + Flex Layout)
+backends/web           render.mjs (IR -> HTML, CSS flexbox with RN/Yoga defaults) + measure.mjs (headless Chrome boxes -> judge)
 verify/judge.mjs       reference frames vs logged native frames, root-relative, 1pt
 preview/               host app template; `spectra verify` builds it per repo in .spectra/preview
 bootstrap/             detect (profile), install, jest harness templates
@@ -27,7 +28,8 @@ bin/spectra.mjs        the CLI (`node bin/spectra.mjs` lists commands)
 | NavCore Detail (RN 0.88): jest capture vs runtime capture | identical generated Swift; 11/11 within 1pt, worst 0.17pt |
 | Figma fixture with hand-computed boxes (fill/hug/fixed, space-between, absolute, stroke, shadow, instances) | 21/21 exact |
 | Fresh repo: `install` -> bootstrap (2 mocks/providers) -> jest capture | same Swift as the device capture |
-| `node --test tests/*.test.mjs` | 10/10 (Figma lowering, URL parsing, cache) |
+| Web back-end (2026-10-26), `spectra web <ir> --judge`, browser boxes vs the same reference frames | Home 13/13 (worst 0.50pt), NavCore Detail 11/11 (worst 1.00pt, a text width: at the tolerance), Figma checkout 21/21 exact |
+| `node --test tests/*.test.mjs` | 19/19 (Figma lowering, URL parsing, cache, stacks, web) |
 
 ## Not done yet
 
@@ -36,5 +38,7 @@ bin/spectra.mjs        the CLI (`node bin/spectra.mjs` lists commands)
 - Behaviour (events, state, data), navigation chrome, lists as lazy lists, images/vector assets (placeholders), custom
   fonts bundling, text baseline placement inside `lineHeight` (~1pt), pixel-grid rounding, percentages, wrap,
   aspectRatio, borders, grid auto layout, Figma system chrome (status bar instances).
+- Web back-end: one device's safe area (iPhone 17 Pro, 62/34pt) baked in; no navigation chrome or status bar; text is
+  measured by Chrome's fonts (SF on macOS, so close; elsewhere not); each measure launches Chrome (~10s, mostly startup).
 - iOS targets below 26: generated text uses `.lineHeight`; needs a fallback.
 - FlexCore: 0.9% of random trees with absolute positioning plus conflicting constraints still differ from Yoga.

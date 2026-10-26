@@ -10,6 +10,7 @@
 //   spectra capture jest <file> <Export> [-o]               from a jest render (any state, no simulator)
 //   spectra gen <ir.json> [-o Out.generated.swift] [--ignore-safe-area all|bottom|none]
 //   spectra judge <ir.json> <map.json> <frames.log> [--tol 1]
+//   spectra web <ir.json|figma raw> [-o out.html] [--judge] [--tol 1] [--open]   browser preview, no Xcode build
 //   spectra verify <ir.json> [--backend flex|swiftui|uikit] [--udid U] [--frame x,y,w,h] [--bg r,g,b] [--release]
 //   spectra install <repo>                                  skills + .spectra/ shim + detect
 import { execFileSync, spawnSync } from 'node:child_process';
@@ -107,6 +108,28 @@ test('spectra capture ${b}', () => { captureScreen(wrap(React.createElement(Scre
     return out;
   },
 
+  async web() {
+    const src = positional[1] ?? die('usage: spectra web <ir.json|figma raw> [-o out.html] [--judge] [--open]');
+    const raw = src.endsWith('.zst') ? (await import('../frontends/figma/api.mjs')).readCache(resolve(src)) : readJson(src);
+    const ir = raw.document ? (await import('../frontends/figma/lower.mjs')).lower(raw).ir : raw;
+    const opts = flag('ignore-safe-area', undefined) ? { ignoreEdges: flag('ignore-safe-area') } : {};
+    const { render } = await import('../backends/web/render.mjs');
+    const r = render(ir, opts);
+    const out = opt('out', '-o', join(dot, 'web', `${pascal(r.ir.screen ?? basename(src, '.json'))}.html`));
+    mkdirSync(dirname(out), { recursive: true });
+    writeFileSync(out, r.html);
+    console.log(`${out}: ${r.nodes} nodes`);
+    if (flag('judge')) {
+      if (!r.ir.roots?.[0]?.frame) die('no reference frames in this IR (a jest capture): nothing to judge against');
+      const { judgeWeb } = await import('../backends/web/measure.mjs');
+      const { report } = await import('../verify/judge.mjs');
+      const tol = Number(flag('tol', 1));
+      const j = judgeWeb(ir, opts, tol);
+      console.log(report(j, tol)); process.exitCode = j.pass ? 0 : 1;
+    }
+    if (flag('open')) spawnSync('open', [out]);
+  },
+
   async judge() {
     const [, ir, map, log] = positional;
     const { judge, report } = await import('../verify/judge.mjs');
@@ -146,7 +169,13 @@ ${names.map(n => `  case "${n}": AnyView(${n}(onFrames: onFrames))`).join('\n')}
   }
 }
 `);
-    const udid = flag('udid', null) || booted() || die('no booted iPhone simulator (pass --udid)');
+    // the simulator comes from the pack's resolver: a slim orbitfleet lease by default, a pinned udid when given
+    const { claim, release } = await import('../../bin/sim.mjs');
+    const pinned = flag('udid', null) || (() => { try { const v = JSON.parse(readFileSync(join(repo, '.spectra', 'profile.json'), 'utf8')).simulator?.value; return typeof v === 'string' ? v : null; } catch { return null; } })();
+    let sim;
+    try { sim = claim({ holder: `spectra:${basename(repo)}`, udid: pinned }); } catch (e) { die(e.message); }
+    process.on('exit', () => release(sim));
+    const udid = sim.udid;
     const config = flag('release', false) ? 'Release' : 'Debug';
     const sh = (cmd, args, o = {}) => { const x = spawnSync(cmd, args, { cwd: pv, encoding: 'utf8', ...o }); if (x.status !== 0) die(`${cmd} ${args[0]} failed:\n${(x.stdout + x.stderr).split('\n').filter(l => /error/i.test(l)).slice(0, 15).join('\n')}`); return x.stdout; };
     sh('xcodegen', ['-q']);

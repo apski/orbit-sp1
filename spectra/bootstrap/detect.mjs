@@ -112,8 +112,11 @@ export function scan(repo) {
   try { xcode = execFileSync('xcodebuild', ['-version'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString().split('\n')[0]; } catch {}
   try { sims = Object.values(JSON.parse(execFileSync('xcrun', ['simctl', 'list', 'devices', 'booted', '-j']).toString()).devices).flat().filter(d => /iPhone/.test(d.name)); } catch {}
   P.xcode = { value: xcode, evidence: xcode ? [xcode] : [] };
-  P.simulator = { value: sims.length ? sims.map(s => ({ name: s.name, udid: s.udid })) : null, evidence: sims.map(s => s.name),
-    note: sims.length > 1 ? 'several booted: confirm which one Spectra may use (others may belong to other sessions)' : undefined };
+  const fleet = (() => { try { execFileSync('sh', ['-c', 'command -v orbitfleet'], { stdio: 'ignore' }); return true; } catch { return false; } })();
+  P.simulator = fleet
+    ? { value: 'fleet', evidence: ['orbitfleet on PATH: a slim simulator is leased per verify run (orbit sim claim)'], note: 'set a udid to pin one' }
+    : { value: sims.length ? sims.map(s => ({ name: s.name, udid: s.udid })) : null, evidence: sims.map(s => s.name),
+      note: sims.length > 1 ? 'several booted: confirm which one Spectra may use (others may belong to other sessions)' : undefined };
   P.node = { value: { version: process.version, zstd: typeof zlib.zstdCompressSync === 'function' }, evidence: [process.version] };
   return P;
 }

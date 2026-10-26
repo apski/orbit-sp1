@@ -28,6 +28,7 @@ before `verify` passes. CLI: `.spectra/spectra` (no args lists commands). Prefli
 .spectra/spectra capture runtime OrdersScreen --port 8081 --device "iPhone 17 Pro"   # same state, for reference frames
 .spectra/spectra gen .spectra/ir/OrdersScreen.jest.json                    # -> .spectra/out/OrdersScreen.generated.swift
 .spectra/spectra verify .spectra/ir/OrdersScreen.runtime.json --udid <sim>  # PARITY n/n within 1pt
+.spectra/spectra web .spectra/ir/OrdersScreen.runtime.json --judge --open   # browser preview, no Xcode build; same judge
 ```
 
 - Jest and runtime captures of the same state must produce the same Swift (diff the generated files). If they don't,
@@ -37,6 +38,8 @@ before `verify` passes. CLI: `.spectra/spectra` (no args lists commands). Prefli
 - Paste the PARITY line and any BAD rows to the user. Below 1pt everywhere = layout matches RN.
 
 ## Reading results
+
+On a native-port surface, record each verified screen: `python3 $(.orbit/home)/navlab/arch/program.py link <surface> file:<verify report>`.
 
 | Symptom | Likely cause |
 |---|---|
