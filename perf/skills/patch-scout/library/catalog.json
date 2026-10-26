@@ -1,0 +1,104 @@
+{
+ "_doc": "Known patches to third-party RN packages. Paths in each patch are relative to the package root (node_modules/<package>). tested = the version the patch was written against; applicability on other versions is decided by a dry run, not by this field. measure = how to A/B it with perf-climb. needs: rn-from-source = native React Native core must be compiled from source (RCT_USE_PREBUILT_RNCORE=0 / buildReactNativeFromSource) in BOTH baseline and candidate builds.",
+ "sources": {
+  "bluesky": { "repo": "https://github.com/bluesky-social/social-app", "commit": "4e4ad9c5f5cc584bd06473ab6f16318fd0bd8465", "license": "MIT (library/bluesky/LICENSE)", "added": "2026-10-26" }
+ },
+ "patches": [
+  {
+   "id": "rn-prepared-text-layout", "source": "bluesky", "file": "bluesky/prepared-text-layout.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "perf", "needs": ["rn-from-source"],
+   "what": "Keep the text layout measured off the main thread and reuse it at first draw instead of re-laying out in drawAttributedString:",
+   "helps_when": "text-heavy lists or feeds (many <Text> first draws while scrolling or at launch)",
+   "measured": "iPhone 16 Pro Max, Release, 30 s feed fling: main-thread drawAttributedString: ~570 ms -> 160 ms; JS thread +~300 ms; about half of prepared layouts are never drawn",
+   "measure": { "scenario": "fling a text-heavy list for 30 s (Release)", "metric": "main-thread time in drawAttributedString: (xctrace Time Profiler, perf-climb profile), plus hitch count; watch JS-thread time, it goes up" },
+   "upstream": "local to Bluesky"
+  },
+  {
+   "id": "rn-scheduler-delegate-invalidation", "source": "bluesky", "file": "bluesky/scheduler-delegate-invalidation.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "crash", "needs": ["rn-from-source"],
+   "what": "Restore the invalidation guard so queued rendering updates can't call a destroyed SchedulerDelegate (EXC_BAD_ACCESS in Scheduler::uiManagerDidFinishTransaction)",
+   "helps_when": "crash reports in Scheduler::uiManagerDidFinishTransaction / uiManagerDidDispatchCommand, surfaces torn down during updates",
+   "upstream": "RN #58138 / #56892 merged; 0.88 removed the guard again"
+  },
+  {
+   "id": "rn-view-group-clipping-null-child", "source": "bluesky", "file": "bluesky/view-group-clipping-null-child.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "android", "category": "crash", "needs": ["rn-from-source"],
+   "what": "Skip children that became null re-entrantly during subview clipping instead of throwing 'Required value was null'",
+   "helps_when": "removeClippedSubviews + animated smooth scroll on Android (IllegalStateException in updateSubviewClipStatus)",
+   "upstream": "no upstream fix in 0.88"
+  },
+  {
+   "id": "rn-modal-dismiss-child-controller", "source": "bluesky", "file": "bluesky/pr-58364-f20f857241.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "bug", "needs": ["rn-from-source"],
+   "what": "Dismiss the whole modal stack when the modal presented a child controller (blank undismissable sheet)",
+   "helps_when": "a system alert (e.g. Undo Typing) or child VC is up while an RN Modal closes",
+   "upstream": "RN PR #58364 merged after 0.88; drop when the release contains f20f857"
+  },
+  {
+   "id": "rn-hairline-border", "source": "bluesky", "file": "bluesky/hairline-border-contents-center.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "visual", "needs": ["rn-from-source"],
+   "what": "Hairline borders (StyleSheet.hairlineWidth) no longer vanish at some subpixel Y offsets on Fabric",
+   "helps_when": "dividers drawn as hairline borders disappear on some rows", "upstream": "issue only"
+  },
+  {
+   "id": "rn-refresh-control-defer-props", "source": "bluesky", "file": "bluesky/refresh-control-defer-props.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "bug", "needs": ["rn-from-source"],
+   "what": "Defer RefreshControl tintColor/progressViewOffset writes until attached: restores pull haptic (iOS 17.4+) and offset (iOS 26)",
+   "helps_when": "pull-to-refresh lost its haptic or spinner offset on New Arch", "upstream": "RN #43388, #57843 open"
+  },
+  {
+   "id": "rn-text-input-reveal-caret", "source": "bluesky", "file": "bluesky/text-input-reveal-caret.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "visual", "needs": ["rn-from-source"],
+   "what": "Scroll the caret into view after a multiline TextInput grows", "helps_when": "composer inputs that grow with content",
+   "upstream": "RN #58517 open"
+  },
+  {
+   "id": "rn-scrollview-disable-recycling", "source": "bluesky", "file": "bluesky/scrollview-disable-recycling.patch",
+   "package": "react-native", "tested": "0.88.0", "platform": "ios", "category": "bug", "needs": ["rn-from-source"],
+   "what": "Turn off Fabric ScrollView view recycling so a recycled ScrollView can't carry contentInset changes (e.g. from Reanimated) into the next one",
+   "helps_when": "wrong insets on newly mounted ScrollViews after animating insets. Costs a little mount time: measure it",
+   "measure": { "scenario": "mount/unmount screens with ScrollViews", "metric": "mount time; correctness of insets" },
+   "upstream": "local"
+  },
+  {
+   "id": "screens-yoga-no-dirty-on-clone", "source": "bluesky", "file": "bluesky/react-native-screens@4.30.0.patch",
+   "package": "react-native-screens", "tested": "4.30.0", "platform": "ios,android", "category": "perf",
+   "what": "Don't dirty shadow nodes' Yoga nodes on every clone (re-layout storm while transforms animate). MIXED: the file also has Android RecyclerView transition and iOS secure-view snapshot fixes",
+   "helps_when": "scrolling screens with animated headers/transforms inside react-native-screens",
+   "measured": "iOS simulator, Debug dev client, 15 s scroll of a profile Media tab: 2.06 s of 5.8 s main-thread time was this layout work before the patch",
+   "measure": { "scenario": "scroll a screen with an animated header for 15 s", "metric": "main-thread time in Yoga layout (Time Profiler), hitches" },
+   "upstream": "react-native-screens PR #4922 open"
+  },
+  {
+   "id": "expo-modules-core-no-font-enumeration", "source": "bluesky", "file": "bluesky/expo-modules-core@58.0.22.patch",
+   "package": "expo-modules-core", "tested": "58.0.22", "platform": "ios", "category": "perf",
+   "what": "Don't enumerate every installed font at iOS launch. MIXED: also an Android Bitdrift network-interceptor change",
+   "helps_when": "apps that register custom fonts, worst with WOFF2",
+   "measured": "iPhone 14 Pro: ~15 ms main thread at launch with TTF Inter, ~230 ms with WOFF2",
+   "measure": { "scenario": "cold launch (Release)", "metric": "launch to first frame / first text measurement" },
+   "upstream": "unchanged on expo main"
+  },
+  {
+   "id": "expo-image-offmain-downscale", "source": "bluesky", "file": "bluesky/expo-image@58.0.15.patch",
+   "package": "expo-image", "tested": "58.0.15", "platform": "ios", "category": "perf",
+   "what": "Downscale large images on a background queue instead of the main thread; guard stale loads",
+   "helps_when": "feeds/galleries of large images in small views", "measured": "'several ms per image' (not measured precisely)",
+   "measure": { "scenario": "fling an image-heavy list", "metric": "main-thread time in image downscale, hitches" },
+   "upstream": "unknown"
+  },
+  {
+   "id": "svg-path-parse-cache", "source": "bluesky", "file": "bluesky/react-native-svg@15.16.0.patch",
+   "package": "react-native-svg", "tested": "15.16.0", "platform": "android", "category": "perf",
+   "what": "Cache parsed SVG `d` paths in PathView on Android. MIXED: also web prop/type fixes",
+   "helps_when": "many SVG icons re-rendering on Android", "measured": "none",
+   "measure": { "scenario": "scroll a list of SVG icons on Android", "metric": "UI-thread time in PathParser" },
+   "upstream": "unknown"
+  },
+  {
+   "id": "reanimated-jni-teardown", "source": "bluesky", "file": "bluesky/react-native-reanimated@4.7.1.patch",
+   "package": "react-native-reanimated", "tested": "4.7.1", "platform": "android", "category": "crash",
+   "what": "Prevent JNI crashes when worklets outlive React host teardown", "helps_when": "Android crashes on reload / host teardown with Reanimated",
+   "upstream": "reanimated PR #10858 open"
+  }
+ ]
+}

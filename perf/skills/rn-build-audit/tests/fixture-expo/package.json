@@ -1,0 +1,2 @@
+{ "name": "fixture-expo", "scripts": { "prebuild": "expo prebuild --clean", "e2e:start": "expo start -c" },
+  "dependencies": { "expo": "58.0.0", "react-native": "0.88.0" } }

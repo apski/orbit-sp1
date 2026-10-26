@@ -41,7 +41,7 @@ Related: `perf-climb` / `rn-perf-climb` (improve one app against a baseline), ar
 
 ```bash
 lab/build.sh && lab/build.sh native                  # Release only; fails loudly, never installs a stale app
-ARM=rn node ~/code/simwalk/simwalk.mjs flows/<walk>.mjs --repeat 3   # verify both arms after every change
+ARM=rn simwalk flows/<walk>.mjs --repeat 3   # verify both arms after every change
 python3 lab/sweep.py one -depth 8 ... [--arm native] # one traced run + hottest symbols
 python3 lab/sweep.py <sweep> --reps 3 --arm both     # interleaved arms, resumable
 python3 lab/report.py                                # medians, ratios, buckets, per-k curves, RN vs native
@@ -80,6 +80,9 @@ depth-8 × 300-tab config at 173ms against 185ms measured.
 1. **No accessibility client during measurement.** An attached ax-service (argent/simwalk, which lives 1h)
    turns iOS AX on: UITableView then built 40 cells instead of 2. `sweep.py` kills it before every run;
    argent 0.30+ socket is `/tmp/ax-<udid8>`, simwalk's is `/tmp/sd-<udid8>`.
+   argent's `launch-app` also leaves `DYLD_INSERT_LIBRARIES` set in the sim's launchd (stop-all doesn't clear it), so
+   every later launch, xctrace included, loads argent: `xcrun simctl spawn <udid> launchctl unsetenv DYLD_INSERT_LIBRARIES`
+   before each run (NavLab `sweep.py detach_tools`; `assets/sweep.py` doesn't yet).
 2. **Host load gate.** Other agents' simulators drove load to 134. Wait for the 1-minute load average to drop
    below 10 before a run, discard the run if it rises past 15, and log the load per run.
 3. **xctrace wedges** about 1 run in 15 and records nothing (a 40KB bundle). Detect "app never launched" at 30s and

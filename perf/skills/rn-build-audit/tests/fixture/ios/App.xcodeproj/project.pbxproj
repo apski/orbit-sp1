@@ -1,0 +1,57 @@
+// !$*UTF8*$!
+{
+	objects = {
+
+		111111111111111111111111 /* App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 222222222222222222222222 /* Build configuration list for PBXNativeTarget "App" */;
+			buildPhases = (
+				AAAAAAAAAAAAAAAAAAAAAAAA /* x */,
+				BBBBBBBBBBBBBBBBBBBBBBBB /* x */,
+				CCCCCCCCCCCCCCCCCCCCCCCC /* x */,
+			);
+			name = App;
+			productType = "com.apple.product-type.application";
+		};
+		222222222222222222222222 /* Build configuration list for PBXNativeTarget "App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				333333333333333333333333 /* Debug */,
+			);
+		};
+		333333333333333333333333 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+			};
+			name = Debug;
+		};
+		AAAAAAAAAAAAAAAAAAAAAAAA /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			outputPaths = (
+			);
+			name = "Upload Debug Symbols to Sentry";
+			shellPath = /bin/sh;
+			shellScript = "sentry-cli debug-files upload \"$DWARF_DSYM_FOLDER_PATH\"\n";
+		};
+		BBBBBBBBBBBBBBBBBBBBBBBB /* Gated upload */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			outputPaths = (
+			);
+			name = "Gated upload";
+			shellPath = /bin/sh;
+			shellScript = "[ \"$CONFIGURATION\" = \"Release\" ] || exit 0\nsentry-cli debug-files upload .\n";
+		};
+		CCCCCCCCCCCCCCCCCCCCCCCC /* Disabled */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			outputPaths = (
+			);
+			name = "Disabled";
+			shellPath = /bin/sh;
+			shellScript = "# off\necho disabled\n";
+		};
+	};
+}

@@ -1,0 +1,9 @@
+{
+ "name": "fixture",
+ "scripts": {
+  "start": "react-native start --reset-cache"
+ },
+ "dependencies": {
+  "react-native": "0.88.0"
+ }
+}

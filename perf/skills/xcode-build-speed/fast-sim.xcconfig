@@ -1,0 +1,16 @@
+// Local simulator dev-loop overlay. No project edits: xcodebuild -xcconfig <this file> ... (applies to every target,
+// Pods included, above project settings). Never for archives or device builds: no dSYM, arm64 only.
+
+// One compilation cache for every worktree and every DerivedData dir (Xcode 26+). Prefix mapping strips the
+// checkout path from cache keys, so a worktree at another path still hits.
+COMPILATION_CACHE_ENABLE_CACHING = YES
+COMPILATION_CACHE_CAS_PATH = $(HOME)/Library/Developer/Xcode/CompilationCache.shared
+CLANG_ENABLE_PREFIX_MAPPING = YES
+CLANG_ENABLE_PROJECT_PREFIX_MAPPING = YES
+SWIFT_ENABLE_PREFIX_MAPPING = YES
+SWIFT_ENABLE_PROJECT_PREFIX_MAPPING = YES
+
+// dSYM generation and linking are never cached; the simulator debugger reads dwarf from the .o files.
+DEBUG_INFORMATION_FORMAT = dwarf
+ARCHS = arm64
+ONLY_ACTIVE_ARCH = YES
