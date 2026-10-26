@@ -3,7 +3,7 @@
 A long task is anything that spans sessions or agents: a perf climb, a migration, a design-afresh, a Spectra
 conversion of a design system, an Orbit bootstrap, a lab. Each one runs under the seven rules below. The per-skill
 table at the end says what each rule means in that skill; each long-task skill repeats its row under `## Harness`.
-For a repo with its own Orbit (`agents/orbit/`), `RECONCILE.md` maps the same rules onto the host's mechanisms.
+For a repo with its own Orbit (`agents/orbit/`), map the same rules onto the host's own mechanisms.
 
 ## The rules
 

@@ -64,7 +64,7 @@ const LAUNCHERS = {
 
 /** A repo that already runs its own Orbit (engine + config in agents/orbit; Rust core, its own /orbit skill, streams,
  *  DECISIONS.md). That Orbit is the high level: the pack installs its subsystems INTO it (a block in its ORBIT.md, the
- *  index its agents read first), never a second engine beside it, and never over its skills. RECONCILE.md says which
+ *  index its agents read first), never a second engine beside it, and never over its skills. the host's reconcile plan says which
  *  side wins per subsystem. */
 const hostOrbit = repo => (existsSync(join(repo, 'agents', 'orbit', 'bin', 'orbit')) ? join(repo, 'agents', 'orbit') : null);
 
@@ -79,7 +79,7 @@ function placeSkills(src, repo, vars) {
   const priorInstall = existsSync(join(repo, '.orbit', 'orbit-SP1.json')) && !hostOrbit(repo);
   const skipped = [];
   for (const n of names) {
-    // a skill the pack didn't place (no marker) is the repo's own: it wins; RECONCILE.md decides merges
+    // a skill the pack didn't place (no marker) is the repo's own: it wins; the host's reconcile plan decides merges
     if ([join(agents, n), join(claude, n)].some(d => existsSync(d) && !isLink(d) && !existsSync(join(d, '.orbit-sp1.json')) && !priorInstall)) { skipped.push(n); continue; }
     const mark = d => writeFileSync(join(d, '.orbit-sp1.json'), JSON.stringify({ source: relative(HOME, join(src, n)) }) + '\n');
     const fill = dst => { let t = read(join(dst, 'SKILL.md')); for (const [k, v] of Object.entries(vars)) t = t.replaceAll(k, v); writeFileSync(join(dst, 'SKILL.md'), t); };
@@ -118,7 +118,7 @@ function install(repo) {
   // 2. Orbit: launchers + config dir <repo>/.orbit (the engine stays in orbit-SP1), skills, census report.
   const host = hostOrbit(repo);
   if (only.includes('orbit') && host) {
-    log.push(['orbit', 'host', `${relative(repo, host)} is the Orbit; SP1 subsystems wired into its ORBIT.md; reconcile: RECONCILE.md`]);
+    log.push(['orbit', 'host', `${relative(repo, host)} is the Orbit; SP1 subsystems wired into its ORBIT.md; reconcile per its own plan`]);
   } else if (only.includes('orbit')) {
     for (const name of Object.keys(LAUNCHERS)) launcher(name);
     if (!existsSync(join(dot, '.gitignore'))) writeFileSync(join(dot, '.gitignore'), '# Orbit index and run output stay local.\n.cache/\nruns/\ncensus.md\n');
@@ -203,14 +203,13 @@ ${only.includes('spectra') ? 'Spectra (RN/Figma -> native UI compiler): `.spectr
 function hostBlock(only, rn) {
   const row = (k, ...cells) => (only.includes(k) ? [`| ${cells.join(' | ')} |`] : []);
   return ['<!-- orbit-sp1:start -->', '## orbit-SP1 (service pack, installed into this Orbit)', '',
-    `Pack: \`$(.orbit/home)\` (rev ${rev ?? '?'}). Per-subsystem verdicts and the open merge steps: \`$(.orbit/home)/RECONCILE.md\`.`,
+    `Pack: \`$(.orbit/home)\` (rev ${rev ?? '?'}). Per-subsystem verdicts and merge steps: this Orbit's own reconcile plan.`,
     'Orbit stays the entry point; these are subsystems of it. Nothing here edits DECISIONS.md, streams or principles: changes to those go through the usual O-NNN / stream review.', '',
     '| Subsystem | Job | Command | vs this Orbit |', '|---|---|---|---|',
-    ...row('spectra', 'Spectra (SP1)', 'UI compiler: RN (jest or running app) / Figma -> IR -> SwiftUI on FlexLayout (Yoga port), judged against the source\'s own layout', '`.spectra/spectra`, skills `spectra*`', '**supersedes** the RN -> .hostui -> SwiftUI leg (RECONCILE.md S1-S4); `orbit components` / `lookalikes` stay as its DS inputs'),
-    ...row('navlab', 'NavLab', 'navigation map (navscan), repo profile, DS audit, architecture pack', '`navlab-install`, `navlab-audit`, `ds-audit`', rn ? 'adds the navigation tree; feeds the `navcore` stream' : 'skipped: not an RN repo'),
+    ...row('spectra', 'Spectra (SP1)', 'UI compiler: RN (jest or running app) / Figma -> IR -> SwiftUI on FlexLayout (Yoga port), judged against the source\'s own layout', '`.spectra/spectra`, skills `spectra*`', 'compare with this Orbit\'s own UI pipeline before retiring either'),
+    ...row('navlab', 'NavLab', 'navigation map (navscan), repo profile, DS audit, architecture pack', '`navlab-install`, `navlab-audit`, `ds-audit`', rn ? 'adds the navigation tree' : 'skipped: not an RN repo'),
     ...row('orbit-rag', 'orbit-rag', 'docs + DECISIONS.md + highlights: hybrid search, cited bundles, drift check', 'MCP `orbit-rag`, http://127.0.0.1:7420', 'adds retrieval over DECISIONS.md / knowledge/; read-only'),
-    '| Perf pack | thread-offload, perf-climb, native-perf-climb, ... | global skills (`orbit skills-sync`) | adds; results go to Trajectory like any climb |',
-    '| NavCore | native-first navigation recipe (D1-D10), simwalk flows | separate repo (`~/code/NavCore`) | evidence for the `navcore` stream |',
+    '| Perf pack | thread-offload, perf-climb, native-perf-climb, ... | global skills (`orbit skills-sync`) | adds |',
     '<!-- orbit-sp1:end -->'].join('\n');
 }
 
@@ -224,7 +223,7 @@ function status(repo) {
   const dot = join(repo, '.orbit');
   const ob = existsSync(join(dot, 'orbit')), cfg = existsSync(join(dot, 'orbit.toml')), indexed = existsSync(join(dot, '.cache'));
   const host = hostOrbit(repo);
-  if (host) rows.push(['orbit', 'host', `${relative(repo, host)} is the Orbit (SP1 block in its ORBIT.md: ${read(join(host, 'ORBIT.md')).includes('orbit-sp1:start') ? 'present' : 'missing, run orbit install'}), work RECONCILE.md`]);
+  if (host) rows.push(['orbit', 'host', `${relative(repo, host)} is the Orbit (SP1 block in its ORBIT.md: ${read(join(host, 'ORBIT.md')).includes('orbit-sp1:start') ? 'present' : 'missing, run orbit install'}), reconcile per its own plan`]);
   else rows.push(['orbit', ob ? 'installed' : 'not installed', !ob ? 'orbit install' : !cfg ? 'orbit-bootstrap skill: review .orbit/census.md, write .orbit/orbit.toml' : indexed ? 'online' : '.orbit/orbit index']);
   const sp = json(join(repo, '.spectra', 'profile.json'));
   const harness = existsSync(join(repo, '.spectra', 'jest', 'wrap.js'));
@@ -277,7 +276,7 @@ function compare(other) {
     '## Other subsystems', '',
     `- NavLab (navigation, DS audit, architecture pack): ${has('navlab') || has('navlab.config.json') ? 'present there; compare navlab/ by hand' : 'not there: new'}`,
     `- Spectra (RN/Figma -> native UI compiler): ${has('spectra') || has('.spectra') ? 'present there; compare spectra/ by hand' : 'not there: new'}`,
-    ...(removed.some(f => /hostui|compose_(emit|native)/.test(f)) ? ['- Their RN -> IR -> SwiftUI leg (HostUI, compose_*): SP1 Spectra supersedes it; run RECONCILE.md S1-S4 on their green screen before retiring anything'] : []), '',
+    '',
     '## How to judge', '', '- Run both test suites: `python3 -m unittest discover -s <orbit>/tests -t <orbit>` in each.',
     '- Where both have `bench/`, run the same benchmark on the same repo and compare the numbers.',
     '- Take changes with evidence; keep theirs where theirs is newer or tuned to their repo (orbit.toml, policy.toml).'];

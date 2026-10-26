@@ -65,7 +65,7 @@ checked by `bin/orbit installer-check <name> <fixture repo>`:
 | orbit-rag | `orbit-rag/install.mjs` | not run yet: registers an MCP server + a LaunchAgent (machine-global), needs a `--dry` mode first |
 
 **Repo with its own Orbit** (`agents/orbit/`): SP1 installs into it (a block in its `ORBIT.md`, no second engine,
-its skills kept), then `RECONCILE.md` says which side wins per subsystem.
+its skills kept); the host's own reconcile plan says which side wins per subsystem.
 
 **Per-repo state after install:** `.orbit/` (Orbit config, house rules, routes, policy, index and run log, plus the
 launchers `orbit`, `census`, `engine-tests`, `home`), `.spectra/` (profile, jest harness, Figma cache, generated code,

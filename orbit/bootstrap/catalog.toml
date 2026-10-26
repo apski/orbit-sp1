@@ -399,7 +399,7 @@ id = "tailwind"
 category = "design"
 glob = ["**/tailwind.config.*"]
 sources = ["design-tokens"]
-skills = ["hostui-tokens-from-code"]
+skills = []
 
 [[signal]]
 id = "design-tokens"

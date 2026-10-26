@@ -54,7 +54,7 @@ eab661858a28124806ea12e47277225c04f395252c190f751d31a041219425b9  ./arch/gaps.py
 1411fc7961db54867476619d83640cdc8625e52f014aa5af0a58e93cbb80b895  ./arch/README.md
 b692add0bfe1ff72fb7a481bc4eb11809fabb1373040051285aa8b7b4892fac0  ./arch/release.py
 9fc1a31829f8a16d8a778497c25f966955be3d140a799a9e1a128afeefacb2da  ./arch/replay.py
-1ba7a7d3c061f2b6aa7847a5a8e0bf428594842000bdc544ae2d9c95f3275b06  ./arch/safetynet.py
+2cf5c005d7623fa53c2e9108ac9bbebeda532f40731d3dc6c00f9081c095bffb  ./arch/safetynet.py
 ddc29637a084fd959a2cdcb674cf23aaaef0985c44c92289db3d20c764140c8a  ./arch/upgrade.py
 fe5634e8acb270506376a898df5d7f056eb7e12e9656420ec460efdaf09657c1  ./baseline/sim-iphone17pro-ios26.4/app-native/intervals.csv
 3db5180e1d98727addb184fc81f8e9293feb3089e7a3af8d0b465752bad172fb  ./baseline/sim-iphone17pro-ios26.4/app-native/runs.csv

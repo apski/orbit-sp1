@@ -49,9 +49,9 @@ skills (`app-architecture-steward`, `rn-native-migration`, ...), Spectra convers
 
 That Orbit is the high level. `install` detects it and installs SP1 *into* it: a block in `agents/orbit/ORBIT.md`
 (SP1 subsystems as rows of its table), no second engine, and no overwriting of its skills (its `/orbit` stays; kept
-names are printed). Skip the `orbit-bootstrap` row above. Then work `$OP/RECONCILE.md` in order: verdicts per
-subsystem (SP1 Spectra is the compiler; the host engine wins), Spectra steps S1-S4, the host's two live bugs first,
-and the harness rules. Changes to the host's DECISIONS.md, streams and routes are proposals in its own review flow.
+names are printed). Skip the `orbit-bootstrap` row above. Then reconcile per subsystem with evidence (which side
+wins, where a host pipeline overlaps Spectra or NavLab), host bugs first, then the harness rules; keep that plan in the
+host repo. Changes to the host's DECISIONS.md, streams and routes are proposals in its own review flow.
 
 ## "status"
 
